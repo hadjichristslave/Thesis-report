@@ -108,6 +108,7 @@ Related research will be focused on 4 general fields of SLAM related literature.
 \end{itemize}
 
 These categories are the base of this project. More specifically, object based SLAM is crucial due to the fact that point clouds are used as input and from such raw input objects must be extracted. Methods that use such approaches to perform SLAM are then needed. The second part of the research is focused on point cloud representations. This part of the research is mostly focused on what features or meta features a cloud has need to be taken into account so that the clustering performed is optimal. The part of the research is focused on non-parametric Bayesian methods and the clustering tools they provide. Such tools are important they can be used to provide novel approachs to object segmentation within a point cloud. Finally, research is focused on the correspondence problem in SLAM. As one of the fundamental problems that need to be solved in order to have robust SLAM algorithms, it is imperative the correspondence problem be solved efficiently. In that extent and due to the unique representation of our objects, a novel approach in the correspondence between objects in a SLAM problem is given.
+
 \subsection{Object based SLAM}
 Object based SLAM or semantic slam methods proposed to the literature focus in domain specific solutions of a particular problem. Salas-Moreno et al~\cite{slam++} define a method of performing object based slam for specific objects. The objects are identified by camera that is on top of the robot. By having a model of pretrained objects SLAM can be performed on environments the robot knows what objects to expect. The disadvantage of that method is that object models have be to be well defined and there is a small number of such objects. 
 Castle et al. use object recognition to perform object based SLAM with the use of a hand-held cameras. Selvatici et al~\cite{objslam} use a similar approach while exploiting structural information such as object height and position within the room. That way a couch that is a large object situated in floor level is easier to be recognized.
@@ -122,9 +123,9 @@ Seongyong Koo et al.~\cite{objectDisc} introduce a method of unsupervised object
 
 In the problem at hand augmenting the information each point consists is crucial for a successful method. Research towards object segmentation in point clouds is focusing on calculating meta information regarding the points and applying some heuristic function to see if the points could belong in the same segment of the cloud. Trevor et al.~\cite{pointSeg} take positional information, Euclidean distances and the normal of points to as input to their heuristic and output segments that are part of the same object. PCL library~\cite{pcl} introduces methods like Euclidean clustering and conditional Euclidean clustering that use a number of heuristics that take normal as well as curvature information to extract segments in the point cloud that represent objects. Furthermore, a there is a lot of resarch on segmentation of point clouds in scenes, the emphasis is usually on extracting geometric primitives~\cite{planarSeg},~\cite{planarSeg2} using cues like normals and curvature. Rabbani et al~\cite{segOverview} introduce a new method of object segmentation using KNN as their base algorithm. They also present a very informative literature review along with the strengths and weaknesses of existing methods. Finally Triebel et al.~\cite{smartSeg} introduce a general clustering framework that does not rely on plane segmentation. Instead of segmenting the plane by using classical approaches like RANSAC or MLASAC they introduce a framework where they make no assumptions regarding plane data. 
 
-\subsubsection{Non Parametric Bayesian methods}
+\subsection{Non Parametric Bayesian methods}
 
-
+Bayesian non-parametric methods are the cornerstone of Bayesian statistics. In this project the focus was directed towards the clustering methods that are being introduced by those tools. Radford M. Neal~\cite{bayes:neal} with his paper regarding MCMC methods made the definitive step towards Dirichlet process mixture models reaching mainstream success. Since then, two major schools in inference on such models have been introduced. Statistical inference and MCMC methods, and Variational inference. Variational inference was introduced by Jordan et al.~\cite{bayes:jordan} and it introduces deterministic tools to perform inference and approximate a posterior distribution and marginals. Both methods have strengths and weaknesses and many tools have been established by using the two approaches as their base. Blei et al.~\cite{LDA} introduced LDA as a method to perform topic modelling. Teh et al~\cite{bayes:hier} introduce a hierarchy on the inference process by introducing the Hierarchical Dirichlet process. Particle filter approaches have also been established. Doucet et al.~\cite{bayes:smc} introduce Sequential Monte Carlo as a fast way to approximate inference. Inference on Dirichlet process mixtures is a very active research field and covering it is beyond the scope of this report.
 
 \subsection{Correspondence}
 
@@ -309,8 +310,20 @@ Figueredo, A.J. and Wolf, P. S.A. (2009).
 \bibitem{corres:three}
 \newblock Lamon, P., Tapus, A., Glauser, E., Tomatis, N., \& Siegwart, R. (2003, October). Environmental modeling with fingerprint sequences for topological global localization. In Intelligent Robots and Systems, 2003.(IROS 2003). Proceedings. 2003 IEEE/RSJ International Conference on (Vol. 4, pp. 3781-3786). IEEE.
 
+\bibitem{bayes:neal}
+\newblock Neal, R. M. (2000). Markov chain sampling methods for Dirichlet process mixture models. Journal of computational and graphical statistics, 9(2), 249-265.
+
+\bibitem{bayes:jordan}
+\newblock Blei, D. M., \& Jordan, M. I. (2006). Variational inference for Dirichlet process mixtures. Bayesian analysis, 1(1), 121-143.
+
 \bibitem{slam}
 \newblock{Montemerlo, M., Thrun, S., Koller, D., \& Wegbreit, B. (2002). FastSLAM: A factored solution to the simultaneous localization and mapping problem. AAAI/IAAI, 593-598.}
+
+\bibitem{bayes:hier}
+\newblock Teh, Y. W., Jordan, M. I., Beal, M. J., \& Blei, D. M. (2006). Hierarchical dirichlet processes. Journal of the american statistical association, 101(476).
+
+\bibitem{bayes:smc}
+\newblock Doucet, A., De Freitas, N., \& Gordon, N. (2001). An introduction to sequential Monte Carlo methods (pp. 3-14). Springer New York.
 
 \bibitem{LDA}
 \newblock{Blei, D. M., Ng, A. Y., \& Jordan, M. I. (2003). Latent dirichlet allocation. the Journal of machine Learning research, 3, 993-1022.}

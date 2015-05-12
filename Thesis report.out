@@ -2,11 +2,12 @@
 \BOOKMARK [1][-]{section.2}{Literature review}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Object based SLAM}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Point Cloud Representation}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{Correspondence}{section.2}% 5
-\BOOKMARK [1][-]{section.3}{Theory background}{}% 6
-\BOOKMARK [1][-]{section.4}{Model definition}{}% 7
-\BOOKMARK [1][-]{section.5}{Results}{}% 8
-\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 9
-\BOOKMARK [1][-]{section.7}{Discussion}{}% 10
-\BOOKMARK [2][-]{subsection.7.1}{Subsection One}{section.7}% 11
-\BOOKMARK [2][-]{subsection.7.2}{Subsection Two}{section.7}% 12
+\BOOKMARK [2][-]{subsection.2.3}{Non Parametric Bayesian methods}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Correspondence}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Theory background}{}% 7
+\BOOKMARK [1][-]{section.4}{Model definition}{}% 8
+\BOOKMARK [1][-]{section.5}{Results}{}% 9
+\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 10
+\BOOKMARK [1][-]{section.7}{Discussion}{}% 11
+\BOOKMARK [2][-]{subsection.7.1}{Subsection One}{section.7}% 12
+\BOOKMARK [2][-]{subsection.7.2}{Subsection Two}{section.7}% 13
