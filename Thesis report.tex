@@ -1,0 +1,327 @@
+\documentclass[twoside]{article}
+
+\usepackage{lipsum} % Package to generate dummy text throughout this template
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage{geometry} % Document margins
+\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\Roman{subsection}} % Roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{Master thesis $\bullet$ Panagiotis Chatzichristodoulou $\bullet$ 2015} % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{{Towards lifelong mapping in pointclouds}}} % Article title
+
+\author{
+\large
+\normalsize University of Maastricht \\ % Your institution
+\normalsize \href{mailto:john@smith.com}{panos@almende.org} % Your email address
+\vspace{-5mm}
+}
+\date{}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Insert title
+
+\thispagestyle{fancy} % All pages have headers and footers
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+
+\noindent The thesis discuses the application of dependent Dirichlet processes and how such tools can help improve the quality of clustering algorihms in the recently introduced data representation objects, pointclouds. A novel method to point cloud clustering is introduced its mechanics are analysed. Finally Its potential weaknesses and what steps can be taken to remedy them are analysed.
+
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\begin{multicols}{2} % Two-column layout throughout the main article text
+
+\section{Introduction}
+
+
+\lettrine[nindent=0em,lines=3] Simultaneous localization and mapping is one of the fundamental problems of autonomous systems\cite{probRobs}. In order for a robot to be truly autonomous, it must have the ability to enter an area and infer its structure. To that direction, a lot of effort has been put in algorithms that are able to map static environments. With solutions like EKF-SLAM\cite{ekf}, FastSlam\cite{slam} and GraphSLAM\cite{graph} robots are now able to efficiently map static environments. 
+The logical extention to such methods that can map  static environments is methods that remove this restriction. The idea of lifelong robot learning is not new and has been introduced into the literature since Thrun et al\cite{liflonglearning}. Konolige et al.\cite{lifelongmaps} specifically focus on lifelong learning in mapping and the utility such methods have.  In the PhD thesis of Walcott long term mapping is decomposed to 4 basic subproblems:
+\begin{itemize}
+	\item{Continuously incorporate new information.}
+	\item{Address the problem of tractability for growing DPG}
+	\item{Representation of the environment should include the history of the map as changes occur	with the passage of time.}
+	\item{Detect changes and update the map online}
+\end{itemize}
+
+The first two problems can be though of as compression problems as the map increases over time whereas the latter ones can be though of as dynamic environment problems. The methods of tackling those problems vary according to what sensors a robot will use to perform the mapping.
+
+Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized RGBD devices with its low price range and high quality sensors. It came as no surprise that research in point clouds, the representation system of kinect sensor readings, has increased since. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap}. The goal of this thesis is to introduce a novel approach to tackle the compression problem of long term mapping methods that use the Kinect device by using Bayesian non parametric methods.
+
+Dirichlet processes and Dirichlet process mixture models \cite{nonParam} are the cornerstone of Bayesian non parametric statistics. The strength of those models lies in the fact that they allow the model's mixture components to grow as much as needed so as to best fit the data. The dynamic number of components in combination with the highly resilient Dirichlet priors leads to very flexible models that can be used in a very large area of applications from topic modeling\cite{LDA} to speaker diarization\cite{speakerDiar}. 
+
+The main motivation behind this project is to use such methods as a means of compressing the information provided by the environment. In that direction, finding a way to robustly clustering a point cloud into semantically sound chunks seems a reasonable starting point. This leads to the direction of object based SLAM, which is a domain where objects are used as reference points to perform the mapping.
+
+The rest of the paper is structured as follows. Section \ref{sec:literature} will reference literature review, Section~\ref{sec:theory} will introduce the theories behind the model, Section 4~\ref{sec:model} will define the model, Section 5~\ref{sec:results} will show experimental results of the method. Finally, Section 6~\ref{sec:discussion} will end up with a discussion on the methods strengths and weaknesses.
+
+%------------------------------------------------
+ 
+\section{Literature review}
+\label{sec:literature}
+
+Related research will be focused on 4 general fields of SLAM related literature.
+\begin{itemize}
+	\item Object based SLAM or semantic slam
+	\item Point cloud representations
+	\item Non-parametric clustering methods
+	\item The correspondence problem in SLAM
+\end{itemize}
+
+These categories are the base of this project. More specifically, object based SLAM is crucial due to the fact that point clouds are used as input and from such raw input objects must be extracted. Methods that use such approaches to perform SLAM are then needed. The second part of the research is focused on point cloud representations. This part of the research is mostly focused on what features or meta features a cloud has need to be taken into account so that the clustering performed is optimal. The part of the research is focused on non-parametric Bayesian methods and the clustering tools they provide. Such tools are important they can be used to provide novel approachs to object segmentation within a point cloud. Finally, research is focused on the correspondence problem in SLAM. As one of the fundamental problems that need to be solved in order to have robust SLAM algorithms, it is imperative the correspondence problem be solved efficiently. In that extent and due to the unique representation of our objects, a novel approach in the correspondence between objects in a SLAM problem is given.
+\subsection{Object based SLAM}
+Object based SLAM or semantic slam methods proposed to the literature focus in domain specific solutions of a particular problem. Salas-Moreno et al~\cite{slam++} define a method of performing object based slam for specific objects. The objects are identified by camera that is on top of the robot. By having a model of pretrained objects SLAM can be performed on environments the robot knows what objects to expect. The disadvantage of that method is that object models have be to be well defined and there is a small number of such objects. 
+Castle et al. use object recognition to perform object based SLAM with the use of a hand-held cameras. Selvatici et al~\cite{objslam} use a similar approach while exploiting structural information such as object height and position within the room. That way a couch that is a large object situated in floor level is easier to be recognized.
+Choudhary et al.~\cite{objectpointslam} use point clouds and an object database to match objects currently seen with known objects within their database. They use omnimaper~\cite{omnimaper} as their mapping method and as a representation a combination of the downsampled  voxel grids with additional normal and curvature information.  Finally, all their operations are done in the none planar components of the point cloud.
+Jensfelt et al~\cite{objslam} present an object based approach to SLAM where the robot can manipulate the objects of the map. They use camera pictures as input and receptive Field Histogram as the method to abstract the camera input and extract features for their object matching algorithm. Their approach is proposed as a solution to a service robot scenario.
+MonoSLAM~\cite{monoslam} introduces a method of performing slam using a monocular camera. 
+
+What the aforementioned methods have in common is that they approach the problem of slam as a classification task. Objects need to be semantically understood before they are processed. The approach introduced in this considers to be a collection of chunks. So having specific enough environment descriptors should lead to the robot being able to operate in a label free environment. This would remove the need of having to classify objects but would also increase the time it takes to extract features from the environment as features are the base of the unsupervised object discovery.
+Seongyong Koo et al.~\cite{objectDisc} introduce a method of unsupervised object individuation from RGB-D image sequences. They cluster their initial cloud into candidate objects using Eucledian clustering and proceed to extract features like the Euclidian distance(L2) and the Kullback-Leibler distance between point cloud objects. They use IMFT to solve their tracking problem.
+
+\subsection{Point Cloud Representation}
+
+In the problem at hand augmenting the information each point consists is crucial for a successful method. Research towards object segmentation in point clouds is focusing on calculating meta information regarding the points and applying some heuristic function to see if the points could belong in the same segment of the cloud. Trevor et al.~\cite{pointSeg} take positional information, Euclidean distances and the normal of points to as input to their heuristic and output segments that are part of the same object. PCL library~\cite{pcl} introduces methods like Euclidean clustering and conditional Euclidean clustering that use a number of heuristics that take normal as well as curvature information to extract segments in the point cloud that represent objects. Furthermore, a there is a lot of resarch on segmentation of point clouds in scenes, the emphasis is usually on extracting geometric primitives~\cite{planarSeg},~\cite{planarSeg2} using cues like normals and curvature. Rabbani et al~\cite{segOverview} introduce a new method of object segmentation using KNN as their base algorithm. They also present a very informative literature review along with the strengths and weaknesses of existing methods. Finally Triebel et al.~\cite{smartSeg} introduce a general clustering framework that does not rely on plane segmentation. Instead of segmenting the plane by using classical approaches like RANSAC or MLASAC they introduce a framework where they make no assumptions regarding plane data. 
+
+\subsubsection{Non Parametric Bayesian methods}
+
+
+
+\subsection{Correspondence}
+
+In its general definition, the correspondence problem refers to the problem of ascertaining which parts of one image correspond to which parts of another image, where differences are due to movement of the camera, the elapse of time, and/or movement of objects in the photos. Under the SLAM context, it refers to the problem of identifying objects as objects that have been encountered before during the mapping process. ON that direction Cree et al.~\cite{corresp:first} create a histogram of line segments of each landmark and compute their root mean square error. They proceed to calculate their RGB signature to calculate the distance between different landmarks. Low et al.~\cite{corres:sec} match Scale Invariant Feature Transform (SIFT) features, an approach which transforms image data into scale-invariant coordinates relative to local features. Lamon et al~\cite{corres:three} store a database of fingerprints which indicate the location in the robot's environment. The features are ordered and stored at a database at as they appear in the robot's immediate surroundings. A new fingerprint is computed for each new view and matched against existing ones.
+
+The approach presented in this paper takes as input features similar to the aforementioned methods and is similar to~\cite{objectDisc} as parts of the point cloud are being clustered and fit into a distribution.The features that are used for the cloud representation are an extension of the features presented in~\cite{smcddp} with the addition of extra angular information present in the points of the cloud. The distance among clusters can be then represented as one among their distributions and there has been extensive search on statistical distribution distance. Distances like Hellinger, KL divergence, Euclidian, Mahalanabis can all be taken into account when performing the object matching. The robustness of the method can also be increased by using tracking methods like IMFT. The novelty lies in its completely probabilistic mechanism as the clustering is done by using SMC to the augmented feature space. Using distributions as a means of representing objects within the point cloud is a form of compression as objects are represented by a distribution which is smaller in size and easier to maintain and expand. Finally, a novel approach to distribution correspondence is introduced through the means of a decision tree.
+
+
+
+%------------------------------------------------
+
+\section{Theory background}
+\label{sec:theory}
+
+\section{Model definition}
+\label{sec:model}
+
+\section{Results}
+\label{sec:results}
+
+\section{Conclusion and future work}
+\label{sec:discussion}
+
+A novel method for SLAM by using compressed representations of objects in a point cloud is introduced. Its strengths and weaknesses are presented. Future work could include
+\begin{itemize}
+    \item Improved tracking by using IMRF
+    \item Extend to dynamic environments
+    \item Extend the representation used
+\end{itemize}
+\begin{table}[H]
+\caption{Example table}
+\centering
+\begin{tabular}{llr}
+\toprule
+\multicolumn{2}{c}{Name} \\
+\cmidrule(r){1-2}
+First name & Last Name & Grade \\
+\midrule
+John & Doe & $7.5$ \\
+Richard & Miles & $2$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\lipsum[5] % Dummy text
+
+\begin{equation}
+\label{eq:emc}
+e = mc^2
+\end{equation}
+
+\lipsum[6] % Dummy text
+
+%------------------------------------------------
+
+\section{Discussion}
+
+\subsection{Subsection One}
+
+\lipsum[7] % Dummy text
+
+\subsection{Subsection Two}
+
+\lipsum[8] % Dummy text
+
+
+\begin{thebibliography}{9} % Bibliography - this is intentionally simple in this template
+
+\bibitem{probRobs}
+\newblock Thrun, S. (2002). Probabilistic robotics. Communications of the ACM, 45(3), 52-57.
+
+
+\bibitem{ekf}
+\newblock Bailey, T., Nieto, J., Guivant, J., Stevens, M., \& Nebot, E. (2006, October). Consistency of the EKF-SLAM algorithm. In Intelligent Robots and Systems, 2006 IEEE/RSJ International Conference on (pp. 3562-3568). IEEE.
+
+\bibitem{graph}
+\newblock Thrun, S., \& Montemerlo, M. (2006). The graph SLAM algorithm with applications to large-scale mapping of urban structures. The International Journal of Robotics Research, 25(5-6), 403-429.
+
+\bibitem{Figueredo:2009dg}
+Figueredo, A.J. and Wolf, P. S.A. (2009).
+\newblock Assortative pairing and life history strategy - a cross-cultural
+  study.
+\newblock {\em Human Nature}, 20:317--330.
+
+\bibitem{liflonglearning}
+\newblock Thrun, S., \& Mitchell, T. M. (1995). Lifelong robot learning. The Biology and Technology of Intelligent Autonomous Agents, 165-196.
+
+\bibitem{lifelongmaps}
+\newblock Konolige, K., \& Bowman, J. (2009, October). Towards lifelong visual maps. In Intelligent Robots and Systems, 2009. IROS 2009. IEEE/RSJ International Conference on (pp. 1156-1163). IEEE.
+
+\bibitem{aishalong}
+\newblock Walcott, A. (2011). Long-term robot mapping in dynamic environments (Doctoral dissertation, Massachusetts Institute of Technology).
+
+\bibitem{bayesianNon}
+\newblock Hjort, N. L., Holmes, C., Müller, P., \& Walker, S. G. (Eds.). (2010). Bayesian nonparametrics (Vol. 28). Cambridge University Press.
+
+\bibitem{dependent}
+\newblock {MacEachern, S. N. (2000) Dependent dirichlet processes. Unpublished manuscript, Department of Statistics, The Ohio State University.}
+
+\bibitem{brml}
+\newblock{Barber, D. (2012) Bayesian reasoning and machine learning.}
+
+\bibitem{dependentDiri}
+\newblock{Neiswanger, W., Wood, F., \& Xing, E.The dependent dirichlet process mixture of objects for detection-free tracking and object modeling. In Proceedings of the Seventeenth International Conference on Artificial Intelligence and Statistics (pp. 660-668) (2014, August) }
+
+\bibitem{pcl}
+\newblock{Rusu, R. B., \& Cousins, S. (2011, May). 3d is here: Point cloud library (pcl). In Robotics and Automation (ICRA), 2011 IEEE International Conference on (pp. 1-4). IEEE.}
+
+\bibitem{rtabmap}
+\newblock Labbé, M., \& Michaud, F. (2011, September). Memory management for real-time appearance-based loop closure detection. In Intelligent Robots and Systems (IROS), 2011 IEEE/RSJ International Conference on (pp. 1271-1276). IEEE.
+
+
+\bibitem{slam++}
+\newblock Salas-Moreno, R. F., Newcombe, R. A., Strasdat, H., Kelly, P. H., \& Davison, A. J. (2013, June). Slam++: Simultaneous localisation and mapping at the level of objects. In Computer Vision and Pattern Recognition (CVPR), 2013 IEEE Conference on (pp. 1352-1359). IEEE.
+
+\bibitem{objslam}
+\newblock Selvatici, A. H., \& Costa, A. H. (2008). Object-based visual slam: How object identity informs geometry.
+
+\bibitem{castleetal}
+\newblock Castle, R. O., Gawley, D. J., Klein, G., \& Murray, D. W. (2007, April). Towards simultaneous recognition, localization and mapping for hand-held and wearable cameras. In Robotics and Automation, 2007 IEEE International Conference on (pp. 4102-4107). IEEE.
+
+
+\bibitem{objectpointslam}
+\newblock Choudhary, S., Trevor, A. J., Christensen, H. I., \& Dellaert, F. (2014, September). SLAM with object discovery, modeling and mapping. In Intelligent Robots and Systems (IROS 2014), 2014 IEEE/RSJ International Conference on (pp. 1018-1025). IEEE.
+
+\bibitem{objectpoint}
+\newblock Jensfelt, P., Ekvall, S., Kragic, D., \& Aarno, D. (2006, September). Augmenting slam with object detection in a service robot framework. In Robot and Human Interactive Communication, 2006. ROMAN 2006. The 15th IEEE International Symposium on (pp. 741-746). IEEE.
+
+\bibitem{monoslam}
+\newblock Davison, A. J., Reid, I. D., Molton, N. D., \& Stasse, O. (2007). MonoSLAM: Real-time single camera SLAM. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 29(6), 1052-1067.
+
+\bibitem{objectDisc}
+\newblock Koo, S., Lee, D., \& Kwon, D. S. (2014, September). Unsupervised object individuation from RGB-D image sequences. In Intelligent Robots and Systems (IROS 2014), 2014 IEEE/RSJ International Conference on (pp. 4450-4457). IEEE.
+
+
+\bibitem{distMes}
+\newblock{Cichocki, A., \& Amari, S. I.Families of alpha-beta-and gamma-divergences: Flexible and robust measures of similarities. Entropy, 12(6), 1532-1568.}
+
+\bibitem{fpfh}
+\newblock{Fast point feature histogram.Rusu, R. B., Blodow, N., \& Beetz, M. (2009, May). Fast point feature histograms (FPFH) for 3D registration. In Robotics and Automation, 2009. ICRA'09. IEEE International Conference on (pp. 3212-3217). IEEE.}
+
+\bibitem{segOverview}
+\newblock {Rabbani, T., van den Heuvel, F., \& Vosselmann, G. (2006). Segmentation of point clouds using smoothness constraint. International Archives of Photogrammetry, Remote Sensing and Spatial Information Sciences, 36(5), 248-253.}
+
+\bibitem{gpu}
+\newblock{Caron, F., Davy, M., \& Doucet, A. (2012) Generalized Polya urn for time-varying Dirichlet process mixtures. arXiv preprint arXiv:1206.5254.}
+
+
+\bibitem{kinect}
+\newblock{Zhang, Z. (2012) Microsoft kinect sensor and its effect. MultiMedia, IEEE, 19(2), 4-10.}
+
+\bibitem{nonParam}
+\newblock{Wainwright, M. J., \& Jordan, M. I. (2008). Graphical models, exponential families, and variational inference. Foundations and Trends in Machine Learning, 1(1-2), 1-305.}
+
+\bibitem{omnimaper}
+\newblock{A.Trevor,  J.Rogers, and  H.Christensen.  Omnimapper:  A  modular multimodal  mapping  framework.   In IEEE  International  Conference on Robotics and Automation (ICRA), 2014}
+
+\bibitem{imft}
+\newblock Koo, S., Lee, D., \& Kwon, D. S. (2013, November). Multiple object tracking using an rgb-d camera by hierarchical spatiotemporal data association. In Intelligent Robots and Systems (IROS), 2013 IEEE/RSJ International Conference on (pp. 1113-1118). IEEE.
+
+\bibitem{pointSeg}
+\newblock Trevor, A. J., Gedikli, S., Rusu, R. B., \& Christensen, H. I. (2013). Efficient organized point cloud segmentation with connected components. Semantic Perception Mapping and Exploration (SPME).
+
+\bibitem{planarSeg}
+\newblock Unnikrishnan, R., \& Hebert, M. (2003, October). Robust extraction of multiple structures from non-uniformly sampled data. In Intelligent Robots and Systems, 2003.(IROS 2003). Proceedings. 2003 IEEE/RSJ International Conference on (Vol. 2, pp. 1322-1329). IEEE. 
+
+\bibitem{planarSeg2}
+\newblock Rabbani, T., van den Heuvel, F., \& Vosselmann, G. (2006). Segmentation of point clouds using smoothness constraint. International Archives of Photogrammetry, Remote Sensing and Spatial Information Sciences, 36(5), 248-253.
+
+\bibitem{smartSeg}
+\newblock Triebel, R., Shin, J., \& Siegwart, R. (2010, June). Segmentation and unsupervised part-based discovery of repetitive objects. In Robotics: Science and Systems (Vol. 2).
+
+\bibitem{smcddp}
+\newblock Neiswanger, W., Wood, F., \& Xing, E. (2014, August). The dependent dirichlet process mixture of objects for detection-free tracking and object modeling. In Proceedings of the Seventeenth International Conference on Artificial Intelligence and Statistics (pp. 660-668).
+
+\bibitem{corresp:first}
+\newblock Cree, M. J., Jefferies, M. E., \& Baker, J. T. Using 3D Visual Landmarks to Solve the Correspondence Problem in Simultaneous Localisation and Mapping.
+
+\bibitem{corres:sec}
+\newblock Lowe, D. G. (2004). Distinctive image features from scale-invariant keypoints. International journal of computer vision, 60(2), 91-110.
+
+\bibitem{corres:three}
+\newblock Lamon, P., Tapus, A., Glauser, E., Tomatis, N., \& Siegwart, R. (2003, October). Environmental modeling with fingerprint sequences for topological global localization. In Intelligent Robots and Systems, 2003.(IROS 2003). Proceedings. 2003 IEEE/RSJ International Conference on (Vol. 4, pp. 3781-3786). IEEE.
+
+\bibitem{slam}
+\newblock{Montemerlo, M., Thrun, S., Koller, D., \& Wegbreit, B. (2002). FastSLAM: A factored solution to the simultaneous localization and mapping problem. AAAI/IAAI, 593-598.}
+
+\bibitem{LDA}
+\newblock{Blei, D. M., Ng, A. Y., \& Jordan, M. I. (2003). Latent dirichlet allocation. the Journal of machine Learning research, 3, 993-1022.}
+
+\bibitem{speakerDiar}
+\newblock{Fox, E. B., Sudderth, E. B., Jordan, M. I., \& Willsky, A. S. (2011). A sticky HDP-HMM with application to speaker diarization. The Annals of Applied Statistics, 5(2A), 1020-1056.}
+
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{multicols}
+
+\end{document}
