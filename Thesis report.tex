@@ -70,7 +70,7 @@
 %	ARTICLE CONTENTS
 %----------------------------------------------------------------------------------------
 
-\begin{multicols}{2} % Two-column layout throughout the main article text
+
 
 \section{Introduction}
 
@@ -125,7 +125,7 @@ In the problem at hand augmenting the information each point consists is crucial
 
 \subsection{Non Parametric Bayesian methods}
 
-Bayesian non-parametric methods are the cornerstone of Bayesian statistics. In this project the focus was directed towards the clustering methods that are being introduced by those tools. Radford M. Neal~\cite{bayes:neal} with his paper regarding MCMC methods made the definitive step towards Dirichlet process mixture models reaching mainstream success. Since then, two major schools in inference on such models have been introduced. Statistical inference and MCMC methods, and Variational inference. Variational inference was introduced by Jordan et al.~\cite{bayes:jordan} and it introduces deterministic tools to perform inference and approximate a posterior distribution and marginals. Both methods have strengths and weaknesses and many tools have been established by using the two approaches as their base. Blei et al.~\cite{LDA} introduced LDA as a method to perform topic modelling. Teh et al~\cite{bayes:hier} introduce a hierarchy on the inference process by introducing the Hierarchical Dirichlet process. Particle filter approaches have also been established. Doucet et al.~\cite{bayes:smc} introduce Sequential Monte Carlo as a fast way to approximate inference. Inference on Dirichlet process mixtures is a very active research field and covering it is beyond the scope of this report.
+Bayesian non-parametric methods are the cornerstone of Bayesian statistics. In this project the focus was directed towards the clustering methods that are being introduced by those tools. Radford M. Neal~\cite{bayes:neal} with his paper regarding MCMC methods made the definitive step towards Dirichlet process mixture models reaching mainstream success. Since then, two major schools in inference on such models have been introduced. Statistical inference and MCMC methods, and Variational inference. Variational inference was introduced by Jordan et al.~\cite{bayes:jordan} and it introduces deterministic tools to perform inference and approximate a posterior distribution and marginals. Both methods have strengths and weaknesses and many tools have been established by using the two approaches as their base. Blei et al.~\cite{LDA} introduced LDA as a method to perform topic modelling. Teh et al~\cite{bayes:hier} introduce a hierarchy on the inference process by introducing the Hierarchical Dirichlet process. Particle filter approaches have also been established. Doucet et al.~\cite{bayes:smc} introduce Sequential Monte Carlo as a fast way to approximate inference. Inference on Dirichlet process mixtures is a very active research field and covering it is beyond the scope of this report. In this project SMC samplers where used due to their robustness as well as their ability to expand. 
 
 \subsection{Correspondence}
 
@@ -139,6 +139,20 @@ The approach presented in this paper takes as input features similar to the afor
 
 \section{Theory background}
 \label{sec:theory}
+
+Relevant theory will be divided into 2 major sections
+\begin{itemize}
+	\item Dependent Dirichlet processes
+	\item SLAM
+\end{itemize}
+
+
+
+\subsection{Dependent dirichlet process mixture models}
+
+
+Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data. Data are now being given dependencies which could be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such methods is the imediate extension they provide to dynamic environments. Since data on every frame are dependent on data of the previous frame, using such methods is intuitively straightforward.
+
 
 \section{Model definition}
 \label{sec:model}
@@ -328,6 +342,9 @@ Figueredo, A.J. and Wolf, P. S.A. (2009).
 \bibitem{LDA}
 \newblock{Blei, D. M., Ng, A. Y., \& Jordan, M. I. (2003). Latent dirichlet allocation. the Journal of machine Learning research, 3, 993-1022.}
 
+\bibitem{theory:ddp}
+\newblock MacEachern, S. N. (2000). Dependent dirichlet processes. Unpublished manuscript, Department of Statistics, The Ohio State University.
+
 \bibitem{speakerDiar}
 \newblock{Fox, E. B., Sudderth, E. B., Jordan, M. I., \& Willsky, A. S. (2011). A sticky HDP-HMM with application to speaker diarization. The Annals of Applied Statistics, 5(2A), 1020-1056.}
 
@@ -335,6 +352,6 @@ Figueredo, A.J. and Wolf, P. S.A. (2009).
 
 %----------------------------------------------------------------------------------------
 
-\end{multicols}
+
 
 \end{document}
