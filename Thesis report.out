@@ -1,7 +1,7 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Literature review}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Object based SLAM}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Point Cloud Representation}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Point Cloud Object segmentation}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Non Parametric Bayesian methods}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Correspondence}{section.2}% 6
 \BOOKMARK [1][-]{section.3}{Theory background}{}% 7
