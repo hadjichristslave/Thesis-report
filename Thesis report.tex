@@ -39,6 +39,9 @@
 \fancyhead[C]{Master thesis $\bullet$ Panagiotis Chatzichristodoulou $\bullet$ 2015} % Custom header text
 \fancyfoot[RO,LE]{\thepage} % Custom footer text
 
+\usepackage{graphicx}
+\graphicspath{ {pics/} }
+
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
@@ -65,6 +68,7 @@
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 
+ 
 \begin{abstract}
 
 \noindent The thesis discuses the application of dependent Dirichlet processes and how such tools can help improve the quality of clustering algorihms in the recently introduced data representation objects, pointclouds. A novel method to point cloud clustering is introduced its mechanics are analysed. Finally Its potential weaknesses and what steps can be taken to remedy them are analysed.
@@ -74,7 +78,16 @@
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
 %----------------------------------------------------------------------------------------
+\newpage
+\thispagestyle{empty}
+ 
+\tableofcontents
 
+\listoffigures
+ 
+\listoftables
+ 
+\newpage
 
 
 \section{Introduction}
@@ -170,6 +183,7 @@ The models introduces a Pipeline in the layer of landmark detection of the EKF-S
   \caption{Landmark Layer}\label{euclid}
   \begin{algorithmic}[1]
     \Procedure{getLandmarkId}{$pointCloud, timepoint, existingLandmarks$}\Comment{Post transformation}
+      \State $initialize(landMarkIds)$ \Comment{Initialize empty list}
       \State $pointCloudReduced \gets extractMetaFeatures(pointCloud)$ \Comment{Cloud preprocessing}
       \State $features \gets extractMetaFeatures(pointCloudReduced)$
       \State $landmarks \gets cluster(features)$  \Comment{Cluster using features}
@@ -177,12 +191,13 @@ The models introduces a Pipeline in the layer of landmark detection of the EKF-S
       \For{\texttt{$landmarks$ as $landmark$}}
 	      \State $ (probability, landId) \gets getBestLandmarkCorrespondence(landmark, existingLandmarks) $
 			\If{$probability >threshold$}
-			   \State \textbf{return} $ landId$\Comment{Return known landmark}
+			   \State $ addLandmarks(landMarkIds, landId)$\Comment{Return known landmark}
 			\Else 
-			   \State $landId \gets addLandmark(landmark)$1 \Comment{Add landmark}
- 			   \State \textbf{return} $ landId$\Comment{Return added landmark}
+			   \State $ newLandID \gets addLandmarkDB(landmarkDB, landmark)$ \Comment{Add get new id}
+			   \State $addLandmarks(newLandID)$ \Comment{Add landmark}	   
 			\EndIf
       \EndFor
+      \State \textbf{return} $ landMarkIds$\Comment{Return added landmark}
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
@@ -190,7 +205,32 @@ The models introduces a Pipeline in the layer of landmark detection of the EKF-S
 
 This top level description has a lot of implied steps so a line by line description will be provided:
 
-\textbf{Method input:} The method takes as input a point cloud.x	
+\textbf{Method input:} The method takes as input a point cloud. The post transformation comment has to do with the fact that the 
+cloud expected is the one after all the frame transformations are done in the tf layer.
+
+\textbf{Lines 3-4:} Feature extraction is done through the pcl~\cite{pcl} library. An initial point cloud reduction is mandatory to increase the speed of the process. A voxel grid is used to reduce the dataset size. A leaf size of 0.04cm produces a good tradeoff between precision and speed. The object representation approach is similar to~\cite{objectpointslam}. Instead of using the CSHOT descriptor, pcl's fpfh~\cite{fpfh} is being used. Fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. In that way we end up with a 23 dimensional angular signature of the angular information between a point and its neighbors. Since the information are given in the form of a histogram, classical statistic solutions regarding the distances between two points can be taken into account. In our solution EMD,Hellinger,and KL divergence are being computed in the pipeline. Color information is being encoded with an approach similar to ~\cite{smcddp}. The colour spectrum is discretized and what is extracted is the count of different colour signatures between a point and its k nearest neighbors. Finally positional information is also given as input to the algorithm. The pipeline is presented in figure fig.~\ref{pcl:mod}. What the algorithm outputs is then a vector of $ \textbf{x} = (x_s, x_c, x_a) $ where $s$ represents a 3x1 space information, $c$ colour information 27x1 and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1).
+
+\begin{figure}[h!]
+  \caption{Point cloud modification pipeline.}
+  \centering
+    \includegraphics[width=1\textwidth]{Basic}
+  \label{pcl:mod}
+\end{figure}
+
+\textbf{Lines 5:} The clustering takes place in this line. The input of the method is the feature vector calculated in the previous steps. An SMC sampler is used as was presented in the theory section. The data are modeled as following a distribution $G_0(\theta_k) = Normal(x_n^s | \mu , \Sigma)* Mult(x_n^c| \delta) * exp( x_n^a | \lambda) $ Where Normal is a 3 dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$, mult is a multinomial with probability vector $\delta_t$ and exp is an exponential with rate $\lambda$. The exponential distribution was chosen after the data analysis showed the exponential trend on the data follow as can be seen in figure fig.~\ref{pcl:kl}
+
+\begin{figure}[h!]
+  \caption{Exponential trend in KL distances.}
+  \centering
+    \includegraphics[width=1\textwidth]{Kullback-Leibler}
+  \label{pcl:kl}
+\end{figure}
+
+
+\textbf{Lines 6-12:} The correspondence of the previous landmarks to current ones happens in theses lines.The getBestLandmarkCorrespondence function is a random forest implementation. An offline model has been trained to recognize correlation between distances and data correspondence. This approach is similar to~\cite{objectDisc} and many the efficiency of the method depends on the training to be general enough. The random forest outputs the probability of a landmark having been encountered before; if it has, it is being added to the landmarks list to be send for update in the EKF, otherwise a new landmark is added and its ID is then updated to the list.
+
+\textbf{Lines 15:} The algoritm returns the list of landmarks given the pointcloud and all the previous landmarks the robot has encountered.
+
 \section{Results}
 \label{sec:results}
 

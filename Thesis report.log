@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  17 MAY 2015 13:43
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  17 MAY 2015 18:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -385,29 +385,50 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
 \f@ncyO@olf=\skip68
 \f@ncyO@orf=\skip69
 )
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+\Gread@gobject=\count128
+))
+\Gin@req@height=\dimen161
+\Gin@req@width=\dimen162
+)
 (./Thesis report.aux)
 \openout1 = `"Thesis report.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Try loading font information for T1+pplx on input line 58.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Try loading font information for T1+pplx on input line 61.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pplx.fd
 File: t1pplx.fd 2004/09/06 font definitions for T1/pplx.
 )
-\big@size=\dimen161
-LaTeX Info: Redefining \microtypecontext on input line 58.
+\big@size=\dimen163
+LaTeX Info: Redefining \microtypecontext on input line 61.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -459,50 +480,64 @@ Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box57
-Package hyperref Info: Link coloring OFF on input line 58.
+Package hyperref Info: Link coloring OFF on input line 61.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count128
+\c@section@level=\count129
 )
-LaTeX Info: Redefining \ref on input line 58.
-LaTeX Info: Redefining \pageref on input line 58.
-LaTeX Info: Redefining \nameref on input line 58.
+LaTeX Info: Redefining \ref on input line 61.
+LaTeX Info: Redefining \pageref on input line 61.
+LaTeX Info: Redefining \nameref on input line 61.
 
 (./Thesis report.out) (./Thesis report.out)
 \@outlinefile=\write3
 \openout3 = `"Thesis report.out"'.
 
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count130
+\scratchdimen=\dimen164
+\scratchbox=\box58
+\nofMPsegments=\count131
+\nofMParguments=\count132
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count133
+\MPscratchDim=\dimen165
+\MPnumerator=\count134
+\makeMPintoPDFobject=\count135
+\everyMPtoPDFconversion=\toks23
+)
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <24> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 61.
-LaTeX Font Info:    Try loading font information for OT1+pplx on input line 61.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 64.
+LaTeX Font Info:    Try loading font information for OT1+pplx on input line 64.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pplx.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 61.
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 64.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 61.
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 64.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 61.
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 64.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 61.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 64.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
@@ -513,31 +548,49 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 68.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 72.
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/pplx/m/sc/12'.
 (microtype)             Ignoring protrusion settings for this character.
+ (./Thesis report.toc
+Overfull \hbox (0.56pt too wide) detected at line 12
+\T1/pplx/b/n/10 VII 
+ []
+
+)
+\tf@toc=\write4
+\openout4 = `"Thesis report.toc"'.
+
+ (./Thesis report.lof)
+\tf@lof=\write5
+\openout5 = `"Thesis report.lof"'.
+
+ (./Thesis report.lot)
+\tf@lot=\write6
+\openout6 = `"Thesis report.lot"'.
+
+ [2]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/pplx/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Try loading font information for OMS+pplx on input line 86.
+LaTeX Font Info:    Try loading font information for OMS+pplx on input line 99.
 
-LaTeX Font Info:    No file OMSpplx.fd. on input line 86.
+LaTeX Font Info:    No file OMSpplx.fd. on input line 99.
 
 
 LaTeX Font Warning: Font shape `OMS/pplx/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 86.
+(Font)              for symbol `textbullet' on input line 99.
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-] [2] [3] [4]
+[3] [4] [5] [6]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 170.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 177.
+put line 183.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 191.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 Package microtype Info: Loading generic settings for font family
@@ -545,34 +598,51 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (1.27063pt too wide) in paragraph at lines 178--179
+Overfull \hbox (1.27063pt too wide) in paragraph at lines 192--193
 [] $\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 probability\OT1/pplx/m/n/10 (-20) , \OM
 L/zplm/m/it/10 landId\OT1/zplm/m/n/10 ) \OMS/zplm/m/n/10   \OML/zplm/m/it/10 ge
 tBestLandmarkCorrespondence\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 landmark\OT1/ppl
 x/m/n/10 (-20) , \OML/zplm/m/it/10 existingLandmarks\OT1/zplm/m/n/10 )$ 
  []
 
-[5] [6] [7] [8] [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 390.
- [10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 390.
+[7] <pics/Basic.png, id=199, 865.2325pt x 203.76125pt>
+File: pics/Basic.png Graphic file (type png)
+ <use pics/Basic.png>
+Package pdftex.def Info: pics/Basic.png used on input line 216.
+(pdftex.def)             Requested size: 430.00462pt x 101.26476pt.
+
+<pics/Kullback-Leibler.png, id=202, 808.01875pt x 337.26pt>
+File: pics/Kullback-Leibler.png Graphic file (type png)
+
+<use pics/Kullback-Leibler.png>
+Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 225.
+(pdftex.def)             Requested size: 430.00462pt x 179.48285pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8 <./pics/Basic.png>] [9 <./pics/Kullback-Leibler.png (PNG copy)>] [10]
+[11] [12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 431.
+ [13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 431.
  (./Thesis report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 390.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 390.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 431.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 431.
 Package rerunfilecheck Info: File `"Thesis report".out' has not changed.
 (rerunfilecheck)             Checksum: FC201E656016E1EDEAEE4B1904F25B20;861.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 390.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 431.
  ) 
 Here is how much of TeX's memory you used:
- 9502 strings out of 495032
- 145682 string characters out of 6181719
- 349266 words of memory out of 5000000
- 12277 multiletter control sequences out of 15000+600000
- 64719 words of font info for 245 fonts, out of 8000000 for 9000
+ 10242 strings out of 495032
+ 155373 string characters out of 6181719
+ 359524 words of memory out of 5000000
+ 12965 multiletter control sequences out of 15000+600000
+ 66548 words of font info for 256 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  36i,13n,43p,1569b,445s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/panos/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk>{/usr/sha
@@ -580,12 +650,14 @@ re/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/fpl/fplrc8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8
-a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "Thesis report.pdf" (10 pages, 143011 bytes).
+c/mathpazo/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo
+/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on "Thesis report.pdf" (13 pages, 188146 bytes).
 PDF statistics:
- 245 PDF objects out of 1000 (max. 8388607)
- 72 named destinations out of 1000 (max. 500000)
- 57457 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 298 PDF objects out of 1000 (max. 8388607)
+ 77 named destinations out of 1000 (max. 500000)
+ 57467 words of extra memory for PDF output out of 61914 (max. 10000000)
 
