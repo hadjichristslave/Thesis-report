@@ -1,3 +1,4 @@
+
 \documentclass[twoside]{article}
 
 \usepackage{lipsum} % Package to generate dummy text throughout this template
@@ -76,7 +77,7 @@
 
 
 \lettrine[nindent=0em,lines=3] Simultaneous localization and mapping is one of the fundamental problems of autonomous systems\cite{probRobs}. In order for a robot to be truly autonomous, it must have the ability to enter an area and infer its structure. To that direction, a lot of effort has been put in algorithms that are able to map static environments. With solutions like EKF-SLAM\cite{ekf}, FastSlam\cite{slam} and GraphSLAM\cite{graph} robots are now able to efficiently map static environments. 
-The logical extention to such methods that can map  static environments is methods that remove this restriction. The idea of lifelong robot learning is not new and has been introduced into the literature since Thrun et al\cite{liflonglearning}. Konolige et al.\cite{lifelongmaps} specifically focus on lifelong learning in mapping and the utility such methods have.  In the PhD thesis of Walcott long term mapping is decomposed to 4 basic subproblems:
+The logical extention to methods that can map  static environments is methods that remove this restriction. The idea of lifelong robot learning is not new and has been introduced as a general concept to the literature by Sebastian Thrun~\cite{liflonglearning}. Konolige et al.\cite{lifelongmaps} specifically focus on lifelong learning in mapping and the utility such methods would have.  In the PhD thesis of Walcott~\cite{aishalong} long term mapping is decomposed to 4 basic subproblems:
 \begin{itemize}
 	\item{Continuously incorporate new information.}
 	\item{Address the problem of tractability for growing DPG}
@@ -84,15 +85,17 @@ The logical extention to such methods that can map  static environments is metho
 	\item{Detect changes and update the map online}
 \end{itemize}
 
-The first two problems can be though of as compression problems as the map increases over time whereas the latter ones can be though of as dynamic environment problems. The methods of tackling those problems vary according to what sensors a robot will use to perform the mapping.
+The first two problems can be though of as compression problems as the map increases over time whereas the latter ones can be though of as dynamic environment problems. Methods of tackling those problems vary according to what sensors a robot uses to perform the mapping. In this project the focus will be directed in methods that use RGBD devices to perform SLAM like Microsoft's Kinect.
 
-Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized RGBD devices with its low price range and high quality sensors. It came as no surprise that research in point clouds, the representation system of kinect sensor readings, has increased since. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap}. The goal of this thesis is to introduce a novel approach to tackle the compression problem of long term mapping methods that use the Kinect device by using Bayesian non parametric methods.
+Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized RGBD devices with its low price range and high quality sensors. It came as no surprise that research in point clouds, the representation system of Kinect sensor readings, has increased since. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap}. The goal of this thesis is to introduce a novel approach to tackle the compression problem of long term mapping methods that use the Kinect device by using Bayesian non parametric methods.
 
-Dirichlet processes and Dirichlet process mixture models \cite{nonParam} are the cornerstone of Bayesian non parametric statistics. The strength of those models lies in the fact that they allow the model's mixture components to grow as much as needed so as to best fit the data. The dynamic number of components in combination with the highly resilient Dirichlet priors leads to very flexible models that can be used in a very large area of applications from topic modeling\cite{LDA} to speaker diarization\cite{speakerDiar}. 
+Dirichlet processes and Dirichlet process mixture models \cite{nonParam} are the cornerstone of Bayesian non parametric statistics. The strength of those models lies in the fact that they allow the model's mixture components to grow as much as needed so as to best fit the data. The dynamic number of components in combination with the highly resilient priors leads to very flexible models that can be used in a very large area of applications from topic modeling\cite{LDA} to speaker diarization\cite{speakerDiar}. 
 
-The main motivation behind this project is to use such methods as a means of compressing the information provided by the environment. In that direction, finding a way to robustly clustering a point cloud into semantically sound chunks seems a reasonable starting point. This leads to the direction of object based SLAM, which is a domain where objects are used as reference points to perform the mapping.
+The main motivation behind this project is to use such methods as a means of compressing the information provided by the environment. In that direction, finding a way to robustly clustering a point cloud into semantically sound "chunks" of structure seems a reasonable starting point. This leads to the direction of object based SLAM, which is a domain where objects are used as reference points to perform the mapping.
 
-The rest of the paper is structured as follows. Section \ref{sec:literature} will reference literature review, Section~\ref{sec:theory} will introduce the theories behind the model, Section 4~\ref{sec:model} will define the model, Section 5~\ref{sec:results} will show experimental results of the method. Finally, Section 6~\ref{sec:discussion} will end up with a discussion on the methods strengths and weaknesses.
+In this paper, a novel EKF SLAM algorithm that takes point clouds as visual input will be implementeed. Its ability to compress the data a point cloud introduces will be presented and analysed; Furthermore, directions on how the method could be extended to tackle the first two subproblems of Walcott's thesis will be given in the discussion.
+
+The rest of the paper is structured as follows. Section \ref{sec:literature} will present relevant literature review, Section~\ref{sec:theory} will introduce the theories behind the model, Section 4~\ref{sec:model} will define the model, Section 5~\ref{sec:results} will show experimental results of the method. Finally, Section 6~\ref{sec:discussion} will end up with a discussion on the methods strengths and weaknesses.
 
 %------------------------------------------------
  
