@@ -276,6 +276,8 @@ The sampler as was described in the theory section takes as input the modified c
   \label{pcl:clustering}
 \end{figure}
 
+The random forest takes as input the distributions as given by the cluster and outputs the probability that each one represents an element the algorithm has previously already in the database. Only elements past a threshold will be considered as landmarks already encountered and otherwise the new distributions are added to the database. The features taken by the algorithm are the distances between each distribution and each landmark already stored in the database. Since the operations are done in the distribution level, statistical divergences are used. The training set is supplied beforehand to the algorithm. 
+
 \section{Conclusion and future work}
 \label{sec:discussion}
 
