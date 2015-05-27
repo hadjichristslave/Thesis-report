@@ -9,4 +9,4 @@
 \contentsline {section}{\numberline {4}Model definition}{7}{section.4}
 \contentsline {section}{\numberline {5}Results}{9}{section.5}
 \contentsline {section}{\numberline {6}Conclusion and future work}{11}{section.6}
-\contentsline {section}{\numberline {7}Discussion}{11}{section.7}
+\contentsline {section}{\numberline {7}Discussion}{12}{section.7}

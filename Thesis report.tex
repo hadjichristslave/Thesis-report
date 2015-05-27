@@ -255,7 +255,7 @@ The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size o
   \label{pcl:fig}
 \end{figure}
 
-The cloud is too dense to be correctly displayed in the plot. The planar components of the plane also dominate the cloud and its hard to operate on them. An image with a high amount of planar components is typical when data are acquired from a turtlebot with the camera being situated near the ground. In order to perform the clustering operations, the cloud needs to be downsampled. The process followed is the one described in the method definition and the results are shown in Fig~\ref{pcl:reduced}. 
+The cloud is too dense to be correctly displayed in the plot. The planar components of the plane also dominate the cloud and its hard to operate on them. An image with a high amount of planar components is typical when data are acquired from a turtlebot with the camera being situated near the ground. In order to perform the clustering operations, the cloud needs to be downsampled. The process followed is the one described in the method definition and the results are shown in Fig~\ref{pcl:reduced}. The operation used is a pipeline voxel downsampling, statistical outlier removal and plane estimation via RANSAC is typical in the literature~/ref{objectDisc}.
 
 
 \begin{figure}[h!]
@@ -265,7 +265,16 @@ The cloud is too dense to be correctly displayed in the plot. The planar compone
   \label{pcl:reduced}
 \end{figure}
 
-As you can see the cloud structure remains intact and there is no loss of structural information. The cloud is now ready to be used as input for the sampler which will take the features calculated in the pipeline to cluster the cloud into segments of structure.
+The cloud is stripped of its planar components with the remaining structure having minimal to no loss of structural information. The cloud is now ready to be used as input for the sampler which will take the features calculated in the pipeline to cluster the cloud into segments of structure. The whole takes a medium amount of time and depending on the parameter tweaking it can 
+
+The sampler as was described in the theory section takes as input the modified cloud and outputs clusters of the structure. Its results are shown in figure~\ref{pcl:clustering}. The environment is captured as a sequence of clusters. It can be seen that the chair that is situated in the center of the cloud has a number of clusters assigned to it. This behavior of the cluster is expected as a lot of point clouds are part of the chair and the horizontal as well and the vertical components have different angular signatures. It is not possible to create a general framework that takes into account all the different angle and point signatures between objects. The decision of how the clusters represent a structure should then be taken in a decision layer on top of that cluster. The random forest is build to classify objects by taking as input the output of the sampler.
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=.5\textwidth]{clustering}
+    \caption{Point cloud post pipeline modifications.}
+  \label{pcl:clustering}
+\end{figure}
 
 \section{Conclusion and future work}
 \label{sec:discussion}
