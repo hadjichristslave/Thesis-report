@@ -276,7 +276,14 @@ The sampler as was described in the theory section takes as input the modified c
   \label{pcl:clustering}
 \end{figure}
 
-The random forest takes as input the distributions as given by the cluster and outputs the probability that each one represents an element the algorithm has previously already in the database. Only elements past a threshold will be considered as landmarks already encountered and otherwise the new distributions are added to the database. The features taken by the algorithm are the distances between each distribution and each landmark already stored in the database. Since the operations are done in the distribution level, statistical divergences are used. The training set is supplied beforehand to the algorithm. 
+The random forest takes as input the distributions as given by the cluster and outputs the probability that each one represents an element the algorithm has previously already in the database. Only elements past a threshold will be considered as landmarks already encountered and otherwise the new distributions are added to the database. The features taken by the algorithm are the distances between each distribution and each landmark already stored in the database. More specifically, for the Gaussian parts of the distribution Wasserstein and Kullback Leibler divergence are used to measure the distance between them. For the exponential part, squared Hellinger and Kullback-Leibler being used, and for the categorical EMD, KL divergence and Hellinger distance. All distribution distances are given in the appendix. The final result is a 7 feature vector that will be used to classify if it's a distance signature that classifies a landmark or not. The training set is supplied beforehand to the algorithm. The results of the algorithm are shown in Fig.~\ref{pcl:features}
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=.5\textwidth]{landmarkClasification}
+    \caption{Point cloud post pipeline modifications.}
+  \label{pcl:features}
+\end{figure}
 
 \section{Conclusion and future work}
 \label{sec:discussion}
