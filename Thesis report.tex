@@ -215,7 +215,7 @@ This top level description has a lot of implied steps so a line by line descript
 \textbf{Method input:} The method takes as input a point cloud. The post transformation comment has to do with the fact that the 
 cloud expected is the one after all the frame transformations are done in the tf layer of the robot.
 
-\textbf{Lines 3-4:} Feature extraction is done through the pcl~\cite{pcl} library. An initial point cloud reduction is mandatory to increase the speed of the process. A voxel grid is used to reduce the dataset size. A leaf size of 0.04cm produces a good tradeoff between precision and speed. The object representation approach is similar to~\cite{objectpointslam}. Instead of using the CSHOT descriptor, pcl's fpfh~\cite{fpfh} is being used. Fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. In that way we end up with a 23 dimensional angular signature of information between a point and its neighbors. Since the information are given in the form of a histogram, classical statistic solutions regarding the distances between two points can be taken into account. In our solution EMD,Hellinger,and KL divergence are being computed in the pipeline. Color information is being encoded with an approach similar to ~\cite{smcddp}. The colour spectrum is discretized and what is extracted is the count of different colour signatures between a point and its k nearest neighbors. Finally positional information is also given as input to the algorithm. The pipeline is presented in figure fig.~\ref{pcl:mod}. What the algorithm outputs is then a vector of $ \textbf{x} = (x_s, x_c, x_a) $ where $s$ represents a 3x1 space information, $c$ colour information 27x1 and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1).
+\textbf{Lines 3-4:} Feature extraction is done through the pcl~\cite{pcl} library. An initial point cloud reduction is mandatory to increase the speed of the process. A voxel grid is used to reduce the dataset size. A leaf size of 0.04cm produces a good tradeoff between precision and speed. The object representation approach is similar to~\cite{objectpointslam}. Instead of using the CSHOT descriptor, pcl's fpfh~\cite{fpfh} is being used. Fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. In that way we end up with a 23 dimensional angular signature of information between a point and its neighbors. Since the information are given in the form of a histogram, classical statistic solutions regarding the distances between two points can be taken into account. In our solution EMD,Hellinger,and KL divergence are being computed in the pipeline. Color information is being encoded with an approach similar to ~\cite{smcddp}. The colour spectrum is discretized and what is extracted is the count of different colour signatures between a point and its k nearest neighbors. Finally positional information is also given as input to the algorithm. The pipeline is presented in figure fig.~\ref{pcl:mod}. What the algorithm outputs is then a vector of $ \textbf{x} = (x_s, x_c, x_a) $ where $s$ represents a 3x1 space information, $c$ colour information 27x1 and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1). It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it reduces manyfold(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
 
 \begin{figure}[h!]
   \caption{Point cloud modification pipeline.}
@@ -246,22 +246,21 @@ The EKF SLAM works with no adjustments made to the package but the landmarks whi
 
 The results of the pipeline as well as the results of its performance in SLAM methods will be discussed.
 
-The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size of a point cloud so that operations on the reduced dataset are feasible. A point cloud instance as taken raw from the kinect sensor approximately 300.000 points. Matrix operations at such large matrices are therefore non feasible. The main target of the pipeline is to reduce the size of the data to a more manageable scale. The initial point cloud is shown in Figure~\ref{pcl:fig}
+The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size of a point cloud so that operations on the reduced dataset are feasible. A point cloud instance as taken raw from the kinect sensor approximately 240.000 points and matrix operations at such large matrices are non feasible. The main target of the pipeline is to reduce the size of the data to a more manageable scale. The initial dense point cloud is shown in Fig.~\ref{pcl:fig}.
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=1\textwidth]{Kullback-Leibler}
+    \includegraphics[width=.5\textwidth]{denseInitial}
     \caption{Exponential trend in KL distances.}
   \label{pcl:fig}
 \end{figure}
 
-
-Given this very dense input point cloud the pipeline described will output its reduced version which is shown in Figure~\ref{pcl:reduced}.
+The cloud is too dense to be correctly displayed in the plot. The planar components of the plane also dominate the cloud and its hard to operate on them. An image with a high amount of planar components is typical when data are acquired from a turtlebot with the camera being situated near the ground. In order to perform the clustering operations, the cloud needs to be downsampled. The process followed is the one described in the method definition and the results are shown in Fig~\ref{pcl:reduced}. 
 
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=1\textwidth]{initial}
+    \includegraphics[width=.5\textwidth]{initial}
     \caption{Point cloud post pipeline modifications.}
   \label{pcl:reduced}
 \end{figure}
