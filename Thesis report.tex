@@ -246,7 +246,27 @@ The EKF SLAM works with no adjustments made to the package but the landmarks whi
 
 The results of the pipeline as well as the results of its performance in SLAM methods will be discussed.
 
-The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size of a point cloud so that operations on the reduced dataset are feasible. A point cloud instance as taken raw from the kinect sensor approximately 300.000 points. Matrix operations at such large matrices are therefore non feasible. The main target of the pipeline is to reduce the size of the data to a more manageable scale. 
+The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size of a point cloud so that operations on the reduced dataset are feasible. A point cloud instance as taken raw from the kinect sensor approximately 300.000 points. Matrix operations at such large matrices are therefore non feasible. The main target of the pipeline is to reduce the size of the data to a more manageable scale. The initial point cloud is shown in Figure~\ref{pcl:fig}
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=1\textwidth]{Kullback-Leibler}
+    \caption{Exponential trend in KL distances.}
+  \label{pcl:fig}
+\end{figure}
+
+
+Given this very dense input point cloud the pipeline described will output its reduced version which is shown in Figure~\ref{pcl:reduced}.
+
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=1\textwidth]{initial}
+    \caption{Point cloud post pipeline modifications.}
+  \label{pcl:reduced}
+\end{figure}
+
+As you can see the cloud structure remains intact and there is no loss of structural information. The cloud is now ready to be used as input for the sampler which will take the features calculated in the pipeline to cluster the cloud into segments of structure.
 
 \section{Conclusion and future work}
 \label{sec:discussion}
