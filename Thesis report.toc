@@ -1,14 +1,12 @@
-\contentsline {section}{\numberline {I}Introduction}{3}{section.1}
-\contentsline {section}{\numberline {II}Literature review}{4}{section.2}
-\contentsline {subsection}{\numberline {I}Object based SLAM}{4}{subsection.2.1}
-\contentsline {subsection}{\numberline {II}Point Cloud Object segmentation}{5}{subsection.2.2}
-\contentsline {subsection}{\numberline {III}Non Parametric Bayesian methods}{5}{subsection.2.3}
-\contentsline {subsection}{\numberline {IV}Correspondence}{6}{subsection.2.4}
-\contentsline {section}{\numberline {III}Theory background}{6}{section.3}
-\contentsline {subsection}{\numberline {I}Dependent dirichlet process mixture models}{7}{subsection.3.1}
-\contentsline {section}{\numberline {IV}Model definition}{7}{section.4}
-\contentsline {section}{\numberline {V}Results}{9}{section.5}
-\contentsline {section}{\numberline {VI}Conclusion and future work}{9}{section.6}
-\contentsline {section}{\numberline {VII}Discussion}{10}{section.7}
-\contentsline {subsection}{\numberline {I}Subsection One}{10}{subsection.7.1}
-\contentsline {subsection}{\numberline {II}Subsection Two}{10}{subsection.7.2}
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\contentsline {section}{\numberline {2}Literature review}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Object based SLAM}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Point Cloud Object segmentation}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Non Parametric Bayesian methods}{5}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Correspondence}{6}{subsection.2.4}
+\contentsline {section}{\numberline {3}Theory background}{7}{section.3}
+\contentsline {subsection}{\numberline {3.1}Dependent dirichlet process mixture models}{7}{subsection.3.1}
+\contentsline {section}{\numberline {4}Model definition}{7}{section.4}
+\contentsline {section}{\numberline {5}Results}{9}{section.5}
+\contentsline {section}{\numberline {6}Conclusion and future work}{9}{section.6}
+\contentsline {section}{\numberline {7}Discussion}{10}{section.7}
