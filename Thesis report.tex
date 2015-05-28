@@ -14,6 +14,7 @@
 \usepackage{booktabs} % Horizontal rules in tables
 \usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
 \usepackage{hyperref} % For hyperlinks in the PDF
+\usepackage{svg}
 
 \usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
 \usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
@@ -182,7 +183,17 @@ Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data. 
 \section{Model definition}
 \label{sec:model}
 
-A model that takes as input point clouds from a Kinect sensor mounted on a robot and outputs the most probable landmarks given the input and the previous landmarks in now presented.
+A model that takes as input point clouds from a Kinect sensor mounted on a robot and outputs the most probable landmarks given the input and the previous landmarks in now presented. Fig.~\ref{pipeline} depicts the general workflow of what happens during the observation step of SLAM. The SLAM node requires landmark information, and the landmark pipeline outputs the most probable landmarks given the current database of landmarks and the current observations. If needed landmarks added to the database and the landmark ids are given to back to the SLAM node.
+
+
+\begin{figure}
+\begin{tabular}{cc}
+  \includegraphics[width=65mm]{workflowGen} &    \includegraphics[width=65mm]{workflowSpec} \\
+(a) General pipeline & (b) Landmark pipeline \\[6pt]
+\end{tabular}
+\caption{General landmark update pipeline}
+\label{pipeline}
+\end{figure}
 
 The model introduces a Pipeline in the layer of landmark detection of the EKF-SLAM algorithm. All the operations from feature extraction to clustering and object matching will be performed at that layer. More specifically the pseudo-code for the method is the following:
 
@@ -215,7 +226,7 @@ This top level description has a lot of implied steps so a line by line descript
 \textbf{Method input:} The method takes as input a point cloud. The post transformation comment has to do with the fact that the 
 cloud expected is the one after all the frame transformations are done in the tf layer of the robot.
 
-\textbf{Lines 3-4:} Feature extraction is done through the pcl~\cite{pcl} library. An initial point cloud reduction is mandatory to increase the speed of the process. A voxel grid is used to reduce the dataset size. A leaf size of 0.04cm produces a good tradeoff between precision and speed. The object representation approach is similar to~\cite{objectpointslam}. Instead of using the CSHOT descriptor, pcl's fpfh~\cite{fpfh} is being used. Fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. In that way we end up with a 23 dimensional angular signature of information between a point and its neighbors. Since the information are given in the form of a histogram, classical statistic solutions regarding the distances between two points can be taken into account. In our solution EMD,Hellinger,and KL divergence are being computed in the pipeline. Color information is being encoded with an approach similar to ~\cite{smcddp}. The colour spectrum is discretized and what is extracted is the count of different colour signatures between a point and its k nearest neighbors. Finally positional information is also given as input to the algorithm. The pipeline is presented in figure fig.~\ref{pcl:mod}. What the algorithm outputs is then a vector of $ \textbf{x} = (x_s, x_c, x_a) $ where $s$ represents a 3x1 space information, $c$ colour information 27x1 and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1). It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it reduces manyfold(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
+\textbf{Lines 3-4:} Feature extraction is done through the pcl~\cite{pcl} library. An initial point cloud reduction is mandatory to increase the speed of the process. A voxel grid is used to reduce the dataset size. A leaf size of 0.04cm produces a good tradeoff between precision and speed. The object representation approach is similar to~\cite{objectpointslam}. Instead of using the CSHOT descriptor, pcl's fpfh~\cite{fpfh} is being used. Fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. In that way we end up with a 23 dimensional angular signature of information between a point and its neighbors. Since the information are given in the form of a histogram, classical statistic solutions regarding the distances between angular signatures can be taken into account. In our solution EMD,Hellinger,and KL divergence are being computed in the pipeline. Color information is being encoded with an approach similar to ~\cite{smcddp}. The colour spectrum is discretized and what is extracted is the count of different colour signatures between a point and its k nearest neighbors. Finally positional information is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. What the algorithm outputs is then a vector of $ \textbf{x} = (x_s, x_c, x_a) $ where $s$ represents a 3x1 vector of space information, $c$ a 27x1 vector of colour information and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1). It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it greatly reduces(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
 
 \begin{figure}[h!]
   \caption{Point cloud modification pipeline.}
@@ -224,7 +235,7 @@ cloud expected is the one after all the frame transformations are done in the tf
   \label{pcl:mod}
 \end{figure}
 
-\textbf{Lines 5:} The clustering takes place in this line. The input of the method is the feature vector for every data point which is calculated in the previous steps. An SMC sampler is used as was presented in the theory section. The data are modeled as following a distribution $G_0(\theta_k) = Normal(x_n^s | \mu , \Sigma)* Mult(x_n^c| \delta) * Exp( x_n^a | \lambda) $ Where Normal is a 3 dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$, Mult is a multinomial with probability vector $\delta_t$ and Exp is an exponential with rate $\lambda$. The angle distribution of datapoints is shown in.~\ref{pcl:kl}. For this graph data points from various point clouds where taken and passed through the pipeline analysed in lines 3-4. The data were then plotted, and the figure shows what the aggregated angle distribution between neighbor datapoints is. Since there is a clear exponential trend, an exponential distribution was chosen to model it.
+\textbf{Lines 5:} The clustering takes place in this line. The input of the method is the feature vector for every data point which is calculated in the previous steps. An SMC sampler is used as was presented in the theory section. The data are modeled as following a distribution $G_0(\theta_k) = Normal(x_n^s | \mu , \Sigma)* Mult(x_n^c| \delta) * Exp( x_n^a | \lambda) $ Where Normal is a 3 dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$, Mult is a multinomial with probability vector $\delta_t$ and Exp is an exponential with rate $\lambda$. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. For this graph data points from various point clouds where taken and passed through the pipeline analysed in lines 3-4. The data were then plotted, and the figure shows what the aggregated angle distribution between neighbor datapoints is. Since there is a clear exponential trend, the exponential distribution was chosen to model it. A gamma distribution is also a nice fit for the data, but due to time constrains, only one modeling distribution was explored.
 
 \begin{figure}[h!]
   \centering

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  27 MAY 2015 22:16
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  28 MAY 2015 10:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -293,97 +293,36 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip46
 )
-(/usr/share/texlive/texmf-dist/tex/latex/lettrine/lettrine.sty
-File: lettrine.sty 2013/03/14 v1.64 (Daniel Flipo)
-\c@DefaultLines=\count118
-\DefaultFindent=\dimen144
-\DefaultNindent=\dimen145
-\DefaultSlope=\dimen146
-\L@lbox=\box54
-\L@tbox=\box55
-\c@L@lines=\count119
-\L@Pindent=\dimen147
-\L@Findent=\dimen148
-\L@Nindent=\dimen149
-\L@lraise=\dimen150
-\L@first=\dimen151
-\L@next=\dimen152
-\L@slope=\dimen153
-\L@height=\dimen154
-\LettrineWidth=\dimen155
+(/usr/share/texlive/texmf-dist/tex/latex/svg/svg.sty
+Package: svg 2012/09/05 v1.0 SVG inclusion and extraction
 
-Loading lettrine.cfg
-(/usr/share/texlive/texmf-dist/tex/latex/lettrine/lettrine.cfg))
-(/usr/share/texlive/texmf-dist/tex/latex/paralist/paralist.sty
-Package: paralist 2013/06/09 v2.4 Extended list environments
-\pltopsep=\skip47
-\plpartopsep=\skip48
-\plitemsep=\skip49
-\plparsep=\skip50
-\pl@lab=\toks19
-)
-(/usr/share/texlive/texmf-dist/tex/latex/abstract/abstract.sty
-Package: abstract 2009/06/08 v1.2a configurable abstracts
-\abstitleskip=\skip51
-\absleftindent=\skip52
-\absrightindent=\skip53
-\absparindent=\skip54
-\absparsep=\skip55
-)
-(/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
-Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
-\ttl@box=\box56
-\beforetitleunit=\skip56
-\aftertitleunit=\skip57
-\ttl@plus=\dimen156
-\ttl@minus=\dimen157
-\ttl@toksa=\toks20
-\titlewidth=\dimen158
-\titlewidthlast=\dimen159
-\titlewidthfirst=\dimen160
-)
-(/usr/share/texlive/texmf-dist/tex/latex/titlesec/block.tss
-File: block.tss 2011/12/15
-)
-(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
-Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
-nment
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2012/10/14 v2.6b package option processing (HA)
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks19
+\XKV@tempa@toks=\toks20
+\XKV@depth=\count118
+File: xkeyval.tex 2012/10/14 v2.6b key=value parser (HA)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+\c@KVtest=\count119
+\sf@farskip=\skip47
+\sf@captopadj=\dimen144
+\sf@capskip=\skip48
+\sf@nearskip=\skip49
+\c@subfigure=\count120
+\c@subfigure@save=\count121
+\c@lofdepth=\count122
+\c@subtable=\count123
+\c@subtable@save=\count124
+\c@lotdepth=\count125
+\sf@top=\skip50
+\sf@bottom=\skip51
 )
-\@float@every@algorithm=\toks21
-\c@algorithm=\count120
-)
-(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
-Package: algpseudocode 
-
-(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
-Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
-
-Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count121
-\c@ALG@rem=\count122
-\c@ALG@nested=\count123
-\ALG@tlm=\skip58
-\ALG@thistlm=\skip59
-\c@ALG@Lnr=\count124
-\c@ALG@blocknr=\count125
-\c@ALG@storecount=\count126
-\c@ALG@tmpcounter=\count127
-\ALG@tmplength=\skip60
-)
-Document Style - pseudocode environments for use with the `algorithmicx' style
-) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip61
-\f@ncyO@elh=\skip62
-\f@ncyO@erh=\skip63
-\f@ncyO@olh=\skip64
-\f@ncyO@orh=\skip65
-\f@ncyO@elf=\skip66
-\f@ncyO@erf=\skip67
-\f@ncyO@olf=\skip68
-\f@ncyO@orf=\skip69
+(/usr/share/texlive/texmf-dist/tex/latex/import/import.sty
+Package: import 2009/03/23  v 5.1
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
@@ -401,34 +340,151 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 
 (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-\Gread@gobject=\count128
+\Gread@gobject=\count126
 ))
-\Gin@req@height=\dimen161
-\Gin@req@width=\dimen162
+\Gin@req@height=\dimen145
+\Gin@req@width=\dimen146
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/transparent.sty
+Package: transparent 2007/01/08 v1.0 Transparency via pdfTeX's color stack (HO)
+
+)
+(/usr/share/texmf/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+\SVG@out@width=\skip52
+\SVG@out@height=\skip53
+\c@svgfigure=\count127
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lettrine/lettrine.sty
+File: lettrine.sty 2013/03/14 v1.64 (Daniel Flipo)
+\c@DefaultLines=\count128
+\DefaultFindent=\dimen147
+\DefaultNindent=\dimen148
+\DefaultSlope=\dimen149
+\L@lbox=\box54
+\L@tbox=\box55
+\c@L@lines=\count129
+\L@Pindent=\dimen150
+\L@Findent=\dimen151
+\L@Nindent=\dimen152
+\L@lraise=\dimen153
+\L@first=\dimen154
+\L@next=\dimen155
+\L@slope=\dimen156
+\L@height=\dimen157
+\LettrineWidth=\dimen158
+
+Loading lettrine.cfg
+(/usr/share/texlive/texmf-dist/tex/latex/lettrine/lettrine.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/paralist/paralist.sty
+Package: paralist 2013/06/09 v2.4 Extended list environments
+\pltopsep=\skip54
+\plpartopsep=\skip55
+\plitemsep=\skip56
+\plparsep=\skip57
+\pl@lab=\toks21
+)
+(/usr/share/texlive/texmf-dist/tex/latex/abstract/abstract.sty
+Package: abstract 2009/06/08 v1.2a configurable abstracts
+\abstitleskip=\skip58
+\absleftindent=\skip59
+\absrightindent=\skip60
+\absparindent=\skip61
+\absparsep=\skip62
+)
+(/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
+\ttl@box=\box56
+\beforetitleunit=\skip63
+\aftertitleunit=\skip64
+\ttl@plus=\dimen159
+\ttl@minus=\dimen160
+\ttl@toksa=\toks22
+\titlewidth=\dimen161
+\titlewidthlast=\dimen162
+\titlewidthfirst=\dimen163
+)
+(/usr/share/texlive/texmf-dist/tex/latex/titlesec/block.tss
+File: block.tss 2011/12/15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks23
+\c@algorithm=\count130
+)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count131
+\c@ALG@rem=\count132
+\c@ALG@nested=\count133
+\ALG@tlm=\skip65
+\ALG@thistlm=\skip66
+\c@ALG@Lnr=\count134
+\c@ALG@blocknr=\count135
+\c@ALG@storecount=\count136
+\c@ALG@tmpcounter=\count137
+\ALG@tmplength=\skip67
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip68
+\f@ncyO@elh=\skip69
+\f@ncyO@erh=\skip70
+\f@ncyO@olh=\skip71
+\f@ncyO@orh=\skip72
+\f@ncyO@elf=\skip73
+\f@ncyO@erf=\skip74
+\f@ncyO@olf=\skip75
+\f@ncyO@orf=\skip76
 )
 (./Thesis report.aux)
 \openout1 = `"Thesis report.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Try loading font information for T1+pplx on input line 65.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Try loading font information for T1+pplx on input line 66.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pplx.fd
 File: t1pplx.fd 2004/09/06 font definitions for T1/pplx.
 )
-\big@size=\dimen163
-LaTeX Info: Redefining \microtypecontext on input line 65.
+\big@size=\dimen164
+LaTeX Info: Redefining \microtypecontext on input line 66.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -476,22 +532,23 @@ File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box57
-Package hyperref Info: Link coloring OFF on input line 65.
+Package hyperref Info: Link coloring OFF on input line 66.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count129
+\c@section@level=\count138
 )
-LaTeX Info: Redefining \ref on input line 65.
-LaTeX Info: Redefining \pageref on input line 65.
-LaTeX Info: Redefining \nameref on input line 65.
+LaTeX Info: Redefining \ref on input line 66.
+LaTeX Info: Redefining \pageref on input line 66.
+LaTeX Info: Redefining \nameref on input line 66.
 
 (./Thesis report.out) (./Thesis report.out)
 \@outlinefile=\write3
@@ -500,44 +557,44 @@ LaTeX Info: Redefining \nameref on input line 65.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count130
-\scratchdimen=\dimen164
+\scratchcounter=\count139
+\scratchdimen=\dimen165
 \scratchbox=\box58
-\nofMPsegments=\count131
-\nofMParguments=\count132
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count133
-\MPscratchDim=\dimen165
-\MPnumerator=\count134
-\makeMPintoPDFobject=\count135
-\everyMPtoPDFconversion=\toks23
+\nofMPsegments=\count140
+\nofMParguments=\count141
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count142
+\MPscratchDim=\dimen166
+\MPnumerator=\count143
+\makeMPintoPDFobject=\count144
+\everyMPtoPDFconversion=\toks25
 )
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <24> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 68.
-LaTeX Font Info:    Try loading font information for OT1+pplx on input line 68.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 69.
+LaTeX Font Info:    Try loading font information for OT1+pplx on input line 69.
 
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 68.
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 69.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 68.
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 69.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 68.
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 69.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 68.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 69.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
@@ -548,7 +605,7 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 68.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 69.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
@@ -568,25 +625,38 @@ Package microtype Info: Character `029' is missing
 \openout6 = `"Thesis report.lot"'.
 
  [2]
-LaTeX Font Info:    Try loading font information for OMS+pplx on input line 104
+LaTeX Font Info:    Try loading font information for OMS+pplx on input line 105
 .
-LaTeX Font Info:    No file OMSpplx.fd. on input line 104.
+LaTeX Font Info:    No file OMSpplx.fd. on input line 105.
 
 
 LaTeX Font Warning: Font shape `OMS/pplx/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 104.
+(Font)              for symbol `textbullet' on input line 105.
 
 [3] [4] [5]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6]
+<pics/workflowGen.png, id=184, 755.82375pt x 411.5375pt>
+File: pics/workflowGen.png Graphic file (type png)
+
+<use pics/workflowGen.png>
+Package pdftex.def Info: pics/workflowGen.png used on input line 191.
+(pdftex.def)             Requested size: 184.9429pt x 100.69884pt.
+
+<pics/workflowSpec.png, id=186, 773.89125pt x 489.83pt>
+File: pics/workflowSpec.png Graphic file (type png)
+
+<use pics/workflowSpec.png>
+Package pdftex.def Info: pics/workflowSpec.png used on input line 191.
+(pdftex.def)             Requested size: 184.9429pt x 117.05334pt.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 190.
+put line 201.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/pplx/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 198.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 209.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
@@ -597,88 +667,87 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (1.27063pt too wide) in paragraph at lines 199--200
+Overfull \hbox (1.27063pt too wide) in paragraph at lines 210--211
 [] $\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 probability\OT1/pplx/m/n/10 (-20) , \OM
 L/zplm/m/it/10 landId\OT1/zplm/m/n/10 ) \OMS/zplm/m/n/10   \OML/zplm/m/it/10 ge
 tBestLandmarkCorrespondence\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 landmark\OT1/ppl
 x/m/n/10 (-20) , \OML/zplm/m/it/10 existingLandmarks\OT1/zplm/m/n/10 )$ 
  []
 
-[7] <pics/Basic.png, id=196, 865.2325pt x 203.76125pt>
+[7 <./pics/workflowGen.png> <./pics/workflowSpec.png>]
+<pics/Basic.png, id=200, 865.2325pt x 203.76125pt>
 File: pics/Basic.png Graphic file (type png)
  <use pics/Basic.png>
-Package pdftex.def Info: pics/Basic.png used on input line 223.
+Package pdftex.def Info: pics/Basic.png used on input line 234.
 (pdftex.def)             Requested size: 430.00462pt x 101.26476pt.
 
-[8 <./pics/Basic.png>]
-<pics/Kullback-Leibler.png, id=207, 808.01875pt x 337.26pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8] <pics/Kullback-Leibler.png, id=211, 808.01875pt x 337.26pt>
 File: pics/Kullback-Leibler.png Graphic file (type png)
 
 <use pics/Kullback-Leibler.png>
-Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 231.
+Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 242.
 (pdftex.def)             Requested size: 430.00462pt x 179.48285pt.
-
-<pics/denseInitial.png, id=211, 562.1pt x 489.83pt>
+ [9 <./pics/Basic.png> <./pics/Kullback-Leibler.png (PNG copy)>] <pics/denseIni
+tial.png, id=222, 562.1pt x 489.83pt>
 File: pics/denseInitial.png Graphic file (type png)
 
 <use pics/denseInitial.png>
-Package pdftex.def Info: pics/denseInitial.png used on input line 253.
+Package pdftex.def Info: pics/denseInitial.png used on input line 264.
+(pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
+ [10 <./pics/denseInitial.png>]
+<pics/initial.png, id=229, 562.1pt x 489.83pt>
+File: pics/initial.png Graphic file (type png)
+ <use pics/initial.png>
+Package pdftex.def Info: pics/initial.png used on input line 274.
+(pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
+
+<pics/clustering.png, id=231, 562.1pt x 489.83pt>
+File: pics/clustering.png Graphic file (type png)
+ <use pics/clustering.png>
+Package pdftex.def Info: pics/clustering.png used on input line 285.
 (pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9 <./pics/Kullback-Leibler.png (PNG copy)>]
-<pics/initial.png, id=217, 562.1pt x 489.83pt>
-File: pics/initial.png Graphic file (type png)
- <use pics/initial.png>
-Package pdftex.def Info: pics/initial.png used on input line 263.
-(pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
-
-Underfull \vbox (badness 6559) has occurred while \output is active []
-
- [10 <./pics/denseInitial.png> <./pics/initial.png>]
-<pics/clustering.png, id=225, 562.1pt x 489.83pt>
-File: pics/clustering.png Graphic file (type png)
- <use pics/clustering.png>
-Package pdftex.def Info: pics/clustering.png used on input line 274.
-(pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
-
-<pics/landmarkClasification.png, id=227, 562.1pt x 489.83pt>
+[11 <./pics/initial.png>]
+<pics/landmarkClasification.png, id=238, 562.1pt x 489.83pt>
 File: pics/landmarkClasification.png Graphic file (type png)
 
 <use pics/landmarkClasification.png>
-Package pdftex.def Info: pics/landmarkClasification.png used on input line 283.
+Package pdftex.def Info: pics/landmarkClasification.png used on input line 294.
 
 (pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+ [12 <./pics/clustering.png> <./pics/landmarkClasification.png>] [13] [14] [15]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 465.
+ [16]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 465.
 
-[11 <./pics/clustering.png>] [12 <./pics/landmarkClasification.png>] [13]
-[14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 454.
- [15]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 454.
- (./Thesis report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 454.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 454.
+(./Thesis report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 465.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 465.
 Package rerunfilecheck Info: File `"Thesis report".out' has not changed.
 (rerunfilecheck)             Checksum: D6FCF755F56D6BE0F9CB3080DEE923BC;733.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 454.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 465.
  ) 
 Here is how much of TeX's memory you used:
- 10276 strings out of 495032
- 155970 string characters out of 6181719
- 358901 words of memory out of 5000000
- 12981 multiletter control sequences out of 15000+600000
- 62923 words of font info for 262 fonts, out of 8000000 for 9000
+ 11205 strings out of 495032
+ 168520 string characters out of 6181719
+ 382204 words of memory out of 5000000
+ 13874 multiletter control sequences out of 15000+600000
+ 63123 words of font info for 265 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,13n,43p,1845b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,14n,75p,1874b,468s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/panos/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk>{/usr/sha
 re/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/font
@@ -689,9 +758,9 @@ c/mathpazo/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo
 /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "Thesis report.pdf" (15 pages, 258273 bytes).
+Output written on "Thesis report.pdf" (16 pages, 299649 bytes).
 PDF statistics:
- 316 PDF objects out of 1000 (max. 8388607)
- 80 named destinations out of 1000 (max. 500000)
- 56447 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 327 PDF objects out of 1000 (max. 8388607)
+ 82 named destinations out of 1000 (max. 500000)
+ 56457 words of extra memory for PDF output out of 61914 (max. 10000000)
 
