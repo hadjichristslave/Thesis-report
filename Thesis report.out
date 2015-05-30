@@ -5,8 +5,10 @@
 \BOOKMARK [2][-]{subsection.2.3}{Non Parametric Bayesian methods}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Correspondence}{section.2}% 6
 \BOOKMARK [1][-]{section.3}{Theory background}{}% 7
-\BOOKMARK [2][-]{subsection.3.1}{Dependent dirichlet process mixture models}{section.3}% 8
-\BOOKMARK [1][-]{section.4}{Model definition}{}% 9
-\BOOKMARK [1][-]{section.5}{Results}{}% 10
-\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 11
-\BOOKMARK [1][-]{section.7}{Discussion}{}% 12
+\BOOKMARK [2][-]{subsection.3.1}{Dependent Dirichlet Process mixtures}{section.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Generalized Polya's Urn}{subsection.3.1}% 9
+\BOOKMARK [3][-]{subsubsection.3.1.2}{The data distribution}{subsection.3.1}% 10
+\BOOKMARK [1][-]{section.4}{Model definition}{}% 11
+\BOOKMARK [1][-]{section.5}{Results}{}% 12
+\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 13
+\BOOKMARK [1][-]{section.7}{Discussion}{}% 14

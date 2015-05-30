@@ -5,8 +5,10 @@
 \contentsline {subsection}{\numberline {2.3}Non Parametric Bayesian methods}{5}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Correspondence}{6}{subsection.2.4}
 \contentsline {section}{\numberline {3}Theory background}{7}{section.3}
-\contentsline {subsection}{\numberline {3.1}Dependent dirichlet process mixture models}{7}{subsection.3.1}
-\contentsline {section}{\numberline {4}Model definition}{8}{section.4}
+\contentsline {subsection}{\numberline {3.1}Dependent Dirichlet Process mixtures}{7}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Generalized Polya's Urn}{7}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}The data distribution}{8}{subsubsection.3.1.2}
+\contentsline {section}{\numberline {4}Model definition}{9}{section.4}
 \contentsline {section}{\numberline {5}Results}{11}{section.5}
 \contentsline {section}{\numberline {6}Conclusion and future work}{13}{section.6}
-\contentsline {section}{\numberline {7}Discussion}{13}{section.7}
+\contentsline {section}{\numberline {7}Discussion}{14}{section.7}

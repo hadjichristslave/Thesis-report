@@ -18,7 +18,7 @@
 
 \usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
 \usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
-
+\usepackage{amsmath}
 \usepackage{abstract} % Allows abstract customization
 \renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
 \renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
@@ -174,11 +174,10 @@ Relevant theory will be divided into 2 major sections
 
 
 
-\subsection{Dependent dirichlet process mixture models}
-//This is draft, I had no time to add theory here.I will update this part later.
+\subsection{Dependent Dirichlet Process mixtures}
+
+\subsubsection{Generalized Polya's Urn}
 Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those priors by allowing the clusters in the data to vary with some covariance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such methods is the immediate extension they provide to dynamic environments. 
-
-
 
 A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. In the current project, the $n_th$ datapoint at time $t$,$x_{t,n}$ has an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
 
@@ -206,6 +205,53 @@ A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of r
 Where Cat is a categorical distribution, Bin is the binomial distribution, $\alpha$ is the DP concentration parameter and $\rho$ is the deletion parameter of the GPU. This Generative Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$)
 
 To define our method, we need to explicitly define the input it will receive. Our data points along with their meta-features that were extracted in the first part of the pipeline. Each point $x$ in the input consists of a tuple $x_{t,n} =(x_t^s, x_t^a, x_t^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ colour information. The method those features are extracted is explained in the model definition section of the paper. For the purpose of this project each part of the cloud was represented by vector of length 32.
+
+
+\subsubsection{The data distribution}
+
+Each data-point is modeled as being part of the distribution D($\theta_t^k$) where $\theta$ represents the parameters of cluster $k$ at time $t$. More analytically, each set $x$ with $n$ datapoints at time $t$ is distributed as:
+$$ x_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
+
+Where Normal is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; Mult is a Multinomial distribution with parameter vector $\delta$ representing the colour distribution and Exp is an exponential with shape parameter $lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. For this graph data points from various point clouds where taken and passed through the pipeline analysed in lines 3-4. The data were then plotted, and the figure shows what the aggregated angle distribution between neighbor datapoints is. Since there is a clear exponential trend, the exponential distribution was chosen to model it. A gamma distribution is also a nice fit for the data, but due to time constrains, only one modeling    distribution was explored.
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=.5\textwidth]{Kullback-Leibler}
+    \caption{Exponential trend in KL distances.}
+  \label{pcl:kl}
+\end{figure}
+
+
+Now that the distribution of the objects is defined, the progression of the sufficient statistics at time $t$ given $t-1$ given by:
+
+$\theta_t^k | \theta_{t-1}^k \sim
+\begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
+G_0 & \mbox{if } k > K_{t-1}. \end{cases}$
+
+Where $T$ represents the transition kernel of the data given the previous state in the model. The case $ k > K_{t-1} $ represents the creation of a new cluster and $G_0$ is the base distribution of the DDP. In our case, the conjugate priors of the distributions of the data were chosen to model the base distribution. Therefore, $G_0$ is defined as:
+
+$$ G_0(\theta_t^k)  = NiW( \mu_t^k, \Sigma_t^k | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t^k | q_0) Gam( \lambda_t^k | \alpha_0, \beta_0) $$
+
+Where NiW is a Normal inverse Wishart distribution, Dir denotes a Dirichlet distribution, and Gam the Gamma distribution. The generative process for the Dependent Dirichlet mixture model can be written for each timestep $t$ as:
+
+\begin{itemize}
+	\item Draw  $c_t$ $\sim$ $GPU(\alpha, \rho) $
+	\item $\forall$  k draw: $ \theta_t^k | \theta_{t-1}^k \sim
+	\begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
+	G_0 & \mbox{if } k > K_{t-1}. \end{cases}$
+	\item $\forall$  point $n$ draw $ x_{t,n} \sim F(\theta_t^{c_t,n})$
+\end{itemize}
+
+Given the theory in \cite{caron}, the transition Kernel must satistfy:
+
+$$ \int G_0(\theta_k) T(\theta_t^k | \theta_{t-1}^k) d\theta_{t-1}^k =  G_0(\theta_k) $$
+
+The equation means that the invariant distribution must equal its base distribution. A typical way of meeting this restriction is to introduce a set of M auxiliary variables \textbf{z} such that:
+
+$$ P(\theta_t^k | \theta_{t-1}^k) =  \int P(\theta_t^k | z_{t}^k)   P(z_t^k| \theta_{t-1}^k) dz_t^k $$
+
+
+
 
 \section{Model definition}
 \label{sec:model}
@@ -262,15 +308,7 @@ cloud expected is the one after all the frame transformations are done in the tf
   \label{pcl:mod}
 \end{figure}
 
-\textbf{Lines 5:} The clustering takes place in this line. The input of the method is the feature vector for every data point which is calculated in the previous steps. An SMC sampler is used as was presented in the theory section. The data are modeled as following a distribution $G_0(\theta_k) = Normal(x_n^s | \mu , \Sigma)* Mult(x_n^c| \delta) * Exp( x_n^a | \lambda) $ Where Normal is a 3 dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$, Mult is a multinomial with probability vector $\delta_t$ and Exp is an exponential with rate $\lambda$. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. For this graph data points from various point clouds where taken and passed through the pipeline analysed in lines 3-4. The data were then plotted, and the figure shows what the aggregated angle distribution between neighbor datapoints is. Since there is a clear exponential trend, the exponential distribution was chosen to model it. A gamma distribution is also a nice fit for the data, but due to time constrains, only one modeling    distribution was explored.
-
-\begin{figure}[h!]
-  \centering
-    \includegraphics[width=1\textwidth]{Kullback-Leibler}
-    \caption{Exponential trend in KL distances.}
-  \label{pcl:kl}
-\end{figure}
-
+\textbf{Lines 5:} The clustering takes place in this line. The input of the method is the feature vector for every data point which is calculated in the previous steps. An SMC sampler is used as was presented in the theory section. 
 
 \textbf{Lines 6-12:} The correspondence of the previous landmarks to current ones happens in theses lines. Since the landmarks are distributions, statistical distances can be taken to perform the matching. The distances are then discretized and are being given as input to the getBestLandmarkCorrespondence. The getBestLandmarkCorrespondence function is a random forest implementation. An offline model has been trained to recognize correlation between those distances and landmark detection. This approach is similar to~\cite{objectDisc}. It must be noted that the method depends on the training to be general enough so a good initial data set is mandatory. The random forest outputs the probability of a landmark having been encountered before; if the probability is high enough, it is being added to the landmarks list to be send for update in the EKF, otherwise a new landmark is added and its ID is then updated to the list.
 
