@@ -8,7 +8,8 @@
 \BOOKMARK [2][-]{subsection.3.1}{Dependent Dirichlet Process mixtures}{section.3}% 8
 \BOOKMARK [3][-]{subsubsection.3.1.1}{Generalized Polya's Urn}{subsection.3.1}% 9
 \BOOKMARK [3][-]{subsubsection.3.1.2}{The data distribution}{subsection.3.1}% 10
-\BOOKMARK [1][-]{section.4}{Model definition}{}% 11
-\BOOKMARK [1][-]{section.5}{Results}{}% 12
-\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 13
-\BOOKMARK [1][-]{section.7}{Discussion}{}% 14
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Sequential monte carlo sampler}{subsection.3.1}% 11
+\BOOKMARK [1][-]{section.4}{Model definition}{}% 12
+\BOOKMARK [1][-]{section.5}{Results}{}% 13
+\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 14
+\BOOKMARK [1][-]{section.7}{Discussion}{}% 15
