@@ -176,8 +176,9 @@ Relevant theory will be divided into 2 major sections
 
 \subsection{Dependent dirichlet process mixture models}
 //This is draft, I had no time to add theory here.I will update this part later.
+Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those priors by allowing the clusters in the data to vary with some covariance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such methods is the immediate extension they provide to dynamic environments. 
 
-Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data. Data are now being given dependencies which could be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such methods is the imediate extension they provide to dynamic environments. Since data on every frame are dependent on data of the previous frame, using such methods is intuitively straightforward.
+A DDP also known as Generalized Polya Urn
 
 
 \section{Model definition}
@@ -451,10 +452,18 @@ Figueredo, A.J. and Wolf, P. S.A. (2009).
 \newblock{Blei, D. M., Ng, A. Y., \& Jordan, M. I. (2003). Latent dirichlet allocation. the Journal of machine Learning research, 3, 993-1022.}
 
 \bibitem{theory:ddp}
-\newblock MacEachern, S. N. (2000). Dependent dirichlet processes. Unpublished manuscript, Department of Statistics, The Ohio State University.
-
+\newblock MacEachern, S. N. (2000). -
 \bibitem{speakerDiar}
 f\newblock{Fox, E. B., Sudderth, E. B., Jordan, M. I., \& Willsky, A. S. (2011). A sticky HDP-HMM with application to speaker diarization. The Annals of Applied Statistics, 5(2A), 1020-1056.}
+
+
+\bibitem{antoniak}
+\newblock{Charles E Antoniak,Mixtures of dirichlet processes with applications to bayesian nonparametric problems, The annals of statistics (1974), 1152–1174}
+
+\bibitem{caron}
+\newblock{F. Caron, M. Davy, and A. Doucet, Generalized Polya urn for time-varying Dirichlet process mixtures, 23rd Conference on
+Uncertainty in Artificial Intelligence (UAI’2007), Vancouver,
+Canada, July 2007, 2007}
 
 \end{thebibliography}
 
