@@ -272,27 +272,98 @@ where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior hyperparameters giv
 
 \subsubsection{Sequential monte carlo sampler}
 
-We can now define the SMC sampler that will be used to perform inference on our model.
+We can now define the SMC sampler that will be used to perform inference on our model as follows:
 
-
-
-
-\begin{algorithm}
+\begin{algorithm}[h]
   \caption{SMC for DDPM}\label{SMC}
   \begin{algorithmic}[1]
 	\State \textbf{Input:} Points \{$x_{1,1:N_t}, ..x_{T,1:N_t}$\}with augmented features
-	\State \textbf{Output:} Clusters representing point cloud structure
+	\State \textbf{Output:} Clusters representing of the data
 	\For{$t = 1,...T$} 
 			\For{$ l = 1,...L$} 
 							\For{$ iter = 1,...S$} 
-						
+								\State Sample $(c_t)^{(l)} \sim Q_1$  
+								\State Sample $(\theta^k ) \sim Q_2$
 						    \EndFor		
 		    \EndFor
+		    \For{$ k = 1,...K$} 
+			   \State Sample $\Delta s_{t-1}^k \sim Binom( (s_{t-1,N_{t-1}}^k)^{(l)}, \rho) $ 
+		       \State Set $s_{t,0}^{k} = s_{t-1,N_{t-1}}^{k} -\Delta s_{t-1}^k$
+   		       \State Sample $( (z_{t+1}^k)^{(l)} ) \sim T_1((\theta_t^k))^{(l)} $
+		    \EndFor
+		 	\State compute particle weights $w_t^l$
     \EndFor
-
+    \State Normalize and resample weights
   \end{algorithmic}
 \end{algorithm}
 
+\subsubsection{Gibbs updates definition}
+
+The proposal distribution $Q_1$ is the probability of an assignment $c_{t,n}$ given cluster sizes, parameters and concentration $\alpha$. Formally $Q_1$ can be written as:
+
+\begin{equation} \label{easdf}
+ Q_1(c_{t,n} | s_{t,n}^k, \theta_t^k, \alpha) \propto Cat( s_{t,n}^1,...s_{t,n}^K, \alpha ) \times
+ 	\begin{cases} 
+ 	F(x_{t,n} | \theta_t^{c_t} )  &\mbox{if } k \leq K_{t-1} \\
+ 	\int P(x_{t,n} | \theta_t )G_0(\theta) d\theta & \mbox{if } k > K_{t-1}. \end{cases}
+\end{equation}
+
+Where $c_{t,n}$ represents cluster $c$ of point $n$ at time $t$, $s$ represents cluster sizes. The integral represents the posterior predictive distribution of the cluster times the base distribution with the parameters integrated out. A review of the literature helps understand how the posterior predictive formula is derived. More specifically, the analytic expression of the integral is:
+
+
+\begin{equation} \label{Q1}
+	\begin{split}
+		 	\int P(x_{t,n} | \theta_t )G_0(\theta) d\theta =
+		 	\int Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) \times  \\ NiW( \mu_t, \Sigma_t | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t | q_0) Gam( \lambda_t | \alpha_0, \beta_0)  d\theta  \\
+			= \int Normal(x_{t,n}^s| \mu_t, \Sigma_t) \times NiW( \mu_t, \Sigma_t | \kappa_0, \mu_0, \nu_0, \Lambda_0 )\\
+			 Mult(x_{t,n}^c | \delta_t) \times Dir(\delta_t | q_0) \\
+			 Exp(x_{t,n}^a | \lambda_t) \times  \times Gam( \lambda_t | \alpha_0, \beta_0)  d\theta  \\
+		 	= t_{\nu_0-1}( x_{t,n}^s | \mu_0, \frac{\Lambda_0(\kappa_0+1)}{\kappa_0(\nu_0-1)}) \times \prod_{j=1}^V \frac{\Gamma(x_{t,n}^c)}{\Gamma(q_0)} \times \\ \frac{\Gamma(\sum_{j=1}^V q_0)}{\Gamma(\Gamma(\sum_{j=1}^V x_{t,n}^c)} \times Lomax(\alpha_0 + s_{t,n}^c, \beta_0 \sum_{j=1}^V x_{t,n}^c)
+ 	\end{split}
+\end{equation}
+
+Where $t$ represents student's t-distribution with $\nu$ degrees of freedom, Lomax represents Lomax distribution with shape and scale, $\alpha$ and $\beta$ repsectively and the rest represent a Dirichlet-Multinomial(aka DirMul) distribution. The formulas of the posterior predictive distributions can be found in the literature with \cite{compendium} being a good example. The conjugacy of the base and prior distribution allows for an easy sampling formula for proposal distribution $Q_2$ which is of the form:
+
+
+\begin{equation} \label{Q_2}
+\begin{split}
+Q_2(\theta_t^k | \theta_{t-1}^k , x_t^k, z_t^k) \propto F( x_t^k | \theta_k) \times T_2(\theta_t^k | z_t^k) \\
+= NiW( \mu_t^k, \Sigma_t^k | \kappa_n, \mu_n, \nu_n, \Lambda_n ) Dir(\delta_t^k | q_n) Gam(\lambda_t^k | \alpha_n, \beta_n)
+\end{split}
+\end{equation}
+
+With:
+
+\begin{equation} \label{udpates}
+\begin{split}
+\kappa_n = \kappa_0 + N \\
+\nu_n = \nu_0 + N \\
+\mu_n = \frac{\kappa_0}{\kappa_0 + N} \mu_0 +  \frac{N}{\kappa_0 + N} \overline{x}^s\\
+\Lambda_n = \Lambda_0 + s_{x}^s\\
+q_N = q_0 +  \sum_n x_i^c\\
+\alpha_n = \alpha_0 +  N\\
+\beta_n = \beta_0 +  \sum^n x_i^a\\
+\end{split}
+\end{equation}
+
+
+Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations. The formulas for the updates can be found at the literature.
+
+\subsubsection{Weight updates}
+
+The only thing left to explicitly define the sampler in its whole is the weight update step. More specifically, on every time step $t$ the weight of particle $l$ is calculated as:
+
+\begin{equation}
+w_t^{(l)} = \frac {P(c_t^{(l)} , \theta_t^{(l)}, x_t| 	\theta_{t-1} )}{P(c_t^{(l)} , \theta_t^{(l)}| 	\theta_{t-1} )}
+\end{equation}
+
+Using bayes rule, the numerator can be written as:
+
+\begin{equation}
+	P(x_t , | c_t^{(l)} , \theta_t^{(l)} \theta_{t-1} ) \times P(c_t^{(l)} , \theta_t^{(l)}|  \theta_{t-1} )
+\end{equation}
+
+Which can be calculated using equations $Q_2$ and $Q_1$ for the first and second part respectively. After the particle weights are normalized particles are drawn with probability proportional to their weights.
 \section{Model definition}
 \label{sec:model}
 
@@ -568,6 +639,9 @@ f\newblock{Fox, E. B., Sudderth, E. B., Jordan, M. I., \& Willsky, A. S. (2011).
 \newblock{F. Caron, M. Davy, and A. Doucet, Generalized Polya urn for time-varying Dirichlet process mixtures, 23rd Conference on
 Uncertainty in Artificial Intelligence (UAI’2007), Vancouver,
 Canada, July 2007, 2007}
+
+\bibitem{compendium}
+\newblock{Fink, D. (1997). A compendium of conjugate priors.}
 
 \end{thebibliography}
 
