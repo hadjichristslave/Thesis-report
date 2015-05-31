@@ -9,9 +9,9 @@
 \contentsline {subsubsection}{\numberline {3.1.1}Generalized Polya's Urn}{7}{subsubsection.3.1.1}
 \contentsline {subsubsection}{\numberline {3.1.2}The data distribution}{8}{subsubsection.3.1.2}
 \contentsline {subsubsection}{\numberline {3.1.3}Sequential monte carlo sampler}{9}{subsubsection.3.1.3}
-\contentsline {subsubsection}{\numberline {3.1.4}Gibbs updates definition}{9}{subsubsection.3.1.4}
-\contentsline {subsubsection}{\numberline {3.1.5}Weight updates}{11}{subsubsection.3.1.5}
-\contentsline {section}{\numberline {4}Model definition}{11}{section.4}
+\contentsline {subsubsection}{\numberline {3.1.4}Gibbs updates definition}{10}{subsubsection.3.1.4}
+\contentsline {subsubsection}{\numberline {3.1.5}Weight updates}{12}{subsubsection.3.1.5}
+\contentsline {section}{\numberline {4}Model definition}{12}{section.4}
 \contentsline {section}{\numberline {5}Results}{14}{section.5}
 \contentsline {section}{\numberline {6}Conclusion and future work}{16}{section.6}
 \contentsline {section}{\numberline {7}Discussion}{17}{section.7}

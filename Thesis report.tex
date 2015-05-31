@@ -169,7 +169,6 @@ The approach presented in this paper takes as input features as the mentioned me
 Relevant theory will be divided into 2 major sections
 \begin{itemize}
 	\item Dependent Dirichlet processes
-	\item SLAM
 \end{itemize}
 
 
@@ -177,7 +176,7 @@ Relevant theory will be divided into 2 major sections
 \subsection{Dependent Dirichlet Process mixtures}
 
 \subsubsection{Generalized Polya's Urn}
-Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those priors by allowing the clusters in the data to vary with some covariance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such methods is the immediate extension they provide to dynamic environments. 
+Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those priors by allowing the clusters in the data to vary with some covariance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable and have dependencies that cannot be disregarded. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such methods is the immediate extension they provide to dynamic environments. 
 
 A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. In the current project, the $n_th$ datapoint at time $t$,$x_{t,n}$ has an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
 
@@ -209,10 +208,10 @@ To define our method, we need to explicitly define the input it will receive. Ou
 
 \subsubsection{The data distribution}
 
-Each data-point is modeled as being part of the distribution D($\theta_t^k$) where $\theta$ represents the parameters of cluster $k$ at time $t$. More analytically, each set $x$ with $n$ datapoints at time $t$ is distributed as:
+Each data-point is modeled as being part of the distribution D($\theta_t^k$) where $\theta$ represents the parameters of cluster $k$ at time $t$. More specifically, each set \textbf{x} with $n$ datapoints at time $t$ is distributed as:
 $$ x_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
 
-Where Normal is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; Mult is a Multinomial distribution with parameter vector $\delta$ representing the colour distribution and Exp is an exponential with shape parameter $lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. For this graph data points from various point clouds where taken and passed through the pipeline analysed in lines 3-4. The data were then plotted, and the figure shows what the aggregated angle distribution between neighbor datapoints is. Since there is a clear exponential trend, the exponential distribution was chosen to model it. A gamma distribution is also a nice fit for the data, but due to time constrains, only one modeling    distribution was explored.
+Where Normal is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; Mult is a Categorical multinomial distribution with parameter vector $\delta$ representing weigths the colour distribution and Exp is an exponential with shape parameter $lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. For this graph data points from various point clouds where taken and passed through the pipeline analysed in lines 3-4. The data were then plotted, and the figure shows what the aggregated angle distribution between neighbor datapoints is. Since there is a clear exponential trend, the exponential distribution was chosen to model it. A gamma distribution is also a nice fit for the data, but due to time constrains, only one modeling    distribution was explored.
 
 \begin{figure}[h!]
   \centering
@@ -232,28 +231,28 @@ Where $T$ represents the transition kernel of the data given the previous state 
 
 $$ G_0(\theta_t^k)  = NiW( \mu_t^k, \Sigma_t^k | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t^k | q_0) Gam( \lambda_t^k | \alpha_0, \beta_0) $$
 
-Where NiW is a Normal inverse Wishart distribution, Dir denotes a Dirichlet distribution, and Gam the Gamma distribution. The generative process for the Dependent Dirichlet mixture model can be written for each timestep $t$ as:
+Where NiW is a Normal inverse Wishart distribution, Dir denotes a Dirichlet distribution, and Gam the Gamma distribution. $ \kappa_0, \mu_0, \nu_0, \Lambda_0, q_0,\alpha_0$ and $\beta_0$ are predefined parameters of the model. The generative process for the Dependent Dirichlet mixture model can be written for each timestep $t$ as:
 
-\begin{itemize}
+\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+\begin{enumerate}
 	\item Draw  $c_t$ $\sim$ $GPU(\alpha, \rho) $
 	\item $\forall$  k draw: $ \theta_t^k | \theta_{t-1}^k \sim
 	\begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
 	G_0 & \mbox{if } k > K_{t-1}. \end{cases}$
 	\item $\forall$  point $n$ draw $ x_{t,n} \sim F(\theta_t^{c_t,n})$
-\end{itemize}
-
+\end{enumerate}
+\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
 Given the theory in \cite{caron}, the transition Kernel must satistfy:
 
 $$ \int G_0(\theta_k) T(\theta_t^k | \theta_{t-1}^k) d\theta_{t-1}^k =  G_0(\theta_k) $$
 
-The equation means that the invariant distribution must equal its base distribution. A typical way of meeting this restriction is to introduce a set of M auxiliary variables \textbf{z} such that:
+The equation means that the invariant distribution must equal its base distribution. A typical way of meeting this restriction and forcing the sampler to converge to the original target density\cite{smc:theory} is to introduce a set of M auxiliary variables \textbf{z} such that:
 
 $$ P(\theta_t^k | \theta_{t-1}^k) =  \int P(\theta_t^k | z_{t}^k)   P(z_t^k| \theta_{t-1}^k) dz_t^k $$
 
-We now sample from the transition kernel using
+The transition kernel of the model can now be sampled by using the following formula
 
 $\theta_t^k \sim T(\theta_{t-1}^k) = T_2 \circ T_1(\theta_{t-1}^k)$ where:
-
 \begin{equation} \label{eq1}
 \begin{split}
 z_t^k  & \sim T_1(\theta_{t-1}^k)\\
@@ -268,11 +267,11 @@ z_t^k  & \sim T_1(\theta_{t-1}^k)\\
 \end{split}
 \end{equation}
 
-where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior hyperparameters given the auxiliary variables $z$.
+where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior parameters given the auxiliary variables $z$.
 
 \subsubsection{Sequential monte carlo sampler}
 
-We can now define the SMC sampler that will be used to perform inference on our model as follows:
+Sequential monte carlo samplers for Dirichlet process mixture models where introduced by Doucet et al~\cite{doucet} and serve as fast alternative to MCMC and VI methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation cannot occur in a time horizon of 1 that the sampler will be used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
 
 \begin{algorithm}[h]
   \caption{SMC for DDPM}\label{SMC}
@@ -298,16 +297,13 @@ We can now define the SMC sampler that will be used to perform inference on our 
 \end{algorithm}
 
 \subsubsection{Gibbs updates definition}
-
 The proposal distribution $Q_1$ is the probability of an assignment $c_{t,n}$ given cluster sizes, parameters and concentration $\alpha$. Formally $Q_1$ can be written as:
-
-\begin{equation} \label{easdf}
+\begin{equation} \label{Gibbs}
  Q_1(c_{t,n} | s_{t,n}^k, \theta_t^k, \alpha) \propto Cat( s_{t,n}^1,...s_{t,n}^K, \alpha ) \times
  	\begin{cases} 
  	F(x_{t,n} | \theta_t^{c_t} )  &\mbox{if } k \leq K_{t-1} \\
  	\int P(x_{t,n} | \theta_t )G_0(\theta) d\theta & \mbox{if } k > K_{t-1}. \end{cases}
 \end{equation}
-
 Where $c_{t,n}$ represents cluster $c$ of point $n$ at time $t$, $s$ represents cluster sizes. The integral represents the posterior predictive distribution of the cluster times the base distribution with the parameters integrated out. A review of the literature helps understand how the posterior predictive formula is derived. More specifically, the analytic expression of the integral is:
 
 
@@ -322,7 +318,9 @@ Where $c_{t,n}$ represents cluster $c$ of point $n$ at time $t$, $s$ represents 
  	\end{split}
 \end{equation}
 
-Where $t$ represents student's t-distribution with $\nu$ degrees of freedom, Lomax represents Lomax distribution with shape and scale, $\alpha$ and $\beta$ repsectively and the rest represent a Dirichlet-Multinomial(aka DirMul) distribution. The formulas of the posterior predictive distributions can be found in the literature with \cite{compendium} being a good example. The conjugacy of the base and prior distribution allows for an easy sampling formula for proposal distribution $Q_2$ which is of the form:
+Where $t$ represents student's t-distribution with $\nu$ degrees of freedom, Lomax represents Lomax distribution with shape and scale, $\alpha$ and $\beta$ repsectively and the rest represent a Dirichlet-Multinomial(aka DirMul) distribution. The formulas of the posterior predictive distributions can be found in the literature with \cite{compendium} being a good example. 
+
+1The conjugacy of the base and prior distribution allows for an easy sampling formula for proposal distribution $Q_2$ which is of the form:
 
 
 \begin{equation} \label{Q_2}
@@ -642,6 +640,12 @@ Canada, July 2007, 2007}
 
 \bibitem{compendium}
 \newblock{Fink, D. (1997). A compendium of conjugate priors.}
+
+\bibitem{smc:theory}
+\newblock{Ülker, Y., Günsel, B., \& Cemgil, A. T. (2010). Sequential Monte Carlo samplers for Dirichlet process mixtures. In International Conference on Artificial Intelligence and Statistics (pp. 876-883).}
+
+\bibitem{doucet}
+\newblock{Del Moral, P., Doucet, A., \& Jasra, A. (2006). Sequential monte carlo samplers. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 68(3), 411-436.}
 
 \end{thebibliography}
 
