@@ -76,7 +76,7 @@
  
 \begin{abstract}
 
-\noindent The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to improve lifelong mapping capabilities of existing methods. A novel method of object clustering and matching is presented and its results are applied to an EKF SLAM algorithm. The strengths, weaknesses as well as future directions that can be taken to improve the method are then presented. 
+\noindent Long term mapping is the natural conceptual extension to existing mapping methods. Mapping an area for long timeis a problem that if tackled efficiently will be a large step towards highly autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to improve lifelong mapping capabilities of existing methods. A novel method of object clustering and matching is presented and its results are applied to an EKF SLAM algorithm; its strengths, weaknesses as well as future directions on how these tools could be extended to include dynamic environments are introduced.
 
 
 \end{abstract}
@@ -99,7 +99,7 @@
 \section{Introduction}
 
 
-Simultaneous localization and mapping is one of the fundamental problems of autonomous systems\cite{probRobs}. In order for a robot to be truly autonomous, it must have the ability to enter an area and infer its structure. To that direction, a lot of effort has been put in algorithms that are able to map static environments. With solutions like EKF-SLAM\cite{ekf}, FastSlam\cite{slam} and GraphSLAM\cite{graph} robots are now able to efficiently map static environments. 
+Simultaneous localization and mapping is one of the fundamental problems of autonomous systems\cite{probRobs}. In order for a robot to be considered truly autonomous, it must have the ability to enter an area and infer its structure. To that direction, a lot of effort has been put in algorithms that are able to map static environments. With solutions like EKF-SLAM\cite{ekf}, FastSlam\cite{slam} and GraphSLAM\cite{graph} robots are now able to efficiently map static environments. 
 The logical extention to methods that can map  static environments is methods that remove this restriction. The idea of lifelong robot learning is not new and has been introduced as a general concept to the literature by Sebastian Thrun~\cite{liflonglearning}. Konolige et al.\cite{lifelongmaps} specifically focus on lifelong learning in mapping and the utility such methods would have.  In the PhD thesis of Walcott~\cite{aishalong} long term mapping is decomposed to 4 basic subproblems:
 \begin{itemize}
 	\item{Continuously incorporate new information.}
@@ -166,14 +166,9 @@ The approach presented in this paper takes as input features as the mentioned me
 \section{Theory background}
 \label{sec:theory}
 
-Relevant theory will be divided into 2 major sections
-\begin{itemize}
-	\item Dependent Dirichlet processes
-\end{itemize}
-
-
-
 \subsection{Dependent Dirichlet Process mixtures}
+An explicit definition of the Dependent Dirichlet process sampler will now be given. Relevant background will be briefly mentioned as well as the theoretical topics that are important for the implementation.
+
 
 \subsubsection{Generalized Polya's Urn}
 Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those priors by allowing the clusters in the data to vary with some covariance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable and have dependencies that cannot be disregarded. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such methods is the immediate extension they provide to dynamic environments. 
