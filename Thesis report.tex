@@ -435,7 +435,7 @@ The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size o
   \label{pcl:fig}
 \end{figure}
 
-The cloud is too dense to be correctly displayed in the plot. The planar components of the plane also dominate the cloud and its hard to operate on them. An image with a high amount of planar components is typical when data are acquired from a turtlebot with the camera being situated near the ground. In order to perform the clustering operations, the cloud needs to be downsampled. The process followed is the one described in the method definition and the results are shown in Fig~\ref{pcl:reduced}. The operation used is a pipeline voxel downsampling, statistical outlier removal and plane estimation via RANSAC is typical in the literature~/ref{objectDisc}.
+The cloud is too dense to be correctly displayed in the plot. The planar components of the plane also dominate the cloud and its hard to operate on them. An image with a high amount of planar components is typical when data are acquired from a turtlebot with the camera being situated near the ground. In order to perform the clustering operations, the cloud needs to be downsampled. The process followed is the one described in the method definition and the results are shown in Fig~\ref{pcl:reduced}. The operation used is a pipeline voxel downsampling, statistical outlier removal and plane estimation via RANSAC is typical in the literature \cite{objectDisc}.
 
 
 \begin{figure}[h!]
