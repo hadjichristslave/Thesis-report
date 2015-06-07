@@ -196,7 +196,7 @@ A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of r
 
 Where Cat is a categorical distribution, Bin is the binomial distribution, $\alpha$ is the DP concentration parameter and $\rho$ is the deletion parameter of the GPU. This Generative Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$)
 
-This process can be though of in the terms of a general Chinese restaurant process as shown in Fig.~\ref{generalPolya}. The figure can be described as follows: (a) at time $t$, we suppose that there are customers seating at several tables. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated(b). Each table occupied is moved according to the number of customers still seating in that table(c). A new customer then enters the table and either chooses to sit on one of the existing tables(e) or choose a new with probability proportional to the $\alpha$ parameter of the model(f).
+This process can be though of in the terms of a general Chinese restaurant process as shown in Fig.~\ref{generalPolya}. At time $t$ (a), suppose there are customers seating at several tables in the restaurant. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated (b). Each table occupied is moved according to the number of customers still seating in that table (c). A new customer then enters the table and either chooses to sit on one of the existing tables (e) or choose a new with probability proportional to the strength parameter $\alpha$ of the model (f).
 
 \begin{figure}[h!]
   \centering
@@ -208,169 +208,7 @@ This process can be though of in the terms of a general Chinese restaurant proce
 \section{Model definition}
 \label{sec:model}
 
-In order to define the model, two major components of the algorithm must be explicitly defined. The data distribution and the SMC sampler. Once these two modules are defined the model can be formally presented.
-
-\subsection{The data distribution}
-
-
-To define our method, we need to explicitly define the input it will receive. Our data points along with their meta-features that were extracted in the first part of the pipeline. Each point $x$ in the input consists of a tuple $x_{t,n} =(x_t^s, x_t^a, x_t^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ colour information. The method those features are extracted is explained in the model definition section of the paper. For the purpose of this project each part of the cloud was represented by vector of length 32.
-
-Each data-point is modeled as being part of the distribution D($\theta_t^k$) where $\theta$ represents the parameters of cluster $k$ at time $t$. More specifically, each set \textbf{x} with $n$ datapoints at time $t$ is distributed as:
-$$ x_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
-
-Where Normal is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; Mult is a Categorical multinomial distribution with parameter vector $\delta$ representing weigths the colour distribution and Exp is an exponential with shape parameter $lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. For this graph data points from various point clouds where taken and passed through the pipeline analysed in lines 3-4. The data were then plotted, and the figure shows what the aggregated angle distribution between neighbor datapoints is. Since there is a clear exponential trend, the exponential distribution was chosen to model it. A gamma distribution is also a nice fit for the data, but due to time constrains, only one modeling    distribution was explored.
-
-\begin{figure}[h!]
-  \centering
-    \includegraphics[width=.5\textwidth]{Kullback-Leibler}
-    \caption{Exponential trend in KL distances.}
-  \label{pcl:kl}
-\end{figure}
-
-
-Now that the distribution of the objects is defined, the progression of the sufficient statistics at time $t$ given $t-1$ given by:
-
-$\theta_t^k | \theta_{t-1}^k \sim
-\begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
-G_0 & \mbox{if } k > K_{t-1}. \end{cases}$
-
-Where $T$ represents the transition kernel of the data given the previous state in the model. The case $ k > K_{t-1} $ represents the creation of a new cluster and $G_0$ is the base distribution of the DDP. In our case, the conjugate priors of the distributions of the data were chosen to model the base distribution. Therefore, $G_0$ is defined as:
-
-$$ G_0(\theta_t^k)  = NiW( \mu_t^k, \Sigma_t^k | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t^k | q_0) Gam( \lambda_t^k | \alpha_0, \beta_0) $$
-
-Where NiW is a Normal inverse Wishart distribution, Dir denotes a Dirichlet distribution, and Gam the Gamma distribution. $ \kappa_0, \mu_0, \nu_0, \Lambda_0, q_0,\alpha_0$ and $\beta_0$ are predefined parameters of the model. The generative process for the Dependent Dirichlet mixture model can be written for each timestep $t$ as:
-
-\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
-\begin{enumerate}
-	\item Draw  $c_t$ $\sim$ $GPU(\alpha, \rho) $
-	\item $\forall$  k draw: $ \theta_t^k | \theta_{t-1}^k \sim
-	\begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
-	G_0 & \mbox{if } k > K_{t-1}. \end{cases}$
-	\item $\forall$  point $n$ draw $ x_{t,n} \sim F(\theta_t^{c_t,n})$
-\end{enumerate}
-\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
-Given the theory in \cite{caron}, the transition Kernel must satistfy:
-
-$$ \int G_0(\theta_k) T(\theta_t^k | \theta_{t-1}^k) d\theta_{t-1}^k =  G_0(\theta_k) $$
-
-The equation means that the invariant distribution must equal its base distribution. A typical way of meeting this restriction and forcing the sampler to converge to the original target density\cite{smc:theory} is to introduce a set of M auxiliary variables \textbf{z} such that:
-
-$$ P(\theta_t^k | \theta_{t-1}^k) =  \int P(\theta_t^k | z_{t}^k)   P(z_t^k| \theta_{t-1}^k) dz_t^k $$
-
-The transition kernel of the model can now be sampled by using the following formula
-
-$\theta_t^k \sim T(\theta_{t-1}^k) = T_2 \circ T_1(\theta_{t-1}^k)$ where:
-\begin{equation} \label{eq1}
-\begin{split}
-z_t^k  & \sim T_1(\theta_{t-1}^k)\\
- & = Normal(\mu_{t-1}, \Sigma_{t-1}) Mult( \delta_{t-1}) Exp( \lambda_{t-1})
-\end{split}
-\end{equation}
-
-\begin{equation}
-\begin{split}
-\mu_t, \Sigma_t, \delta_t,  \lambda_t & \sim T_2(z_t^k)\\
- & = NiW( \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(q_0) Gam(\alpha_0, \beta_0) 
-\end{split}
-\end{equation}
-
-where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior parameters given the auxiliary variables $z$.
-
-\subsection{Sequential monte carlo sampler}
-
-Sequential monte carlo samplers for Dirichlet process mixture models where introduced by Doucet et al~\cite{doucet} and serve as fast alternative to MCMC and VI methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation cannot occur in a time horizon of 1 that the sampler will be used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
-
-\begin{algorithm}[h]
-  \caption{SMC for DDPM}\label{SMC}
-  \begin{algorithmic}[1]
-	\State \textbf{Input:} Points \{$x_{1,1:N_t}, ..x_{T,1:N_t}$\}with augmented features
-	\State \textbf{Output:} Clusters representing of the data
-	\For{$t = 1,...T$} 
-			\For{$ l = 1,...L$} 
-							\For{$ iter = 1,...S$} 
-								\State Sample $(c_t)^{(l)} \sim Q_1$  
-								\State Sample $(\theta^k ) \sim Q_2$
-						    \EndFor		
-		    \EndFor
-		    \For{$ k = 1,...K$} 
-			   \State Sample $\Delta s_{t-1}^k \sim Binom( (s_{t-1,N_{t-1}}^k)^{(l)}, \rho) $ 
-		       \State Set $s_{t,0}^{k} = s_{t-1,N_{t-1}}^{k} -\Delta s_{t-1}^k$
-   		       \State Sample $( (z_{t+1}^k)^{(l)} ) \sim T_1((\theta_t^k))^{(l)} $
-		    \EndFor
-		 	\State compute particle weights $w_t^l$
-    \EndFor
-    \State Normalize and resample weights
-  \end{algorithmic}
-\end{algorithm}
-
-\subsection{Gibbs updates}
-The proposal distribution $Q_1$ is the probability of an assignment $c_{t,n}$ given cluster sizes, parameters and concentration $\alpha$. Formally $Q_1$ can be written as:
-\begin{equation} \label{Gibbs}
- Q_1(c_{t,n} | s_{t,n}^k, \theta_t^k, \alpha) \propto Cat( s_{t,n}^1,...s_{t,n}^K, \alpha ) \times
- 	\begin{cases} 
- 	F(x_{t,n} | \theta_t^{c_t} )  &\mbox{if } k \leq K_{t-1} \\
- 	\int P(x_{t,n} | \theta_t )G_0(\theta) d\theta & \mbox{if } k > K_{t-1}. \end{cases}
-\end{equation}
-Where $c_{t,n}$ represents cluster $c$ of point $n$ at time $t$, $s$ represents cluster sizes. The integral represents the posterior predictive distribution of the cluster times the base distribution with the parameters integrated out. A review of the literature helps understand how the posterior predictive formula is derived. More specifically, the analytic expression of the integral is:
-
-
-\begin{equation} \label{Q1}
-	\begin{split}
-		 	\int P(x_{t,n} | \theta_t )G_0(\theta) d\theta =
-		 	\int Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) \times  \\ NiW( \mu_t, \Sigma_t | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t | q_0) Gam( \lambda_t | \alpha_0, \beta_0)  d\theta  \\
-			= \int Normal(x_{t,n}^s| \mu_t, \Sigma_t) \times NiW( \mu_t, \Sigma_t | \kappa_0, \mu_0, \nu_0, \Lambda_0 )\\
-			 Mult(x_{t,n}^c | \delta_t) \times Dir(\delta_t | q_0) \\
-			 Exp(x_{t,n}^a | \lambda_t) \times  \times Gam( \lambda_t | \alpha_0, \beta_0)  d\theta  \\
-		 	= t_{\nu_0-1}( x_{t,n}^s | \mu_0, \frac{\Lambda_0(\kappa_0+1)}{\kappa_0(\nu_0-1)}) \times \prod_{j=1}^V \frac{\Gamma(x_{t,n}^c)}{\Gamma(q_0)} \times \\ \frac{\Gamma(\sum_{j=1}^V q_0)}{\Gamma(\sum_{j=1}^V x_{t,n}^c)} \times Lomax(\alpha_0 + s_{t,n}^c, \beta_0 \sum_{j=1}^V x_{t,n}^c)
- 	\end{split}
-\end{equation}
-
-Where $t$ represents student's t-distribution with $\nu$ degrees of freedom, Lomax represents Lomax distribution with shape and scale, $\alpha$ and $\beta$ repsectively and the rest represent a Dirichlet-Multinomial(aka DirMul) distribution. The formulas of the posterior predictive distributions can be found in the literature with \cite{compendium} being a good example. 
-
-The conjugacy of the base and prior distribution allows for an easy sampling formula for proposal distribution $Q_2$ which is of the form: 
-
-
-\begin{equation} \label{Q_2}
-\begin{split}
-Q_2(\theta_t^k | \theta_{t-1}^k , x_t^k, z_t^k) \propto F( x_t^k | \theta_k) \times T_2(\theta_t^k | z_t^k) \\
-= NiW( \mu_t^k, \Sigma_t^k | \kappa_n, \mu_n, \nu_n, \Lambda_n ) Dir(\delta_t^k | q_n) Gam(\lambda_t^k | \alpha_n, \beta_n)
-\end{split}
-\end{equation}
-
-With:
-
-\begin{equation} \label{udpates}
-\begin{split}
-\kappa_n = \kappa_0 + N \\
-\nu_n = \nu_0 + N \\
-\mu_n = \frac{\kappa_0}{\kappa_0 + N} \mu_0 +  \frac{N}{\kappa_0 + N} \overline{x}^s\\
-\Lambda_n = \Lambda_0 + s_{x}^s\\
-q_N = q_0 +  \sum_n x_i^c\\
-\alpha_n = \alpha_0 +  N\\
-\beta_n = \beta_0 +  \sum^n x_i^a\\
-\end{split}
-\end{equation}
-
-
-Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations. The formulas for the updates can be found at the literature.
-
-\subsection{Weight updates}
-
-The only thing left to explicitly define the sampler in its whole is the weight update step. More specifically, on every time step $t$ the weight of particle $l$ is calculated as:
-
-\begin{equation}
-w_t^{(l)} = \frac {P(c_t^{(l)} , \theta_t^{(l)}, x_t| 	\theta_{t-1} )}{P(c_t^{(l)} , \theta_t^{(l)}| 	\theta_{t-1} )}
-\end{equation}
-
-Using bayes rule, the numerator can be written as:
-
-\begin{equation}
-	P(x_t , | c_t^{(l)} , \theta_t^{(l)} \theta_{t-1} ) \times P(c_t^{(l)} , \theta_t^{(l)}|  \theta_{t-1} )
-\end{equation}
-
-Which can be calculated using equations $Q_2$ and $Q_1$ for the first and second part respectively. After the particle weights are normalized particles are drawn with probability proportional to their weights.
-
-
+\subsection{General pipeline}
 Now that the data distribution and sampler are defined, the model that takes as input point clouds from a Kinect sensor mounted on a robot and outputs the most probable landmarks given the input and the previous landmarks can be presented. Fig.~\ref{pipeline} depicts the general workflow of what happens during the observation step of SLAM. The SLAM node-- requires landmark information, and the landmark pipeline outputs the most probable landmarks given the current database of landmarks and the current observations. If needed landmarks added to the database and the landmark ids are given to back to the SLAM node.
 
 
@@ -430,7 +268,169 @@ cloud expected is the one after all the frame transformations are done in the tf
 \textbf{Lines 15:} The algorithm returns the list of the most probable landmarks the robot encounters in this current time.
 
 
-The EKF SLAM works with no adjustments made to the package but the landmarks which are now distributions of data.
+Now that the general pipeline is defined, the data distribution as well as the sampler can be introduced.
+
+
+\subsection{The data distribution}
+
+Each point $x$ in the input consists of a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ colour information. The method those features are extracted is explained in lines 3 and 4 in the general pipeline. For the purpose of this project each part of the cloud was represented by vector of length 32 with the first three elements representing the space information, elements 4-6 angle information, and the rest colour information.
+
+The object model is a mixture of distributions over the data with each object beign modeled as D($\theta_t^k$) where $\theta$ represents the parameters of object $k$ at time $t$. More specifically, each set \textbf{x} with $n$ datapoints at time $t$ is distributed as:
+$$ x_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
+
+Where Normal is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; Mult is a Categorical multinomial distribution with parameter vector $\delta$ representing weigths the colour distribution and Exp is an exponential with shape parameter $\lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. For this graph data points from various point clouds where taken and passed through the pipeline analysed in lines 3-4. The data were then plotted, and the figure shows what the aggregated angle distribution between neighbor datapoints is. Since there is a clear exponential trend, the exponential distribution was chosen to model it. A gamma distribution is also a nice fit for the data, but due to time constrains, only one modeling    distribution was explored.
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=.5\textwidth]{Kullback-Leibler}
+    \caption{Exponential trend in KL distances.}
+  \label{pcl:kl}
+\end{figure}
+
+
+Now that the distribution of the objects is defined, the progression of the sufficient statistics at time $t$ given $t-1$ given by:
+
+$\theta_t^k | \theta_{t-1}^k \sim
+\begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
+G_0 & \mbox{if } k > K_{t-1}. \end{cases}$
+
+Where $T$ represents the transition kernel of the data given the previous state in the model. The case $ k > K_{t-1} $ represents the creation of a new cluster and $G_0$ is the base distribution of the DDP. In our case, the conjugate priors of the distributions of the data were chosen to model the base distribution. Therefore, $G_0$ is defined as:
+
+$$ G_0(\theta_t^k)  = NiW( \mu_t^k, \Sigma_t^k | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t^k | q_0) Gam( \lambda_t^k | \alpha_0, \beta_0) $$
+
+Where NiW is a Normal inverse Wishart distribution, Dir denotes a Dirichlet distribution, and Gam the Gamma distribution. $ \kappa_0, \mu_0, \nu_0, \Lambda_0, q_0,\alpha_0$ and $\beta_0$ are predefined parameters of the model. The generative process for the Dependent Dirichlet mixture model can be written for each timestep $t$ as:
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+\begin{enumerate}
+	\item Draw  $c_t$ $\sim$ $GPU(\alpha, \rho) $
+	\item $\forall$  k draw: $ \theta_t^k | \theta_{t-1}^k \sim
+	\begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
+	G_0 & \mbox{if } k > K_{t-1}. \end{cases}$
+	\item $\forall$  point $n$ draw $ x_{t,n} \sim F(\theta_t^{c_t,n})$
+\end{enumerate}
+\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+Given the theory in \cite{caron}, the transition Kernel must satistfy:
+
+$$ \int G_0(\theta_k) T(\theta_t^k | \theta_{t-1}^k) d\theta_{t-1}^k =  G_0(\theta_k) $$
+
+The equation means that the invariant distribution must equal its base distribution. A typical way of meeting this restriction and forcing the sampler to converge to the original target density\cite{smc:theory} is to introduce a set of M auxiliary variables \textbf{z} such that:
+
+$$ P(\theta_t^k | \theta_{t-1}^k) =  \int P(\theta_t^k | z_{t}^k)   P(z_t^k| \theta_{t-1}^k) dz_t^k $$
+
+The transition kernel of the model can now be sampled by using the following formula
+
+$\theta_t^k \sim T(\theta_{t-1}^k) = T_2 \circ T_1(\theta_{t-1}^k)$ where:
+\begin{equation} \label{eq1}
+\begin{split}
+z_t^k  & \sim T_1(\theta_{t-1}^k)\\
+ & = Normal(\mu_{t-1}, \Sigma_{t-1}) Mult( \delta_{t-1}) Exp( \lambda_{t-1})
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\mu_t, \Sigma_t, \delta_t,  \lambda_t & \sim T_2(z_t^k)\\
+ & = NiW( \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(q_0) Gam(\alpha_0, \beta_0) 
+\end{split}
+\end{equation}
+
+where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior parameters given the auxiliary variables $z$.
+
+\subsection{Sequential monte carlo sampler}
+
+Sequential monte carlo samplers for Dirichlet process mixture models where introduced by Doucet et al~\cite{doucet} and serve as fast alternative to MCMC and VI methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation cannot occur in a time horizon of 1 that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
+
+\begin{algorithm}[h]
+  \caption{SMC for DDPM}\label{SMC}
+  \begin{algorithmic}[1]
+	\State \textbf{Input:} Points \{$x_{1,1:N_t}, ..x_{T,1:N_t}$\}with extracted features
+	\State \textbf{Output:} Clusters representing of the data
+	\For{$t = 1,...T$} 
+			\For{$ l = 1,...L$} 
+							\For{$ iter = 1,...S$} 
+								\State Sample $(c_t)^{(l)} \sim Q_1$  
+								\State Sample $(\theta^k ) \sim Q_2$
+						    \EndFor		
+		    \EndFor
+		    \For{$ k = 1,...K$} 
+			   \State Sample $\Delta s_{t-1}^k \sim Binom( (s_{t-1,N_{t-1}}^k)^{(l)}, \rho) $ 
+		       \State Set $s_{t,0}^{k} = s_{t-1,N_{t-1}}^{k} -\Delta s_{t-1}^k$
+   		       \State Sample $( (z_{t+1}^k)^{(l)} ) \sim T_1((\theta_t^k))^{(l)} $
+		    \EndFor
+		 	\State compute particle weights $w_t^l$
+    \EndFor
+    \State Normalize and resample weights
+  \end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Gibbs updates}
+The proposal distribution $Q_1$ is the probability of an assignment $c_{t,n}$ given cluster sizes, parameters and concentration $\alpha$. Formally $Q_1$ can be written as:
+\begin{equation} \label{Gibbs}
+ Q_1(c_{t,n} | s_{t,n}^k, \theta_t^k, \alpha) \propto Cat( s_{t,n}^1,...s_{t,n}^K, \alpha ) \times
+ 	\begin{cases} 
+ 	F(x_{t,n} | \theta_t^{c_t} )  &\mbox{if } k \leq K_{t-1} \\
+ 	\int P(x_{t,n} | \theta_t )G_0(\theta) d\theta & \mbox{if } k > K_{t-1}. \end{cases}
+\end{equation}
+Where $c_{t,n}$ represents cluster $c$ of point $n$ at time $t$, $s$ represents cluster sizes. The integral represents the posterior predictive distribution of the cluster times the base distribution with the parameters integrated out. A review of the literature helps understand how the posterior predictive formula is derived. More specifically, the analytic expression of the integral is:
+
+
+\begin{equation} \label{Q1}
+	\begin{split}
+		 	\int P(x_{t,n} | \theta_t )G_0(\theta) d\theta =
+		 	\int Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) \times  \\ NiW( \mu_t, \Sigma_t | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t | q_0) Gam( \lambda_t | \alpha_0, \beta_0)  d\theta  \\
+			= \int Normal(x_{t,n}^s| \mu_t, \Sigma_t) \times NiW( \mu_t, \Sigma_t | \kappa_0, \mu_0, \nu_0, \Lambda_0 )\\
+			 Mult(x_{t,n}^c | \delta_t) \times Dir(\delta_t | q_0) \\
+			 Exp(x_{t,n}^a | \lambda_t) \times  \times Gam( \lambda_t | \alpha_0, \beta_0)  d\theta  \\
+		 	= t_{\nu_0-1}( x_{t,n}^s | \mu_0, \frac{\Lambda_0(\kappa_0+1)}{\kappa_0(\nu_0-1)}) \times \prod_{j=1}^V \frac{\Gamma(x_{t,n}^c)}{\Gamma(q_0)} \times \\ \frac{\Gamma(\sum_{j=1}^V q_0)}{\Gamma(\sum_{j=1}^V x_{t,n}^c)} \times Lomax(\alpha_0 + s_{t,n}^c, \beta_0 \sum_{j=1}^V x_{t,n}^c)
+ 	\end{split}
+\end{equation}
+
+Where $t$ represents student's t-distribution with $\nu$ degrees of freedom, Lomax represents Lomax distribution with shape and scale, $\alpha$ and $\beta$ repsectively and the rest represent a Dirichlet-Multinomial(aka DirMul) distribution. The formulas of the posterior predictive distributions can be found in the literature with \cite{compendium} being a good example. 
+
+The conjugacy of the base and prior distribution allows for an easy sampling formula for proposal distribution $Q_2$ which is of the form: 
+
+
+\begin{equation} \label{Q_2}
+\begin{split}
+Q_2(\theta_t^k | \theta_{t-1}^k , x_t^k, z_t^k) \propto F( x_t^k | \theta_k) \times T_2(\theta_t^k | z_t^k) \\
+= NiW( \mu_t^k, \Sigma_t^k | \kappa_n, \mu_n, \nu_n, \Lambda_n ) Dir(\delta_t^k | q_n) Gam(\lambda_t^k | \alpha_n, \beta_n)
+\end{split}
+\end{equation}
+
+With:
+
+\begin{equation} \label{udpates}
+\begin{split}
+\kappa_n = \kappa_0 + N \\
+\nu_n = \nu_0 + N \\
+\mu_n = \frac{\kappa_0}{\kappa_0 + N} \mu_0 +  \frac{N}{\kappa_0 + N} \overline{x}^s\\
+\Lambda_n = \Lambda_0 + s_{x}^s\\
+q_N = q_0 +  \sum_n x_i^c\\
+\alpha_n = \alpha_0 +  N\\
+\beta_n = \beta_0 +  \sum^n x_i^a\\
+\end{split}
+\end{equation}
+
+
+Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations. The formulas for the updates can be found at the literature of cojugate priors with\cite{conjugate} being a good example.
+
+\subsubsection{Weight updates}
+
+The only thing left to explicitly define the sampler in its whole is the weight update step. More specifically, on every time step $t$ the weight of particle $l$ is calculated as:
+
+\begin{equation}
+w_t^{(l)} = \frac {P(c_t^{(l)} , \theta_t^{(l)}, x_t| 	\theta_{t-1} )}{P(c_t^{(l)} , \theta_t^{(l)}| 	\theta_{t-1} )}
+\end{equation}
+
+Using bayes rule, the numerator can be written as:
+
+\begin{equation}
+	P(x_t , | c_t^{(l)} , \theta_t^{(l)} \theta_{t-1} ) \times P(c_t^{(l)} , \theta_t^{(l)}|  \theta_{t-1} )
+\end{equation}
+
+Which can be calculated using equations $Q_2$ and $Q_1$ for the first and second part respectively. After the particle weights are normalized particles are drawn with probability proportional to their weights.
+
+
 
 \subsection{Complexity}
 
@@ -691,6 +691,9 @@ Canada, July 2007, 2007}
 \newblock{Del Moral, P., Doucet, A., \& Jasra, A. (2006). Sequential monte carlo samplers. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 68(3), 411-436.}
 
 \bibitem{RANSAC}
+
+\bibitem{conjugate}
+\newblock Raiffa, H. (1974). Applied statistical decision theory.
 
 \end{thebibliography}
 

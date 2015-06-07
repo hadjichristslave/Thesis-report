@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  7 JUN 2015 13:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  7 JUN 2015 14:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -716,76 +716,83 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-<pics/generalPolya.png, id=213, 806.01125pt x 826.08624pt>
+<pics/generalPolya.png, id=218, 806.01125pt x 826.08624pt>
 File: pics/generalPolya.png Graphic file (type png)
 
 <use pics/generalPolya.png>
 Package pdftex.def Info: pics/generalPolya.png used on input line 203.
 (pdftex.def)             Requested size: 279.50037pt x 286.46223pt.
- [7] [8 <./pics/generalPolya.png>]
-<pics/Kullback-Leibler.png, id=234, 808.01875pt x 337.26pt>
-File: pics/Kullback-Leibler.png Graphic file (type png)
-
-<use pics/Kullback-Leibler.png>
-Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 225.
-(pdftex.def)             Requested size: 215.0023pt x 89.73885pt.
- [9 <./pics/Kullback-Leibler.png (PNG copy)>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[10] [11] <pics/workflowGen.png, id=264, 755.82375pt x 411.5375pt>
+ [7]
+<pics/workflowGen.png, id=234, 755.82375pt x 411.5375pt>
 File: pics/workflowGen.png Graphic file (type png)
 
 <use pics/workflowGen.png>
-Package pdftex.def Info: pics/workflowGen.png used on input line 379.
+Package pdftex.def Info: pics/workflowGen.png used on input line 217.
 (pdftex.def)             Requested size: 184.9429pt x 100.69884pt.
 
-<pics/workflowSpec.png, id=265, 773.89125pt x 489.83pt>
+<pics/workflowSpec.png, id=235, 773.89125pt x 489.83pt>
 File: pics/workflowSpec.png Graphic file (type png)
 
 <use pics/workflowSpec.png>
-Package pdftex.def Info: pics/workflowSpec.png used on input line 379.
+Package pdftex.def Info: pics/workflowSpec.png used on input line 217.
 (pdftex.def)             Requested size: 184.9429pt x 117.05334pt.
- [12]
-Overfull \hbox (1.27063pt too wide) in paragraph at lines 398--399
+
+Overfull \hbox (1.27063pt too wide) in paragraph at lines 236--237
 [] $\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 probability\OT1/pplx/m/n/10 (-20) , \OM
 L/zplm/m/it/10 landId\OT1/zplm/m/n/10 ) \OMS/zplm/m/n/10   \OML/zplm/m/it/10 ge
 tBestLandmarkCorrespondence\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 landmark\OT1/ppl
 x/m/n/10 (-20) , \OML/zplm/m/it/10 existingLandmarks\OT1/zplm/m/n/10 )$ 
  []
 
-[13 <./pics/workflowGen.png> <./pics/workflowSpec.png>]
-<pics/Basic.png, id=288, 865.2325pt x 203.76125pt>
+[8 <./pics/generalPolya.png>] [9 <./pics/workflowGen.png> <./pics/workflowSpec.
+png>] <pics/Basic.png, id=254, 865.2325pt x 203.76125pt>
 File: pics/Basic.png Graphic file (type png)
  <use pics/Basic.png>
-Package pdftex.def Info: pics/Basic.png used on input line 422.
+Package pdftex.def Info: pics/Basic.png used on input line 260.
 (pdftex.def)             Requested size: 430.00462pt x 101.26476pt.
 
-[14 <./pics/Basic.png>] [15]
-<pics/denseInitial.png, id=309, 562.1pt x 489.83pt>
+[10 <./pics/Basic.png>]
+<pics/Kullback-Leibler.png, id=263, 808.01875pt x 337.26pt>
+File: pics/Kullback-Leibler.png Graphic file (type png)
+
+<use pics/Kullback-Leibler.png>
+Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 285.
+(pdftex.def)             Requested size: 215.0023pt x 89.73885pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[11] [12 <./pics/Kullback-Leibler.png (PNG copy)>]
+Underfull \vbox (badness 3590) has occurred while \output is active []
+
+ [13]
+[14] [15] <pics/denseInitial.png, id=316, 562.1pt x 489.83pt>
 File: pics/denseInitial.png Graphic file (type png)
 
 <use pics/denseInitial.png>
 Package pdftex.def Info: pics/denseInitial.png used on input line 481.
 (pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
- [16 <./pics/denseInitial.png>]
-<pics/initial.png, id=318, 562.1pt x 489.83pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<pics/initial.png, id=319, 562.1pt x 489.83pt>
 File: pics/initial.png Graphic file (type png)
  <use pics/initial.png>
 Package pdftex.def Info: pics/initial.png used on input line 491.
 (pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
 
-<pics/clustering.png, id=320, 562.1pt x 489.83pt>
-File: pics/clustering.png Graphic file (type png)
- <use pics/clustering.png>
-Package pdftex.def Info: pics/clustering.png used on input line 502.
-(pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
-
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[17 <./pics/initial.png>]
-<pics/landmarkClasification.png, id=327, 562.1pt x 489.83pt>
+[16] <pics/clustering.png, id=326, 562.1pt x 489.83pt>
+File: pics/clustering.png Graphic file (type png)
+
+<use pics/clustering.png>
+Package pdftex.def Info: pics/clustering.png used on input line 502.
+(pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
+ [17 <./pics/denseInitial.png> <./pics/initial.png>]
+<pics/landmarkClasification.png, id=334, 562.1pt x 489.83pt>
 File: pics/landmarkClasification.png Graphic file (type png)
 
 <use pics/landmarkClasification.png>
@@ -793,18 +800,19 @@ Package pdftex.def Info: pics/landmarkClasification.png used on input line 511.
 
 (pdftex.def)             Requested size: 215.0023pt x 187.35562pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [18 <./pics/clustering.png> <./pics/landmarkClasification.png>] [19] [20] [21]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 701.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[18 <./pics/clustering.png>] [19 <./pics/landmarkClasification.png>] [20]
+[21]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 704.
  [22]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 701.
-
-(./Thesis report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 701.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 701.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 704.
+ (./Thesis report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 704.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 704.
 Package rerunfilecheck Info: File `"Thesis report".out' has not changed.
-(rerunfilecheck)             Checksum: 6D379E9B865E05BACAEA8A6ACCD5C1E0;1052.
+(rerunfilecheck)             Checksum: 6F98C4DE06DF59E976E2C012E48C50E7;1138.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -812,14 +820,14 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 701.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 704.
  ) 
 Here is how much of TeX's memory you used:
- 11889 strings out of 495032
- 176238 string characters out of 6181719
- 395111 words of memory out of 5000000
- 14473 multiletter control sequences out of 15000+600000
- 75171 words of font info for 299 fonts, out of 8000000 for 9000
+ 11904 strings out of 495032
+ 176484 string characters out of 6181719
+ 394142 words of memory out of 5000000
+ 14482 multiletter control sequences out of 15000+600000
+ 75371 words of font info for 302 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  36i,16n,75p,1902b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/panos/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk>{/usr/sha
@@ -833,9 +841,9 @@ i.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "Thesis report.pdf" (22 pages, 401118 bytes).
+Output written on "Thesis report.pdf" (22 pages, 399136 bytes).
 PDF statistics:
- 426 PDF objects out of 1000 (max. 8388607)
- 115 named destinations out of 1000 (max. 500000)
- 58550 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 433 PDF objects out of 1000 (max. 8388607)
+ 117 named destinations out of 1000 (max. 500000)
+ 58558 words of extra memory for PDF output out of 61914 (max. 10000000)
 
