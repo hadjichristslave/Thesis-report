@@ -166,11 +166,9 @@ The approach presented in this paper takes an input similar to~\cite{objectDisc}
 \section{Theory background}
 \label{sec:theory}
 
-\subsection{Dependent Dirichlet Process mixtures}
-An explicit definition of the Dependent Dirichlet process sampler will now be given. Relevant background will be briefly mentioned as well as the theoretical topics that are important for the implementation.
+A basic background of GPU
 
-
-\subsubsection{Generalized Polya's Urn}
+\subsection{Generalized Polya's Urn}
 Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those priors by allowing the clusters in the data to vary with some covariance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable and have dependencies that cannot be disregarded. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such methods is the immediate extension they provide to dynamic environments. 
 
 A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. In the current project, the $n_th$ datapoint at time $t$,$x_{t,n}$ has an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
@@ -198,10 +196,24 @@ A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of r
 
 Where Cat is a categorical distribution, Bin is the binomial distribution, $\alpha$ is the DP concentration parameter and $\rho$ is the deletion parameter of the GPU. This Generative Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$)
 
+This process can be though of in the terms of a general Chinese restaurant process as shown in Fig.~\ref{generalPolya}. The figure can be described as follows: (a) at time $t$, we suppose that there are customers seating at several tables. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated(b). Each table occupied is moved according to the number of customers still seating in that table(c). A new customer then enters the table and either chooses to sit on one of the existing tables(e) or choose a new with probability proportional to the $\alpha$ parameter of the model(f).
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=.65\textwidth]{generalPolya}
+    \caption{Generalised Polya Urn as presented in CRP.}
+  \label{generalPolya}
+\end{figure}
+
+\section{Model definition}
+\label{sec:model}
+
+In order to define the model, two major components of the algorithm must be explicitly defined. The data distribution and the SMC sampler. Once these two modules are defined the model can be formally presented.
+
+\subsection{The data distribution}
+
+
 To define our method, we need to explicitly define the input it will receive. Our data points along with their meta-features that were extracted in the first part of the pipeline. Each point $x$ in the input consists of a tuple $x_{t,n} =(x_t^s, x_t^a, x_t^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ colour information. The method those features are extracted is explained in the model definition section of the paper. For the purpose of this project each part of the cloud was represented by vector of length 32.
-
-
-\subsubsection{The data distribution}
 
 Each data-point is modeled as being part of the distribution D($\theta_t^k$) where $\theta$ represents the parameters of cluster $k$ at time $t$. More specifically, each set \textbf{x} with $n$ datapoints at time $t$ is distributed as:
 $$ x_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
@@ -264,7 +276,7 @@ z_t^k  & \sim T_1(\theta_{t-1}^k)\\
 
 where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior parameters given the auxiliary variables $z$.
 
-\subsubsection{Sequential monte carlo sampler}
+\subsection{Sequential monte carlo sampler}
 
 Sequential monte carlo samplers for Dirichlet process mixture models where introduced by Doucet et al~\cite{doucet} and serve as fast alternative to MCMC and VI methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation cannot occur in a time horizon of 1 that the sampler will be used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
 
@@ -291,7 +303,7 @@ Sequential monte carlo samplers for Dirichlet process mixture models where intro
   \end{algorithmic}
 \end{algorithm}
 
-\subsubsection{Gibbs updates}
+\subsection{Gibbs updates}
 The proposal distribution $Q_1$ is the probability of an assignment $c_{t,n}$ given cluster sizes, parameters and concentration $\alpha$. Formally $Q_1$ can be written as:
 \begin{equation} \label{Gibbs}
  Q_1(c_{t,n} | s_{t,n}^k, \theta_t^k, \alpha) \propto Cat( s_{t,n}^1,...s_{t,n}^K, \alpha ) \times
@@ -342,7 +354,7 @@ q_N = q_0 +  \sum_n x_i^c\\
 
 Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations. The formulas for the updates can be found at the literature.
 
-\subsubsection{Weight updates}
+\subsection{Weight updates}
 
 The only thing left to explicitly define the sampler in its whole is the weight update step. More specifically, on every time step $t$ the weight of particle $l$ is calculated as:
 
@@ -357,10 +369,9 @@ Using bayes rule, the numerator can be written as:
 \end{equation}
 
 Which can be calculated using equations $Q_2$ and $Q_1$ for the first and second part respectively. After the particle weights are normalized particles are drawn with probability proportional to their weights.
-\section{Model definition}
-\label{sec:model}
 
-A model that takes as input point clouds from a Kinect sensor mounted on a robot and outputs the most probable landmarks given the input and the previous landmarks in now presented. Fig.~\ref{pipeline} depicts the general workflow of what happens during the observation step of SLAM. The SLAM node requires landmark information, and the landmark pipeline outputs the most probable landmarks given the current database of landmarks and the current observations. If needed landmarks added to the database and the landmark ids are given to back to the SLAM node.
+
+Now that the data distribution and sampler are defined, the model that takes as input point clouds from a Kinect sensor mounted on a robot and outputs the most probable landmarks given the input and the previous landmarks can be presented. Fig.~\ref{pipeline} depicts the general workflow of what happens during the observation step of SLAM. The SLAM node-- requires landmark information, and the landmark pipeline outputs the most probable landmarks given the current database of landmarks and the current observations. If needed landmarks added to the database and the landmark ids are given to back to the SLAM node.
 
 
 \begin{figure}
@@ -403,7 +414,7 @@ This top level description has a lot of implied steps so a line by line descript
 \textbf{Method input:} The method takes as input a point cloud. The post transformation comment has to do with the fact that the 
 cloud expected is the one after all the frame transformations are done in the tf layer of the robot.
 
-\textbf{Lines 3-4:} Feature extraction is done through the pcl~\cite{pcl} library. An initial point cloud reduction is mandatory to increase the speed of the process. A voxel grid is used to reduce the dataset size. A leaf size of 0.04cm produces a good tradeoff between precision and speed. The object representation approach is similar to~\cite{objectpointslam}. Instead of using the CSHOT descriptor, pcl's fpfh~\cite{fpfh} is being used. Fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. In that way we end up with a 23 dimensional angular signature of information between a point and its neighbors. Since the information are given in the form of a histogram, classical statistic solutions regarding the distances between angular signatures can be taken into account. In our solution EMD,Hellinger,and KL divergence are being computed in the pipeline. Color information is being encoded with an approach similar to ~\cite{smcddp}. The colour spectrum is discretized and what is extracted is the count of different colour signatures between a point and its k nearest neighbors. Finally positional information is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. What the algorithm outputs is then a vector of $ \textbf{x} = (x_s, x_c, x_a) $ where $s$ represents a 3x1 vector of space information, $c$ a 27x1 vector of colour information and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1). It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it greatly reduces(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
+\textbf{Lines 3-4:} Feature extraction is done through the pcl~\cite{pcl} library. An initial point cloud reduction is mandatory to increase the speed of the process. A voxel grid is used to reduce the dataset size. A leaf size of approximately 4cm produces a good tradeoff between precision and speed. The object representation approach is similar to~\cite{objectpointslam}. Instead of using the CSHOT descriptor, pcl's fpfh~\cite{fpfh} is being used. Fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. In that way we end up with a 23 dimensional angular signature of information between a point and its neighbors. Since the information are given in the form of a histogram, classical statistic solutions regarding the distances between angular signatures can be taken into account. In our solution EMD,Hellinger,and KL divergence are being computed in the pipeline. Color information is being encoded with an approach similar to ~\cite{smcddp}. The colour spectrum is discretized and what is extracted is the count of different colour signatures between a point and its k nearest neighbors. Finally positional information is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. What the algorithm outputs is then a vector of $ \textbf{x} = (x_s, x_c, x_a) $ where $s$ represents a 3x1 vector of space information, $c$ a 27x1 vector of colour information and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1). It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it greatly reduces(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
 
 \begin{figure}[h!]
   \caption{Point cloud modification pipeline.}
@@ -428,29 +439,30 @@ The complexity can be decomposed into three major parts. The cloud downsampling,
 \textbf{Downsampling}: The complexity of the cloud can be reduced to the complexity of its components. This means that the decomposed complexity is defined as follows:
 $$O(filter) = O(Vox\ Downsampling + Stat\ Removal + RANSAC+ FPFH + Color\ estimation) $$
 
-Voxel downsampling searches for neighbors.
+Voxel downsampling searches for neighbors within a distance defined by the user and keeps an average value that equally represents the cloud. Since the operation involves searching for neighbors of a point, and under the assumption that search operations take $O(log\ n)$ time where N is the number of points within the cloud, the complexity of voxelGrid downsampling is $O(k log n)$ where $k$ defines the number of neighbors and $n$ the number of points in the cloud.
 Statistial outlier removal searches for k nearest neigbhors and removes those whose deviation is passed a certain threshold. Given that search operations take $O(log\ n)$, for k neighbors, the complexity is $O(k\ log\ n)$.
-RANSAC: A lot of research has been done regarding the optimal complexity of RANSAC~\cite{RANSAC}. RANSAC has a complexity of $ O(k(t_M)+ m_s*N)$ where k is the iterations $m_s$ the average number of models per sample $N$ the number of data points and $t_M$ the time needed to draw a sample. The time variance also depends on the hardware.
-FPFH estimation: FPFH has a complexity of $O(nk)$~\cite{fpfh}.
-Color estimation: For this operation, the k nearest neighbors are chosen and some operation is performed on them. The complexity here is similar to Statistical outlier removal since operations after the search take a constant time $O(k\ log\ n)$ where $k$ is the number of neighbors, $n$ the number of points. 
+A high amount of research has been done regarding the optimal complexity of RANSAC~\cite{RANSAC}. RANSAC has a complexity of $ O(k(t_M)+ m_s*N)$ where k is the maximum amount of iterations defined by the user, $m_s$ the average number of models per sample $N$ the number of data points and $t_M$ the time needed to draw a sample. The time variance also depends on the hardware.
+FPFH has a complexity of $O(nk)$ as given in~\cite{fpfh}.
+Finally, for the operation of color estimation, the k nearest neighbors are chosen and some constant operation is performed on them. The complexity here is similar to Statistical outlier removal since operations after the search take a constant time $O(k\ log\ n)$ where $k$ is the number of neighbors, $n$ the number of points. 
 
 The downsampling pipeline has then a complexity of 
+\begin{equation} \label{Q_filt}
+O(filter) = O(k_{0}\ log\ n_{init} + k_{1}\ log\ n_{1} + k_{2}(t_M)+ m_s*n_{2} + n_{3}k_{3} + k_{4}\ log\ n_{3} )
+\end{equation}
 
-$$O(filter) = O(k_{0}\ log\ n_{0} + k_{1}\ log\ n_{1} + O(k_{2}(t_M)+ m_s*n_{2}) + n_{3}k_{3} + k_{4}\ log\ n_{3} ) $$
+Different $k$ indexes represent the number of neighbors defined for every operation. The $n$ represents the number of points used as input. Using the notation  of equation \ref{Q_filt}, $n_{init}$ defines the whole cloud, $n_1$ the cloud after operation 1, $n_2$ the cloud after operations 2 etc.
 
-Different $k$ indexes represent the parameters for every operation. The $n$ values represent the number of points the previous operation output, so $n_0$ represents the whole dataset, $n_1$ the dataset after the voxel downsampling etc.
-
-\textbf{Clustering}: The complexity of the SMC sampler is defined in \cite{smcddp} as $O(TLKSN)$ where $T$ defines the time frames,$L$ the number of particles, $K$ the number of clusters, $S$ the number of samples, and $N$ the size of the dataset. Given that the sampler is only used in single timesteps, the computational complexity is reduced to $ O(LKSN) $. This is a low complexity and directly affects the performance since the sampler averages 10msec of excecution time.
+\textbf{Clustering}: The complexity of the SMC sampler is defined in \cite{smcddp} as $O(TLKSN)$ where $T$ defines the time frames, $L$ the number of particles, $K$ the number of clusters, $S$ the number of samples, and $N$ the size of the dataset. Given that the sampler is only used in single timesteps, the computational complexity is reduced to $ O(LKSN) $. This is a low complexity and directly affects the performance since the sampler averages 10msec of excecution time.
 
 \textbf{Decision making}: The decision making takes $ O(\kappa * l^2) $ computational time where $\kappa$ defines the number of clusters output by the sampler and $l$ the number of landmarks currently stored in the database. This number can be further reduced by taking for example only landmarks that are nearby the cluster, but optimizing the decision making performance is outside the scope of this project.
 
 
-The final complexity of the method can then be defined as:
+Finally, with some notation abuse, the final complexity of the method can then be defined as:
 
 \begin{equation} \label{Q_2}
 \begin{split}
 O(filter) + O(cluster) + O(decision) = \\
-O(k_{0}logn_{0} + k_{1}logn_{1} + O(k_{2}(t_M)+ m_s*n_{2}) + n_{3}k_{3} + k_{4}logn_{3} ) + O(LKSn_3) + O(K * l^2)=\\
+O(k_{0}logn_{0} + k_{1}logn_{1} + O(k_{2}(t_M)+ m_s*n_{2}) + n_{3}k_{3} + k_{4}logn_{3} ) + O(LKSn_3) + O(\kappa * l^2)=\\
 O(k_{0}logn_{0} + k_{1}logn_{1} + k_{2}(t_M)+ m_s*n_{2} + n_{3}k_{3} + k_{4}logn_{3} + LKSn_3 + \kappa * l^2)
 \end{split}
 \end{equation}
@@ -680,8 +692,6 @@ Canada, July 2007, 2007}
 
 \bibitem{RANSAC}
 
-
-\bibitem{}
 \end{thebibliography}
 
 %----------------------------------------------------------------------------------------

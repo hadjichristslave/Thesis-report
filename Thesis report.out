@@ -5,14 +5,13 @@
 \BOOKMARK [2][-]{subsection.2.3}{Non Parametric Bayesian methods}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Correspondence}{section.2}% 6
 \BOOKMARK [1][-]{section.3}{Theory background}{}% 7
-\BOOKMARK [2][-]{subsection.3.1}{Dependent Dirichlet Process mixtures}{section.3}% 8
-\BOOKMARK [3][-]{subsubsection.3.1.1}{Generalized Polya's Urn}{subsection.3.1}% 9
-\BOOKMARK [3][-]{subsubsection.3.1.2}{The data distribution}{subsection.3.1}% 10
-\BOOKMARK [3][-]{subsubsection.3.1.3}{Sequential monte carlo sampler}{subsection.3.1}% 11
-\BOOKMARK [3][-]{subsubsection.3.1.4}{Gibbs updates}{subsection.3.1}% 12
-\BOOKMARK [3][-]{subsubsection.3.1.5}{Weight updates}{subsection.3.1}% 13
-\BOOKMARK [1][-]{section.4}{Model definition}{}% 14
-\BOOKMARK [2][-]{subsection.4.1}{Complexity}{section.4}% 15
-\BOOKMARK [1][-]{section.5}{Results}{}% 16
-\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 17
-\BOOKMARK [1][-]{section.7}{Discussion}{}% 18
+\BOOKMARK [2][-]{subsection.3.1}{Generalized Polya's Urn}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Model definition}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{The data distribution}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Sequential monte carlo sampler}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.3}{Gibbs updates}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.4}{Weight updates}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.5}{Complexity}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Results}{}% 15
+\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 16
+\BOOKMARK [1][-]{section.7}{Discussion}{}% 17
