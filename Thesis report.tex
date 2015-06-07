@@ -291,7 +291,7 @@ Sequential monte carlo samplers for Dirichlet process mixture models where intro
   \end{algorithmic}
 \end{algorithm}
 
-\subsubsection{Gibbs updates definition}
+\subsubsection{Gibbs updates}
 The proposal distribution $Q_1$ is the probability of an assignment $c_{t,n}$ given cluster sizes, parameters and concentration $\alpha$. Formally $Q_1$ can be written as:
 \begin{equation} \label{Gibbs}
  Q_1(c_{t,n} | s_{t,n}^k, \theta_t^k, \alpha) \propto Cat( s_{t,n}^1,...s_{t,n}^K, \alpha ) \times
@@ -420,6 +420,42 @@ cloud expected is the one after all the frame transformations are done in the tf
 
 
 The EKF SLAM works with no adjustments made to the package but the landmarks which are now distributions of data.
+
+\subsection{Complexity}
+
+The complexity can be decomposed into three major parts. The cloud downsampling, the clustering and the decision making.
+
+\textbf{Downsampling}: The complexity of the cloud can be reduced to the complexity of its components. This means that the decomposed complexity is defined as follows:
+$$O(filter) = O(Vox\ Downsampling + Stat\ Removal + RANSAC+ FPFH + Color\ estimation) $$
+
+Voxel downsampling searches for neighbors.
+Statistial outlier removal searches for k nearest neigbhors and removes those whose deviation is passed a certain threshold. Given that search operations take $O(log\ n)$, for k neighbors, the complexity is $O(k\ log\ n)$.
+RANSAC: A lot of research has been done regarding the optimal complexity of RANSAC~\cite{RANSAC}. RANSAC has a complexity of $ O(k(t_M)+ m_s*N)$ where k is the iterations $m_s$ the average number of models per sample $N$ the number of data points and $t_M$ the time needed to draw a sample. The time variance also depends on the hardware.
+FPFH estimation: FPFH has a complexity of $O(nk)$~\cite{fpfh}.
+Color estimation: For this operation, the k nearest neighbors are chosen and some operation is performed on them. The complexity here is similar to Statistical outlier removal since operations after the search take a constant time $O(k\ log\ n)$ where $k$ is the number of neighbors, $n$ the number of points. 
+
+The downsampling pipeline has then a complexity of 
+
+$$O(filter) = O(k_{0}\ log\ n_{0} + k_{1}\ log\ n_{1} + O(k_{2}(t_M)+ m_s*n_{2}) + n_{3}k_{3} + k_{4}\ log\ n_{3} ) $$
+
+Different $k$ indexes represent the parameters for every operation. The $n$ values represent the number of points the previous operation output, so $n_0$ represents the whole dataset, $n_1$ the dataset after the voxel downsampling etc.
+
+\textbf{Clustering}: The complexity of the SMC sampler is defined in \cite{smcddp} as $O(TLKSN)$ where $T$ defines the time frames,$L$ the number of particles, $K$ the number of clusters, $S$ the number of samples, and $N$ the size of the dataset. Given that the sampler is only used in single timesteps, the computational complexity is reduced to $ O(LKSN) $. This is a low complexity and directly affects the performance since the sampler averages 10msec of excecution time.
+
+\textbf{Decision making}: The decision making takes $ O(\kappa * l^2) $ computational time where $\kappa$ defines the number of clusters output by the sampler and $l$ the number of landmarks currently stored in the database. This number can be further reduced by taking for example only landmarks that are nearby the cluster, but optimizing the decision making performance is outside the scope of this project.
+
+
+The final complexity of the method can then be defined as:
+
+\begin{equation} \label{Q_2}
+\begin{split}
+O(filter) + O(cluster) + O(decision) = \\
+O(k_{0}logn_{0} + k_{1}logn_{1} + O(k_{2}(t_M)+ m_s*n_{2}) + n_{3}k_{3} + k_{4}logn_{3} ) + O(LKSn_3) + O(K * l^2)=\\
+O(k_{0}logn_{0} + k_{1}logn_{1} + k_{2}(t_M)+ m_s*n_{2} + n_{3}k_{3} + k_{4}logn_{3} + LKSn_3 + \kappa * l^2)
+\end{split}
+\end{equation}
+
+The complexity as defined in equation~\ref{Q_2} depends greatly on the initial reduction of the voxel downsampling. As the voxel leaf size parameter decreases and the downsampling outputs a larger cloud, the precision as well as the computing time of the method increases. Since in this thesis the research was directed towards online SLAM methods, the leaf size was modified so that the cloud the time requirements for online landmark tracking were met.
 
 \section{Results}
 \label{sec:results}
@@ -566,7 +602,7 @@ Figueredo, A.J. and Wolf, P. S.A. (2009).
 
 \bibitem{nonParam}
 \newblock{Wainwright, M. J., \& Jordan, M. I. (2008). Graphical models, exponential families, and variational inference. Foundations and Trends in Machine Learning, 1(1-2), 1-305.}
-
+``
 \bibitem{omnimaper}
 \newblock{A.Trevor,  J.Rogers, and  H.Christensen.  Omnimapper:  A  modular multimodal  mapping  framework.   In IEEE  International  Conference on Robotics and Automation (ICRA), 2014}
 
@@ -642,6 +678,10 @@ Canada, July 2007, 2007}
 \bibitem{doucet}
 \newblock{Del Moral, P., Doucet, A., \& Jasra, A. (2006). Sequential monte carlo samplers. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 68(3), 411-436.}
 
+\bibitem{RANSAC}
+
+
+\bibitem{}
 \end{thebibliography}
 
 %----------------------------------------------------------------------------------------
