@@ -1,18 +1,18 @@
-\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
-\contentsline {section}{\numberline {2}Literature review}{4}{section.2}
-\contentsline {subsection}{\numberline {2.1}Object based SLAM}{4}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Point Cloud Object segmentation}{5}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Non Parametric Bayesian methods}{5}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Correspondence}{6}{subsection.2.4}
-\contentsline {section}{\numberline {3}Theory background}{7}{section.3}
-\contentsline {subsection}{\numberline {3.1}Generalized Polya's Urn}{7}{subsection.3.1}
-\contentsline {section}{\numberline {4}Model definition}{8}{section.4}
-\contentsline {subsection}{\numberline {4.1}General pipeline}{8}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}The data distribution}{11}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Sequential monte carlo sampler}{13}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}Gibbs updates}{13}{subsubsection.4.3.1}
-\contentsline {subsubsection}{\numberline {4.3.2}Weight updates}{15}{subsubsection.4.3.2}
-\contentsline {subsection}{\numberline {4.4}Complexity}{15}{subsection.4.4}
-\contentsline {section}{\numberline {5}Results}{16}{section.5}
-\contentsline {section}{\numberline {6}Conclusion and future work}{18}{section.6}
-\contentsline {section}{\numberline {7}Discussion}{19}{section.7}
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
+\contentsline {section}{\numberline {2}Literature review}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Object based SLAM}{5}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Point Cloud Object segmentation}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Non Parametric Bayesian methods}{6}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Correspondence}{7}{subsection.2.4}
+\contentsline {section}{\numberline {3}Theory background}{8}{section.3}
+\contentsline {subsection}{\numberline {3.1}Generalized Polya's Urn}{8}{subsection.3.1}
+\contentsline {section}{\numberline {4}Model definition}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}General pipeline}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}The data distribution}{12}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Sequential monte carlo sampler}{14}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}Gibbs updates}{14}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}Weight updates}{16}{subsubsection.4.3.2}
+\contentsline {subsection}{\numberline {4.4}Complexity}{16}{subsection.4.4}
+\contentsline {section}{\numberline {5}Results}{17}{section.5}
+\contentsline {section}{\numberline {6}Conclusion and future work}{19}{section.6}
+\contentsline {section}{\numberline {7}Discussion}{20}{section.7}

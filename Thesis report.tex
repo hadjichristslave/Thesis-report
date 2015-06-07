@@ -1,4 +1,3 @@
-
 \documentclass[twoside,hidelinks]{article}
 
 \usepackage{lipsum} % Package to generate dummy text throughout this template
@@ -45,21 +44,37 @@
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 
-\title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{{Towards lifelong mapping in pointclouds}}} % Article title
+\title{
+\Huge{Master Thesis} \\
+\noindent\rule{4cm}{0.4pt} \\
+\vspace{5mm}
+\huge{\selectfont{Towards lifelong mapping in pointclouds}}
+\vspace{5mm} \\
+\normalsize Panagiotis Chatzichristodoulou \\
+\noindent\rule{4cm}{0.4pt} \\
+\vspace{5mm}
+\fontsize{24pt}{10pt}{Master Thesis DKE 09-16 }} % Article title
+
+
 
 \author{
-\large
-\normalsize \textbf{Supervisors} \\ 
+\normalsize Thesis submitted in partial fulfillment\\
+\normalsize  of the requirements for the degree of Master of Science \\
+\normalsize of Artificial Intelligence at the Department of Knowledge \\
+\normalsize  Engineering of the Maastricht University \\
+\vspace{5mm} \\
+\normalsize \textbf{Thesis Commitee:} \\ 
 \normalsize University of Maastricht \\ % Your institution
 \normalsize \textit{Rico Mockel, Kurt Driessens} \\
 \normalsize Dobots \\
 \normalsize \textit{Anne Van Rossum} \\
-\normalsize \textbf{Student} \\
-\normalsize Panagiotis Chatzichristodoulou \\
-\normalsize Student ID : I6076679
-\vspace{-5mm}
+\vspace{0mm} \\
+\normalsize Maastricht University \\
+\normalsize Faculty of Humanities and Sciences \\ 
+\normalsize Department of Knowledge Engineering \\
+\normalsize Master Articial Intelligence \\
 }
-\date{}
+
 
 %----------------------------------------------------------------------------------------
 
@@ -73,10 +88,10 @@
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 
- 
+\newpage 
 \begin{abstract}
 
-\noindent Long term mapping is the natural conceptual extension to existing mapping methods. Mapping an area for long timeis a problem that if tackled efficiently will be a large step towards highly autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to improve lifelong mapping capabilities of existing methods. A novel method of object clustering and matching is presented and its results are applied to an EKF SLAM algorithm; its strengths, weaknesses as well as future directions on how these tools could be extended to include dynamic environments are introduced.
+\noindent Long term mapping is the natural conceptual extension to existing mapping methods. Mapping an area for a large amount of time is a problem that if tackled efficiently will be a large step towards highly autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to improve lifelong mapping capabilities of existing methods. A novel method of object clustering, point cloud representation and feature matching is presented and its results are applied to an EKF SLAM algorithm; its strengths, weaknesses are analysed as well as future directions on how the method could be improved as well as extended to be able to cope with dynamic enviroments.
 
 
 \end{abstract}
@@ -108,15 +123,15 @@ The logical extention to methods that can map  static environments is methods th
 	\item{Detect changes and update the map online}
 \end{itemize}
 
-The first two problems can be though of as compression problems as the map increases over time whereas the latter ones can be though of as dynamic environment problems. Methods of tackling those problems vary according to what sensors a robot uses to perform the mapping. In this project the focus will be directed in methods that use RGBD devices to perform SLAM like Microsoft's Kinect.
+The first two problems can be though of as compression problems as the map increases over time whereas the latter ones can be though of as dynamic environment ones. Methods of tackling those problems vary according to what sensors a robot uses to perform the mapping. In this project the focus will be directed towards methods that use RGBD devices like Microsoft's Kinect to perform SLAM.
 
-Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized RGBD devices with its low price range and high quality sensors. It came as no surprise that research in point clouds, the representation system of Kinect sensor readings, has increased since. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap}. The goal of this thesis is to introduce a novel approach to tackle the compression problem of long term mapping methods that use the Kinect device by using Bayesian non parametric methods.
+Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized RGBD devices with its low price range and high quality sensors. It came as no surprise that research in point clouds, the representation system of Kinect, has increased since then. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap}. The goal of this thesis is to introduce a novel approach to tackle the compression problem of long term mapping methods that use the Kinect devices by using Bayesian non parametric methods as the base of the solution.
 
 Dirichlet processes and Dirichlet process mixture models \cite{nonParam} are the cornerstone of Bayesian non parametric statistics. The strength of those models lies in the fact that they allow the model's mixture components to grow as much as needed so as to best fit the data. The dynamic number of components in combination with the highly resilient priors leads to very flexible models that can be used in a very large area of applications from topic modeling\cite{LDA} to speaker diarization\cite{speakerDiar}. 
 
-The main motivation behind this project is to use such methods as a means of compressing the information provided by the environment. In that direction, finding a way to robustly cluster a point cloud into semantically sound "chunks" of structure seems a reasonable starting point. This leads to the direction of object based SLAM, which is a domain where objects are used as reference points to perform the mapping.
+The main motivation behind this project is to use such methods as a means of compressing the information provided by the environment. In that direction, finding a way to robustly cluster a point cloud into "chunks" of structure seems a reasonable starting point. This leads to the direction of object based SLAM, which is a domain where objects are used as reference points to perform the mapping.
 
-In this paper, an EKF SLAM method that takes point clouds as input will be implemented. More specifically, a landmark detection layer using the clouds as input will be added; its results will then be empirically tested as well as its ability to optimally compress the data a point cloud. Its strengths and weaknesses will be presented and analysed; furthermore, directions on how the method could be extended to tackle the first two subproblems of Walcott's thesis will be given in the discussion.
+In this paper, an EKF SLAM method that uses point clouds as input will be implemented. More specifically, a landmark detection layer will be incroporated; its results will then be empirically tested as well as its ability to optimally compress the data a point cloud. Its strengths and weaknesses will be presented and analysed; furthermore, directions on how the method could be extended to tackle the first two subproblems of Walcott's thesis will be given in the discussion.
 
 The rest of the paper is structured as follows. Section \ref{sec:literature} will present relevant literature review, Section~\ref{sec:theory} will introduce the theories behind the model, Section~\ref{sec:model} will define the model, Section ~\ref{sec:results} will show experimental results of the method. Finally, Section ~\ref{sec:discussion} will end up with a discussion on the methods strengths and weaknesses.
 
@@ -670,7 +685,7 @@ Figueredo, A.J. and Wolf, P. S.A. (2009).
 \bibitem{theory:ddp}
 \newblock MacEachern, S. N. (2000). -
 \bibitem{speakerDiar}
-f\newblock{Fox, E. B., Sudderth, E. B., Jordan, M. I., \& Willsky, A. S. (2011). A sticky HDP-HMM with application to speaker diarization. The Annals of Applied Statistics, 5(2A), 1020-1056.}
+\newblock{Fox, E. B., Sudderth, E. B., Jordan, M. I., \& Willsky, A. S. (2011). A sticky HDP-HMM with application to speaker diarization. The Annals of Applied Statistics, 5(2A), 1020-1056.}
 
 
 \bibitem{antoniak}
@@ -691,6 +706,7 @@ Canada, July 2007, 2007}
 \newblock{Del Moral, P., Doucet, A., \& Jasra, A. (2006). Sequential monte carlo samplers. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 68(3), 411-436.}
 
 \bibitem{RANSAC}
+\newblock{Meer, P., Mintz, D., Rosenfeld, A., \& Kim, D. Y. (1991). Robust regression methods for computer vision: A review. International journal of computer vision, 6(1), 59-70.}
 
 \bibitem{conjugate}
 \newblock Raiffa, H. (1974). Applied statistical decision theory.
