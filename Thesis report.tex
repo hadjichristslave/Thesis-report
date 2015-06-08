@@ -484,6 +484,10 @@ O(k_{0}logn_{0} + k_{1}logn_{1} + k_{2}(t_M)+ m_s*n_{2} + n_{3}k_{3} + k_{4}logn
 
 The complexity as defined in equation~\ref{Q_2} depends greatly on the initial reduction of the voxel downsampling. As the voxel leaf size parameter decreases and the downsampling outputs a larger cloud, the precision as well as the computing time of the method increases. Since in this thesis the research was directed towards online SLAM methods, the leaf size was modified so that the cloud the time requirements for online landmark tracking were met.
 
+\subsection{Landmark size}
+
+The basic block of this algorithm is the cluster. In order to be able to compute how scalable the method is, the size of a single landmark will be computed. Each landmark is represetned by a single row in an SQLite database. To calculate how much space a landmark occupies, we will first calculate how space each of the columns has. Each row consists of 32 real numbers and 1 auto increment integer. Given that SQLite databases assign the memory dynamically, the worst case scenarios will be taken into account so that every other case is also included. According to the SQLite manual of datatypes~\cite{sqlite} a real value takes up to 8 bytes of memory. An auto increment integer takes up to 4 bytes of information, so the total number  of memory for a worst case scenario landmark is 260 bytes. This number can vary greatly over different environments and is a safe assumption to calculate the memory this method occupies.
+
 \section{Results}
 \label{sec:results}
 
@@ -521,12 +525,22 @@ The sampler as was described in the theory section takes as input the modified c
 
 The random forest takes as input the distributions as given by the cluster and outputs the probability that each one represents an element the algorithm has previously already in the database. Only elements past a threshold will be considered as landmarks already encountered and otherwise the new distributions are added to the database. The features taken by the algorithm are the distances between each distribution and each landmark already stored in the database. More specifically, for the Gaussian parts of the distribution Wasserstein and Kullback Leibler divergence are used to measure the distance between them. For the exponential part, squared Hellinger and Kullback-Leibler being used, and for the categorical EMD, KL divergence and Hellinger distance. All distribution distances are given in the appendix. The final result is a 7 feature vector that will be used to classify if it's a distance signature that classifies a landmark or not. The training set is supplied beforehand to the algorithm. The results of the algorithm are shown in Fig.~\ref{pcl:features}
 
+
 \begin{figure}[h!]
   \centering
     \includegraphics[width=.5\textwidth]{landmarkClasification}
     \caption{Point cloud post pipeline modifications.}
   \label{pcl:features}
 \end{figure}
+
+
+\subsection{EKF-SLAM experiments}
+
+The method's results were given as input to an EKF-SLAM algorithm to test how it would perform using a point cloud as input. The results of feature extraction and cluster representation on simple objects like boxes are shown in the following figures. 
+
+
+
+As it is shown in the concentrated results that displays the features in combination with the point cloud, there is a large reduction in the dimensionality of the input. Given that a normal scene can be reproduced by an average of 20 clusters, and each cluster has a size of 256 bytes, the method is extremely scalable. Furthermore, the implementation can be extended to be even more performance based with techniques like recovering only the nearby clusters when searching for features, sorting the database or using parallel computing for optimal search time. Utilizing such tools can make the technique being able to handle a very large amount of features since 100.000 clusters can be used to represent large areas take only 256MB of space.
 
 \section{Conclusion and future work}
 \label{sec:discussion}
@@ -541,6 +555,7 @@ A novel method for SLAM by using compressed representations of objects in a poin
 
 \section{Discussion}
 
+A fast method of pointcloud clustering and representation are presented. Its strengths and weaknesses are given. This method serves as a proof of concept on how non-parametric bayesians could help 
 
 \begin{thebibliography}{9}
 
@@ -710,6 +725,9 @@ Canada, July 2007, 2007}
 
 \bibitem{conjugate}
 \newblock Raiffa, H. (1974). Applied statistical decision theory.
+
+\bibitem{sqlite}
+\newblock{https://www.sqlite.org/datatype3.html}
 
 \end{thebibliography}
 

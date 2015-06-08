@@ -13,6 +13,8 @@
 \BOOKMARK [3][-]{subsubsection.4.3.1}{Gibbs updates}{subsection.4.3}% 13
 \BOOKMARK [3][-]{subsubsection.4.3.2}{Weight updates}{subsection.4.3}% 14
 \BOOKMARK [2][-]{subsection.4.4}{Complexity}{section.4}% 15
-\BOOKMARK [1][-]{section.5}{Results}{}% 16
-\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 17
-\BOOKMARK [1][-]{section.7}{Discussion}{}% 18
+\BOOKMARK [2][-]{subsection.4.5}{Landmark size}{section.4}% 16
+\BOOKMARK [1][-]{section.5}{Results}{}% 17
+\BOOKMARK [2][-]{subsection.5.1}{EKF-SLAM experiments}{section.5}% 18
+\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 19
+\BOOKMARK [1][-]{section.7}{Discussion}{}% 20
