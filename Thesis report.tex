@@ -445,6 +445,36 @@ Using bayes rule, the numerator can be written as:
 
 Which can be calculated using equations $Q_2$ and $Q_1$ for the first and second part respectively. After the particle weights are normalized particles are drawn with probability proportional to their weights.
 
+\subsection{Decision Layer}
+
+Once the sampler has ouput the clusters of the point cloud. The decision of how an observation relates to previously encountered data has to be made. This decision is taken in the decision layer of the algorithm. For ease of use and due to time restrictions, a simple decision layer was implemented. The question that the decision layer answers is: "How does the data I currently see relate to the data I have previously seen in the past?". To do that, distance measures must be defined between the observations and the landmarks. Distances between distributions are called divergences and a large amount of literature on divergences exists.
+
+Since the distributions output consist of 3 separate parts, specific divergences for each part were considered. More specifically let $l$ be the distribution of the landmark and $o$ the distribution of the observation. $l$ can be decomposed into 3 parts: $l_G$,$l_C$,$l_E$ where G,C and E stand for Gaussian, Categorical and Exponential respectively. The observation distribution can be decomposed similarly. With that notation the distances between those distributions can be defined. For each individual landmark distribution $l$ and observation distribution $o$ the distances computed where the following:
+
+\begin{itemize}
+	\item Gaussian 
+		\begin{itemize}
+			\item Wesserstein($l_G,o_G$);			
+			\item KL($l_G,o_G$);
+		\end{itemize}
+	\item Exponential
+			\begin{itemize}
+				\item SquaredHellinger($l_E,o_E$);
+				\item KL($l_E,o_E$);
+			\end{itemize}
+	\item Categorical
+			\begin{itemize}
+				\item EMD($l_C,o_C$);
+				\item KL($l_C,o_C$);
+				\item Hellinger($l_C,o_C$);
+			\end{itemize}
+
+\end{itemize}
+
+Empiric evaluation and some parameter tweaking showed a nice splitting boundary between landmarks. It is of course possible to learn the optimal decision boundary but optimizing the decision layer was outside the scope of this project.
+
+
+
 
 
 \subsection{Complexity}
@@ -516,7 +546,7 @@ The cloud is stripped of its planar components with the remaining structure havi
 
 The sampler as was described in the theory section takes as input the modified cloud and outputs clusters of the structure. Its results are shown in figure~\ref{pcl:features}. The environment is captured as a sequence of clusters. It can be seen that the chair that is situated in the center of the cloud has a number of clusters assigned to it. This behavior of the cluster is expected as a lot of point clouds are part of the chair and the horizontal as well and the vertical components have different angular signatures. It is not possible to create a general framework that takes into account all the different angle and point signatures between objects. The decision of how the clusters represent a structure should then be taken in a decision layer on top of that cluster. A simple decision layer is implemented to classify objects by taking as input the output of the sampler.
 
-The decision layer takes as input the cluseters, and matches their characteristics to existing cluster. Only elements past a threshold will be considered as landmarks already encountered and otherwise the new distributions are added to the database. The features taken by the algorithm are the distances between each distribution and each landmark already stored in the database. More specifically, for the Gaussian parts of the distribution Wasserstein and Kullback Leibler divergence are used to measure the distance between them. For the exponential part, squared Hellinger and Kullback-Leibler being used, and for the categorical EMD, KL divergence and Hellinger distance. All distribution distances are given in the appendix. The final result is a 7 feature vector that will be used to classify if it's a distance signature that classifies a landmark or not. The training set is supplied beforehand to the algorithm. The results of the algorithm are shown in Fig.~\ref{pcl:features}
+The decision layer takes as input the distributions output by the sampler, and compares their characteristics to existing landmarks. Elements past a threshold are considered as landmarks already encountered; otherwise the new distributions are added to the database. The features taken by the algorithm are the distances between each distribution and each landmark already stored in the database. More specifically, for the Gaussian parts of the distribution Wasserstein and Kullback Leibler divergence are used to measure the distance between them. For the exponential part, squared Hellinger and Kullback-Leibler being used, and for the categorical EMD, KL divergence and Hellinger distance. All distribution distances are given in the appendix. The final result is a 7 feature vector that will be used to classify if it's a distance signature that classifies a landmark or not. The training set is supplied beforehand to the algorithm. The results of the algorithm are shown in Fig.~\ref{pcl:features}
 
 
 \subsection{EKF-SLAM experiments}
@@ -526,9 +556,9 @@ The method's results were given as input to an EKF-SLAM algorithm to test how it
 
 \begin{figure}
 \begin{tabular}{cc}
-  \includegraphics[width=60mm]{robotPictures/experiment1/input} &   \includegraphics[width=100mm]{robotPictures/experiment1/clustersWithData} \\
+  \includegraphics[width=60mm]{robotPictures/experiment1/input} &   \includegraphics[width=85mm]{robotPictures/experiment1/clustersWithData} \\
 (a) Input  & (b) Pointcloud along with landmarks\\[6pt]
- \includegraphics[width=60mm]{robotPictures/experiment2/depthinput} &   \includegraphics[width=100mm]{robotPictures/experiment2/clustered} \\
+ \includegraphics[width=60mm]{robotPictures/experiment2/depthinput} &   \includegraphics[width=85mm]{robotPictures/experiment2/clustered} \\
 (c) Depth input & (d) Pointcloud along with landmarks \\[6pt]
 \end{tabular}
 \caption{caption}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  8 JUN 2015 22:44
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  8 JUN 2015 23:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -715,21 +715,21 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-<pics/generalPolya.png, id=234, 806.01125pt x 826.08624pt>
+<pics/generalPolya.png, id=239, 806.01125pt x 826.08624pt>
 File: pics/generalPolya.png Graphic file (type png)
 
 <use pics/generalPolya.png>
 Package pdftex.def Info: pics/generalPolya.png used on input line 218.
 (pdftex.def)             Requested size: 279.50037pt x 286.46223pt.
  [8]
-<pics/workflowGen.png, id=249, 755.82375pt x 411.5375pt>
+<pics/workflowGen.png, id=254, 755.82375pt x 411.5375pt>
 File: pics/workflowGen.png Graphic file (type png)
 
 <use pics/workflowGen.png>
 Package pdftex.def Info: pics/workflowGen.png used on input line 232.
 (pdftex.def)             Requested size: 184.9429pt x 100.69884pt.
 
-<pics/workflowSpec.png, id=250, 773.89125pt x 489.83pt>
+<pics/workflowSpec.png, id=255, 773.89125pt x 489.83pt>
 File: pics/workflowSpec.png Graphic file (type png)
 
 <use pics/workflowSpec.png>
@@ -744,14 +744,14 @@ x/m/n/10 (-20) , \OML/zplm/m/it/10 existingLandmarks\OT1/zplm/m/n/10 )$
  []
 
 [9 <./pics/generalPolya.png>] [10 <./pics/workflowGen.png> <./pics/workflowSpec
-.png>] <pics/Basic.png, id=269, 704.6325pt x 220.825pt>
+.png>] <pics/Basic.png, id=274, 704.6325pt x 220.825pt>
 File: pics/Basic.png Graphic file (type png)
  <use pics/Basic.png>
 Package pdftex.def Info: pics/Basic.png used on input line 275.
 (pdftex.def)             Requested size: 430.00462pt x 134.76031pt.
 
 [11 <./pics/Basic.png>]
-<pics/Kullback-Leibler.png, id=278, 808.01875pt x 337.26pt>
+<pics/Kullback-Leibler.png, id=283, 808.01875pt x 337.26pt>
 File: pics/Kullback-Leibler.png Graphic file (type png)
 
 <use pics/Kullback-Leibler.png>
@@ -762,81 +762,81 @@ Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 300.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [12] [13 <./pics/Kullback-Leibler.png (PNG copy)>] [14] [15] [16] [17]
-<pics/initial.png, id=338, 562.1pt x 489.83pt>
+<pics/initial.png, id=341, 562.1pt x 489.83pt>
 File: pics/initial.png Graphic file (type png)
  <use pics/initial.png>
-Package pdftex.def Info: pics/initial.png used on input line 503.
+Package pdftex.def Info: pics/initial.png used on input line 533.
 (pdftex.def)             Requested size: 136.57323pt x 119.01158pt.
 
-<pics/clustering.png, id=339, 562.1pt x 489.83pt>
+<pics/clustering.png, id=342, 562.1pt x 489.83pt>
 File: pics/clustering.png Graphic file (type png)
  <use pics/clustering.png>
-Package pdftex.def Info: pics/clustering.png used on input line 503.
+Package pdftex.def Info: pics/clustering.png used on input line 533.
 (pdftex.def)             Requested size: 136.57323pt x 119.01158pt.
 
-<pics/landmarkClasification.png, id=340, 562.1pt x 489.83pt>
+<pics/landmarkClasification.png, id=343, 562.1pt x 489.83pt>
 File: pics/landmarkClasification.png Graphic file (type png)
 
 <use pics/landmarkClasification.png>
-Package pdftex.def Info: pics/landmarkClasification.png used on input line 504.
+Package pdftex.def Info: pics/landmarkClasification.png used on input line 534.
 
 (pdftex.def)             Requested size: 136.57323pt x 119.01158pt.
 
-Overfull \hbox (15.71506pt too wide) in paragraph at lines 502--507
+Overfull \hbox (15.71506pt too wide) in paragraph at lines 532--537
 [][] 
  []
 
-[18 <./pics/initial.png> <./pics/clustering.png> <./pics/landmarkClasification.
-png>]
-<pics/robotPictures/experiment1/input.png, id=352, 600.2425pt x 441.65pt>
+[18] [19 <./pics/initial.png> <./pics/clustering.png> <./pics/landmarkClasifica
+tion.png>]
+<pics/robotPictures/experiment1/input.png, id=362, 600.2425pt x 441.65pt>
 File: pics/robotPictures/experiment1/input.png Graphic file (type png)
 
 <use pics/robotPictures/experiment1/input.png>
 Package pdftex.def Info: pics/robotPictures/experiment1/input.png used on input
- line 529.
+ line 559.
 (pdftex.def)             Requested size: 170.71652pt x 125.60873pt.
 
-<pics/robotPictures/experiment1/clustersWithData.png, id=353, 1054.94125pt x 55
+<pics/robotPictures/experiment1/clustersWithData.png, id=363, 1054.94125pt x 55
 9.08875pt>
 File: pics/robotPictures/experiment1/clustersWithData.png Graphic file (type pn
 g)
  <use pics/robotPictures/experiment1/clustersWithData.png>
 Package pdftex.def Info: pics/robotPictures/experiment1/clustersWithData.png us
-ed on input line 529.
-(pdftex.def)             Requested size: 284.52756pt x 150.78535pt.
+ed on input line 559.
+(pdftex.def)             Requested size: 241.84842pt x 128.16968pt.
 
-<pics/robotPictures/experiment2/depthinput.png, id=354, 303.1325pt x 226.8475pt
+<pics/robotPictures/experiment2/depthinput.png, id=364, 303.1325pt x 226.8475pt
 >
 File: pics/robotPictures/experiment2/depthinput.png Graphic file (type png)
  <use pics/robotPictures/experiment2/depthinput.png>
 Package pdftex.def Info: pics/robotPictures/experiment2/depthinput.png used on 
-input line 531.
+input line 561.
 (pdftex.def)             Requested size: 170.71652pt x 127.75716pt.
 
-<pics/robotPictures/experiment2/clustered.png, id=355, 1073.00874pt x 580.1675p
+<pics/robotPictures/experiment2/clustered.png, id=365, 1073.00874pt x 580.1675p
 t>
 File: pics/robotPictures/experiment2/clustered.png Graphic file (type png)
  <use pics/robotPictures/experiment2/clustered.png>
 Package pdftex.def Info: pics/robotPictures/experiment2/clustered.png used on i
-nput line 531.
-(pdftex.def)             Requested size: 284.52756pt x 153.84102pt.
+nput line 561.
+(pdftex.def)             Requested size: 241.84842pt x 130.7622pt.
 
-Overfull \hbox (49.23946pt too wide) in paragraph at lines 528--534
+Overfull \hbox (6.56032pt too wide) in paragraph at lines 558--564
 [][] 
  []
 
-[19] [20 <./pics/robotPictures/experiment1/input.png (PNG copy)> <./pics/robotP
-ictures/experiment1/clustersWithData.png (PNG copy)> <./pics/robotPictures/expe
-riment2/depthinput.png> <./pics/robotPictures/experiment2/clustered.png (PNG co
-py)>] [21] [22] [23]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 733.
+[20 <./pics/robotPictures/experiment1/input.png (PNG copy)> <./pics/robotPictur
+es/experiment1/clustersWithData.png (PNG copy)> <./pics/robotPictures/experimen
+t2/depthinput.png> <./pics/robotPictures/experiment2/clustered.png (PNG copy)>]
+[21] [22] [23]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 763.
  [24]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 733.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 763.
  (./Thesis report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 733.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 733.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 763.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 763.
 Package rerunfilecheck Info: File `"Thesis report".out' has not changed.
-(rerunfilecheck)             Checksum: 3108F69D89F666CF50F86D115300C4B9;1336.
+(rerunfilecheck)             Checksum: 924E39D28B54646EEB844376DE07F7C8;1400.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -844,13 +844,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 733.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 763.
  ) 
 Here is how much of TeX's memory you used:
- 11930 strings out of 495032
- 177405 string characters out of 6181719
+ 11932 strings out of 495032
+ 177435 string characters out of 6181719
  392390 words of memory out of 5000000
- 14494 multiletter control sequences out of 15000+600000
+ 14495 multiletter control sequences out of 15000+600000
  76729 words of font info for 306 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  36i,16n,75p,1902b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -865,9 +865,9 @@ i.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "Thesis report.pdf" (24 pages, 722688 bytes).
+Output written on "Thesis report.pdf" (24 pages, 725552 bytes).
 PDF statistics:
- 458 PDF objects out of 1000 (max. 8388607)
- 121 named destinations out of 1000 (max. 500000)
- 58597 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 463 PDF objects out of 1000 (max. 8388607)
+ 122 named destinations out of 1000 (max. 500000)
+ 58605 words of extra memory for PDF output out of 61914 (max. 10000000)
 
