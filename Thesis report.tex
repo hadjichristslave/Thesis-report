@@ -493,51 +493,46 @@ The basic block of this algorithm is the cluster. In order to be able to compute
 
 The results of the pipeline as well as the results of its performance in SLAM methods will be discussed.
 
-The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size of a point cloud so that operations on the reduced dataset are feasible. A point cloud instance as taken raw from the kinect sensor approximately 240.000 points and matrix operations at such large matrices are non feasible. The main target of the pipeline is to reduce the size of the data to a more manageable scale. The initial dense point cloud is shown in Fig.~\ref{pcl:fig}.
 
-\begin{figure}[h!]
-  \centering
-    \includegraphics[width=.5\textwidth]{denseInitial}
-    \caption{Exponential trend in KL distances.}
-  \label{pcl:fig}
+\subsection{Offline testing}
+
+In offline testing, some static results will be displayed and analysed. The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size of a point cloud so that operations on the reduced dataset are feasible. A point cloud instance as taken raw from the kinect sensor approximately 240.000 points and matrix operations at such large matrices are non feasible. The main target of the pipeline is to reduce the size of the data to a more manageable scale. The initial dense point cloud is shown in Fig.~\ref{pcl:features}(a).
+
+\begin{figure}
+\begin{tabular}{ccc}
+  \includegraphics[width=50mm]{initial} &   \includegraphics[width=50mm]{clustering} &
+  \includegraphics[width=50mm]{landmarkClasification} \\
+(a) Initial  & (b) Clusters (c) Landmarks\\[6pt]
+\end{tabular}
+\caption{Basic pipeline}
+  \label{pcl:features}
 \end{figure}
+
 
 The cloud is too dense to be correctly displayed in the plot. The planar components of the plane also dominate the cloud and its hard to operate on them. An image with a high amount of planar components is typical when data are acquired from a turtlebot with the camera being situated near the ground. In order to perform the clustering operations, the cloud needs to be downsampled. The process followed is the one described in the method definition and the results are shown in Fig~\ref{pcl:reduced}. The operation used is a pipeline voxel downsampling, statistical outlier removal and plane estimation via RANSAC is typical in the literature \cite{objectDisc}.
 
-
-\begin{figure}[h!]
-  \centering
-    \includegraphics[width=.5\textwidth]{initial}
-    \caption{Point cloud post pipeline modifications.}
-  \label{pcl:reduced}
-\end{figure}
 
 The cloud is stripped of its planar components with the remaining structure having minimal to no loss of structural information. The cloud is now ready to be used as input for the sampler which will take the features calculated in the pipeline to cluster the cloud into segments of structure. The whole takes a medium amount of time and depending on the parameter tweaking it can 
 
 The sampler as was described in the theory section takes as input the modified cloud and outputs clusters of the structure. Its results are shown in figure~\ref{pcl:clustering}. The environment is captured as a sequence of clusters. It can be seen that the chair that is situated in the center of the cloud has a number of clusters assigned to it. This behavior of the cluster is expected as a lot of point clouds are part of the chair and the horizontal as well and the vertical components have different angular signatures. It is not possible to create a general framework that takes into account all the different angle and point signatures between objects. The decision of how the clusters represent a structure should then be taken in a decision layer on top of that cluster. The random forest is build to classify objects by taking as input the output of the sampler.
 
-\begin{figure}[h!]
-  \centering
-    \includegraphics[width=.5\textwidth]{clustering}
-    \caption{Point cloud post pipeline modifications.}
-  \label{pcl:clustering}
-\end{figure}
-
 The random forest takes as input the distributions as given by the cluster and outputs the probability that each one represents an element the algorithm has previously already in the database. Only elements past a threshold will be considered as landmarks already encountered and otherwise the new distributions are added to the database. The features taken by the algorithm are the distances between each distribution and each landmark already stored in the database. More specifically, for the Gaussian parts of the distribution Wasserstein and Kullback Leibler divergence are used to measure the distance between them. For the exponential part, squared Hellinger and Kullback-Leibler being used, and for the categorical EMD, KL divergence and Hellinger distance. All distribution distances are given in the appendix. The final result is a 7 feature vector that will be used to classify if it's a distance signature that classifies a landmark or not. The training set is supplied beforehand to the algorithm. The results of the algorithm are shown in Fig.~\ref{pcl:features}
-
-
-\begin{figure}[h!]
-  \centering
-    \includegraphics[width=.5\textwidth]{landmarkClasification}
-    \caption{Point cloud post pipeline modifications.}
-  \label{pcl:features}
-\end{figure}
 
 
 \subsection{EKF-SLAM experiments}
 
 The method's results were given as input to an EKF-SLAM algorithm to test how it would perform using a point cloud as input. The results of feature extraction and cluster representation on simple objects like boxes are shown in the following figures. 
 
+
+\begin{figure}
+\begin{tabular}{cc}
+  \includegraphics[width=60mm]{robotPictures/experiment1/input} &   \includegraphics[width=100mm]{robotPictures/experiment1/clustersWithData} \\
+(a) Input  & (b) Pointcloud along with landmarks\\[6pt]
+ \includegraphics[width=60mm]{robotPictures/experiment2/depthinput} &   \includegraphics[width=100mm]{robotPictures/experiment2/clustered} \\
+(c) Depth input & (d) Pointcloud along with landmarks \\[6pt]
+\end{tabular}
+\caption{caption}
+\end{figure}
 
 
 As it is shown in the concentrated results that displays the features in combination with the point cloud, there is a large reduction in the dimensionality of the input. Given that a normal scene can be reproduced by an average of 20 clusters, and each cluster has a size of 256 bytes, the method is extremely scalable. Furthermore, the implementation can be extended to be even more performance based with techniques like recovering only the nearby clusters when searching for features, sorting the database or using parallel computing for optimal search time. Utilizing such tools can make the technique being able to handle a very large amount of features since 100.000 clusters can be used to represent large areas take only 256MB of space.
