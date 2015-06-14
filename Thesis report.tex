@@ -288,6 +288,7 @@ Now that the general pipeline is defined, specific parts of the method will be d
 
 \subsection{The data distribution}
 
+The point cloud consists of many points hence a data unit will be considered a single point.
 Each point $x$ in the input consists of a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ colour information. The method those features are extracted is explained in lines 3 and 4 in the general pipeline. For the purpose of this project each part of the cloud was represented by vector of length 32 with the first three elements representing the space information, elements 4-6 angle information, and the rest colour information.
 
 The object model is a mixture of distributions over the data with each object beign modeled as D($\theta_t^k$) where $\theta$ represents the parameters of object $k$ at time $t$. More specifically, each set \textbf{x} with $n$ datapoints at time $t$ is distributed as:
