@@ -66,7 +66,7 @@
 \normalsize \textbf{Thesis Commitee:} \\ 
 \normalsize University of Maastricht \\ % Your institution
 \normalsize \textit{Rico Mockel, Kurt Driessens} \\
-\normalsize Dobots \\
+\normalsize Dobots B.V.\\
 \normalsize \textit{Anne Van Rossum} \\
 \vspace{0mm} \\
 \normalsize Maastricht University \\
@@ -91,7 +91,7 @@
 \newpage 
 \begin{abstract}
 
-\noindent Long term mapping is the natural conceptual extension to existing mapping methods. Mapping an area for a large amount of time is a problem that if tackled efficiently will be a large step towards highly autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to improve lifelong mapping capabilities of existing methods. A novel method of object clustering, point cloud representation and feature matching is presented and its results are applied to an EKF SLAM algorithm; its strengths, weaknesses are analysed as well as future directions on how the method could be improved as well as extended to be able to cope with dynamic enviroments.
+\noindent Long term mapping is the natural extension to existing mapping methods. Mapping an area for a large amount of time is a problem that if tackled efficiently will be a large step towards highly autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to improve lifelong mapping capabilities of existing methods. A novel method of object clustering, point cloud representation and feature matching is presented and its results are applied to an EKF SLAM algorithm; its strengths, weaknesses are analysed as well as future directions on how the method could be improved as well as extended to be able to cope with dynamic enviroments.
 
 
 \end{abstract}
@@ -123,9 +123,9 @@ The logical extention to methods that can map  static environments is methods th
 	\item{Detect changes and update the map online}
 \end{itemize}
 
-The first two problems can be though of as compression problems as the map increases over time whereas the latter ones can be though of as dynamic environment ones. Methods of tackling those problems vary according to what sensors a robot uses to perform the mapping. In this project the focus will be directed towards methods that use RGBD devices like Microsoft's Kinect to perform SLAM.
+The first two problems can be though of as compression problems as the map increases over time whereas the latter ones can be though of as dynamic environment one. Approaches of tackling those problems vary according to the sensors a robot is using to perform the mapping. In this project the focus will be directed towards methods that use RGBD devices like Microsoft's Kinect to perform SLAM.
 
-Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized RGBD devices with its low price range and high quality sensors. It came as no surprise that research in point clouds, the representation system of Kinect, has increased since then. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap}. The goal of this thesis is to introduce a novel approach to tackle the compression problem of long term mapping methods that use the Kinect devices by using Bayesian non parametric methods as the base of the solution.
+Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized RGBD devices with its low price range and high quality sensors. It came as no surprise that research in point clouds, the representation system of Kinect, has increased since then. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap}. The goal of this thesis is to introduce a novel approach to tackle the compression problem of long term mapping methods that use the Kinect devices while using Bayesian non parametric methods as the base of its solution.
 
 Dirichlet processes and Dirichlet process mixture models \cite{nonParam} are the cornerstone of Bayesian non parametric statistics. The strength of those models lies in the fact that they allow the model's mixture components to grow as much as needed so as to best fit the data. The dynamic number of components in combination with the highly resilient priors leads to very flexible models that can be used in a very large area of applications from topic modeling\cite{LDA} to speaker diarization\cite{speakerDiar}. 
 
