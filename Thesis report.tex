@@ -448,9 +448,9 @@ Which can be calculated using equations $Q_2$ and $Q_1$ for the first and second
 
 \subsection{Decision Layer}
 
-Once the sampler has ouput the clusters of the point cloud. The decision of how an observation relates to previously encountered data has to be made. This decision is taken in the decision layer of the algorithm. For ease of use and due to time restrictions, a simple decision layer was implemented. The question that the decision layer answers is: "How does the data I currently see relate to the data I have previously seen in the past?". To do that, distance measures must be defined between the observations and the landmarks. Distances between distributions are called divergences and a large amount of literature on divergences exists.
+Once the sampler outputs the clusters of the point cloud the output can be passed to the decision layer. The question that the decision layer answers is: "How does the data/clusters I currently observe relate to the data I have previously seen in the past?". The decision of how an observation relates to previously encountered data has to be made and this decision is taken in the decision layer of the algorithm. To do that, distance measures must be defined between the observations and the landmarks. Distances between distributions are called divergences and a large amount of literature on divergences exists.
 
-Since the distributions output consist of 3 separate parts, specific divergences for each part were considered. More specifically let $l$ be the distribution of the landmark and $o$ the distribution of the observation. $l$ can be decomposed into 3 parts: $l_G$,$l_C$,$l_E$ where G,C and E stand for Gaussian, Categorical and Exponential respectively. The observation distribution can be decomposed similarly. With that notation the distances between those distributions can be defined. For each individual landmark distribution $l$ and observation distribution $o$ the distances computed where the following:
+Since our data are modeled as comming from a convolution of 3 distributions, specific divergences for each part were considered. More specifically let $l$ be the distribution of the landmark and $o$ the distribution of the observation. $l$ can be decomposed into 3 parts: $l_G$,$l_C$,$l_E$ where G,C and E stand for Gaussian, Categorical and Exponential respectively. The observation distribution can be decomposed similarly. With that notation the distances between those distributions can be defined. For each individual landmark distribution $l$ and observation distribution $o$ the distances computed where the following:
 
 \begin{itemize}
 	\item Gaussian 
@@ -472,16 +472,15 @@ Since the distributions output consist of 3 separate parts, specific divergences
 
 \end{itemize}
 
-Empiric evaluation and some parameter tweaking showed a nice splitting boundary between landmarks. It is of course possible to learn the optimal decision boundary but optimizing the decision layer was outside the scope of this project.
-
-
-
+The decision boundary of an observation being a landmark or not was chosen by empiric evaluation of the landmarks. It is of course possible to learn the optimal decision boundary but optimizing the decision layer was outside the scope of this project.
 
 
 \subsection{Complexity}
 
 The complexity can be decomposed into three major parts. The cloud downsampling, the clustering and the decision making.
-
+$$
+O(total) = O(filter) + O(cluster) + O(decision)
+$$
 \textbf{Downsampling}: The complexity of the cloud can be reduced to the complexity of its components. This means that the decomposed complexity is defined as follows:
 $$O(filter) = O(Vox\ Downsampling + Stat\ Removal + RANSAC+ FPFH + Color\ estimation) $$
 
@@ -499,6 +498,10 @@ O(filter) = O(k_{0}\ log\ n_{init} + k_{1}\ log\ n_{1} + k_{2}(t_M)+ m_s*n_{2} +
 Different $k$ indexes represent the number of neighbors defined for every operation. The $n$ represents the number of points used as input. Using the notation  of equation \ref{Q_filt}, $n_{init}$ defines the whole cloud, $n_1$ the cloud after operation 1, $n_2$ the cloud after operations 2 etc.
 
 \textbf{Clustering}: The complexity of the SMC sampler is defined in \cite{smcddp} as $O(TLKSN)$ where $T$ defines the time frames, $L$ the number of particles, $K$ the number of clusters, $S$ the number of samples, and $N$ the size of the dataset. Given that the sampler is only used in single timesteps, the computational complexity is reduced to $ O(LKSN) $. This is a low complexity and directly affects the performance since the sampler averages 10msec of excecution time.
+
+$$
+O(cluster) = O(LKSN)
+$$
 
 \textbf{Decision making}: The decision making takes $ O(\kappa * l^2) $ computational time where $\kappa$ defines the number of clusters output by the sampler and $l$ the number of landmarks currently stored in the database. This number can be further reduced by taking for example only landmarks that are nearby the cluster, but optimizing the decision making performance is outside the scope of this project.
 
@@ -525,9 +528,28 @@ The basic block of this algorithm is the cluster. In order to be able to compute
 The results of the pipeline as well as the results of its performance in SLAM methods will be discussed.
 
 
+\subsection{Simple datasets}
+
+In this section the performance and the output of the algorithm will be tested against a simple dataset. That will make the conceptual extension to more complex datasets that will be used in the robot easier. In order to test the sampling as well as the decision layer of the algorithm, a dataset provided by the pcl library was used. The cloud is shown in Fig.\ref{pcl:clust}(a)
+
+\begin{figure}
+\begin{tabular}{cc}
+  \includegraphics[width=.5\textwidth]{clusterings/initialData} &   \includegraphics[width=.5\textwidth]{clusterings/colorcodedDistributions} \\
+(a) Raw cloud  & (b) Post clustering \\[6pt]
+\end{tabular}
+\caption{Initial data along with the distributions infered}
+  \label{pcl:clust}
+\end{figure}
+
+The cloud represents a milk cartridge in two different positions. The pipeline will take is now given a simple input and the output of the sampler is shown in Fig.\ref{pcl:clust}(b). The reduced point cloud is shown in the top left part of Fig.\ref{pcl:clust}(b). It is significantly smaller in size and this cloud along with all the meta-information needed are given as input to the sampler. The sampler then outputs a mixture of distributions that best fits the data. The output of the cluster is shown in Fig.\ref{pcl:clust}(b) with the top right being the Gaussian distributions infered, bottom left the exponential and bottom right the categorical representing colour information of the cloud. The sampler outputs 3 clusters for the data and
+
+Once this cloud was acquired, it was reduced and then the reduced cloud along with the meta-information computed in the pipeline were given as input to the sampler. The sampler then outputs clusters of the structure that encapsulate positional, angular and colour information. The results can be seen in  figure Fig.\ref{pcl:post}
+
+The tables following depict the distances between the clustes shown in the picture. Positional distances among neighbor clusters are small, but angular distances do not coincide.
+
 \subsection{Offline testing}
 
-In the offline testing section, basic static results will be displayed and analysed. The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size of a point cloud so that operations on the reduced dataset are feasible. A point cloud instance as taken raw from the kinect sensor approximately 300.000 points and matrix operations at such large matrices are non feasible. The main target of the pipeline is to reduce the size of the data to a more manageable scale. The initial dense point cloud is shown in Fig.~\ref{pcl:features}(a).
+In the offline testing section, basic static results will be displayed and analyzed. The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size of a point cloud so that operations on the reduced dataset are feasible. A point cloud instance as taken raw from the kinect sensor approximately 300.000 points and matrix operations at such large matrices are non feasible. The main target of the pipeline is to reduce the size of the data to a more manageable scale. The initial dense point cloud is shown in Fig.~\ref{pcl:features}(a).
 
 \begin{figure}
 \begin{tabular}{ccc}
@@ -557,10 +579,18 @@ The method's results were given as input to an EKF-SLAM algorithm to test how it
 
 \begin{figure}
 \begin{tabular}{cc}
-  \includegraphics[width=60mm]{robotPictures/experiment1/input} &   \includegraphics[width=85mm]{robotPictures/experiment1/clustersWithData} \\
+\includegraphics[width=60mm]{box/input1} & 
+  \includegraphics[width=85mm]{box/clusters1} \\
 (a) Input  & (b) Pointcloud along with landmarks\\[6pt]
- \includegraphics[width=60mm]{robotPictures/experiment2/depthinput} &   \includegraphics[width=85mm]{robotPictures/experiment2/clustered} \\
+	\includegraphics[width=60mm]{box/input2} & 
+  \includegraphics[width=85mm]{box/clusters2} \\
 (c) Depth input & (d) Pointcloud along with landmarks \\[6pt]
+	\includegraphics[width=60mm]{box/input3} & 
+  \includegraphics[width=85mm]{box/clusters3} \\
+(e) Depth input & (f) Pointcloud along with landmarks \\[6pt]
+	\includegraphics[width=60mm]{box/input4} & 
+  \includegraphics[width=85mm]{box/clusters4} \\
+(g) Depth input & (h) Pointcloud along with landmarks \\[6pt]
 \end{tabular}
 \caption{caption}
 \end{figure}

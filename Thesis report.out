@@ -16,7 +16,8 @@
 \BOOKMARK [2][-]{subsection.4.5}{Complexity}{section.4}% 16
 \BOOKMARK [2][-]{subsection.4.6}{Landmark size}{section.4}% 17
 \BOOKMARK [1][-]{section.5}{Results}{}% 18
-\BOOKMARK [2][-]{subsection.5.1}{Offline testing}{section.5}% 19
-\BOOKMARK [2][-]{subsection.5.2}{EKF-SLAM experiments}{section.5}% 20
-\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 21
-\BOOKMARK [1][-]{section.7}{Discussion}{}% 22
+\BOOKMARK [2][-]{subsection.5.1}{Simple datasets}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.2}{Offline testing}{section.5}% 20
+\BOOKMARK [2][-]{subsection.5.3}{EKF-SLAM experiments}{section.5}% 21
+\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 22
+\BOOKMARK [1][-]{section.7}{Discussion}{}% 23
