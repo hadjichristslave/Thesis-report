@@ -30,6 +30,9 @@
 
 \algdef{SE}[FOR]{NoDoFor}{EndFor}[1]{\algorithmicfor\ #1}{\algorithmicend\ \algorithmicfor}%
 
+
+\usepackage{array}
+\newcolumntype{C}{>{\centering\arraybackslash}p{13ex}}
 \usepackage{multirow}
 \usepackage{fancyhdr} % Headers and footers
 \pagestyle{fancy} % All pages have headers and footers
@@ -542,44 +545,44 @@ In this section the performance and the output of the algorithm will be tested a
   \label{pcl:clust}
 \end{figure}
 
-The cloud represents a milk cartridge in two different positions. The pipeline will take is now given a simple input and the output of the sampler is shown in Fig.\ref{pcl:clust}(b). The reduced point cloud is shown in the top left part of Fig.\ref{pcl:clust}(b). It is significantly smaller in size and this cloud along with all the meta-information needed are given as input to the sampler. The sampler then outputs a mixture of distributions that best fits the data. The output of the cluster is shown in Fig.\ref{pcl:clust}(b) with the top right being the Gaussian distributions infered, bottom left the exponential and bottom right the categorical representing colour information of the cloud. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The colour information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
+The cloud represents a milk cartridge in two different positions. The pipeline will take is now given a simple input and the output of the sampler is shown in Fig.\ref{pcl:clust}(b). The reduced point cloud is shown in the top left part of Fig.\ref{pcl:clust}(b). It is significantly smaller in size and this cloud along with all the meta-information needed are given as input to the sampler. The sampler then outputs a mixture of distributions that best fits the data. The output of the cluster is shown in Fig.\ref{pcl:clust}(b) with the top right being the Gaussian distributions infered, bottom left the exponential and bottom right the categorical representing colour information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The colour information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
 
 \begin{center}
 
-    \begin{tabular}{|l|l|l|l|l|l|l|l|}
+    \begin{tabular}{|C|C|C|C|C|C|}
     \hline
-    \multicolumn{8}{|l|}{\centerline{UUID 2478}} \\
+    \multicolumn{6}{|l|}{\centerline{UUID 2478}} \\
     \hline
-     LandUUID & GausKL & GausWes & ExpHel & ExpHel & CatKL & CatEMD& CatHel \\
+     LandUUID & GausKL & GausWes & ExpHel & ExpHel & CatKL \\
      \hline
-	 2478&0&1.18111e-07&0&0.164045&0&0&0 \\
+	 2478&0&1.18111e-07&0&0.164045&0 \\
 	 \hline
- 	 2479&0.0115821&53.5171&-1.20726&0.319589&0&0&0 \\
+ 	 2479&0.0115821&53.5171&-1.20726&0.319589&0 \\
  	 \hline
-	 2480&13.5579&22449.9&-1.56956&0.376699&0&0&0 \\
+	 2480&13.5579&22449.9&-1.56956&0.376699&13.8155 \\
 	 \hline
-    \multicolumn{8}{|l|}{\centerline{UUID 2479}} \\
+    \multicolumn{6}{|l|}{\centerline{UUID 2479}} \\
     \hline
-     LandUUID & GausKL & GausWes & ExpHel & ExpHel & CatKL & CatEMD& CatHel \\
-     \hline
-	 2478&0.0115821&20.1454&1.7215&0.319589&0&0&0 \\
+	 2478&0.0115821&20.1454&1.7215&0.319589&0 \\
 	 \hline
-	2479&5.42101e-20&4.88951e-08&0&0.411668&0&0&0 \\
+	2479&5.42101e-20&4.88951e-08&0&0.411668&0 \\
 	\hline
-	2480&12.8379&21458.6&-0.474719&0.449769&0&0&0 \\
+	2480&12.8379&21458.6&-0.474719&0.449769&13.8155 \\
 	 \hline
-    \multicolumn{8}{|l|}{\centerline{UUID 2480}} \\
+    \multicolumn{6}{|l|}{\centerline{UUID 2480}} \\
     \hline
-	 2478&13.5579&31191.5&2.55205&0.376699&0&0&0\\
+	 2478&13.5579&31191.5&2.55205&0.376699&13.8155\\
 	 \hline
-     2479&12.8379&65013.8&0.53855&0.449769&0&0&0\\
+     2479&12.8379&65013.8&0.53855&0.449769&13.8155\\
      \hline
-	2480&0&2.43346e-07&0&0.481313&0&0&0\\
+	2480&0&2.43346e-07&0&0.481313&0\\
 	 \hline
 	 \end{tabular}    
 \end{center}
 
 Now that the structured is infered, the ouput is given to the decision layer that has to calculate the distances between the clusters. The table shows the distances between the clusters infered. Having empiric results makes adding a simple decision boundary regarding an easier procedure.
+
+
 
 
 \subsection{Offline testing}
