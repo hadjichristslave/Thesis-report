@@ -17,7 +17,8 @@
 \contentsline {subsection}{\numberline {4.6}Landmark size}{19}{subsection.4.6}
 \contentsline {section}{\numberline {5}Results}{19}{section.5}
 \contentsline {subsection}{\numberline {5.1}Simple datasets}{19}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Offline testing}{21}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}EKF-SLAM experiments}{22}{subsection.5.3}
-\contentsline {section}{\numberline {6}Conclusion and future work}{24}{section.6}
-\contentsline {section}{\numberline {7}Discussion}{24}{section.7}
+\contentsline {subsection}{\numberline {5.2}EKF-SLAM experiments}{21}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Speed}{21}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}Memory requirements}{22}{subsubsection.5.2.2}
+\contentsline {section}{\numberline {6}Conclusion and future work}{22}{section.6}
+\contentsline {section}{\numberline {7}Discussion}{22}{section.7}

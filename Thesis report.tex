@@ -481,20 +481,20 @@ The decision boundary of an observation being a landmark or not was chosen by em
 
 The complexity can be decomposed into three major parts. The cloud downsampling, the clustering and the decision making.
 $$
-complexity = O(filter) + O(cluster) + O(decision)
+O(total) = O(filter) + O(cluster) + O(decision)
 $$
 \textbf{Downsampling}: The complexity of the cloud downsampling pipeline can be decomposed to the one of its components. This means that the decomposed complexity is defined as follows:
 $$O(filter) = O(Vox\ Downsampling + Stat\ Removal + RANSAC+ FPFH + Color\ estimation) $$
 
-Voxel downsampling searches for neighbors within a distance defined by the user and keeps an average value that equally represents the cloud. Since the operation involves searching for neighbors of a point, and since search operations take $O(log\ n)$ time where N is the number of points within the cloud, the complexity of voxelGrid downsampling is $O(k log n)$ where $k$ is the number of neighbors and $n$ the number of points in the cloud.
-Statistial outlier removal searches for k nearest neigbhors and removes those whose deviation is passed a certain threshold. Given that search operations take $O(log\ n)$, for k neighbors, the complexity is $O(k\ log\ n)$.
-A high amount of research has been done regarding the optimal complexity of RANSAC~\cite{RANSAC}. RANSAC has a complexity of $ O(k(t_M)+ m_s*N)$ where k is the maximum amount of iterations defined by the user, $m_s$ the average number of models per sample $N$ the number of data points and $t_M$ the time needed to draw a sample. The time variance also depends on the hardware.
-FPFH has a complexity of $O(nk)$ as given in~\cite{fpfh}.
-Finally, for the operation of color estimation, the k nearest neighbors are chosen and some constant operation is performed on them. The complexity here is similar to Statistical outlier removal since operations after the search take a constant time $O(k\ log\ n)$ where $k$ is the number of neighbors, $n$ the number of points. 
+Voxel downsampling searches for neighbors within a distance defined by the user and keeps an average value that equally represents the cloud. Since the operation involves searching for neighbors of a point, and since search operations take $O(log\ n)$ time where N is the number of points within the cloud, the complexity of voxelGrid downsampling is $O(k log n)$ where $k$ is the number of neighbors and $n$ the number of points in the cloud. It is reasonable to assume that the averaging operations take $O(1)$ time since they can be done while searching.
+Statistial outlier removal searches for k nearest neigbhors and removes those whose deviation is passed a certain threshold. Given that search operations take $O(log\ n)$, for k neighbors, the complexity is $O(k\ log\ n)$. The same assumption regarding the averaging computations is done here.
+A high amount of research has been done regarding the optimal complexity of RANSAC~\cite{RANSAC}. RANSAC has a complexity of $ O(k+ m_s*N)$ where k is the maximum amount of iterations defined by the user, $m_s$ the average number of models per sample $N$ the number of data points.
+FPFH operations have a complexity of $O(nk)$ as given in~\cite{fpfh}.
+Finally, for the operation of color estimation, the k nearest neighbors are chosen and some constant operation is performed on them. The complexity here is similar to Statistical outlier removal since operations after the search are assumed to take take $O(1)$ time. The complexity for color estimation then becomes $O(k\ log\ n)$ where $k$ is the number of neighbors, $n$ the number of points. 
 
-The downsampling pipeline has then a complexity of 
+The downsampling pipeline has a total complexity of:
 \begin{equation} \label{Q_filt}
-O(filter) = O(k_{0}\ log\ n_{init} + k_{1}\ log\ n_{1} + k_{2}(t_M)+ m_s*n_{2} + n_{3}k_{3} + k_{4}\ log\ n_{3} )
+O(filter) = O(k_{0}\ log\ n_{init} + k_{1}\ log\ n_{1} + k_{2}+ m_s*n_{2} + n_{3}k_{3} + k_{4}\ log\ n_{3} )
 \end{equation}
 
 Different $k$ indexes represent the number of neighbors defined for every operation. The $n$ represents the number of points used as input. Using the notation  of equation \ref{Q_filt}, $n_{init}$ defines the whole cloud, $n_1$ the cloud after operation 1, $n_2$ the cloud after operations 2 etc.
@@ -522,7 +522,7 @@ The complexity as defined in equation~\ref{Q_2} depends greatly on the initial r
 
 \subsection{Landmark size}
 
-The basic block of this algorithm is the cluster. In order to be able to compute how scalable the method is, the size of a single landmark will be computed. Each landmark is represetned by a single row in an SQLite database. To calculate how much space a landmark occupies, we will first calculate how space each of the columns has. Each row consists of 32 real numbers and 1 auto increment integer. Given that SQLite databases assign the memory dynamically, the worst case scenarios will be taken into account so that every other case is also included. According to the SQLite manual of datatypes~\cite{sqlite} a real value takes up to 8 bytes of memory. An auto increment integer takes up to 4 bytes of information, so the total number  of memory for a worst case scenario landmark is 260 bytes. This number can vary greatly over different environments and is a safe assumption to calculate the memory this method occupies.
+The basic block of this algorithm is the cluster. In order to be able to compute how scalable the method is, the size of a single landmark will be computed. Each landmark is represented by a single row in an SQLite database. To calculate how much space a landmark occupies, we will first calculate how space each of the columns has. Each row consists of 32 real numbers and 1 auto increment integer. Given that SQLite databases assign the memory dynamically, the worst case scenarios will be taken into account so that every other case is also included. According to the SQLite manual of datatypes~\cite{sqlite} a real value takes up to 8 bytes of memory. An auto increment integer takes up to 4 bytes of information, so the total number  of memory for a worst case scenario landmark is 260 bytes. This number can vary greatly over different environments and is a safe assumption to calculate the memory this method occupies.
 
 \section{Results}
 \label{sec:results}
@@ -587,35 +587,46 @@ Now that the structured is infered, the ouput is given to the decision layer tha
 \end{figure}
 
 
-
-\subsection{Offline testing}
-
-In the offline testing section, basic static results will be displayed and analyzed. The main purpose of the pipeline of Fig.~\ref{pcl:mod} is to decrease the size of a point cloud so that operations on the reduced dataset are feasible. A point cloud instance as taken raw from the kinect sensor approximately 300.000 points and matrix operations at such large matrices are non feasible. The main target of the pipeline is to reduce the size of the data to a more manageable scale. The initial dense point cloud is shown in Fig.~\ref{pcl:features}(a).
-
-\begin{figure}
-\begin{tabular}{ccc}
-  \includegraphics[width=48mm]{initial} &   \includegraphics[width=48mm]{clustering} &
-  \includegraphics[width=48mm]{landmarkClasification} \\
-(a) Raw cloud  & (b) Post clustering & (c) Landmark detection\\[6pt]
-\end{tabular}
-\caption{Basic usage of the pipeline along with the clustering}
-  \label{pcl:features}
-\end{figure}
-
-
-The raw cloud is too dense to be correctly displayed in the plot. The planar components of the plane also dominate the cloud and its hard to operate on them. An image with a high amount of planar components is typical when data are acquired from a turtlebot with the camera being situated near the ground. In order to perform the clustering operations, the cloud needs to be down-sampled. The process followed is the one described in the method definition and the results are shown in Fig~\ref{pcl:features}(b). The operation used is a pipeline voxel downsampling, statistical outlier removal and plane estimation via RANSAC is typical in the literature \cite{objectDisc}.
-
-
-The cloud is stripped of its planar components with the remaining structure having minimal to no loss of structural information. The cloud is now ready to be used as input for the sampler which will take the features calculated in the pipeline to cluster the cloud into segments of structure. The whole takes a medium amount of time and depending on the parameter tweaking it can 
-
-The sampler as was described in the theory section takes as input the modified cloud and outputs clusters of the structure. Its results are shown in figure~\ref{pcl:features}. The environment is captured as a sequence of clusters. It can be seen that the chair that is situated in the center of the cloud has a number of clusters assigned to it. This behavior of the cluster is expected as a lot of point clouds are part of the chair and the horizontal as well and the vertical components have different angular signatures. It is not possible to create a general framework that takes into account all the different angle and point signatures between objects. The decision of how the clusters represent a structure should then be taken in a decision layer on top of that cluster. A simple decision layer is implemented to classify objects by taking as input the output of the sampler.
-
-The decision layer takes as input the distributions output by the sampler, and compares their characteristics to existing landmarks. Elements past a threshold are considered as landmarks already encountered; otherwise the new distributions are added to the database. The features taken by the algorithm are the distances between each distribution and each landmark already stored in the database. More specifically, for the Gaussian parts of the distribution Wasserstein and Kullback Leibler divergence are used to measure the distance between them. For the exponential part, squared Hellinger and Kullback-Leibler being used, and for the categorical EMD, KL divergence and Hellinger distance. All distribution distances are given in the appendix. The final result is a 7 feature vector that will be used to classify if it's a distance signature that classifies a landmark or not. The training set is supplied beforehand to the algorithm. The results of the algorithm are shown in Fig.~\ref{pcl:features}
-
-
 \subsection{EKF-SLAM experiments}
 
-The method's results were given as input to an EKF-SLAM algorithm to test how it would perform using a point cloud as input. The results of feature extraction and cluster representation on simple objects like boxes are shown in the following figures. 
+To test the experiments in a real life scenario, the method was used as a sensor model in a Landmark based EKF SLAM algorithm. The method will be tested in its speed and memory requirements. As was shown when calculating the complexity of the method, speed complexity was shown to be very dependent to the downsampling process. If the downsampling threshold operations are strict and the cloud is being stripped of many of its points, accuracy will decline and speed will increase. As shown in the landmark size section, the unit cost of a Landmark has an upper limit. Therefore, the memory requirements of the method are directly depending on how many landmarks the algorithm allows before converging. A strict landmark matching decision layer that requires a high degree of correlation to match landmarks will converge to a higher amount of landmarks compared to a less strict one.
+
+\subsubsection{Speed}
+
+The speed factor was tested on a mid level as well as o a high level machine to see the differences in time needed to perform the operations. The results of a machine running on a pentium i5-3210M with 6GB of RAM are shown in table
+
+
+\begin{center}
+
+    \begin{tabular}{|C|C|C|C|C|C|}
+    \hline
+    \multicolumn{6}{|l|}{\centerline{Pentium i5-3210M}} \\
+    \hline
+     Leaf Size & Downs Time & Cloud size & Sampling & Matching,old & Matching,new \\
+     \hline
+     1m & 0.908768 & 9 & 0.0290296 & 0.00218081 & 0.00218081 \\
+     \hline
+     50cm & 0.914169 & 32 & 0.0112929 & 0.00154852 & 0.00243211 \\
+     \hline
+     30cm & 1.07862 & 79 & 0.0138666 & 0.00126673 & 0.00126673 \\
+     \hline
+     10cm & 1.1764 & 654 & 0.0712596 & 0.00154977 & 0.00154977 \\
+     \hline 
+     5cm & 1.75907 & 2391 & 0.215594 & 0.00181846 & 0.00181846 \\
+     \hline
+     1cm & 14.3283 & 25556 & 5.06356 & 0.00278712 & 0.854803  \\
+     \hline
+	 \end{tabular}    
+\end{center}
+
+The leaf size directly affects the time the cloud takes to be processed in the pipeline as well as the time the sampling takes aftewards. Experimental evaluation has showed that a leaf size between 1-5cm gives a good balance between speed and precision. The difference between Matching,old and Matching,new has to do with the fact that in the second case, a new landmark is added and therefore DB operations take place. When matching old is the same as matching new, then all the clusteres where matched to items in the database.
+					
+
+
+
+
+\subsubsection{Memory requirements}
+
 
 
 \begin{figure}
