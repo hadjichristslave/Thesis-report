@@ -42,6 +42,7 @@
 \fancyfoot[RO,LE]{\thepage} % Custom footer text
 
 \usepackage{graphicx}
+\usepackage{movie15}
 \graphicspath{ {pics/} }
 
 %----------------------------------------------------------------------------------------
@@ -576,6 +577,8 @@ The cloud represents a milk cartridge transformed in two different positions. Th
 \end{center}
 
 Now that the structured is infered, the ouput is given to the decision layer that calculates the distances between the clusters. The table shows the distances between the clusters infered. Having empiric results makes adding a simple decision boundary regarding an easier procedure. It can be seen that the first two landmarks have small distances in their Gaussian parts since they represent nearby areas of the cloud. The angular distance between them is large and that is why they form seperate clusters. The distinct colours of the milk make the colour signatures of the clusters distinct. An example with more complex colour signatures is shown in Fig.[\ref{pcl:clust2}]. The clouds are now given a mixture of colours and this is passed to the color signature infered on every cluster. 
+
+
 
 \begin{figure}
 \begin{tabular}{cc}

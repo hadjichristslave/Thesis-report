@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  21 JUN 2015 16:07
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  21 JUN 2015 20:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -531,32 +531,57 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \f@ncyO@olf=\skip80
 \f@ncyO@orf=\skip81
 )
-(./Thesis report.aux
+(/usr/share/texlive/texmf-dist/tex/latex/movie15/movie15.sty
+Package: movie15 2012/05/16
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/ifdraft.sty
+Package: ifdraft 2008/08/11 v1.3 Detect class options draft and final (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+)
+\@MXV@page=\count150
+\@MXV@adict=\count151
+\@MXV@aadict=\count152
+\@MXV@includes=\count153
+\@MXV@players=\count154
+\@MXV@links=\count155
+\@MXV@width=\dimen176
+\@MXV@height=\dimen177
+\@MXV@depth=\dimen178
+\@MXV@totalheight=\dimen179
+\@MXV@@boxdepth=\dimen180
+\@MXV@traiselen=\dimen181
+\@MXV@braiselen=\dimen182
+\@MXV@start=\dimen183
+\@MXV@end=\dimen184
+\@MXV@textbox=\box59
+) (./Thesis report.aux
 
 LaTeX Warning: Label `Q_2' multiply defined.
 
 )
 \openout1 = `"Thesis report.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Try loading font information for T1+pplx on input line 85.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Try loading font information for T1+pplx on input line 86.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pplx.fd
 File: t1pplx.fd 2004/09/06 font definitions for T1/pplx.
 )
-LaTeX Info: Redefining \microtypecontext on input line 85.
+LaTeX Info: Redefining \microtypecontext on input line 86.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -609,19 +634,19 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\AtBeginShipoutBox=\box59
-Package hyperref Info: Link coloring OFF on input line 85.
+\AtBeginShipoutBox=\box60
+Package hyperref Info: Link coloring OFF on input line 86.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count150
+\c@section@level=\count156
 )
-LaTeX Info: Redefining \ref on input line 85.
-LaTeX Info: Redefining \pageref on input line 85.
-LaTeX Info: Redefining \nameref on input line 85.
+LaTeX Info: Redefining \ref on input line 86.
+LaTeX Info: Redefining \pageref on input line 86.
+LaTeX Info: Redefining \nameref on input line 86.
 
 (./Thesis report.out) (./Thesis report.out)
 \@outlinefile=\write3
@@ -630,42 +655,43 @@ LaTeX Info: Redefining \nameref on input line 85.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count151
-\scratchdimen=\dimen176
-\scratchbox=\box60
-\nofMPsegments=\count152
-\nofMParguments=\count153
+\scratchcounter=\count157
+\scratchdimen=\dimen185
+\scratchbox=\box61
+\nofMPsegments=\count158
+\nofMParguments=\count159
 \everyMPshowfont=\toks30
-\MPscratchCnt=\count154
-\MPscratchDim=\dimen177
-\MPnumerator=\count155
-\makeMPintoPDFobject=\count156
+\MPscratchCnt=\count160
+\MPscratchDim=\dimen186
+\MPnumerator=\count161
+\makeMPintoPDFobject=\count162
 \everyMPtoPDFconversion=\toks31
-)
-LaTeX Font Info:    Try loading font information for OT1+pplx on input line 88.
+) ABD: EveryShipout initializing macros
+LaTeX Font Info:    Try loading font information for OT1+pplx on input line 89.
 
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pplx.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 88.
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 89.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 88.
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 89.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 88.
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 89.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 88.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 89.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
@@ -676,7 +702,7 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 88.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 89.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ] [2]
@@ -697,25 +723,25 @@ Package microtype Info: Character `029' is missing
 \openout6 = `"Thesis report.lot"'.
 
  [3] [4]
-LaTeX Font Info:    Try loading font information for OMS+pplx on input line 124
+LaTeX Font Info:    Try loading font information for OMS+pplx on input line 125
 .
-LaTeX Font Info:    No file OMSpplx.fd. on input line 124.
+LaTeX Font Info:    No file OMSpplx.fd. on input line 125.
 
 
 LaTeX Font Warning: Font shape `OMS/pplx/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 124.
+(Font)              for symbol `textbullet' on input line 125.
 
 [5] [6] [7]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 198.
+put line 199.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/pplx/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 202.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 203.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
@@ -730,35 +756,35 @@ Package microtype Info: Loading generic settings for font family
 File: pics/generalPolya.png Graphic file (type png)
 
 <use pics/generalPolya.png>
-Package pdftex.def Info: pics/generalPolya.png used on input line 222.
+Package pdftex.def Info: pics/generalPolya.png used on input line 223.
 (pdftex.def)             Requested size: 279.50037pt x 286.46223pt.
  [9]
 <pics/workflowGen.png, id=270, 755.82375pt x 411.5375pt>
 File: pics/workflowGen.png Graphic file (type png)
 
 <use pics/workflowGen.png>
-Package pdftex.def Info: pics/workflowGen.png used on input line 236.
+Package pdftex.def Info: pics/workflowGen.png used on input line 237.
 (pdftex.def)             Requested size: 184.9429pt x 100.69884pt.
 
 <pics/workflowSpec.png, id=271, 773.89125pt x 489.83pt>
 File: pics/workflowSpec.png Graphic file (type png)
 
 <use pics/workflowSpec.png>
-Package pdftex.def Info: pics/workflowSpec.png used on input line 236.
+Package pdftex.def Info: pics/workflowSpec.png used on input line 237.
 (pdftex.def)             Requested size: 184.9429pt x 117.05334pt.
  [10 <./pics/generalPolya.png>] [11 <./pics/workflowGen.png> <./pics/workflowSp
 ec.png>]
 <pics/Basic.png, id=290, 704.6325pt x 220.825pt>
 File: pics/Basic.png Graphic file (type png)
  <use pics/Basic.png>
-Package pdftex.def Info: pics/Basic.png used on input line 279.
+Package pdftex.def Info: pics/Basic.png used on input line 280.
 (pdftex.def)             Requested size: 430.00462pt x 134.76031pt.
  [12 <./pics/Basic.png>] <pics/Kullback-Leibler.png, id=298, 808.01875pt x 337.
 26pt>
 File: pics/Kullback-Leibler.png Graphic file (type png)
 
 <use pics/Kullback-Leibler.png>
-Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 305.
+Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 306.
 (pdftex.def)             Requested size: 215.0023pt x 89.73885pt.
 
 
@@ -774,7 +800,7 @@ File: pics/clusterings/initialData.png Graphic file (type png)
 
 <use pics/clusterings/initialData.png>
 Package pdftex.def Info: pics/clusterings/initialData.png used on input line 53
-6.
+7.
 (pdftex.def)             Requested size: 215.0023pt x 120.93031pt.
 
 <pics/clusterings/colorcodedDistributions.png, id=356, 1606.0pt x 903.375pt>
@@ -782,125 +808,128 @@ File: pics/clusterings/colorcodedDistributions.png Graphic file (type png)
 
 <use pics/clusterings/colorcodedDistributions.png>
 Package pdftex.def Info: pics/clusterings/colorcodedDistributions.png used on i
-nput line 536.
+nput line 537.
 (pdftex.def)             Requested size: 215.0023pt x 120.93031pt.
 
-Overfull \hbox (23.99998pt too wide) in paragraph at lines 535--539
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 536--540
 [][] 
  []
 
 [19]
-Overfull \hbox (12.8pt too wide) in paragraph at lines 547--576
+Overfull \hbox (12.8pt too wide) in paragraph at lines 548--577
  [] 
  []
 
 [20 <./pics/clusterings/initialData.png> <./pics/clusterings/colorcodedDistribu
-tions.png>] <pics/clusterings/coloursSource.png, id=372, 1606.0pt x 903.375pt>
+tions.png>] <pics/clusterings/coloursSource.png, id=383, 1606.0pt x 903.375pt>
 File: pics/clusterings/coloursSource.png Graphic file (type png)
 
 <use pics/clusterings/coloursSource.png>
 Package pdftex.def Info: pics/clusterings/coloursSource.png used on input line 
-582.
+585.
 (pdftex.def)             Requested size: 215.0023pt x 120.93031pt.
 
-<pics/clusterings/coloursCorrect.png, id=373, 1606.0pt x 903.375pt>
+<pics/clusterings/coloursCorrect.png, id=384, 1606.0pt x 903.375pt>
 File: pics/clusterings/coloursCorrect.png Graphic file (type png)
 
 <use pics/clusterings/coloursCorrect.png>
 Package pdftex.def Info: pics/clusterings/coloursCorrect.png used on input line
- 582.
+ 585.
 (pdftex.def)             Requested size: 215.0023pt x 120.93031pt.
 
-Overfull \hbox (23.99998pt too wide) in paragraph at lines 581--585
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 584--588
 [][] 
  []
 
 
-Overfull \hbox (1.35573pt too wide) in paragraph at lines 605--606
+Overfull \hbox (1.35573pt too wide) in paragraph at lines 608--609
  []|\T1/pplx/m/n/10 (-20) Matching,new| 
  []
 
 
-Overfull \hbox (12.8pt too wide) in paragraph at lines 601--620
+Overfull \hbox (12.8pt too wide) in paragraph at lines 604--623
  [] 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [21 <./pics/clusterings/coloursSource.png> <./pics/clusterings/coloursCorrect.
-png>]
-<pics/box/input1.png, id=378, 586.19pt x 358.33875pt>
+[21<<gifs/distances.gif>> <./pics/clusterings/coloursSource.png> <./pics/cluste
+rings/coloursCorrect.png>]
+<pics/box/input1.png, id=388, 586.19pt x 358.33875pt>
 File: pics/box/input1.png Graphic file (type png)
 
 <use pics/box/input1.png>
-Package pdftex.def Info: pics/box/input1.png used on input line 634.
+Package pdftex.def Info: pics/box/input1.png used on input line 637.
 (pdftex.def)             Requested size: 170.71652pt x 104.35846pt.
 
-<pics/box/clusters1.png, id=379, 1053.9375pt x 564.1075pt>
+<pics/box/clusters1.png, id=389, 1053.9375pt x 564.1075pt>
 File: pics/box/clusters1.png Graphic file (type png)
 
 <use pics/box/clusters1.png>
-Package pdftex.def Info: pics/box/clusters1.png used on input line 635.
+Package pdftex.def Info: pics/box/clusters1.png used on input line 638.
 (pdftex.def)             Requested size: 241.84842pt x 129.44072pt.
 
-<pics/box/input2.png, id=380, 562.1pt x 387.4475pt>
+<pics/box/input2.png, id=390, 562.1pt x 387.4475pt>
 File: pics/box/input2.png Graphic file (type png)
  <use pics/box/input2.png>
-Package pdftex.def Info: pics/box/input2.png used on input line 637.
+Package pdftex.def Info: pics/box/input2.png used on input line 640.
 (pdftex.def)             Requested size: 170.71652pt x 117.67175pt.
 
-<pics/box/clusters2.png, id=381, 1044.90375pt x 619.31375pt>
+<pics/box/clusters2.png, id=391, 1044.90375pt x 619.31375pt>
 File: pics/box/clusters2.png Graphic file (type png)
 
 <use pics/box/clusters2.png>
-Package pdftex.def Info: pics/box/clusters2.png used on input line 638.
+Package pdftex.def Info: pics/box/clusters2.png used on input line 641.
 (pdftex.def)             Requested size: 241.84842pt x 143.33691pt.
 
-<pics/box/input3.png, id=382, 501.875pt x 313.17pt>
+<pics/box/input3.png, id=392, 501.875pt x 313.17pt>
 File: pics/box/input3.png Graphic file (type png)
  <use pics/box/input3.png>
-Package pdftex.def Info: pics/box/input3.png used on input line 640.
+Package pdftex.def Info: pics/box/input3.png used on input line 643.
 (pdftex.def)             Requested size: 170.71652pt x 106.52895pt.
 
-<pics/box/clusters3.png, id=383, 1021.8175pt x 541.02126pt>
+<pics/box/clusters3.png, id=393, 1021.8175pt x 541.02126pt>
 File: pics/box/clusters3.png Graphic file (type png)
 
 <use pics/box/clusters3.png>
-Package pdftex.def Info: pics/box/clusters3.png used on input line 641.
+Package pdftex.def Info: pics/box/clusters3.png used on input line 644.
 (pdftex.def)             Requested size: 241.84842pt x 128.0481pt.
 
-<pics/box/input4.png, id=384, 519.9425pt x 367.3725pt>
+<pics/box/input4.png, id=394, 519.9425pt x 367.3725pt>
 File: pics/box/input4.png Graphic file (type png)
 
 <use pics/box/input4.png>
-Package pdftex.def Info: pics/box/input4.png used on input line 643.
+Package pdftex.def Info: pics/box/input4.png used on input line 646.
 (pdftex.def)             Requested size: 170.71652pt x 120.62227pt.
 
-<pics/box/clusters4.png, id=385, 1041.8925pt x 564.1075pt>
+<pics/box/clusters4.png, id=395, 1041.8925pt x 564.1075pt>
 File: pics/box/clusters4.png Graphic file (type png)
 
 <use pics/box/clusters4.png>
-Package pdftex.def Info: pics/box/clusters4.png used on input line 644.
+Package pdftex.def Info: pics/box/clusters4.png used on input line 647.
 (pdftex.def)             Requested size: 241.84842pt x 130.93845pt.
 
-Overfull \hbox (6.56032pt too wide) in paragraph at lines 633--647
+Overfull \hbox (6.56032pt too wide) in paragraph at lines 636--650
 [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 87.4079pt on input line 648.
+LaTeX Warning: Float too large for page by 87.4079pt on input line 651.
 
 [22] [23 <./pics/box/input1.png> <./pics/box/clusters1.png> <./pics/box/input2.
 png (PNG copy)> <./pics/box/clusters2.png> <./pics/box/input3.png> <./pics/box/
 clusters3.png> <./pics/box/input4.png> <./pics/box/clusters4.png (PNG copy)>]
 [24] [25] [26]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 846.
- [27]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 846.
+
+Package movie15 Warning: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+(movie15)                @@ Package `movie15' is obsolete and @@
+(movie15)                @@ superseded by `media9'.           @@
+(movie15)                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 849.
+[27]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 849.
  (./Thesis report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 846.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 846.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 849.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 849.
 Package rerunfilecheck Info: File `"Thesis report".out' has not changed.
 (rerunfilecheck)             Checksum: F517B9197CBEEDA908699FE2A2E75A33;1544.
 
@@ -910,13 +939,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 846.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 849.
  ) 
 Here is how much of TeX's memory you used:
- 12011 strings out of 495032
- 178601 string characters out of 6181719
- 396373 words of memory out of 5000000
- 14568 multiletter control sequences out of 15000+600000
+ 12427 strings out of 495032
+ 185545 string characters out of 6181719
+ 444878 words of memory out of 5000000
+ 14970 multiletter control sequences out of 15000+600000
  76089 words of font info for 296 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  36i,16n,75p,1902b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -931,9 +960,9 @@ i.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "Thesis report.pdf" (27 pages, 1226610 bytes).
+Output written on "Thesis report.pdf" (27 pages, 3287189 bytes).
 PDF statistics:
- 494 PDF objects out of 1000 (max. 8388607)
+ 504 PDF objects out of 1000 (max. 8388607)
  128 named destinations out of 1000 (max. 500000)
- 58646 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 58678 words of extra memory for PDF output out of 61914 (max. 10000000)
 
