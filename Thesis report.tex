@@ -1,5 +1,5 @@
 \documentclass[twoside,hidelinks]{article}
-
+ 
 \usepackage{lipsum} % Package to generate dummy text throughout this template
 
 \usepackage[sc]{mathpazo} % Use the Palatino font
@@ -469,26 +469,24 @@ Since our data are modeled as comming from a convolution of 3 distributions, spe
 			\end{itemize}
 	\item Categorical
 			\begin{itemize}
-				\item EMD($l_C,o_C$);
 				\item KL($l_C,o_C$);
-				\item Hellinger($l_C,o_C$);
 			\end{itemize}
 
 \end{itemize}
 
-The decision boundary of an observation being a landmark or not was chosen by empiric evaluation of the landmarks. It is of course possible to learn the optimal decision boundary but optimizing the decision layer was outside the scope of this project.
+The decision boundary of an observation being a landmark or not was chosen by empiric evaluation of the landmarks. It is of course possible to learn the optimal decision boundary but due to time restrictions a simpler decision making approach was chosen instead.
 
 
 \subsection{Complexity}
 
 The complexity can be decomposed into three major parts. The cloud downsampling, the clustering and the decision making.
 $$
-O(total) = O(filter) + O(cluster) + O(decision)
+complexity = O(filter) + O(cluster) + O(decision)
 $$
-\textbf{Downsampling}: The complexity of the cloud can be reduced to the complexity of its components. This means that the decomposed complexity is defined as follows:
+\textbf{Downsampling}: The complexity of the cloud downsampling pipeline can be decomposed to the one of its components. This means that the decomposed complexity is defined as follows:
 $$O(filter) = O(Vox\ Downsampling + Stat\ Removal + RANSAC+ FPFH + Color\ estimation) $$
 
-Voxel downsampling searches for neighbors within a distance defined by the user and keeps an average value that equally represents the cloud. Since the operation involves searching for neighbors of a point, and under the assumption that search operations take $O(log\ n)$ time where N is the number of points within the cloud, the complexity of voxelGrid downsampling is $O(k log n)$ where $k$ defines the number of neighbors and $n$ the number of points in the cloud.
+Voxel downsampling searches for neighbors within a distance defined by the user and keeps an average value that equally represents the cloud. Since the operation involves searching for neighbors of a point, and since search operations take $O(log\ n)$ time where N is the number of points within the cloud, the complexity of voxelGrid downsampling is $O(k log n)$ where $k$ is the number of neighbors and $n$ the number of points in the cloud.
 Statistial outlier removal searches for k nearest neigbhors and removes those whose deviation is passed a certain threshold. Given that search operations take $O(log\ n)$, for k neighbors, the complexity is $O(k\ log\ n)$.
 A high amount of research has been done regarding the optimal complexity of RANSAC~\cite{RANSAC}. RANSAC has a complexity of $ O(k(t_M)+ m_s*N)$ where k is the maximum amount of iterations defined by the user, $m_s$ the average number of models per sample $N$ the number of data points and $t_M$ the time needed to draw a sample. The time variance also depends on the hardware.
 FPFH has a complexity of $O(nk)$ as given in~\cite{fpfh}.
@@ -529,12 +527,9 @@ The basic block of this algorithm is the cluster. In order to be able to compute
 \section{Results}
 \label{sec:results}
 
-The results of the pipeline as well as the results of its performance in SLAM methods will be discussed.
-
-
 \subsection{Simple datasets}
 
-In this section the performance and the output of the algorithm will be tested against a simple dataset. That will make the conceptual extension to more complex datasets that will be used in the robot easier. In order to test the sampling as well as the decision layer of the algorithm, a dataset provided by the pcl library was used. The reduced cloud with the cluster assignments color coded in the points are shown in Fig.\ref{pcl:clust}(a).
+In this section the performance and the output of the algorithm will be tested against a simple dataset. That will make the conceptual extension to more complex datasets that will be used in the robot easier. In order to test the sampling as well as the decision layer of the algorithm, a dataset provided by the pcl library was used. The reduced cloud as well as the cluster assignments color coded in the points are shown in Fig.\ref{pcl:clust}(a).
 
 \begin{figure}
 \begin{tabular}{cc}
@@ -545,7 +540,7 @@ In this section the performance and the output of the algorithm will be tested a
   \label{pcl:clust}
 \end{figure}
 
-The cloud represents a milk cartridge in two different positions. The pipeline will take is now given a simple input and the output of the sampler is shown in Fig.\ref{pcl:clust}(b). The reduced point cloud is shown in the top left part of Fig.\ref{pcl:clust}(b). It is significantly smaller in size and this cloud along with all the meta-information needed are given as input to the sampler. The sampler then outputs a mixture of distributions that best fits the data. The output of the cluster is shown in Fig.\ref{pcl:clust}(b) with the top right being the Gaussian distributions infered, bottom left the exponential and bottom right the categorical representing colour information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The colour information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
+The cloud represents a milk cartridge transformed in two different positions. The pipeline will take the raw cloud as input, filter the cloud and pass it to the sampler to perform the clustering. Fig.\ref{pcl:clust}(b). The reduced point cloud is shown in the top left part of Fig.\ref{pcl:clust}(b). It is significantly smaller in size and this cloud along with all the meta-information needed are used to perform the clustering. The sampler outputs a mixture of distributions that best fits the data. The output of the cluster is shown in Fig.\ref{pcl:clust}(b) with the top right being the Gaussian distributions infered, bottom left the exponential and bottom right the categorical representing colour information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The colour information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
 
 \begin{center}
 
@@ -557,9 +552,9 @@ The cloud represents a milk cartridge in two different positions. The pipeline w
      \hline
 	 2478&0&1.18111e-07&0&0.164045&0 \\
 	 \hline
- 	 2479&0.0115821&53.5171&-1.20726&0.319589&0 \\
+ 	 2479&0.0115821&53.5171&1.20726&0.319589&0 \\
  	 \hline
-	 2480&13.5579&22449.9&-1.56956&0.376699&13.8155 \\
+	 2480&13.5579&22449.9&1.56956&0.376699&13.8155 \\
 	 \hline
     \multicolumn{6}{|l|}{\centerline{UUID 2479}} \\
     \hline
@@ -567,7 +562,7 @@ The cloud represents a milk cartridge in two different positions. The pipeline w
 	 \hline
 	2479&5.42101e-20&4.88951e-08&0&0.411668&0 \\
 	\hline
-	2480&12.8379&21458.6&-0.474719&0.449769&13.8155 \\
+	2480&12.8379&21458.6&0.474719&0.449769&13.8155 \\
 	 \hline
     \multicolumn{6}{|l|}{\centerline{UUID 2480}} \\
     \hline
@@ -580,8 +575,16 @@ The cloud represents a milk cartridge in two different positions. The pipeline w
 	 \end{tabular}    
 \end{center}
 
-Now that the structured is infered, the ouput is given to the decision layer that has to calculate the distances between the clusters. The table shows the distances between the clusters infered. Having empiric results makes adding a simple decision boundary regarding an easier procedure.
+Now that the structured is infered, the ouput is given to the decision layer that calculates the distances between the clusters. The table shows the distances between the clusters infered. Having empiric results makes adding a simple decision boundary regarding an easier procedure. It can be seen that the first two landmarks have small distances in their Gaussian parts since they represent nearby areas of the cloud. The angular distance between them is large and that is why they form seperate clusters. The distinct colours of the milk make the colour signatures of the clusters distinct. An example with more complex colour signatures is shown in Fig.[\ref{pcl:clust2}]. The clouds are now given a mixture of colours and this is passed to the color signature infered on every cluster. 
 
+\begin{figure}
+\begin{tabular}{cc}
+  \includegraphics[width=.5\textwidth]{clusterings/coloursSource} &   \includegraphics[width=.5\textwidth]{clusterings/coloursCorrect} \\
+(a) Raw cloud  & (b) Post clustering \\[6pt]
+\end{tabular}
+\caption{More complicated color distributions}
+  \label{pcl:clust2}
+\end{figure}
 
 
 
