@@ -530,7 +530,7 @@ The basic block of this algorithm is the cluster. In order to be able to compute
 
 \subsection{Simple datasets}
 
-In this section the performance and the output of the algorithm will be tested against a simple dataset. That will make the conceptual extension to more complex datasets that will be used in the robot easier. In order to test the sampling as well as the decision layer of the algorithm, a dataset provided by the pcl library was used. The reduced cloud as well as the cluster assignments color coded in the points are shown in Fig.\ref{pcl:clust}(a).
+In this section the performance and the output of the algorithm will be tested against a simple dataset. That will make the conceptual extension to more complex datasets that will be used with the robot easier. In order to test the sampling as well as the decision layer of the algorithm, a simple dataset provided by the pcl library was used. The reduced cloud as well as the cluster assignments color coded in the points are shown in Fig.\ref{pcl:clust}(a).
 
 \begin{figure}
 \begin{tabular}{cc}
@@ -541,42 +541,42 @@ In this section the performance and the output of the algorithm will be tested a
   \label{pcl:clust}
 \end{figure}
 
-The cloud represents a milk cartridge transformed in two different positions. The pipeline will take the raw cloud as input, filter the cloud and pass it to the sampler to perform the clustering. Fig.\ref{pcl:clust}(b). The reduced point cloud is shown in the top left part of Fig.\ref{pcl:clust}(b). It is significantly smaller in size and this cloud along with all the meta-information needed are used to perform the clustering. The sampler outputs a mixture of distributions that best fits the data. The output of the cluster is shown in Fig.\ref{pcl:clust}(b) with the top right being the Gaussian distributions infered, bottom left the exponential and bottom right the categorical representing colour information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The colour information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
+The cloud represents a milk cartridge transformed in two different positions. The pipeline will take the raw cloud as input, filter the cloud and pass it to the sampler to perform the clustering. In Fig.\ref{pcl:clust}(b). the reduced point cloud is shown in the top left part. It is significantly smaller in size and this cloud along with all the meta-information needed are used to perform the clustering. The sampler outputs a mixture of distributions that best fits the data. The output of the cluster is shown in Fig.\ref{pcl:clust}(b) with the top right being the Gaussian distributions infered, bottom left the exponential and bottom right the categorical representing colour information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
 
 \begin{center}
 
     \begin{tabular}{|C|C|C|C|C|C|}
     \hline
-    \multicolumn{6}{|l|}{\centerline{UUID 2478}} \\
+    \multicolumn{6}{|l|}{\centerline{UUID 1}} \\
     \hline
      LandUUID & GausKL & GausWes & ExpHel & ExpHel & CatKL \\
      \hline
-	 2478&0&1.18111e-07&0&0.164045&0 \\
+	 1&0&1.18111e-07&0&0.164045&0 \\
 	 \hline
- 	 2479&0.0115821&53.5171&1.20726&0.319589&0 \\
+ 	 2&0.0115821&53.5171&1.20726&0.319589&0 \\
  	 \hline
-	 2480&13.5579&22449.9&1.56956&0.376699&13.8155 \\
+	 3&13.5579&22449.9&1.56956&0.376699&13.8155 \\
 	 \hline
-    \multicolumn{6}{|l|}{\centerline{UUID 2479}} \\
+    \multicolumn{6}{|l|}{\centerline{UUID 2}} \\
     \hline
-	 2478&0.0115821&20.1454&1.7215&0.319589&0 \\
+	 1&0.0115821&20.1454&1.7215&0.319589&0 \\
 	 \hline
-	2479&5.42101e-20&4.88951e-08&0&0.411668&0 \\
+	2&5.42101e-20&4.88951e-08&0&0.411668&0 \\
 	\hline
-	2480&12.8379&21458.6&0.474719&0.449769&13.8155 \\
+	3&12.8379&21458.6&0.474719&0.449769&13.8155 \\
 	 \hline
-    \multicolumn{6}{|l|}{\centerline{UUID 2480}} \\
+    \multicolumn{6}{|l|}{\centerline{UUID 3}} \\
     \hline
-	 2478&13.5579&31191.5&2.55205&0.376699&13.8155\\
+	 1&13.5579&31191.5&2.55205&0.376699&13.8155\\
 	 \hline
-     2479&12.8379&65013.8&0.53855&0.449769&13.8155\\
+     2&12.8379&65013.8&0.53855&0.449769&13.8155\\
      \hline
-	2480&0&2.43346e-07&0&0.481313&0\\
+	3&0&2.43346e-07&0&0.481313&0\\
 	 \hline
 	 \end{tabular}    
 \end{center}
 
-Now that the structured is infered, the ouput is given to the decision layer that calculates the distances between the clusters. The table shows the distances between the clusters infered. Having empiric results makes adding a simple decision boundary regarding an easier procedure. It can be seen that the first two landmarks have small distances in their Gaussian parts since they represent nearby areas of the cloud. The angular distance between them is large and that is why they form seperate clusters. The distinct colours of the milk make the colour signatures of the clusters distinct. An example with more complex colour signatures is shown in Fig.[\ref{pcl:clust2}]. The clouds are now given a mixture of colours and this is passed to the color signature infered on every cluster. 
+Now that the structured is infered, the ouput is given to the decision layer that calculates the distances between the clusters. The table shows the distances between every clusters infered. Having empiric results makes adding a simple decision boundary regarding an easier procedure. It can be seen that the first two landmarks have small distances in their Gaussian parts since they represent nearby areas of the cloud. The angular distance between them is large and that is why they form seperate clusters. The distinct colours of the milk make the colour signatures of the clusters distinct. An example with more complex colour signatures is shown in Fig.[\ref{pcl:clust2}]. The clouds are now given a mixture of colours and this is passed to the color signature infered on every cluster. The more complex signature as well as some overlap now exists since now clusters have some overlap in their color information.
 
 
 
@@ -622,10 +622,32 @@ The speed factor was tested on a mid level as well as o a high level machine to 
 	 \end{tabular}    
 \end{center}
 
+
 The leaf size directly affects the time the cloud takes to be processed in the pipeline as well as the time the sampling takes aftewards. Experimental evaluation has showed that a leaf size between 1-5cm gives a good balance between speed and precision. The difference between Matching,old and Matching,new has to do with the fact that in the second case, a new landmark is added and therefore DB operations take place. When matching old is the same as matching new, then all the clusteres where matched to items in the database.
 					
 
+\begin{center}
 
+    \begin{tabular}{|C|C|C|C|C|C|}
+    \hline
+    \multicolumn{6}{|l|}{\centerline{Pentium i7}} \\
+    \hline
+     Leaf Size & Downs Time & Cloud size & Sampling & Matching,old & Matching,new \\
+     \hline
+     1m & &  &  &  &  \\
+     \hline
+     50cm & &  &  &  &  \\
+     \hline
+     30cm & &  &  &  &  \\
+     \hline
+     10cm & &  &  &  &  \\
+     \hline 
+     5cm & &  &  &  &  \\
+     \hline
+     1cm & &  &  &  &  \\
+     \hline
+	 \end{tabular}    
+\end{center}
 
 
 \subsubsection{Memory requirements}
