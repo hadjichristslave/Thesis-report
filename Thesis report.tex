@@ -530,7 +530,7 @@ The basic block of this algorithm is the cluster. In order to be able to compute
 
 \subsection{Simple datasets}
 
-In this section the algorithm will be tested against a simple dataset. That will make the conceptual extension to more complex datasets that will be used with the robot easier. In order to test the sampling as well as the decision layer of the algorithm, a simple dataset provided by the pcl library was used. The reduced cloud as well as the cluster assignments color coded in the points are shown in Fig.\ref{pcl:clust}(a).
+In this section the algorithm will be tested against a simple dataset. That will make the conceptual extension to more complex datasets that will be used with the robot easier. In order to test the sampling as well as the decision layer of the algorithm, a simple dataset was used. The reduced cloud as well as the cluster assignments are color coded in the points and are shown in the top left Fig.\ref{pcl:clust}(b).
 
 \begin{figure}
 \begin{tabular}{cc}
@@ -576,7 +576,7 @@ The cloud represents a milk cartridge transformed in two different positions. Th
 	 \end{tabular}    
 \end{center}
 
-Now that the structured is infered, the ouput is given to the decision layer that calculates the distances between the clusters. The table shows the distances between every clusters infered. It can be seen that the first two landmarks have small distances in their Gaussian parts since they represent nearby areas of the cloud. The angular distance between them is large and that is why they form seperate clusters. The distinct colours of the milk make the colour signatures of the clusters distinct. An example with more complex colour signatures is shown in Fig.[\ref{pcl:clust2}]. The clouds are now given a mixture of colours and this is passed to the color signature infered on every cluster. The more complex signature as well as some overlap now exists since now clusters have some overlap in their color information.
+Now that the structured is inferred, the output is given to the decision layer that calculates the distances between the clusters. The table shows the distances between every cluster inferred. It can be seen that the first two landmarks have small distances in their Gaussian parts since they represent nearby areas of the cloud. The angular distance between them is large and that is why they form separate clusters. The distinct colors of the milk make the color signatures of the clusters distinct. An example with more complex color signatures is shown in Fig.[\ref{pcl:clust2}]. The clouds are now given a mixture of colors and this is passed to the color signature inferred on every cluster in Fig.[\ref{pcl:clust2}](b)
 
 
 
