@@ -590,17 +590,19 @@ Now that the structured is inferred, the output is given to the decision layer t
 
 \subsection{The decision boundary}
 
-The decision boundary of the pipeline can be decomposed into three basic parts; a positional, an color and an angular boundary.
+The decision boundary of the pipeline can be decomposed into three basic parts; a positional, an color and an angular boundary. Figures[fig] shows the different behavior with respect to color and position.
 
-\subsubsection{The positional boundary}
+\begin{figure}
 
-To test 
-
-
-\subsubsection{The positional boundary}
-
-
-
+\begin{tabular}{cc}
+  \includegraphics[width=.5\textwidth]{colorBound} &   \includegraphics[width=.5\textwidth]{colorBound2} \\
+(a) Yellow Folder assignment  & (b) Blue trashcan assignment \\[6pt]
+	\includegraphics[width=.5\textwidth]{posBound} &   \includegraphics[width=.5\textwidth]{posBound2} \\
+(c) Folder initial  & (d) Folder moved \\[6pt]
+\end{tabular}
+\caption{The colour and position boudnary is displayed in these pictures}
+  \label{pip:bounds}
+\end{figure}
 
 \subsection{EKF-SLAM experiments}
 
