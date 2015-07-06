@@ -530,9 +530,11 @@ The basic block of this algorithm is the cluster. In order to be able to compute
 In this section the algorithm will be tested against a simple dataset. That will make the conceptual extension to more complex datasets that will be used with the robot easier. In order to test the sampling as well as the decision layer of the algorithm, a simple dataset was used. The reduced cloud as well as the cluster assignments are color coded in the points and are shown in the top left Fig.\ref{pcl:clust}(b).
 
 \begin{figure}
-\begin{tabular}{cc}
-  \includegraphics[width=.5\textwidth]{clusterings/initialData} &   \includegraphics[width=.5\textwidth]{clusterings/colorcodedDistributions} \\
-(a) Raw cloud  & (b) Post clustering \\[6pt]
+\begin{tabular}{c}
+  \includegraphics[width=1\textwidth]{clusterings/initialData} \\
+  (a) Raw cloud  \\
+   \includegraphics[width=1\textwidth]{clusterings/colorcodedDistributions} \\
+ (b) Post clustering \\[6pt]
 \end{tabular}
 \caption{Initial data along with the distributions infered}
   \label{pcl:clust}
@@ -573,7 +575,7 @@ The cloud represents a milk cartridge transformed in two different positions. Th
 	 \end{tabular}    
 \end{center}
 
-Now that the structured is inferred, the output is given to the decision layer that calculates the distances between the clusters. The table shows the distances between every cluster inferred. It can be seen that the first two landmarks have small distances in their Gaussian parts since they represent nearby areas of the cloud. The angular distance between them is large and that is why they form separate clusters. The distinct colors of the milk make the color signatures of the clusters distinct. An example with more complex color signatures is shown in Fig.[\ref{pcl:clust2}]. The clouds are now given a mixture of colors and this is passed to the color signature inferred on every cluster in Fig.[\ref{pcl:clust2}](b)
+Now that the structured is inferred, the distances between the clusters can be calculated. The table shows the distances between every cluster. It can be seen that the first two landmarks have small distances in their Gaussian counterparts since they represent nearby areas and objects in the cloud that are very far apart. The distinct colors of the milk make the color signatures of the clusters distinct. An example with more complex color signatures is shown in Fig.[\ref{pcl:clust2}]. The clouds are now given a mixture of colors and this is passed to the color signature inferred on every cluster in Fig.[\ref{pcl:clust2}](b)
 
 
 
@@ -588,11 +590,11 @@ Now that the structured is inferred, the output is given to the decision layer t
   \label{pcl:clust2}
 \end{figure}
 
-\subsection{The decision boundary}
+\subsection{The decision layer}
 
 The decision boundary of the pipeline can be decomposed into three basic parts; a positional, an color and an angular boundary. Figures[fig] shows the different behavior with respect to color and position.
 
-\begin{figure}
+\begin{figure}[h!]
 
 \begin{tabular}{cc}
   \includegraphics[width=.5\textwidth]{colorBound} &   \includegraphics[width=.5\textwidth]{colorBound2} \\
