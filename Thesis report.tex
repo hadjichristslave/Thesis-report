@@ -592,7 +592,7 @@ Now that the structured is inferred, the distances between the clusters can be c
 
 \subsection{The decision layer}
 
-The decision boundary of the pipeline can be decomposed into three basic parts; a positional, an color and an angular boundary. Figures[fig] shows the different behavior with respect to color and position.
+The decision boundary of the pipeline can be decomposed into three basic parts; a positional, an color and an angular boundary. Figure[\ref{pip:bounds}] shows the behavior of the decision layer with respect to the Gaussian(positional) and Categorical(color) parts. 
 
 \begin{figure}[h!]
 
@@ -606,7 +606,7 @@ The decision boundary of the pipeline can be decomposed into three basic parts; 
   \label{pip:bounds}
 \end{figure}
 
-In Fig.\ref{pip:bounds}(a) and(b) the color decision boundary of the pipeline is shown. As the folder is being removed and a trashcan of different color is put it its place, the difference in the item occupying that specific space of the cloud is captured by the color signature of the area. Since the difference in colour is substantial, a new landmark will be created to remedy the change in the signature of the environment at that place of the map. Fig.\ref{pip:bounds}(c) and(d) the positional decision boundary is displayed. As the object is moved from position a to position b, it is being assigned to a different landmark to the cloud. It must be noted that the procedure is unsupervised, and there is no rule as to if an object will be considered a single cluster or decomposed to several clusters instead. This can be seen in Fig.\ref{pip:bounds}(c) where the bottom left of the folder is being assigned to the red cluster. The initial parameters of the sampler can be modified so as to create more or less clusters with relation to the environment that is currently being processed. 
+In Fig.\ref{pip:bounds}(a) the yellow folder allong with some of its environment to the left are being assigned to landmark 7386. The folder is then removed and a blue trashcan is put in its place. The folder and the trashcan are similar in size and due to that their Gaussian counterparts will not have large distances. Their main difference lies in the color signature they carry. Since the divergence in their color is substantial, a new landmark is created to capture the change in the signature of the environment at that place of the map. The different landmark assigned to the cluster can be seen in Fig.\ref{pip:bounds}(b). Fig.\ref{pip:bounds}(c) and(d) the positional decision boundary is displayed. As the object is moved from position a to position b, it is being assigned to a different landmark to the cloud. It must be noted that the procedure is unsupervised, and there is no rule as to if an object will be considered a single cluster or decomposed to several clusters instead. This can be seen in Fig.\ref{pip:bounds}(c) where the bottom left of the folder is being assigned to the red cluster. The initial parameters of the sampler can be modified so as to create more or less clusters with relation to the environment that is currently being processed. 
 
 
 \subsection{EKF-SLAM experiments}
