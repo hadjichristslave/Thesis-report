@@ -608,6 +608,10 @@ The decision boundary of the pipeline can be decomposed into three basic parts; 
 
 In Fig.\ref{pip:bounds}(a) the yellow folder allong with some of its environment to the left are being assigned to landmark 7386. The folder is then removed and a blue trashcan is put in its place. The folder and the trashcan are similar in size and due to that their Gaussian counterparts will not have large distances. Their main difference lies in the color signature they carry. Since the divergence in their color is substantial, a new landmark with id 7412 is created to capture the change in the signature of the environment at that place of the map. The different landmark assigned to the cluster can be seen in Fig.\ref{pip:bounds}(b). In Fig.\ref{pip:bounds}(c) and(d) the positional decision boundary is displayed. In the initial position as shown in Fig.\ref{pip:bounds}(c) the yellow folder is assigned to the green landmark of the cloud. As the object is moved from position a to position b, it is being assigned to a different cluster. The reason the cluster is partly assigned to the red part of the cloud is due to the fact that the procedure is unsupervised. Due to that the folder is decomposed to several clusters and each one of them is being assigned to a different part of the cloud with respect to their posision. This can be seen in Fig.\ref{pip:bounds}(c) where the bottom left of the folder is being assigned to the red cluster. Parameter tweaking is possible but the purpose of a general pipeline is to use as little parameter tweaking as possible so that the method is general and can be applied to multiple scenarios.
 
+The exponential part of the distribution is responsible for the angle signature elements within a cluster have. In a more practical approach having a large amount of different angle distributions in a single cluster leads to objects that have texture and their surface is not smooth. Having a very strict limit in the angle distribution can lead to very small clusters and subsequently to a high amount of landmarks within the data. Using the data from the kinect camera, angle distributions are highly prone to high amounts of noise that is found in parts of the cloud that are near the end of Kinect sensor's range. Practical evaluation has shown that using an angle limit that is close to the average distance between angle signatures produces stable results and reasonably sized landmarks in the cloud.
+
+
+
 
 \subsection{EKF-SLAM experiments}
 
@@ -653,17 +657,17 @@ The leaf size directly affects the time the cloud takes to be processed in the p
     \hline
      Leaf Size & Downs Time & Cloud size & Sampling & Matching,old & Matching,new \\
      \hline
-     1m & &  &  &  &  \\
+     1m &0.675993	&7&	-	&-&	-\\
      \hline
-     50cm & &  &  &  &  \\
+     50cm &0.779975&	30&	-&	-&	-\\
      \hline
-     30cm & &  &  &  &  \\
+     30cm &0.676315&	66&	-&	-&	-\\
      \hline
-     10cm & &  &  &  &  \\
+     10cm &0.746999&	488&	-&	-&	-\\
      \hline 
-     5cm & &  &  &  &  \\
+     5cm &0.878036&	1827&	0.132831&	0.00281951&	0.00281951\\
      \hline
-     1cm & &  &  &  &  \\
+     1cm &1.11554	&18487&	2.69855	&0.0021291	&0.0021291  \\
      \hline
 	 \end{tabular}    
 \end{center}
