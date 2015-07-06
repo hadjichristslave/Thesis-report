@@ -672,10 +672,7 @@ The leaf size directly affects the time the cloud takes to be processed in the p
 	 \end{tabular}    
 \end{center}
 
-
 \subsubsection{Memory requirements}
-
-
 
 \begin{figure}
 \begin{tabular}{cc}
@@ -696,7 +693,7 @@ The leaf size directly affects the time the cloud takes to be processed in the p
 \end{figure}
 
 
-As it is shown in the concentrated results that displays the features in combination with the point cloud, there is a large reduction in the dimensionality of the input. Given that a normal scene can be reproduced by an average of ~100 clusters, and each cluster has a size of 280 bytes, the method is extremely scalable. Furthermore, the implementation can be extended to be even more performance based with techniques like recovering only the nearby clusters when searching for matches, sorting the database or using multi threading to increase performance. Utilizing such tools can make the technique being able to handle a very large amount of features since 100.000 clusters can be used to represent large areas take only 260MB of space.
+As it is shown in the concentrated results that displays the features in combination with the point cloud, there is a large reduction in the dimensionality of the input. Given that a normal scene can be reproduced by an average of ~100 clusters, and each cluster has a size of 280 bytes, the method is extremely scalable. Furthermore, the implementation can be extended to be even more performance based with techniques like recovering only the nearby clusters when searching for matches, sorting the database or using multi threading to increase performance. Utilizing such tools can make the technique being able to handle a very large amount of features since 100.000 clusters can be used to represent large areas take only 260MB of space. Figure[fig] shows the memory requirements as a function of CRP strength parameter of the sampler.
 
 \section{Conclusion and future work}
 \label{sec:discussion}
