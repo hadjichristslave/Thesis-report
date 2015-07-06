@@ -22,4 +22,4 @@
 \contentsline {subsubsection}{\numberline {5.3.1}Speed}{20}{subsubsection.5.3.1}
 \contentsline {subsubsection}{\numberline {5.3.2}Memory requirements}{23}{subsubsection.5.3.2}
 \contentsline {section}{\numberline {6}Conclusion and future work}{23}{section.6}
-\contentsline {section}{\numberline {7}Discussion}{23}{section.7}
+\contentsline {section}{\numberline {7}Discussion}{25}{section.7}
