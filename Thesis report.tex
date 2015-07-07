@@ -92,8 +92,8 @@
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
+\newpage
 
-\newpage 
 \begin{abstract}
 
 \noindent Long term mapping is the natural conceptual extension to existing mapping methods that are focused on mapping static environments. Mapping an area for a large amount of time is a problem that if tackled efficiently will be a large step towards highly autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to tackle the clustering subproblem of lifelong mapping methods. A novel method of point cloud representation and matching is presented and its results are applied to an EKF SLAM algorithm; its strengths and weaknesses are analyzed as well as the directions in which the method could be extended to be a complete solution to both the dynamic as well as the compression problem of long term slam.
@@ -113,10 +113,6 @@
  
  
 \newpage
-
-
-\section{Introduction}
-
 
 Simultaneous localization and mapping is one of the fundamental problems of autonomous systems\cite{probRobs}. In order for a robot to be considered truly autonomous, it must have the ability to enter an area and infer its structure. To that direction, a lot of effort has been put in algorithms that are able to map static environments. With solutions like EKF-SLAM\cite{ekf}, FastSlam\cite{slam} and GraphSLAM\cite{graph} robots are now able to efficiently map static environments. 
 The logical extention to methods that can map  static environments is methods that remove this restriction. The idea of lifelong robot learning is not new and has been introduced as a general concept to the literature by Sebastian Thrun~\cite{liflonglearning}. Konolige et al\cite{lifelongmaps} specifically focus on lifelong learning in mapping and the utility such methods would have.  In the PhD thesis of Walcott~\cite{aishalong} long term mapping methods are decomposed to 4 basic subproblems:
@@ -140,7 +136,6 @@ In this paper, an EKF SLAM method that uses point clouds as input will be implem
 The rest of the paper is structured as follows. Section \ref{sec:literature} will present relevant literature review, Section~\ref{sec:theory} will introduce the theories behind the model, Section~\ref{sec:model} will define the model, Section ~\ref{sec:results} will show experimental results of the method. Finally, Section ~\ref{sec:discussion} will end up with a conclusion and future directions in which the method could be improved.
 
 %------------------------------------------------
- 
 \section{Literature review}
 \label{sec:literature}
 
@@ -613,13 +608,25 @@ The exponential part of the distribution is responsible for the angle signature 
 
 \subsection{Limits of the method}
 
-The limits of the technique will be analyzed in this section. Firstly restrictions introduced by the sampler will be givnen and secondly decisions related to the decision boundary will be enumerated.
+The limits of the technique will be analyzed in this section. Restrictions imposed by the method can be categorized to two major classes. Restrctions with respect to the clustering and restrictions with respect to the decision layer of the sampler.
 
-\susbusbsection{Clustering layer}
 
-In the clustering layer
+\subsubsection{Clustering layer}
 
-\susbusbsection{Decision layer}
+
+A very important limit of the pipeline is the tweaking of the hyper-parameter $\alpha$. In the clustering layer the hyper-parameter $\alpha$ is very important in order to have optimal results. If the sampler is run with a very low $\alpha$ this can lead to the whole cloud being assigned a single cluster. This leads to a very low amount of clusters and a significant amount of information loss. Fig.[\ref{pip:limits}](a) shows the behaviour of the sampler for $\alpha$ values lower than 1. On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler every time. That in combination with the constant decision layer lead to a non-converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters that contain a small number of points each. Furthermore, having a high value in the hyperparameter leads to a slower sampling procedure since the complexity of the sampler is $O(KLSN)$ where $K$ is the number of clusters.
+
+
+\begin{figure}
+\begin{tabular}{cc}
+    \includegraphics[width=.5\textwidth]{singlecluster} &  \includegraphics[width=.5\textwidth]{onlyclusters} \\
+  (a) Low $\alpha$ translates to a single cluster  & (b) High $\alpha$ translates to a non converging cloud \\[6pt]
+\end{tabular}
+\caption{The colour and position boudnary is displayed in these pictures}
+  \label{pip:limits}
+\end{figure}
+
+\subsection{Decision layer}
 
 The restrictions introduced by the decision layer are relatively simple due to its constant nature. Taking very small distances in the distance threshold operation can lead to a non converging pipeline with new landmarks being constantly added to the database. The number of landmarks is of course a function of noise too, since having very noisy readings in areas of the cloud that are near the maximum range of the sensor can lead to different landmarks added frequently. These issues can be tackled by having a less strict limit in the operation that defines what is considered a landmark the sampler has encountered before or not.
 
@@ -690,7 +697,7 @@ The memory requirements of the method is a function that is directly affected to
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=.8\textwidth]{memoryRequirements}
+    \includegraphics[width=.8\textwidth]{memoryRequirements2}
     \caption{Memory Requirements as a function of strength parameter $\alpha$.}
   \label{pcl:kl}
 \end{figure}
