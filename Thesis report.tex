@@ -611,6 +611,17 @@ In Fig.\ref{pip:bounds}(a) the yellow folder allong with some of its environment
 The exponential part of the distribution is responsible for the angle signature elements within a cluster have. In a more practical approach having a large amount of different angle distributions in a single cluster leads to objects that have texture and their surface is not smooth. Having a very strict limit in the angle distribution can lead to very small clusters and subsequently to a high amount of landmarks within the data. Using the data from the kinect camera, angle distributions are highly prone to high amounts of noise that is found in parts of the cloud that are near the end of Kinect sensor's range. Practical evaluation has shown that using an angle limit that is close to the average distance between angle signatures produces stable results and reasonably sized landmarks in the cloud.
 
 
+\subsection{Limits of the method}
+
+The limits of the technique will be analyzed in this section. Firstly restrictions introduced by the sampler will be givnen and secondly decisions related to the decision boundary will be enumerated.
+
+\susbusbsection{Clustering layer}
+
+In the clustering layer
+
+\susbusbsection{Decision layer}
+
+The restrictions introduced by the decision layer are relatively simple due to its constant nature. Taking very small distances in the distance threshold operation can lead to a non converging pipeline with new landmarks being constantly added to the database. The number of landmarks is of course a function of noise too, since having very noisy readings in areas of the cloud that are near the maximum range of the sensor can lead to different landmarks added frequently. These issues can be tackled by having a less strict limit in the operation that defines what is considered a landmark the sampler has encountered before or not.
 
 
 \subsection{EKF-SLAM experiments}
