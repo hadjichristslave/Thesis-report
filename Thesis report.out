@@ -19,9 +19,9 @@
 \BOOKMARK [2][-]{subsection.4.2}{The decision layer}{section.4}% 19
 \BOOKMARK [2][-]{subsection.4.3}{Limits of the method}{section.4}% 20
 \BOOKMARK [3][-]{subsubsection.4.3.1}{Clustering layer}{subsection.4.3}% 21
-\BOOKMARK [2][-]{subsection.4.4}{Decision layer}{section.4}% 22
-\BOOKMARK [2][-]{subsection.4.5}{EKF-SLAM experiments}{section.4}% 23
-\BOOKMARK [3][-]{subsubsection.4.5.1}{Speed}{subsection.4.5}% 24
-\BOOKMARK [3][-]{subsubsection.4.5.2}{Memory requirements}{subsection.4.5}% 25
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Decision layer}{subsection.4.3}% 22
+\BOOKMARK [2][-]{subsection.4.4}{EKF-SLAM experiments}{section.4}% 23
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Speed}{subsection.4.4}% 24
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Memory requirements}{subsection.4.4}% 25
 \BOOKMARK [1][-]{section.5}{Conclusion and future work}{}% 26
 \BOOKMARK [1][-]{section.6}{Discussion}{}% 27

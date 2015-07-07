@@ -614,19 +614,19 @@ The limits of the technique will be analyzed in this section. Restrictions impos
 \subsubsection{Clustering layer}
 
 
-A very important limit of the pipeline is the tweaking of the hyper-parameter $\alpha$. In the clustering layer the hyper-parameter $\alpha$ is very important in order to have optimal results. If the sampler is run with a very low $\alpha$ this can lead to the whole cloud being assigned a single cluster. This leads to a very low amount of clusters and a significant amount of information loss. Fig.[\ref{pip:limits}](a) shows the behaviour of the sampler for $\alpha$ values lower than 1. On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler every time. That in combination with the constant decision layer lead to a non-converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters that contain a small number of points each. Furthermore, having a high value in the hyperparameter leads to a slower sampling procedure since the complexity of the sampler is $O(KLSN)$ where $K$ is the number of clusters.
+A very important limit of the pipeline exists with respect to the hyper-parameter $\alpha$. In the clustering layer the hyper-parameter $\alpha$ is very important in order to have optimal results. If the sampler is run with a very low $\alpha$ this can lead to the whole cloud being assigned a single cluster. This leads to a very low amount of clusters and a significant amount of information loss. Fig.[\ref{pip:limits}](a) shows the behaviour of the sampler for $\alpha$ values lower than 1. On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler every time. That in combination with the constant decision layer lead to a non-converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters that contain a small number of points each. Furthermore, having a high value in the hyperparameter leads to a slower sampling procedure since the complexity of the sampler is $O(KLSN)$ where $K$ is the number of clusters.
 
 
 \begin{figure}
 \begin{tabular}{cc}
-    \includegraphics[width=.5\textwidth]{singlecluster} &  \includegraphics[width=.5\textwidth]{onlyclusters} \\
+    \includegraphics[width=.5\textwidth]{singlecluster} &  \includegraphics[width=.5\textwidth]{onlyclusters2} \\
   (a) Low $\alpha$ translates to a single cluster  & (b) High $\alpha$ translates to a non converging cloud \\[6pt]
 \end{tabular}
 \caption{The colour and position boudnary is displayed in these pictures}
   \label{pip:limits}
 \end{figure}
 
-\subsection{Decision layer}
+\subsubsection{Decision layer}
 
 The restrictions introduced by the decision layer are relatively simple due to its constant nature. Taking very small distances in the distance threshold operation can lead to a non converging pipeline with new landmarks being constantly added to the database. The number of landmarks is of course a function of noise too, since having very noisy readings in areas of the cloud that are near the maximum range of the sensor can lead to different landmarks added frequently. These issues can be tackled by having a less strict limit in the operation that defines what is considered a landmark the sampler has encountered before or not.
 
