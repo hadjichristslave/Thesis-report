@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  6 JUL 2015 12:04
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  6 JUL 2015 18:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -560,6 +560,9 @@ Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 
 LaTeX Warning: Label `Q_2' multiply defined.
 
+
+LaTeX Warning: Label `pcl:kl' multiply defined.
+
 )
 \openout1 = `"Thesis report.aux"'.
 
@@ -748,7 +751,7 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-<pics/generalPolya.png, id=258, 806.01125pt x 826.08624pt>
+<pics/generalPolya.png, id=259, 806.01125pt x 826.08624pt>
 File: pics/generalPolya.png Graphic file (type png)
 
 <use pics/generalPolya.png>
@@ -894,83 +897,26 @@ Overfull \hbox (12.8pt too wide) in paragraph at lines 654--673
  [] 
  []
 
-<pics/box/input1.png, id=399, 586.19pt x 358.33875pt>
-File: pics/box/input1.png Graphic file (type png)
+[23] <pics/memoryRequirements.png, id=403, 1348.03625pt x 708.6475pt>
+File: pics/memoryRequirements.png Graphic file (type png)
 
-<use pics/box/input1.png>
-Package pdftex.def Info: pics/box/input1.png used on input line 682.
-(pdftex.def)             Requested size: 170.71652pt x 104.35846pt.
-
-<pics/box/clusters1.png, id=400, 1053.9375pt x 564.1075pt>
-File: pics/box/clusters1.png Graphic file (type png)
-
-<use pics/box/clusters1.png>
-Package pdftex.def Info: pics/box/clusters1.png used on input line 683.
-(pdftex.def)             Requested size: 241.84842pt x 129.44072pt.
-
-<pics/box/input2.png, id=401, 562.1pt x 387.4475pt>
-File: pics/box/input2.png Graphic file (type png)
- <use pics/box/input2.png>
-Package pdftex.def Info: pics/box/input2.png used on input line 685.
-(pdftex.def)             Requested size: 170.71652pt x 117.67175pt.
-
-<pics/box/clusters2.png, id=402, 1044.90375pt x 619.31375pt>
-File: pics/box/clusters2.png Graphic file (type png)
-
-<use pics/box/clusters2.png>
-Package pdftex.def Info: pics/box/clusters2.png used on input line 686.
-(pdftex.def)             Requested size: 241.84842pt x 143.33691pt.
-
-<pics/box/input3.png, id=403, 501.875pt x 313.17pt>
-File: pics/box/input3.png Graphic file (type png)
- <use pics/box/input3.png>
-Package pdftex.def Info: pics/box/input3.png used on input line 688.
-(pdftex.def)             Requested size: 170.71652pt x 106.52895pt.
-
-<pics/box/clusters3.png, id=404, 1021.8175pt x 541.02126pt>
-File: pics/box/clusters3.png Graphic file (type png)
-
-<use pics/box/clusters3.png>
-Package pdftex.def Info: pics/box/clusters3.png used on input line 689.
-(pdftex.def)             Requested size: 241.84842pt x 128.0481pt.
-
-<pics/box/input4.png, id=405, 519.9425pt x 367.3725pt>
-File: pics/box/input4.png Graphic file (type png)
-
-<use pics/box/input4.png>
-Package pdftex.def Info: pics/box/input4.png used on input line 691.
-(pdftex.def)             Requested size: 170.71652pt x 120.62227pt.
-
-<pics/box/clusters4.png, id=406, 1041.8925pt x 564.1075pt>
-File: pics/box/clusters4.png Graphic file (type png)
-
-<use pics/box/clusters4.png>
-Package pdftex.def Info: pics/box/clusters4.png used on input line 692.
-(pdftex.def)             Requested size: 241.84842pt x 130.93845pt.
-
-Overfull \hbox (6.56032pt too wide) in paragraph at lines 681--695
-[][] 
- []
-
-
-LaTeX Warning: Float too large for page by 87.4079pt on input line 696.
-
-[23] [24] [25 <./pics/box/input1.png> <./pics/box/clusters1.png> <./pics/box/in
-put2.png (PNG copy)> <./pics/box/clusters2.png> <./pics/box/input3.png> <./pics
-/box/clusters3.png> <./pics/box/input4.png> <./pics/box/clusters4.png (PNG copy
-)>] [26] [27]
+<use pics/memoryRequirements.png>
+Package pdftex.def Info: pics/memoryRequirements.png used on input line 682.
+(pdftex.def)             Requested size: 344.005pt x 180.83789pt.
+ [24 <./pics/memoryRequirements.png>] [25]
+[26] [27]
 
 Package movie15 Warning: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 (movie15)                @@ Package `movie15' is obsolete and @@
 (movie15)                @@ superseded by `media9'.           @@
 (movie15)                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 894.
-[28] [29]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 894.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 884.
+[28]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 884.
  (./Thesis report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 894.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 894.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 884.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 884.
 Package rerunfilecheck Info: File `"Thesis report".out' has not changed.
 (rerunfilecheck)             Checksum: 17A7FF67FBBD1C7262098AEB65560015;1612.
 
@@ -980,13 +926,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 894.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 884.
  ) 
 Here is how much of TeX's memory you used:
- 12437 strings out of 495032
- 185854 string characters out of 6181719
- 448878 words of memory out of 5000000
- 14984 multiletter control sequences out of 15000+600000
+ 12399 strings out of 495032
+ 185083 string characters out of 6181719
+ 447878 words of memory out of 5000000
+ 14956 multiletter control sequences out of 15000+600000
  75801 words of font info for 292 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  36i,16n,75p,1902b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1001,9 +947,9 @@ i.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "Thesis report.pdf" (29 pages, 3751681 bytes).
+Output written on "Thesis report.pdf" (28 pages, 3019271 bytes).
 PDF statistics:
- 519 PDF objects out of 1000 (max. 8388607)
- 132 named destinations out of 1000 (max. 500000)
- 58674 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 503 PDF objects out of 1000 (max. 8388607)
+ 131 named destinations out of 1000 (max. 500000)
+ 58639 words of extra memory for PDF output out of 61914 (max. 10000000)
 

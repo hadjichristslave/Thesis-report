@@ -674,26 +674,19 @@ The leaf size directly affects the time the cloud takes to be processed in the p
 
 \subsubsection{Memory requirements}
 
-\begin{figure}
-\begin{tabular}{cc}
-\includegraphics[width=60mm]{box/input1} & 
-  \includegraphics[width=85mm]{box/clusters1} \\
-(a) Input  & (b) Pointcloud along with landmarks\\[6pt]
-	\includegraphics[width=60mm]{box/input2} & 
-  \includegraphics[width=85mm]{box/clusters2} \\
-(c) Depth input & (d) Pointcloud along with landmarks \\[6pt]
-	\includegraphics[width=60mm]{box/input3} & 
-  \includegraphics[width=85mm]{box/clusters3} \\
-(e) Depth input & (f) Pointcloud along with landmarks \\[6pt]
-	\includegraphics[width=60mm]{box/input4} & 
-  \includegraphics[width=85mm]{box/clusters4} \\
-(g) Depth input & (h) Pointcloud along with landmarks \\[6pt]
-\end{tabular}
-\caption{caption}
+The memory requirements of the method is a function that is directly affected to the $\alpha$ strength parameter of the samplergGiven that the decison boundary is constant. As the $\alpha$ parameter increases, the sampler will output more clusters on every iteration. The higher amount the of cluster will result a higher amount of landmarks and, consequently, in larger memory requirements in the method. Figure [fig] shows memory requirements as a function of strength parameter alpha.
+
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=.8\textwidth]{memoryRequirements}
+    \caption{Memory Requirements as a function of strength parameter $\alpha$.}
+  \label{pcl:kl}
 \end{figure}
 
+As it can be seen, the number of landmarks follows the logarithmic trend of the distribution in relation to $alpha$. Increasing the  alpha value more will not make the algorithm follow the trend indefinitely. That is due to the fact that as the alpha increases, the currently constant decision layer will keep adding landmarks until the environment saturates and no new landmarks can be added. It must be noted that as the alpha parameter is set to higher numbers, the sampler outputs more clusters making it more accurate of the environment descriptor it outputs, but also takes more time, making it non feasible to use this in real time mapping scenarios. Values of alpha between 0 and 10 provide a robust but also fast enough sampler that can be used in online mapping scenarios.
 
-As it is shown in the concentrated results that displays the features in combination with the point cloud, there is a large reduction in the dimensionality of the input. Given that a normal scene can be reproduced by an average of ~100 clusters, and each cluster has a size of 280 bytes, the method is extremely scalable. Furthermore, the implementation can be extended to be even more performance based with techniques like recovering only the nearby clusters when searching for matches, sorting the database or using multi threading to increase performance. Utilizing such tools can make the technique being able to handle a very large amount of features since 100.000 clusters can be used to represent large areas take only 260MB of space. Figure[fig] shows the memory requirements as a function of CRP strength parameter of the sampler.
+
 
 \section{Conclusion and future work}
 \label{sec:discussion}
