@@ -643,7 +643,7 @@ The restrictions introduced by the decision layer are relatively simple due to i
 
 \subsection{EKF-SLAM experiments}
 
-To test the experiments in a real life scenario, the method was used as a sensor model in a Landmark based EKF SLAM algorithm. The method will be tested in its speed and memory requirements. As was shown when calculating the complexity of the method, speed complexity was shown to be very dependent to the downsampling process. If the downsampling threshold operations are strict and the cloud is being stripped of many of its points, accuracy will decline and speed will increase. As shown in the landmark size section, the unit cost of a Landmark has an upper limit. Therefore, the memory requirements of the method are directly depending on how many landmarks the algorithm allows before converging. A strict landmark matching decision layer that requires a high degree of correlation to match landmarks will converge to a higher amount of landmarks compared to a less strict one.
+Once the parameters are set to the correct values to avoid the cases where the method is known to not work correctly, the method can be used in rel life scenarios to as a sensor model in a Landmark based EKF SLAM algorithm. The method will be tested in its speed and memory requirements. As was shown when calculating the complexity of the method, speed complexity was shown to be very dependent to the downsampling process. If the downsampling threshold operations are strict and the cloud is being stripped of many of its points, accuracy will decline and speed will increase. As shown in the landmark size section, the unit cost of a Landmark has an upper limit. Therefore, the memory requirements of the method are directly depending on how many landmarks the algorithm allows before converging. A strict landmark matching decision layer that requires a high degree of correlation to match landmarks will converge to a higher amount of landmarks compared to a less strict one.
 
 \subsubsection{Speed}
 
@@ -719,18 +719,13 @@ As it can be seen, the number of landmarks follows the logarithmic trend of the 
 \section{Conclusion and future work}
 \label{sec:discussion}
 
-A novel method for cloud representation using non-parametric Bayesian tools was introduced. Its strengths and weaknesses where presented and an application on how this method could be used to perform SLAM were given. 
+In this paper a novel method for cloud representation using non-parametric Bayesian tools was introduced. Its strengths and weaknesses where presented and an application on how this method could be used to tackle the compression problem of long term SLAM were given. This is far from the extend of such methods go. There is a number of directions in which such methods could be improved. Firstly given the nature of the sampler, choosing more complex representations could increase the quality of the sampler making it easier to represent with better precision more complex objects. Furthermore, since the sampler outputs chunks of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures instead of parts of the environment as well as be able to handle the dynamic component that long term slam problems introduce. Finally, 	
 
 \begin{itemize}
-    \item Improved tracking by using IMRF
     \item Extend to dynamic environments
     \item Extend the representation used
 \end{itemize}
 %------------------------------------------------
-
-\section{Discussion}
-
-A fast method of pointcloud clustering and representation are presented. Its strengths and weaknesses are given. This method serves as a proof of concept on how non-parametric bayesians could help 
 
 \begin{thebibliography}{9}
 

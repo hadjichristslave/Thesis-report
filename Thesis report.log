@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  8 JUL 2015 10:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  8 JUL 2015 12:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -940,43 +940,52 @@ Package movie15 Warning: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 (movie15)                @@ superseded by `media9'.           @@
 (movie15)                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 912.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 908.
 [31]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 912.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 908.
  (./Thesis report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 912.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 912.
-Package rerunfilecheck Info: File `"Thesis report".out' has not changed.
-(rerunfilecheck)             Checksum: 8D2FCDFD976454642C690468AD0C5F7D;1784.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 908.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 908.
 
+
+Package rerunfilecheck Warning: File `"Thesis report".out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `"Thesis report".out':
+(rerunfilecheck)             Before: 8D2FCDFD976454642C690468AD0C5F7D;1784
+(rerunfilecheck)             After:  9491D05F8586FCCF323970A25B8D51DC;1738.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 912.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 908.
  ) 
 Here is how much of TeX's memory you used:
  12424 strings out of 495032
  185604 string characters out of 6181719
- 447878 words of memory out of 5000000
+ 448878 words of memory out of 5000000
  14972 multiletter control sequences out of 15000+600000
  75801 words of font info for 292 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  36i,16n,75p,1902b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/panos/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk>{/usr/sha
-re/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/math
-pazo/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmr
-i.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "Thesis report.pdf" (31 pages, 3585162 bytes).
+pdfTeX warning (dest): name{section.6} has been referenced but does not exist
+, replaced by a fixed one
+
+ </home/panos/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk>{/usr/share
+/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpa
+zo/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/urw/palatino/uplri8a.pfb>
+Output written on "Thesis report.pdf" (31 pages, 3585615 bytes).
 PDF statistics:
  537 PDF objects out of 1000 (max. 8388607)
  137 named destinations out of 1000 (max. 500000)
