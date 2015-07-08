@@ -114,6 +114,9 @@
  
 \newpage
 
+\section{Introduction}
+\label{sec:literature}
+
 Simultaneous localization and mapping is one of the fundamental problems of autonomous systems\cite{probRobs}. In order for a robot to be considered truly autonomous, it must have the ability to enter an area and infer its structure. To that direction, a lot of effort has been put in algorithms that are able to map static environments. With solutions like EKF-SLAM\cite{ekf}, FastSlam\cite{slam} and GraphSLAM\cite{graph} robots are now able to efficiently map static environments. 
 The logical extention to methods that can map  static environments is methods that remove this restriction. The idea of lifelong robot learning is not new and has been introduced as a general concept to the literature by Sebastian Thrun~\cite{liflonglearning}. Konolige et al\cite{lifelongmaps} specifically focus on lifelong learning in mapping and the utility such methods would have.  In the PhD thesis of Walcott~\cite{aishalong} long term mapping methods are decomposed to 4 basic subproblems:
 \begin{itemize}
@@ -139,15 +142,9 @@ The rest of the paper is structured as follows. Section \ref{sec:literature} wil
 \section{Literature review}
 \label{sec:literature}
 
-Related research will be focused on 4 general sub fields of related literature.
-\begin{itemize}
-	\item Object based SLAM or semantic slam
-	\item Point Cloud Object segmentation
-	\item Non-parametric clustering methods
-	\item The correspondence problem in SLAM
-\end{itemize}
+Literature review will be focused on 4 related sub fields: Object based SLAM or semantic slam, point cloud object segmentation, non-parametric clustering methods ad the correspondence problem in SLAM.
 
-Since point clouds are used as input and from this input object representations must be extracted, methods that use objects to perform SLAM are then needed. Object based SLAM methods are therefore important given to the nature of the input. The second part of the literature research is focused on point cloud representations and is specifically directed towards the specific meta-features that need to be taken into account so that the reduced point cloud representation gives sufficiently enough information of the cloud. The third part of the research is focused on non-parametric Bayesian methods and the clustering tools they provide. Such tools are important as they can be used to provide new approaches to object segmentation in a point cloud. Finally, research is focused on the correspondence problem in SLAM. As one of the fundamental problems that need to be solved in order to have robust SLAM algorithms, it is imperative the correspondence problem be solved efficiently. In that extent and due to the unique representation of our objects, a novel approach that takes elements from other techniques in the correspondence between objects in a SLAM problem is presented.
+Object based slam is relevant due to the nature of the input. The method will receive as input a point cloud and output a mixture of distributions that best fits the input data. Since such distributions represent objects or parts of objects within the cloud, methods that use objects to perform SLAM are needed. The second part of the literature research is focused on point cloud representations and is specifically directed towards the specific meta-features that need to be taken into account so that the reduced point cloud representation gives sufficiently enough information of the cloud. Having a rich representation while downsampling the cloud as much as possible is important so that the sampler can be used in real time applications. The third part of the research is focused on non-parametric Bayesian methods and the clustering tools they provide. Such tools are important as they can be used to provide new approaches to object segmentation in a point cloud. Finally, research is focused on the correspondence problem in SLAM. As one of the fundamental problems that need to be solved in order to have robust SLAM algorithms, it is imperative the correspondence problem be solved efficiently. In that extent and due to the unique representation of our objects, a novel approach that takes elements from other techniques in the correspondence between objects in a SLAM problem is presented.
 
 \subsection{Object based SLAM}
 Object based SLAM or semantic slam methods proposed in the literature focus at domain specific solutions and particular problems. Salas-Moreno et al~\cite{slam++} define a method of performing object based slam for specific classes objects. The objects are identified by camera that is on top of the robot. By having a model of pre-trained objects, SLAM can be performed on environments the robot knows what objects to expect. The disadvantage of that method is that object models have be to be well defined and there is a small number of such objects. 
@@ -181,7 +178,7 @@ The method presented in this paper receives an input similar to~\cite{objectDisc
 \label{sec:theory}
 
 \subsection{Generalized Polya's Urn}
-Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those priors by allowing the clusters in the data to vary with some covariance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable and have dependencies that cannot be disregarded. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such methods is the immediate extension they provide to dynamic environments. 
+Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those tools by allowing the clusters in the data to vary with some variance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies on the data which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable and have dependencies that cannot be disregarded. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such tools is the inherent extension they provide to dynamic environments. 
 
 A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. In the current project, the $n_th$ datapoint at time $t$,$x_{t,n}$ has an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
 
