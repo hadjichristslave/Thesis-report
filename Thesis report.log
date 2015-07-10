@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  10 JUL 2015 11:37
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  10 JUL 2015 12:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -799,7 +799,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [15]
 [16] [17] [18]
-<pics/clusterings/initialData.png, id=375, 1606.0pt x 903.375pt>
+<pics/clusterings/initialData.png, id=377, 1606.0pt x 903.375pt>
 File: pics/clusterings/initialData.png Graphic file (type png)
 
 <use pics/clusterings/initialData.png>
@@ -807,7 +807,7 @@ Package pdftex.def Info: pics/clusterings/initialData.png used on input line 51
 6.
 (pdftex.def)             Requested size: 430.00462pt x 241.87442pt.
 
-<pics/clusterings/colorcodedDistributions.png, id=376, 1606.0pt x 903.375pt>
+<pics/clusterings/colorcodedDistributions.png, id=378, 1606.0pt x 903.375pt>
 File: pics/clusterings/colorcodedDistributions.png Graphic file (type png)
 
 <use pics/clusterings/colorcodedDistributions.png>
@@ -825,7 +825,7 @@ Overfull \hbox (12.8pt too wide) in paragraph at lines 529--558
  [] 
  []
 
-<pics/clusterings/coloursSource.png, id=392, 1606.0pt x 903.375pt>
+<pics/clusterings/coloursSource.png, id=393, 1606.0pt x 903.375pt>
 File: pics/clusterings/coloursSource.png Graphic file (type png)
 
 <use pics/clusterings/coloursSource.png>
@@ -833,7 +833,7 @@ Package pdftex.def Info: pics/clusterings/coloursSource.png used on input line
 566.
 (pdftex.def)             Requested size: 430.00462pt x 241.87442pt.
 
-<pics/clusterings/coloursCorrect.png, id=393, 1606.0pt x 903.375pt>
+<pics/clusterings/coloursCorrect.png, id=394, 1606.0pt x 903.375pt>
 File: pics/clusterings/coloursCorrect.png Graphic file (type png)
 
 <use pics/clusterings/coloursCorrect.png>
@@ -845,25 +845,25 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 565--571
 [][] 
  []
 
-<pics/colorBound.png, id=395, 1606.0pt x 903.375pt>
+<pics/colorBound.png, id=396, 1606.0pt x 903.375pt>
 File: pics/colorBound.png Graphic file (type png)
  <use pics/colorBound.png>
 Package pdftex.def Info: pics/colorBound.png used on input line 582.
 (pdftex.def)             Requested size: 215.0023pt x 120.93031pt.
 
-<pics/colorBound2.png, id=396, 1606.0pt x 903.375pt>
+<pics/colorBound2.png, id=397, 1606.0pt x 903.375pt>
 File: pics/colorBound2.png Graphic file (type png)
 
 <use pics/colorBound2.png>
 Package pdftex.def Info: pics/colorBound2.png used on input line 582.
 (pdftex.def)             Requested size: 215.0023pt x 120.93031pt.
- <pics/posBound.png, id=397, 1606.0pt x 903.375pt>
+ <pics/posBound.png, id=398, 1606.0pt x 903.375pt>
 File: pics/posBound.png Graphic file (type png)
 
 <use pics/posBound.png>
 Package pdftex.def Info: pics/posBound.png used on input line 584.
 (pdftex.def)             Requested size: 215.0023pt x 120.93031pt.
- <pics/posBound2.png, id=398, 1606.0pt x 903.375pt>
+ <pics/posBound2.png, id=399, 1606.0pt x 903.375pt>
 File: pics/posBound2.png Graphic file (type png)
 
 <use pics/posBound2.png>
@@ -878,19 +878,16 @@ Overfull \hbox (23.99998pt too wide) in paragraph at lines 581--587
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [21] [22 <./pics/clusterings/coloursSource.png> <./pics/clusterings/coloursCorr
-ect.png>]
-Underfull \vbox (badness 2809) has occurred while \output is active []
-
- [23 <./pics/colorBound.png> <./pics/colorBound2.png> <./pics/posBound.png> <./
-pics/posBound2.png>] <pics/singlecluster.png, id=418, 1041.8925pt x 737.75626pt
->
+ect.png>] [23 <./pics/colorBound.png> <./pics/colorBound2.png> <./pics/posBound
+.png> <./pics/posBound2.png>]
+<pics/singlecluster.png, id=419, 1041.8925pt x 737.75626pt>
 File: pics/singlecluster.png Graphic file (type png)
 
 <use pics/singlecluster.png>
 Package pdftex.def Info: pics/singlecluster.png used on input line 609.
 (pdftex.def)             Requested size: 215.0023pt x 152.2429pt.
 
-<pics/onlyclusters2.png, id=419, 1045.9075pt x 743.77875pt>
+<pics/onlyclusters2.png, id=420, 1045.9075pt x 743.77875pt>
 File: pics/onlyclusters2.png Graphic file (type png)
 
 <use pics/onlyclusters2.png>
@@ -901,7 +898,7 @@ Overfull \hbox (23.99998pt too wide) in paragraph at lines 608--612
 [][] 
  []
 
-<pics/monsterchair.png, id=421, 1053.9375pt x 909.3975pt>
+<pics/monsterchair.png, id=422, 1053.9375pt x 909.3975pt>
 File: pics/monsterchair.png Graphic file (type png)
 
 <use pics/monsterchair.png>
@@ -930,7 +927,7 @@ Overfull \hbox (12.8pt too wide) in paragraph at lines 669--688
  [] 
  []
 
-<pics/memoryRequirements2.png, id=433, 1348.03625pt x 735.74875pt>
+<pics/memoryRequirements2.png, id=434, 1348.03625pt x 735.74875pt>
 File: pics/memoryRequirements2.png Graphic file (type png)
 
 <use pics/memoryRequirements2.png>
@@ -983,9 +980,9 @@ i.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "Thesis report.pdf" (31 pages, 3585904 bytes).
+Output written on "Thesis report.pdf" (31 pages, 3586315 bytes).
 PDF statistics:
- 538 PDF objects out of 1000 (max. 8388607)
+ 539 PDF objects out of 1000 (max. 8388607)
  137 named destinations out of 1000 (max. 500000)
  58670 words of extra memory for PDF output out of 61914 (max. 10000000)
 
