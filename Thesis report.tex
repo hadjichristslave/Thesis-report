@@ -178,7 +178,7 @@ The method presented in this paper receives an input similar to~\cite{objectDisc
 \label{sec:theory}
 
 \subsection{Generalized Polya's Urn}
-Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those tools by allowing the clusters in the data to vary with some variance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies on the data which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable and have dependencies that cannot be disregarded. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such tools is the inherent extension they provide to dynamic environments. 
+Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those tools by allowing the clusters in the data to vary with some variance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies on the data which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable and have dependencies that cannot be disregarded. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such tools is the inherent extension they provide to dynamic environments.
 
 A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. In the current project, the $n_th$ datapoint at time $t$,$x_{t,n}$ has an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
 
@@ -205,7 +205,7 @@ A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of r
 
 Where Cat is a categorical distribution, Bin is the binomial distribution, $\alpha$ is the DP concentration parameter and $\rho$ is the deletion parameter of the GPU. This Generative Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$)
 
-This process can be though of in the terms of a general Chinese restaurant process as shown in Fig.~\ref{generalPolya}. At time $t$ (a), suppose there are customers seating at several tables in the restaurant. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated (b). Each table occupied is moved according to the number of customers still seating in that table (c). A new customer then enters the table and either chooses to sit on one of the existing tables (e) or choose a new with probability proportional to the strength parameter $\alpha$ of the model (f).
+This process can be though of in the terms of a general Chinese restaurant process as shown in Fig.~\ref{generalPolya}. At time $t$, suppose there are $n$ customers seating at several tables in the restaurant. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated (b). Each table occupied is moved according to the number of customers still seating in that table (c). A new customer then enters the table and either chooses to sit on one of the existing tables (e) or choose a new with probability proportional to the strength parameter $\alpha$ of the model (f). Now that the basic block of the sampler is defined, the model can be described in detail.
 
 \begin{figure}[h!]
   \centering
@@ -218,7 +218,7 @@ This process can be though of in the terms of a general Chinese restaurant proce
 \label{sec:model}
 
 \subsection{General pipeline}
-Now that the data distribution and sampler are defined, the model that takes as input point clouds from a Kinect sensor mounted on a robot and outputs the most probable landmarks given the input and the previous landmarks can be presented. Fig.~\ref{pipeline} depicts the general workflow of what happens during the observation step of SLAM. The SLAM node-- requires landmark information, and the landmark pipeline outputs the most probable landmarks given the current database of landmarks and the current observations. If needed landmarks added to the database and the landmark ids are given to back to the SLAM node.
+Now that the data distribution and sampler are defined, the model can be presented. Fig.~\ref{pipeline} depicts the general workflow of what happens during the observation step of SLAM. The SLAM node-- requires landmark information, and the landmark pipeline outputs the most probable landmarks given the current database of landmarks and the current observations. If needed landmarks added to the database and the landmark ids are given to back to the SLAM node.
 
 
 \begin{figure}
@@ -281,7 +281,7 @@ Now that the general pipeline is defined, specific parts of the method will be d
 
 
 \subsection{The data distribution}
-
+\label{data:dist}
 The point cloud consists of many points hence a data unit will be considered a single point.
 Each point $x$ in the input consists of a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ colour information. The method those features are extracted is explained in lines 3 and 4 in the general pipeline. For the purpose of this project each part of the cloud was represented by vector of length 32 with the first three elements representing the space information, elements 4-6 angle information, and the rest colour information.
 
@@ -442,29 +442,19 @@ Which can be calculated using equations $Q_2$ and $Q_1$ for the first and second
 
 \subsection{Decision Layer}
 
-Once the sampler outputs the clusters of the point cloud the output can be passed to the decision layer. The question that the decision layer answers is: "How does the data/clusters I currently observe relate to the data I have previously seen in the past?". The decision of how an observation relates to previously encountered data has to be made and this decision is taken in the decision layer of the algorithm. To do that, distance measures must be defined between the observations and the landmarks. Distances between distributions are called divergences and a large amount of literature on divergences exists.
+Once the sampler outputs the clusters of the point cloud the output can be passed to the decision layer. The decision layer calculates how similar a cluster is to clusters encountered before, and if the similarity is high enough the clusters are considered to be part of the same landmark. To do that, distance measures must be defined between the stored clusters and the ones that are inferred at the current iteration of the algorithm. Distances between distributions are called divergences and a large amount of literature on divergences exists.
 
-Since our data are modeled as comming from a convolution of 3 distributions, specific divergences for each part were considered. More specifically let $l$ be the distribution of the landmark and $o$ the distribution of the observation. $l$ can be decomposed into 3 parts: $l_G$,$l_C$,$l_E$ where G,C and E stand for Gaussian, Categorical and Exponential respectively. The observation distribution can be decomposed similarly. With that notation the distances between those distributions can be defined. For each individual landmark distribution $l$ and observation distribution $o$ the distances computed where the following:
+Every cluster consists of a three part distribution as it was defined in section \ref{data:dist}. To define a distance measure between cluster, individual distances between all the distribution parts will be defined. More specifically let $l$ be the distribution of the cluster and $o$ the distribution of a currently observed cluster. $l$ and $o$ can be decomposed into 3 parts: $l_G$,$l_C$,$l_E$ where G,C and E stand for Gaussian, Categorical and Exponential respectively. With that notation the distances between those distributions can be defined. For each individual landmark distribution $l$ and observation distribution $o$ the distances computed where the following:
 
 \begin{itemize}
-	\item Gaussian 
-		\begin{itemize}
-			\item Wesserstein($l_G,o_G$);			
-			\item KL($l_G,o_G$);
-		\end{itemize}
-	\item Exponential
-			\begin{itemize}
-				\item SquaredHellinger($l_E,o_E$);
-				\item KL($l_E,o_E$);
-			\end{itemize}
-	\item Categorical
-			\begin{itemize}
-				\item KL($l_C,o_C$);
-			\end{itemize}
-
+	\item Wesserstein($l_G,o_G$);			
+	\item Kullback-Leibler($l_G,o_G$);
+	\item SquaredHellinger($l_E,o_E$);
+	\item Kullback-Leibler($l_E,o_E$);
+	\item Kullback-Leibler($l_C,o_C$);
 \end{itemize}
 
-The decision boundary of an observation being a landmark or not was chosen by empiric evaluation of the landmarks. It is of course possible to learn the optimal decision boundary but due to time restrictions a simpler decision making approach was chosen instead.
+With that in mind the distance between every distribution can be transposed of a vector of length 5. That way, deciding if a cluster is part of a landmark that has been encountered before is now a problem of finding the optimal decision boundary given the distances at hand. For the purposes of this thesis, the decision boundary of an observation being a landmark or not was chosen by empiric evaluation of the landmarks. It is of course possible to learn the optimal decision boundary but due to time restrictions a simpler decision making approach was chosen instead.
 
 
 \subsection{Complexity}
