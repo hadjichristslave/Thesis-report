@@ -219,7 +219,7 @@ This process can be though of in the terms of a general Chinese restaurant proce
 
 \subsection{General pipeline}
 
-Now that the data distribution and the GPU are defined, the pipeline and its operating mechanisms can be presented. The general flow of operations is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, data are output as clusters from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The same procedure is described in Algorithm~\ref{euclid}. 
+Now that the data distribution and the GPU are defined, the pipeline and its operating mechanisms can be presented. The general flow of operations is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The procedure that is shown in Algorithm~\ref{euclid} is described analytical in as follows:
 
 
 \begin{figure}
@@ -231,38 +231,34 @@ Now that the data distribution and the GPU are defined, the pipeline and its ope
 \label{pipeline}
 \end{figure}
 
-The model introduces a Pipeline in the layer of landmark detection of the EKF-SLAM algorithm. All the operations from feature extraction to clustering and object matching will be performed at that layer. More specifically the pseudo-code for the method is the following:
+
 
 \begin{algorithm}
   \caption{Landmark Layer}\label{euclid}
   \begin{algorithmic}[1]
-    \Procedure{getLandmarkIds}{$pointCloud, timepoint, existingLandmarks$}\Comment{Post transformation}
-      \State $initialize(landMarkIds)$ \Comment{Initialize empty list}
-      \State $pointCloudReduced \gets extractMetaFeatures(pointCloud)$ \Comment{Cloud preprocessing}
+    \Procedure{getLandmarkIds}{$pointCloud, timepoint, existingLandmarks$}
+      \State $initialize(landMarkIds)$
+      \State $pointCloudReduced \gets extractMetaFeatures(pointCloud)$ 
       \State $features \gets extractMetaFeatures(pointCloudReduced)$
-      \State $landmarks \gets cluster(features)$  \Comment{Cluster using features}
-
+      \State $landmarks \gets cluster(features)$  
       \For{\texttt{$landmarks$ as $landmark$}}
 	      \State $ (similarity, landId) \gets calcBestSim(landmark, existingLandmarks) $
 			\If{$similarity >threshold$}
-			   \State $ addLandmarks(landMarkIds, landId)$\Comment{Return known landmark}
+			   \State $ addLandmarks(landMarkIds, landId)$
 			\Else 
-			   \State $ newLandID \gets addLandmarkDB(landmarkDB, landmark)$ \Comment{Add get new id}
-			   \State $addLandmarks(newLandID)$ \Comment{Add landmark}	   
+			   \State $ newLandID \gets addLandmarkDB(landmarkDB, landmark)$
+			   \State $addLandmarks(newLandID)$
 			\EndIf
       \EndFor
-      \State \textbf{return} $ landMarkIds$\Comment{Return added landmark}
+      \State \textbf{return} $ landMarkIds$\Comment{Return landmarks}
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
 
 
-This top level description has a lot of implied steps so a line by line description will be provided:
+\textbf{Method input:} The method takes as input a point cloud as it is currently being read by the kinect sensor.
 
-\textbf{Method input:} The method takes as input a point cloud. The post transformation comment has to do with the fact that the 
-cloud expected is the one after all the frame transformations are done in the tf layer of the robot.
-
-\textbf{Lines 3-4:} Feature extraction is done through the pcl~\cite{pcl} library. An initial point cloud reduction is mandatory to increase the speed of the process. A voxel grid is used to reduce the dataset size. A leaf size of approximately 4cm produces a good tradeoff between precision and speed. The object representation approach is similar to~\cite{objectpointslam}. Instead of using the CSHOT descriptor, pcl's fpfh~\cite{fpfh} is being used. Fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. In that way we end up with a 23 dimensional angular signature of information between a point and its neighbors. Since the information are given in the form of a histogram, classical statistic solutions regarding the distances between angular signatures can be taken into account. In our solution EMD,Hellinger,and KL divergence are being computed in the pipeline. Color information is being encoded with an approach similar to ~\cite{smcddp}. The colour spectrum is discretized and what is extracted is the count of different colour signatures between a point and its k nearest neighbors. Finally positional information is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. What the algorithm outputs is then a vector of $ \textbf{x} = (x_s, x_c, x_a) $ where $s$ represents a 3x1 vector of space information, $c$ a 27x1 vector of colour information and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1). It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it greatly reduces(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
+\textbf{Lines 3-4:} The preprocessing of the pipeline includes cloud downsampling and feature extraction. Feature extraction is done through the pcl\cite{pcl} library. A voxel grid is used to reduce the dataset size. A leaf size of approximately 3cm produces a good trade-off between precision and speed. The object representation used approach is similar to\cite{objectpointslam}. Instead of using the CSHOT descriptor, fpfh\cite{fpfh} histogram is used instead. Fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. After the fpfh estimation a 23 dimensional angular signature of information between a point and its neighbors is acquired. To further reduce dimensionality, what is finally passed at the sampler is the distance between the histograms of a point and its neighbors. The distance metrics used are EMD,Hellinger,and KL divergence. The color signature of the cloud is being encoded with an approach similar to ~\cite{smcddp}. The color spectrum is discretized and what is extracted is the count of different color signatures between a point and its k nearest neighbors. Finally the position of every point is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. What the downsampling procedure outputs is a vector of $ \textbf{x} = (x_s, x_c, x_a) $ where $s$ represents a 3x1 vector of space information, $c$ a 27x1 vector of colour information and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1). It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it greatly reduces(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
 
 \begin{figure}[h!]
   \caption{Point cloud modification pipeline.}
@@ -271,7 +267,7 @@ cloud expected is the one after all the frame transformations are done in the tf
   \label{pcl:mod}
 \end{figure}
 
-\textbf{Lines 5:} The clustering takes place in this line. The input of the method is the feature vector for every data point which is calculated in the previous steps. An SMC sampler is used as was presented in the theory section. 
+\textbf{Lines 5:} The clustering takes place in this line. The input of the method is the feature vector for every data point which is calculated in the previous steps. The clustering is done using the SMC sampler presented in the theory section. 
 
 \textbf{Lines 6-12:} The correspondence of previously seen landmarks to current observations is computed in lines 6-12. Since the landmarks are distributions, statistical distances can be taken to perform the matching. For every observation, its distances with all the stored landmarks are calculated. The calcBestSim function takes as input the observation and all the previously seen landmarks and returns highest similarity match with the landmarks already in the database as well as its landmark id. If the similarity is high enough, correspondence is performed and the landmark is added to the landmark list to be send for update in the EKF, otherwise a new landmark is added and its ID is then added to the list.
 
