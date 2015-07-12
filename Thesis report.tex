@@ -279,13 +279,13 @@ Now that the general pipeline is defined, specific parts of the method will be d
 
 \subsection{The data distribution}
 \label{data:dist}
-The point cloud consists of many points hence a data unit will be considered a single point.
-Each point $x$ in the input consists of a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ colour information. The method those features are extracted is explained in lines 3 and 4 in the general pipeline. For the purpose of this project each part of the cloud was represented by vector of length 32 with the first three elements representing the space information, elements 4-6 angle information, and the rest colour information.
 
-The object model is a mixture of distributions over the data with each object beign modeled as D($\theta_t^k$) where $\theta$ represents the parameters of object $k$ at time $t$. More specifically, each set \textbf{x} with $n$ datapoints at time $t$ is distributed as:
+Each point $x$ in the cloud is represented as a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ color information. The method those features are extracted is explained in lines 3 and 4 in the general pipeline. For the purpose of this project each point in the cloud is represented by vector of length 32 with the first three elements representing the space information, elements 4-6 angle information, and the rest color information.
+
+The object model is a mixture of distributions over the data with each object being modeled as D($\theta_t^k$) where $\theta$ represents the parameters of object $k$ at time $t$. More specifically, each set \textbf{x} with $n$ datapoints at time $t$ is distributed as:
 $$ x_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
 
-Where Normal is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; Mult is a Categorical multinomial distribution with parameter vector $\delta$ representing weigths the colour distribution and Exp is an exponential with shape parameter $\lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. For this graph data points from various point clouds where taken and passed through the pipeline analysed in lines 3-4. The data were then plotted, and the figure shows what the aggregated angle distribution between neighbor datapoints is. Since there is a clear exponential trend, the exponential distribution was chosen to model it. A gamma distribution is also a nice fit for the data, but due to time constrains, only one modeling    distribution was explored.
+Where Normal is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; Mult is a Categorical multinomial distribution with parameter vector $\delta$ representing the weights of the color distribution and Exp is an exponential with shape parameter $\lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. Since there is a clear exponential trend, the exponential distribution was chosen to model the angle signature of the data.
 
 \begin{figure}[h!]
   \centering
@@ -345,7 +345,7 @@ where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior parameters given th
 
 \subsection{Sequential monte carlo sampler}
 
-Sequential monte carlo samplers for Dirichlet process mixture models where introduced by Doucet et al~\cite{doucet} and serve as fast alternative to MCMC and VI methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation cannot occur in a time horizon of 1 that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
+Sequential monte carlo samplers for Dirichlet process mixture models where introduced by Doucet et al~\cite{doucet} and serve as fast alternative to MCMC and VI methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation is hard to occur at a small time horizon of that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
 
 \begin{algorithm}[h]
   \caption{SMC for DDPM}\label{SMC}
@@ -419,17 +419,17 @@ q_N = q_0 +  \sum_n x_i^c\\
 \end{equation}
 
 
-Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations. The formulas for the updates can be found at the literature of cojugate priors with\cite{conjugate} being a good example.
+Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations. The formulas for the updates can be found at the literature of cojugate priors like\cite{conjugate}.
 
 \subsubsection{Weight updates}
 
-The only thing left to explicitly define the sampler in its whole is the weight update step. More specifically, on every time step $t$ the weight of particle $l$ is calculated as:
+The only thing left is to define the weight update step. More specifically, on every time step $t$ the weight of particle $l$ is calculated as:
 
 \begin{equation}
 w_t^{(l)} = \frac {P(c_t^{(l)} , \theta_t^{(l)}, x_t| 	\theta_{t-1} )}{P(c_t^{(l)} , \theta_t^{(l)}| 	\theta_{t-1} )}
 \end{equation}
 
-Using bayes rule, the numerator can be written as:
+Using Bayes rule, the numerator can be written as:
 
 \begin{equation}
 	P(x_t , | c_t^{(l)} , \theta_t^{(l)} \theta_{t-1} ) \times P(c_t^{(l)} , \theta_t^{(l)}|  \theta_{t-1} )
@@ -627,12 +627,19 @@ The restrictions introduced by the decision layer are relatively simple due to i
 
 \subsection{EKF-SLAM experiments}
 
-Now that the method along with its strengths and weaknesses are analysed, it can be used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm. The method will be tested in its speed and 	memory requirements. As was shown when calculating the complexity of the method, speed complexity was shown to be very dependent to the downsampling process. If the downsampling threshold operations are strict and the cloud is being stripped of many of its points, accuracy will decline and speed will increase. As shown in the landmark size section, the unit cost of a Landmark has an upper limit. Therefore, the memory requirements of the method are directly depending on how many landmarks the algorithm allows before converging. A strict landmark matching decision layer that requires a high degree of correlation to match landmarks will converge to a higher amount of landmarks compared to a less strict one.
+Now that the method along with its strengths and weaknesses are analysed, the pipline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm. The method will was tested in its speed and memory requirements. As it was shown when calculating the complexity of the method, speed is dependent to the downsampling process. If the downsampling threshold operations are strict and the cloud is being stripped of many of its points, accuracy will decline and speed will increase. As shown in the landmark size section, the unit cost of a Landmark has an upper limit. Therefore, the memory requirements of the method are directly depending on how many landmarks the algorithm allows. A strict landmark matching decision layer that requires a high degree of correlation to match landmarks will converge to a higher amount of landmarks compared to a less strict one. In figure\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown.
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=.8\textwidth]{slam110landmarks2}
+    \caption{SLAM session using the pipeline.}
+  \label{slam}
+\end{figure}
+
 
 \subsubsection{Speed}
 
-The speed factor was tested on a mid level as well as o a high level machine to see the differences in time needed to perform the operations. The results of a machine running on a pentium i5-3210M with 6GB of RAM are shown in table
-
+The speed factor was tested on a mid level as well as on a high level machine to see the differences in time needed to perform the operations. The results of a machine running on a pentium i5-3210M and on a pentium i7 are shown in table \label{bench}:
 
 \begin{center}
 
@@ -654,39 +661,32 @@ The speed factor was tested on a mid level as well as o a high level machine to 
      \hline
      1cm & 14.3283 & 25556 & 5.06356 & 0.00278712 & 0.854803  \\
      \hline
+     \multicolumn{6}{|l|}{\centerline{Pentium i7}} \\
+     \hline
+      Leaf Size & Downs Time & Cloud size & Sampling & Matching,old & Matching,new \\
+      \hline
+      1m &0.675993	&7&	-	&-&	-\\
+      \hline
+      50cm &0.779975&	30&	-&	-&	-\\
+      \hline
+      30cm &0.676315&	66&	-&	-&	-\\
+      \hline
+      10cm &0.746999&	488&	-&	-&	-\\
+      \hline 
+      5cm &0.878036&	1827&	0.132831&	0.00281951&	0.00281951\\
+      \hline
+      1cm &1.11554	&18487&	2.69855	&0.0021291	&0.0021291  \\
+      \hline
 	 \end{tabular}    
+	 \label{bench}
 \end{center}
 
 
 The leaf size directly affects the time the cloud takes to be processed in the pipeline as well as the time the sampling takes aftewards. Experimental evaluation has showed that a leaf size between 1-5cm gives a good balance between speed and precision. The difference between Matching,old and Matching,new has to do with the fact that in the second case, a new landmark is added and therefore DB operations take place. When matching old is the same as matching new, then all the clusteres where matched to items in the database.
-					
-
-\begin{center}
-
-    \begin{tabular}{|C|C|C|C|C|C|}
-    \hline
-    \multicolumn{6}{|l|}{\centerline{Pentium i7}} \\
-    \hline
-     Leaf Size & Downs Time & Cloud size & Sampling & Matching,old & Matching,new \\
-     \hline
-     1m &0.675993	&7&	-	&-&	-\\
-     \hline
-     50cm &0.779975&	30&	-&	-&	-\\
-     \hline
-     30cm &0.676315&	66&	-&	-&	-\\
-     \hline
-     10cm &0.746999&	488&	-&	-&	-\\
-     \hline 
-     5cm &0.878036&	1827&	0.132831&	0.00281951&	0.00281951\\
-     \hline
-     1cm &1.11554	&18487&	2.69855	&0.0021291	&0.0021291  \\
-     \hline
-	 \end{tabular}    
-\end{center}
 
 \subsubsection{Memory requirements}
 
-The memory requirements of the method is a function that is directly affected to the $\alpha$ strength parameter of the samplergGiven that the decison boundary is constant. As the $\alpha$ parameter increases, the sampler will output more clusters on every iteration. The higher amount the of cluster will result a higher amount of landmarks and, consequently, in larger memory requirements in the method. Figure [fig] shows memory requirements as a function of strength parameter alpha.
+The memory requirements of the method is a function that is directly affected to the $\alpha$ strength parameter of the sampler given that the decison boundary is constant. As the $\alpha$ parameter increases, the sampler will output more clusters on every iteration. The higher amount the of cluster will result a higher amount of landmarks and, consequently, in larger memory requirements in the method. Figure [fig] shows memory requirements as a function of strength parameter alpha.
 
 
 \begin{figure}[h!]
@@ -703,7 +703,7 @@ As it can be seen, the number of landmarks follows the logarithmic trend of the 
 \section{Conclusion and future work}
 \label{sec:discussion}
 
-In this paper a novel method for cloud representation using non-parametric Bayesian tools was introduced. Its strengths and weaknesses where presented and an application on how this method could be used to tackle the compression problem of long term SLAM were given. This is far from the extend of such methods go. There is a number of directions in which such methods could be improved. Firstly given the nature of the sampler, choosing more complex representations could increase the quality of the sampler making it easier to represent with better precision more complex objects. Furthermore, since the sampler outputs chunks of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures instead of parts of the environment as well as be able to handle the dynamic component that long term slam problems introduce. Finally, 	
+In this paper a novel method for cloud representation using non-parametric Bayesian tools was introduced. Its strengths and weaknesses where presented and an application on how this method could be used to tackle the compression problem of long term SLAM were given. This is far from the extend of such methods go. There is a number of directions in which such methods could be improved. Firstly given the nature of the sampler, choosing more complex representations could increase the quality of the sampler making it easier to represent with better precision more complex objects. Furthermore, since the sampler outputs chunks of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures instead of parts of the environment as well as be able to handle the dynamic component that long term slam problems introduce. 
 
 \begin{itemize}
     \item Extend to dynamic environments
