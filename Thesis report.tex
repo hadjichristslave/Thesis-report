@@ -218,7 +218,8 @@ This process can be though of in the terms of a general Chinese restaurant proce
 \label{sec:model}
 
 \subsection{General pipeline}
-Now that the data distribution and the GPU are defined, the pipeline and its operating mechanisms can be presented. Fig.~\ref{pipeline}(a) shows the flow of operations. The EKF-SLAM module requests new observation readings given the point cloud currently read by the sensors. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed.  Fig.~\ref{pipeline}(b) shows a more detailed view of what happens in the pipeline. The same procedure is described in Algorithm~\ref{euclid}.
+
+Now that the data distribution and the GPU are defined, the pipeline and its operating mechanisms can be presented. The general flow of operations is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, data are output as clusters from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The same procedure is described in Algorithm~\ref{euclid}. 
 
 
 \begin{figure}
