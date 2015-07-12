@@ -686,7 +686,7 @@ The leaf size directly affects the time the cloud takes to be processed in the p
 
 \subsubsection{Memory requirements}
 
-The memory requirements of the method is a function that is directly affected to the $\alpha$ strength parameter of the sampler given that the decison boundary is constant. As the $\alpha$ parameter increases, the sampler will output more clusters on every iteration. The higher amount the of cluster will result a higher amount of landmarks and, consequently, in larger memory requirements in the method. Figure [fig] shows memory requirements as a function of strength parameter alpha.
+The memory requirements of the method is a function that is directly affected to the $\alpha$ strength parameter of the sampler given that the decision boundary is constant. As the $\alpha$ parameter increases, the sampler will output more clusters on every iteration. The higher amount the of cluster will result a higher amount of landmarks and, consequently, in larger memory requirements in the method. Fig.\ref{pcl:kl} shows memory requirements as a function of strength parameter alpha.
 
 
 \begin{figure}[h!]
@@ -696,7 +696,7 @@ The memory requirements of the method is a function that is directly affected to
   \label{pcl:kl}
 \end{figure}
 
-As it can be seen, the number of landmarks follows the logarithmic trend of the distribution in relation to $alpha$. Increasing the  alpha value more will not make the algorithm follow the trend indefinitely. That is due to the fact that as the alpha increases, the currently constant decision layer will keep adding landmarks until the environment saturates and no new landmarks can be added. It must be noted that as the alpha parameter is set to higher numbers, the sampler outputs more clusters making it more accurate of the environment descriptor it outputs, but also takes more time, making it non feasible to use this in real time mapping scenarios. Values of alpha between 0 and 10 provide a robust but also fast enough sampler that can be used in online mapping scenarios.
+As it can be seen, the number of landmarks follows the logarithmic trend of the distribution in relation to $\alpha$. Increasing the alpha value more will not make the algorithm follow the logarithmic trend indefinitely. That is due to the fact that as the alpha increases, the constant decision layer has an upper bound to the number of landmarks it can have. This means that the algorithm will keep adding landmarks until the environment saturates and no new landmarks can be added. It must also be noted that as the alpha parameter is set to higher numbers, the sampler outputs more clusters making it more accurate of the environment descriptor it outputs, but also takes more time, making it non feasible to use this in real time mapping scenarios. Values of alpha between 0 and 10 provide a robust but also fast enough sampler that can be used in online mapping scenarios.
 
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  12 JUL 2015 19:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  12 JUL 2015 19:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -940,7 +940,7 @@ Overfull \hbox (12.8pt too wide) in paragraph at lines 646--682
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [25 <./pics/monsterchair.png (PNG copy)>] [26 <./pics/slam110landmarks2.png>]
-<pics/memoryRequirements2.png, id=444, 1348.03625pt x 735.74875pt>
+<pics/memoryRequirements2.png, id=445, 1348.03625pt x 735.74875pt>
 File: pics/memoryRequirements2.png Graphic file (type png)
 
 <use pics/memoryRequirements2.png>
@@ -990,9 +990,9 @@ i.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on "Thesis report.pdf" (31 pages, 4013914 bytes).
+Output written on "Thesis report.pdf" (31 pages, 4014075 bytes).
 PDF statistics:
- 545 PDF objects out of 1000 (max. 8388607)
+ 546 PDF objects out of 1000 (max. 8388607)
  138 named destinations out of 1000 (max. 500000)
  58675 words of extra memory for PDF output out of 61914 (max. 10000000)
 
