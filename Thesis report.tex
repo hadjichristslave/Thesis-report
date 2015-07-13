@@ -604,7 +604,7 @@ The exponential part of the distribution is responsible for the angle signature 
 \subsubsection{Clustering layer}
 
 
-An important limit of the pipeline exists with respect to the Dirichlet hyper-parameter $\alpha$. During the clustering, choosing a correct value for the hyper-parameter $\alpha$ is very important in order to have optimal results. Having sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no environment specific information are incorporated to the cloud. Fig.[\ref{pip:limits}](a) shows the behaviour of the sampler for $\alpha$ values lower than 1. On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler every time. That in combination with the stricter decision layer can lead to a non-converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters that contain a small number of points each. Furthermore, having a high value in the hyperparameter leads to a slower sampling procedure since the complexity of the sampler is $O(KLSN)$ where $K$ is the number of clusters. Fig.[\ref{pip:limits}](b) displays the behavior of the sampler for very large values $\alpha$.
+An important limit of the pipeline exists with respect to the Dirichlet hyper-parameter $\alpha$. During the clustering, choosing a correct value for the hyper-parameter $\alpha$ is very important in order to have optimal results. Having sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no environment specific information are incorporated to the cloud. Fig.[\ref{pip:limits}](a) shows the behaviour of the sampler for $\alpha$ values lower than 1. On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler every time. That in combination with the stricter decision layer can lead to a non-converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters that contain a small number of points each. Furthermore, having a high value in the hyperparameter leads to a slower sampling procedure since the complexity of the sampler is $O(TKLSN)$ where $K$ is the number of clusters. Fig.[\ref{pcl:kl}](b) displays the behavior of the sampler for very large values $\alpha$.
 
 
 \begin{figure}
@@ -633,7 +633,7 @@ The restrictions introduced by the decision layer are relatively simple due to i
 
 \subsection{EKF-SLAM experiments}
 
-Now that the method along with its strengths and weaknesses are analysed, the pipline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm. The method will was tested in its speed and memory requirements. As it was shown when calculating the complexity of the method, speed is dependent to the downsampling process. If the downsampling threshold operations are strict and the cloud is being stripped of many of its points, accuracy will decline and speed will increase. As shown in the landmark size section, the unit cost of a Landmark has an upper limit. Therefore, the memory requirements of the method are directly depending on how many landmarks the algorithm allows. A strict landmark matching decision layer that requires a high degree of correlation to match landmarks will converge to a higher amount of landmarks compared to a less strict one. In figure\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown.
+Finally, the pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. As it was shown when calculating the complexity of the method, speed is dependent to the downsampling process. If the downsampling threshold operations are strict and the cloud is being stripped of many of its points, accuracy will decline and speed will increase. As shown in the landmark size section, the unit cost of a Landmark has an upper limit. Therefore, the memory requirements of the method are directly depending on how many landmarks the algorithm allows. A strict landmark matching decision layer that requires a high degree of correlation to match landmarks will converge to a higher amount of landmarks compared to a less strict one. In Fig.\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown.
 
 \begin{figure}[h!]
   \centering
@@ -667,7 +667,7 @@ The speed factor was tested on a mid level as well as on a high level machine to
      \hline
      1cm & 14.3283 & 25556 & 5.06356 & 0.00278712 & 0.854803  \\
      \hline
-     \multicolumn{6}{|l|}{\centerline{Pentium i7}} \\
+     \multicolumn{6}{|l|}{\centerline{Pentium i7-3610QM}} \\
      \hline
       Leaf Size & Downs Time & Cloud size & Sampling & Matching,old & Matching,new \\
       \hline
@@ -688,7 +688,7 @@ The speed factor was tested on a mid level as well as on a high level machine to
 \end{center}
 
 
-The leaf size directly affects the time the cloud takes to be processed in the pipeline as well as the time the sampling takes aftewards. Experimental evaluation has showed that a leaf size between 1-5cm gives a good balance between speed and precision. The difference between Matching,old and Matching,new has to do with the fact that in the second case, a new landmark is added and therefore DB operations take place. When matching old is the same as matching new, then all the clusteres where matched to items in the database.
+The leaf size directly affects the time the cloud takes to be processed in the pipeline as well as the time the sampling takes aftewards. Experimental evaluation has showed that a leaf size between 1-5cm provides a good balance between speed and precision. The difference between Matching,old and Matching,new has to do with the fact that in the second case, a new landmark is added and therefore DB operations take place. When matching old is the same as matching new, then all the clusteres where matched to items in the database.
 
 \subsubsection{Memory requirements}
 
