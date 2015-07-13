@@ -224,70 +224,10 @@ This process can be though of in the terms of a general chinese restaurant proce
 
 Now that the data distribution and the GPU are defined, the pipeline and its operating mechanisms can be presented. The sampler will be defied as part of the pipeline which will be used to as part of the sensor model of the SLAM module, and its internal mechanisms will be described in detail in the sampler section of the model definition.
 
-\subsection{General pipeline}
-
-The general flow of operations is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The procedure that is shown in Algorithm~\ref{euclid} is described analytical in as follows:
-
-
-\begin{figure}
-\begin{tabular}{cc}
-  \includegraphics[width=65mm]{workflowGen} &    \includegraphics[width=65mm]{workflowSpec} \\
-(a) General pipeline & (b) Landmark pipeline \\[6pt]
-\end{tabular}
-\caption{General landmark update pipeline}
-\label{pipeline}
-\end{figure}
-
-
-
-\begin{algorithm}
-  \caption{Landmark Layer}\label{euclid}
-  \begin{algorithmic}[1]
-    \Procedure{getLandmarkIds}{$pointCloud, timepoint, existingLandmarks$}
-      \State $initialize(landMarkIds)$
-      \State $pointCloudReduced \gets extractMetaFeatures(pointCloud)$ 
-      \State $features \gets extractMetaFeatures(pointCloudReduced)$
-      \State $landmarks \gets cluster(features)$  
-      \For{\texttt{$landmarks$ as $landmark$}}
-	      \State $ (similarity, landId) \gets calcBestSim(landmark, existingLandmarks) $
-			\If{$similarity >threshold$}
-			   \State $ addLandmarks(landMarkIds, landId)$
-			\Else 
-			   \State $ newLandID \gets addLandmarkDB(landmarkDB, landmark)$
-			   \State $addLandmarks(newLandID)$
-			\EndIf
-      \EndFor
-      \State \textbf{return} $ landMarkIds$\Comment{Return landmarks}
-    \EndProcedure
-  \end{algorithmic}
-\end{algorithm}
-
-
-\textbf{Method input:} The method takes as input a point cloud as it is currently being read by the kinect sensor.
-
-\textbf{Lines 3-4:} The preprocessing of the pipeline includes cloud downsampling and feature extraction. Feature extraction is done through the pcl\cite{pcl} library. A voxel grid is used to reduce the dataset size. A leaf size of approximately 3cm produces a good trade-off between precision and speed. The object representation used approach is similar to\cite{objectpointslam}. Instead of using the CSHOT descriptor, fpfh\cite{fpfh} histogram is used instead. A fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. After the fpfh estimation a 23 dimensional angular signature of information between a point and its neighbors is acquired. To further reduce dimensionality, what is finally passed at the sampler is the distance between the histograms of a point and its neighbors. The distance metrics used are EMD,Hellinger,and KL divergence. The color signature of the cloud is being encoded with an approach similar to ~\cite{smcddp}. The color spectrum is discretized and what is extracted is the count of different color signatures between a point and its k nearest neighbors. Finally the position of every point is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. What the downsampling procedure outputs is a vector of $ \textbf{x} = (x_s, x_c, x_a) $ of size $l \times 31 $ where $s$ represents a 3x1 vector of space information, $c$ a 27x1 vector of colour information and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1) and $l$ is the number of points in the cloud. It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it greatly reduces(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
-
-\begin{figure}[h!]
-  \caption{Point cloud modification pipeline.}
-  \centering
-    \includegraphics[width=1\textwidth]{Basic}
-  \label{pcl:mod}
-\end{figure}
-
-\textbf{Lines 5:} The clustering takes place in this line. The input of the method is the feature vector for every data point which is calculated in the previous steps. The clustering is done using the SMC sampler presented in the theory section. 
-
-\textbf{Lines 6-12:} The correspondence of previously seen landmarks to current observations is computed in lines 6-12. Since the landmarks are distributions, statistical distances can be taken to perform the matching. For every observation, its distances with all the stored landmarks are calculated. The calcBestSim function takes as input the observation and all the previously seen landmarks and returns highest similarity match with the landmarks already in the database as well as its landmark id. If the similarity is high enough, correspondence is performed and the landmark is added to the landmark list to be send for update in the EKF, otherwise a new landmark is added and its ID is then added to the list.
-
-\textbf{Lines 15:} The algorithm returns the list of the most probable landmarks the robot encounters in this current time.
-
-
-Now that the general pipeline is defined, specific parts of the method will be defined in more detail
-
-
 \subsection{The data distribution}
 \label{data:dist}
 
-Each point $x$ in the cloud is represented as a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ color information. The method those features are extracted is explained in lines 3 and 4 in the general pipeline. For the purpose of this project each point in the cloud is represented by vector of length 32 with the first three elements representing the space information, elements 4-6 angle information, and the rest color information.
+Each point $x$ in the cloud is represented as a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ color information. The method those features are extracted is explained in lines 3 and 4 in the general pipeline. For the purpose of this project each point in the cloud is represented by vector of length 33 with the first three elements representing the space information, elements 4-6 angle information, and the rest color information.
 
 The object model is a mixture of distributions over the data with each object being modeled as D($\theta_t^k$) where $\theta$ represents the parameters of object $k$ at time $t$. More specifically, each set \textbf{x} with $n$ datapoints at time $t$ is distributed as:
 $$ x_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
@@ -461,6 +401,65 @@ Every cluster consists of a three part distribution as it was defined in section
 With that in mind the distance between every distribution can be transposed of a vector of length 5. That way, deciding if a cluster is part of a landmark that has been encountered before is now a problem of finding the optimal decision boundary given the distances at hand. For the purposes of this thesis, the decision boundary of an observation being a landmark or not was chosen by empiric evaluation of the landmarks. It is of course possible to learn the optimal decision boundary but due to time restrictions a simpler decision making approach was chosen instead.
 
 
+\subsection{General pipeline}
+
+The general flow of operations is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The procedure that is shown in Algorithm~\ref{euclid} is described analytical in as follows:
+
+
+\begin{figure}
+\begin{tabular}{cc}
+  \includegraphics[width=65mm]{workflowGen} &    \includegraphics[width=65mm]{workflowSpec} \\
+(a) General pipeline & (b) Landmark pipeline \\[6pt]
+\end{tabular}
+\caption{General landmark update pipeline}
+\label{pipeline}
+\end{figure}
+
+
+
+\begin{algorithm}
+  \caption{Landmark Layer}\label{euclid}
+  \begin{algorithmic}[1]
+    \Procedure{getLandmarkIds}{$pointCloud, timepoint, existingLandmarks$}
+      \State $initialize(landMarkIds)$
+      \State $pointCloudReduced \gets extractMetaFeatures(pointCloud)$ 
+      \State $features \gets extractMetaFeatures(pointCloudReduced)$
+      \State $landmarks \gets cluster(features)$  
+      \For{\texttt{$landmarks$ as $landmark$}}
+	      \State $ (similarity, landId) \gets calcBestSim(landmark, existingLandmarks) $
+			\If{$similarity >threshold$}
+			   \State $ addLandmarks(landMarkIds, landId)$
+			\Else 
+			   \State $ newLandID \gets addLandmarkDB(landmarkDB, landmark)$
+			   \State $addLandmarks(newLandID)$
+			\EndIf
+      \EndFor
+      \State \textbf{return} $ landMarkIds$\Comment{Return landmarks}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+
+\textbf{Method input:} The method takes as input a point cloud as it is currently being read by the kinect sensor.
+
+\textbf{Lines 3-4:} The preprocessing of the pipeline includes cloud downsampling and feature extraction. Feature extraction is done through the pcl\cite{pcl} library. A voxel grid is used to reduce the dataset size. A leaf size of approximately 3cm produces a good trade-off between precision and speed. The object representation used approach is similar to\cite{objectpointslam}. Instead of using the CSHOT descriptor, fpfh\cite{fpfh} histogram is used instead. A fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. After the fpfh estimation a 23 dimensional angular signature of information between a point and its neighbors is acquired. To further reduce dimensionality, what is finally passed at the sampler is the distance between the histograms of a point and its neighbors. The distance metrics used are EMD,Hellinger,and KL divergence. The color signature of the cloud is being encoded with an approach similar to ~\cite{smcddp}. The color spectrum is discretized and what is extracted is the count of different color signatures between a point and its k nearest neighbors. Finally the position of every point is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. What the downsampling procedure outputs is a vector of $ \textbf{x} = (x_s, x_c, x_a) $ of size $l \times 33 $ where $s$ represents a 3x1 vector of space information, $c$ a 27x1 vector of colour information and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1) and $l$ is the number of points in the cloud. It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it greatly reduces(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
+
+\begin{figure}[h!]
+  \caption{Point cloud modification pipeline.}
+  \centering
+    \includegraphics[width=1\textwidth]{Basic}
+  \label{pcl:mod}
+\end{figure}
+
+\textbf{Lines 5:} The clustering takes place in this line. The input of the method is the feature vector for every data point which is calculated in the previous steps. The clustering is done using the SMC sampler presented in the theory section. 
+
+\textbf{Lines 6-12:} The correspondence of previously seen landmarks to current observations is computed in lines 6-12. Since the landmarks are distributions, statistical distances can be taken to perform the matching. For every observation, its distances with all the stored landmarks are calculated. The calcBestSim function takes as input the observation and all the previously seen landmarks and returns highest similarity match with the landmarks already in the database as well as its landmark id. If the similarity is high enough, correspondence is performed and the landmark is added to the landmark list to be send for update in the EKF, otherwise a new landmark is added and its ID is then added to the list.
+
+\textbf{Lines 15:} The algorithm returns the list of the most probable landmarks the robot encounters in this current time.
+
+
+Now that the general pipeline is defined, specific parts of the method will be defined in more detail
+
 \subsection{Complexity}
 
 The complexity can be decomposed into three parts. The cloud downsampling, the clustering and the decision making process.
@@ -506,7 +505,7 @@ The complexity as defined in equation~\ref{Q_2} depends greatly on the initial r
 
 \subsection{Landmark size}
 
-The basic block of this algorithm is the cluster. In order to be able to compute how scalable the method is, the size of a single landmark will be computed. Each landmark is represented by a single row in an SQLite database. To calculate how much space a landmark occupies, we will first calculate how space each of the columns has. Each row consists of 32 real numbers and 1 auto increment integer. Given that SQLite databases assign the memory dynamically, the worst case scenarios will be taken into account so that every other case is also included. According to the SQLite manual of datatypes~\cite{sqlite} a real value takes up to 8 bytes of memory. An auto increment integer takes up to 4 bytes of information, so the total number  of memory for a worst case scenario landmark is 260 bytes. This number can vary greatly over different environments and is a safe assumption to calculate the memory this method occupies.
+The basic block of this algorithm is a cluster containing an environment signature. In order to be able to compute how scalable the method is, the size of a single landmark will be computed. Each landmark is represented by a single row in an SQLite database. To calculate how much space a landmark occupies, we will first calculate how space each of the columns has. Each row consists of 32 real numbers and 1 auto increment integer. Given that SQLite databases assign the memory dynamically, the worst case scenarios will be taken into account so that every other case is also included. According to the SQLite manual of datatypes~\cite{sqlite} a real value takes up to 8 bytes of memory. An auto increment integer takes up to 4 bytes of information, so the total number  of memory for a worst case scenario landmark is 260 bytes. This number can vary greatly over different environments and is a safe assumption to calculate the memory this method occupies.
 
 \section{Results}
 \label{sec:results}
@@ -578,7 +577,7 @@ Now that the structured is inferred, the distances between the clusters can be c
 
 \subsection{The decision layer}
 
-The decision boundary of the pipeline can be decomposed into three basic parts; a positional, an color and an angular boundary. Figure[\ref{pip:bounds}] shows the behavior of the decision layer with respect to the Gaussian(positional) and Categorical(color) parts. 
+The decision boundary of the pipeline can be decomposed into three basic parts; a positional, a color and an angular boundary. Figure[\ref{pip:bounds}] shows the behavior of the decision layer with respect to the Gaussian(positional) and Categorical(color) parts. 
 
 \begin{figure}[h!]
 
@@ -592,7 +591,7 @@ The decision boundary of the pipeline can be decomposed into three basic parts; 
   \label{pip:bounds}
 \end{figure}
 
-In Fig.\ref{pip:bounds}(a) the yellow folder allong with some of its environment to the left are being assigned to landmark with id 7386. The folder is then removed and a blue trashcan is put in its place. The folder and the trashcan are similar in size and due to that their Gaussian counterparts will not have large distances. Their main difference lies in the color signature they carry. Since the distance in their color is substantial, a new landmark with id 7412 is created to capture the change in the signature of the environment at that place of the map. The different landmark assigned to the cluster can be seen in Fig.\ref{pip:bounds}(b). In Fig.\ref{pip:bounds}(c) and(d) the positional decision boundary is displayed. In the initial position as shown in Fig.\ref{pip:bounds}(c) the yellow folder is assigned to the green landmark of the cloud. As the object is moved a different position in the cloud, it is being assigned to a different cluster. The reason the cluster is assigned to multiple landmarks is due to the fact that the folder is decomposed to several clusters and each one of them is being assigned to a different part of the cloud with respect to their position. This can be seen in Fig.\ref{pip:bounds}(c) where the bottom left of the folder is being assigned to the red cluster. Parameter tweaking is possible but the purpose of a general pipeline is to use as little parameter tweaking as possible so that the method is general and can be applied to a multitude of scenarios.
+In Fig.\ref{pip:bounds}(a) the yellow folder allong with some of its environment to the left are being assigned to landmark with id 7386. The folder is then removed and a blue trashcan is put in its place. The folder and the trashcan are similar in size and due to that their Gaussian counterparts will not have large distances. Their main difference lies in the color signature they carry. Since the distance in their color is substantial, a new landmark with id 7412 is created to capture the change in the signature of the environment at that place of the map. The different landmark assigned to the cluster can be seen in Fig.\ref{pip:bounds}(b). In Fig.\ref{pip:bounds}(c) and(d) the positional decision boundary is displayed. In the initial position as shown in Fig.\ref{pip:bounds}(c) the yellow folder is assigned to the green landmark of the cloud. As the object is moved a different position in the cloud, it is being assigned to a different cluster. The reason the cluster is assigned to multiple landmarks is due to the fact that the folder is decomposed to several clusters and each one of them is being assigned to a different part of the cloud with respect to their position. This can be seen in Fig.\ref{pip:bounds}(c) where the bottom left of the folder is being assigned to the red cluster. Parameter tweaking is possible but the purpose of a general pipeline is to use as little parameter tweaking as possible so that the method is general and can easily be applied to a different scenarios.
 
 The exponential part of the distribution is responsible for the angle signature elements within a cluster have. Practically, having a large amount of different angle distributions in a single cluster leads to objects that have texture and their surface is not smooth. Having a very strict limit in the angle distribution can lead to very small clusters and subsequently to a high amount of landmarks within the data. Using the data from the kinect camera, angle distributions are highly prone to high amounts of noise that is found in parts of the cloud that are near the end of Kinect sensor's range. Practical evaluation has shown that using an angle limit that is close to the average distance between angle signatures produces stable results and reasonably sized landmarks in the cloud.
 
