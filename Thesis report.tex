@@ -158,7 +158,7 @@ Seongyong Koo et al.~\cite{objectDisc} introduce a method of unsupervised object
 
 \subsection{Point Cloud Object segmentation}
 
-Research towards object segmentation in point clouds is focusing on calculating meta information regarding the points and applying a heuristic function to calculate if the points could belong in the same segment of the cloud. Trevor et al.~\cite{pointSeg} take positional information, Euclidean distances and the normal of points to as input to their heuristic and output segments that are part of the same object. PCL library~\cite{pcl} introduces methods like Euclidean clustering and conditional Euclidean clustering that use a number of heuristics that take normal as well as curvature information to extract segments in the point cloud that represent objects. Furthermore, a there is a lot of research on segmentation of point clouds in scenes, the emphasis is usually on extracting geometric primitives~\cite{planarSeg},~\cite{planarSeg2} using cues like normals and curvature. Rabbani et al~\cite{segOverview} introduce a new method of object segmentation using KNN as their base algorithm. They also present a very informative literature review along with the strengths and weaknesses of existing methods. Finally Triebel et al.~\cite{smartSeg} introduce a general clustering framework that does not rely on plane segmentation. Instead of segmenting the plane by using classical approaches like RANSAC or MLASAC they introduce a framework where they make no assumptions regarding plane data. 
+Research towards object segmentation in point clouds is focusing on calculating meta information regarding the points and applying a some filter function over those points to calculate if the points could belong in the same segment of the cloud. Trevor et al.~\cite{pointSeg} take positional information, Euclidean distances and the normal of points to as input to their heuristic and output segments that are part of the same object. PCL library~\cite{pcl} introduces methods like Euclidean clustering and conditional Euclidean clustering that use a number of heuristics that take normal as well as curvature information to extract segments in the point cloud that represent objects. Furthermore, a there is a lot of research on segmentation of point clouds in scenes, the emphasis is usually on extracting geometric primitives~\cite{planarSeg},~\cite{planarSeg2} using cues like normals and curvature. Rabbani et al~\cite{segOverview} introduce a new method of object segmentation using KNN as their base algorithm. They also present a very informative literature review along with the strengths and weaknesses of existing methods. Finally Triebel et al.~\cite{smartSeg} introduce a general clustering framework that does not rely on plane segmentation. Instead of segmenting the plane by using classical approaches like RANSAC or MLASAC they introduce a framework where they make no assumptions regarding plane data. 
 
 \subsection{Non Parametric Bayesian methods}
 
@@ -168,7 +168,7 @@ Dirichlet processes and Dirichlet process mixture models are the cornerstone of 
 
 In its general definition, the correspondence problem refers to the problem of ascertaining which parts of one image correspond to which parts of another image, where differences are due to movement of the camera, the elapse of time, and/or movement of objects in the photos. Under the semantic SLAM context, it refers to the problem of identifying objects as ones that have been encountered before during the mapping process. Towards that direction Cree et al.~\cite{corresp:first} create a histogram of line segments of each landmark and compute their root mean square error. They then proceed to calculate their RGB signature to calculate the distance between different landmarks. Low et al.~\cite{corres:sec} match Scale Invariant Feature Transform (SIFT) features, an approach which transforms image data into scale-invariant coordinates relative to local features. Lamon et al~\cite{corres:three} store a database of fingerprints which indicate the location in the robot's environment. The features are ordered and stored at a database at as they appear in the robot's immediate surroundings. A new fingerprint is computed for each new view and matched against existing ones. Finally, in Seghal et al.~\cite{corres:four} an extension of SIFT descriptors to 3D data and point clouds is given.
 
-The method presented in this paper receives an input similar to\cite{objectDisc}. The features that are used for the cloud representation are an extension of the features presented in~\cite{smcddp} with the addition of angle information extracted in the points of the cloud. The novelty lies in its probabilistic mechanism as the clustering is done by the SMC sampler in the augmented feature space. Using distributions as a means of representing objects within the point cloud is a form of compression as objects are represented by a distribution which is smaller in size and easier to maintain and expand. The matching then is done by calculating the divergences between distributions. The pipeline is presented in detail in the model definition section.
+The method presented in this paper receives an input similar to\cite{objectDisc}. The features that are used for the cloud representation are an extension of the features presented in~\cite{smcddp} with the addition of angle information extracted in the points of the cloud. The sampler is then used to cluster the data in the augmented feature space. Using distributions as a means of representing objects within the point cloud is a form of compression as objects are represented by a distribution which is smaller in size and easier to maintain and expand. The matching then is done by calculating the divergences between distributions. The pipeline is presented in detail in the model definition section.
   
 
 
@@ -177,10 +177,13 @@ The method presented in this paper receives an input similar to\cite{objectDisc}
 \section{Theory background}
 \label{sec:theory}
 
-\subsection{Generalized Polya's Urn}
-Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those tools by allowing the clusters in the data to vary with some variance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies on the data which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable and have dependencies that cannot be disregarded. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such tools is the inherent extension they provide to dynamic environments.
+The basic theory background regarding the sampler will be presented in this section. Generalized Polya Urn is an extension on basic Urn\cite{polya} models for Dirichlet processes and serves as the base of the sampler presented in the theory section.
 
-A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. In the current project, the $n_th$ datapoint at time $t$,$x_{t,n}$ has an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
+\subsection{Generalized Polya's Urn}
+
+Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data~\cite{antoniak}. Dependent dirichlet processes extend those tools by allowing the clusters in the data to vary with some variance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies on the data which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern~\cite{theory:ddp} and have been widely used since. The main motivation behind using such tools is the inherent extension they provide to dynamic environments.
+
+A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. The current notation defines the $n_{th}$ datapoint at time $t$,$x_{t,n}$ having an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
 
 
 
@@ -205,7 +208,9 @@ A DDP also known as Generalized Polya Urn~\cite{caron} and has the property of r
 
 Where Cat is a categorical distribution, Bin is the binomial distribution, $\alpha$ is the DP concentration parameter and $\rho$ is the deletion parameter of the GPU. This Generative Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$)
 
-This process can be though of in the terms of a general Chinese restaurant process as shown in Fig.~\ref{generalPolya}. At time $t$, suppose there are $n$ customers seating at several tables in the restaurant. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated (b). Each table occupied is moved according to the number of customers still seating in that table (c). A new customer then enters the table and either chooses to sit on one of the existing tables (e) or choose a new with probability proportional to the strength parameter $\alpha$ of the model (f). Now that the basic block of the sampler is defined, the model can be described in detail.
+This process can be though of in the terms of a general chinese restaurant process\cite{antoniak} as shown in Fig.~\ref{generalPolya}. At time $t$, suppose there are $n$ customers seating at several tables in the restaurant. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated (b). Each table occupied is moved according to the number of customers still seating in that table (c). A new customer then enters the table and either chooses to sit on one of the existing tables (e) or choose a new with probability proportional to the strength parameter $\alpha$ of the model(f).
+
+
 
 \begin{figure}[h!]
   \centering
@@ -217,9 +222,11 @@ This process can be though of in the terms of a general Chinese restaurant proce
 \section{Model definition}
 \label{sec:model}
 
+Now that the data distribution and the GPU are defined, the pipeline and its operating mechanisms can be presented. The sampler will be defied as part of the pipeline which will be used to as part of the sensor model of the SLAM module, and its internal mechanisms will be described in detail in the sampler section of the model definition.
+
 \subsection{General pipeline}
 
-Now that the data distribution and the GPU are defined, the pipeline and its operating mechanisms can be presented. The general flow of operations is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The procedure that is shown in Algorithm~\ref{euclid} is described analytical in as follows:
+The general flow of operations is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The procedure that is shown in Algorithm~\ref{euclid} is described analytical in as follows:
 
 
 \begin{figure}
@@ -882,6 +889,9 @@ Canada, July 2007, 2007}
 
 \bibitem{sqlite}
 \newblock{https://www.sqlite.org/datatype3.html}
+
+\bibitem{polya}
+\newblock{Johnson, N. L., \& Kotz, S. (1977). Urn models and their application: an approach to modern discrete probability theory (Vol. 77). New York: Wiley.}
 
 \end{thebibliography}
 

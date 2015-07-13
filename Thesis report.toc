@@ -5,9 +5,9 @@
 \contentsline {subsection}{\numberline {2.3}Non Parametric Bayesian methods}{7}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Correspondence}{8}{subsection.2.4}
 \contentsline {section}{\numberline {3}Theory background}{8}{section.3}
-\contentsline {subsection}{\numberline {3.1}Generalized Polya's Urn}{8}{subsection.3.1}
-\contentsline {section}{\numberline {4}Model definition}{9}{section.4}
-\contentsline {subsection}{\numberline {4.1}General pipeline}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {3.1}Generalized Polya's Urn}{9}{subsection.3.1}
+\contentsline {section}{\numberline {4}Model definition}{10}{section.4}
+\contentsline {subsection}{\numberline {4.1}General pipeline}{10}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}The data distribution}{13}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}Sequential monte carlo sampler}{14}{subsection.4.3}
 \contentsline {subsubsection}{\numberline {4.3.1}Gibbs updates}{15}{subsubsection.4.3.1}
