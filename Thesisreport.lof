@@ -1,10 +1,10 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces GPU}}{9}{figure.1}
+\contentsline {figure}{\numberline {1}{\ignorespaces GPU}}{8}{figure.1}
 \contentsline {figure}{\numberline {2}{\ignorespaces General landmark update pipeline}}{9}{figure.2}
-\contentsline {figure}{\numberline {3}{\ignorespaces Point cloud modification pipeline.}}{11}{figure.3}
+\contentsline {figure}{\numberline {3}{\ignorespaces Point cloud modification pipeline.}}{10}{figure.3}
 \contentsline {figure}{\numberline {4}{\ignorespaces Exponential trend}}{11}{figure.4}
-\contentsline {figure}{\numberline {5}{\ignorespaces Initial data along with the distributions infered}}{18}{figure.5}
-\contentsline {figure}{\numberline {6}{\ignorespaces More complicated color distributions}}{20}{figure.6}
-\contentsline {figure}{\numberline {7}{\ignorespaces The colour and position boudnary is displayed in these pictures}}{21}{figure.7}
-\contentsline {figure}{\numberline {8}{\ignorespaces Fail use cases.}}{22}{figure.8}
-\contentsline {figure}{\numberline {9}{\ignorespaces SLAM session using the pipeline.}}{24}{figure.9}
-\contentsline {figure}{\numberline {10}{\ignorespaces Memory Requirements as a function of strength parameter $\alpha $.}}{25}{figure.10}
+\contentsline {figure}{\numberline {5}{\ignorespaces Initial data along with the distributions infered}}{17}{figure.5}
+\contentsline {figure}{\numberline {6}{\ignorespaces More complicated color distributions}}{19}{figure.6}
+\contentsline {figure}{\numberline {7}{\ignorespaces The colour and position boudnary is displayed in these pictures}}{20}{figure.7}
+\contentsline {figure}{\numberline {8}{\ignorespaces Fail use cases.}}{21}{figure.8}
+\contentsline {figure}{\numberline {9}{\ignorespaces SLAM session using the pipeline.}}{23}{figure.9}
+\contentsline {figure}{\numberline {10}{\ignorespaces Memory Requirements as a function of strength parameter $\alpha $.}}{24}{figure.10}
