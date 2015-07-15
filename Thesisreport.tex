@@ -10,7 +10,6 @@
 \usepackage{booktabs} % Horizontal rules in tables
 \usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
 \usepackage{hyperref} % For hyperlinks in the PDF
-\usepackage{svg}
 
 \usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
 \usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
@@ -39,7 +38,6 @@
 \fancyfoot[RO,LE]{\thepage} % Custom footer text
 
 \usepackage{graphicx}
-\usepackage{movie15}
 \graphicspath{ {pics/} }
 
 %----------------------------------------------------------------------------------------
@@ -112,7 +110,7 @@
 \newpage
 
 \section{Introduction}
-\label{sec:literature}
+\label{sec:Intro}
 
 Simultaneous localization and mapping is one of the fundamental problems of autonomous systems\cite{probRobs}. In order for a robot to be considered truly autonomous, it must have the ability to enter an area and infer its structure. To that direction, a lot of effort has been put in algorithms that are able to map static environments. With solutions like EKF-SLAM\cite{ekf}, FastSlam\cite{slam} and GraphSLAM\cite{graph} robots are now able to efficiently map static environments. 
 The logical extention to methods that can map  static environments is methods that remove this restriction. The idea of lifelong robot learning is not new and has been introduced as a general concept to the literature by Sebastian Thrun~\cite{liflonglearning}. Konolige et al\cite{lifelongmaps} specifically focus on lifelong learning in mapping and the utility such methods would have.  In the PhD thesis of Walcott~\cite{aishalong} long term mapping methods are decomposed to 4 basic subproblems:
@@ -209,7 +207,7 @@ This process can be though of in the terms of a general chinese restaurant proce
 
 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
     \includegraphics[width=.65\textwidth]{generalPolya}
     \caption{Generalised Polya Urn as presented in CRP.}
@@ -231,7 +229,7 @@ $$ x_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^
 
 Where Normal is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; Mult is a Categorical multinomial distribution with parameter vector $\delta$ representing the weights of the color distribution and Exp is an exponential with shape parameter $\lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. Since there is a clear exponential trend, the exponential distribution was chosen to model the angle signature of the data.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
     \includegraphics[width=.5\textwidth]{Kullback-Leibler}
     \caption{Exponential trend in KL distances.}
@@ -291,7 +289,7 @@ where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior parameters given th
 
 Sequential monte carlo samplers for Dirichlet process mixture models where introduced by Doucet et al~\cite{doucet} and serve as fast alternative to MCMC and VI methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation is hard to occur at a small time horizon of that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
 
-\begin{algorithm}[h]
+\begin{algorithm}[ht!]
   \caption{SMC for DDPM}\label{SMC}
   \begin{algorithmic}[1]
 	\State \textbf{Input:} Points \{$x_{1,1:N_t}, ..x_{T,1:N_t}$\}with extracted features
@@ -441,7 +439,7 @@ The general flow of operations is presented in Fig.~\ref{pipeline}(a). During st
 
 \textbf{Lines 3-4:} The preprocessing of the pipeline includes cloud downsampling and feature extraction. Feature extraction is done through the pcl\cite{pcl} library. A voxel grid is used to reduce the dataset size. A leaf size of approximately 3cm produces a good trade-off between precision and speed. The object representation used approach is similar to\cite{objectpointslam}. Instead of using the CSHOT descriptor, fpfh\cite{fpfh} histogram is used instead. A fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. After the fpfh estimation a 23 dimensional angular signature of information between a point and its neighbors is acquired. To further reduce dimensionality, what is finally passed at the sampler is the distance between the histograms of a point and its neighbors. The distance metrics used are EMD,Hellinger,and KL divergence. The color signature of the cloud is being encoded with an approach similar to ~\cite{smcddp}. The color spectrum is discretized and what is extracted is the count of different color signatures between a point and its k nearest neighbors. Finally the position of every point is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. What the downsampling procedure outputs is a vector of $ \textbf{x} = (x_s, x_c, x_a) $ of size $l \times 33 $ where $s$ represents a 3x1 vector of space information, $c$ a 27x1 vector of colour information and $a$ angular information whose dimensionality depends on the distances computed(in our case 3x1) and $l$ is the number of points in the cloud. It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. This feature is important since it greatly reduces(6-8 times) the speed of an operation applied on every point of the cloud and that makes the histogram extraction significantly faster.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \caption{Point cloud modification pipeline.}
   \centering
     \includegraphics[width=1\textwidth]{Basic}
@@ -490,7 +488,7 @@ $$
 
 Finally, with some notation abuse, the final complexity of the method can then be defined as:
 
-\begin{equation} \label{Q_2}
+\begin{equation} \label{complexity}
 \begin{split}
 O(filter) + O(cluster) + O(decision) = \\
 O(k_{0}logn_{0} + k_{1}logn_{1} + O(k_{2}(t_M)+ m_s*n_{2}) + n_{3}k_{3} + k_{4}logn_{3} ) + O(LKSn_3) + O(\kappa * l^2)=\\
@@ -498,7 +496,7 @@ O(k_{0}logn_{0} + k_{1}logn_{1} + k_{2}(t_M)+ m_s*n_{2} + n_{3}k_{3} + k_{4}logn
 \end{split}
 \end{equation}
 
-The complexity as defined in equation~\ref{Q_2} depends greatly on the initial reduction of the voxel downsampling. As the voxel leaf size parameter decreases and the downsampling outputs a larger cloud, the precision as well as the computing time of the method increases. Since in this thesis the research was directed towards online SLAM methods, the leaf size was modified so that the cloud the time requirements for online landmark tracking were met.
+The complexity as defined in equation~\ref{complexity} depends greatly on the initial reduction of the voxel downsampling. As the voxel leaf size parameter decreases and the downsampling outputs a larger cloud, the precision as well as the computing time of the method increases. Since in this thesis the research was directed towards online SLAM methods, the leaf size was modified so that the cloud the time requirements for online landmark tracking were met.
 
 \subsection{Landmark size}
 
@@ -576,7 +574,7 @@ Now that the structured is inferred, the distances between the clusters can be c
 
 The decision boundary of the pipeline can be decomposed into three basic parts; a positional, a color and an angular boundary. Figure[\ref{pip:bounds}] shows the behavior of the decision layer with respect to the Gaussian(positional) and Categorical(color) parts. 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 
 \begin{tabular}{cc}
   \includegraphics[width=.5\textwidth]{colorBound} &   \includegraphics[width=.5\textwidth]{colorBound2} \\
@@ -632,7 +630,7 @@ The restrictions introduced by the decision layer are relatively simple due to i
 
 Finally, the pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. As it was shown when calculating the complexity of the method, speed is dependent to the downsampling process. If the downsampling threshold operations are strict and the cloud is being stripped of many of its points, accuracy will decline and speed will increase. As shown in the landmark size section, the unit cost of a Landmark has an upper limit. Therefore, the memory requirements of the method are directly depending on how many landmarks the algorithm allows. A strict landmark matching decision layer that requires a high degree of correlation to match landmarks will converge to a higher amount of landmarks compared to a less strict one. In Fig.\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
     \includegraphics[width=.8\textwidth]{slam110landmarks2}
     \caption{SLAM session using the pipeline.}
@@ -642,7 +640,7 @@ Finally, the pipeline was used in real life scenarios as a sensor model in a Lan
 
 \subsubsection{Speed}
 
-The speed factor was tested on a mid level as well as on a high level machine to see the differences in time needed to perform the operations. The results of a machine running on a pentium i5-3210M and on a pentium i7 are shown in table \label{bench}:
+The speed factor was tested on a mid level as well as on a high level machine to see the differences in time needed to perform the operations. The results of a machine running on a pentium i5-3210M and on a pentium i7 are shown in table \ref{bench}:
 
 \begin{center}
 
@@ -689,14 +687,14 @@ The leaf size directly affects the time the cloud takes to be processed in the p
 
 \subsubsection{Memory requirements}
 
-The memory requirements of the method is a function that is directly affected to the $\alpha$ strength parameter of the sampler given that the decision boundary is constant. As the $\alpha$ parameter increases, the sampler will output more clusters on every iteration. The higher amount the of cluster will result a higher amount of landmarks and, consequently, in larger memory requirements in the method. Fig.\ref{pcl:kl} shows memory requirements as a function of strength parameter alpha.
+The memory requirements of the method is a function that is directly affected to the $\alpha$ strength parameter of the sampler given that the decision boundary is constant. As the $\alpha$ parameter increases, the sampler will output more clusters on every iteration. The higher amount the of cluster will result a higher amount of landmarks and, consequently, in larger memory requirements in the method. Fig.\ref{memReq} shows memory requirements as a function of strength parameter alpha.
 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
   \centering
     \includegraphics[width=.8\textwidth]{memoryRequirements2}
     \caption{Memory Requirements as a function of strength parameter $\alpha$.}
-  \label{pcl:kl}
+  \label{memReq}
 \end{figure}
 
 As it can be seen, the number of landmarks follows the logarithmic trend of the distribution in relation to $\alpha$. Increasing the alpha value more will not make the algorithm follow the logarithmic trend indefinitely. That is due to the fact that as the alpha increases, the constant decision layer has an upper bound to the number of landmarks it can have. This means that the algorithm will keep adding landmarks until the environment saturates and no new landmarks can be added. It must also be noted that as the alpha parameter is set to higher numbers, the sampler outputs more clusters making it more accurate of the environment descriptor it outputs, but also takes more time, making it non feasible to use this in real time mapping scenarios. Values of alpha between 0 and 10 provide a robust but also fast enough sampler that can be used in online mapping scenarios.
