@@ -165,7 +165,7 @@ Dirichlet processes and Dirichlet process mixture models are the cornerstone of 
 
 In its general definition, the correspondence problem refers to the problem of ascertaining which parts of one image correspond to which parts of another image, where differences are due to movement of the camera, the elapse of time, and/or movement of objects in the photos. Under the semantic SLAM context, it refers to the problem of identifying objects as ones that have been encountered before during the mapping process. Towards that direction Cree et al.~\cite{corresp:first} create a histogram of line segments of each landmark and compute their root mean square error. They then proceed to calculate their RGB signature to calculate the distance between different landmarks. Low et al.~\cite{corres:sec} match Scale Invariant Feature Transform (SIFT) features, an approach which transforms image data into scale-invariant coordinates relative to local features. Lamon et al~\cite{corres:three} store a database of fingerprints which indicate the location in the robot's environment. The features are ordered and stored at a database at as they appear in the robot's immediate surroundings. A new fingerprint is computed for each new view and matched against existing ones. Finally, in Seghal et al.~\cite{corres:four} an extension of SIFT descriptors to 3D data and point clouds is given.
 
-The method presented in this paper receives an input similar to\cite{objectDisc}. The features that are used for the cloud representation are an extension of the features presented in~\cite{smcddp} with the addition of angle information extracted in the points of the cloud. The sampler is then used to cluster the data in the augmented feature space. Using distributions as a means of representing objects within the point cloud is a form of compression as objects are represented by a distribution which is smaller in size and easier to maintain and expand. The matching then is done by calculating the divergences between distributions. The pipeline is presented in detail in the model definition section.
+The hj method presented in this paper receives an input similar to\cite{objectDisc}. The features that are used for the cloud representation are an extension of the features presented in~\cite{smcddp} with the addition of angle information extracted in the points of the cloud. The sampler is then used to cluster the data in the augmented feature space. Using distributions as a means of representing objects within the point cloud is a form of compression as objects are represented by a distribution which is smaller in size and easier to maintain and expand. The matching then is done by calculating the divergences between distributions. The pipeline is presented in detail in the model definition section.
   
 
 
@@ -175,6 +175,22 @@ The method presented in this paper receives an input similar to\cite{objectDisc}
 \label{sec:theory}
 
 The basic theory background regarding the sampler will be presented in this section. Generalized Polya Urn is an extension on basic Urn\cite{polya} models for Dirichlet processes and serves as the base of the sampler presented in the theory section.
+
+
+\subsection{Chinese restaurant process}
+
+The Chinese restaurant process(CRP) is a well known procedure in the literature and realisations from a CRP are also instances of Dirichlet processes. The Chinese restaurant process can be thought of as follows: Imagine a restaurant with an infinite number of tables each with infinite capacity and an infinite number of customers waiting outside the restaurant. At time $t=0$ customer 1 enters the restaurant and chooses to sit at table 1 with probability 1. Every customer after the first enters the restaurant and he can either:
+
+
+\begin{itemize}
+
+	\item Choose an unoccupied table with probability $ \propto \frac{\alpha}{n-1+ \alpha }$
+
+	\item Choose occupied table k with probability $ \propto  \frac{c}{n-1+ \alpha }$ where c is the number of people currently sitting at that table
+
+\end{itemize}
+
+
 
 \subsection{Generalized Polya's Urn}
 

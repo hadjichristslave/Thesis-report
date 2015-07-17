@@ -59,89 +59,114 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Point Cloud Object segmentation}{6}{subsection.2.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Non Parametric Bayesian methods}{6}{subsection.2.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Correspondence}{6}{subsection.2.4}}
-\citation{polya}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Theory background}{7}{section.3}}
+\newlabel{sec:theory}{{3}{7}{Theory background}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Dirichlet Distribution}{7}{subsection.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Different behaviour the distribution for different initial parameters of the $\alpha $ vector}}{8}{figure.1}}
+\newlabel{firstplot}{{1}{8}{Different behaviour the distribution for different initial parameters of the $\alpha $ vector}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dirichlet Distribution sampling methods}{8}{subsection.3.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Stick Breaking Process}{8}{subsubsection.3.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Stick breaking construction}}{9}{figure.2}}
+\newlabel{stickR3}{{2}{9}{Stick breaking construction}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Polya's Urn}{9}{subsubsection.3.2.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Poly's urn for $\alpha $=[2 1 1] }}{9}{figure.3}}
+\newlabel{polysurn}{{3}{9}{Poly's urn for $\alpha $=[2 1 1]}{figure.3}{}}
+\citation{komolgorov}
+\citation{definetti}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Dirichlet Process}{10}{subsection.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Sampling methods}{10}{subsection.3.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Chinese restaurant process}{11}{subsubsection.3.4.1}}
+\newlabel{sec:crp}{{3.4.1}{11}{Chinese restaurant process}{subsubsection.3.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The CRP process }}{11}{figure.4}}
+\newlabel{CRP}{{4}{11}{The CRP process}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Stick Breaking}{11}{subsubsection.3.4.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The SB process for Gaussian base distribution and different values of alpha}}{12}{figure.5}}
+\newlabel{crpGausBase}{{5}{12}{The SB process for Gaussian base distribution and different values of alpha}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Dirichlet process mixture models}{12}{subsection.3.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A 1D gaussian mixture model}}{12}{figure.6}}
+\newlabel{1dGMM}{{6}{12}{A 1D gaussian mixture model}{figure.6}{}}
 \citation{antoniak}
 \citation{theory:ddp}
 \citation{caron}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Theory background}{7}{section.3}}
-\newlabel{sec:theory}{{3}{7}{Theory background}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Generalized Polya's Urn}{7}{subsection.3.1}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces GPU}}{7}{algorithm.1}}
-\newlabel{GPU}{{1}{7}{Generalized Polya's Urn}{algorithm.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces A Dirichlet process mixture model.}}{13}{figure.7}}
+\newlabel{mm}{{7}{13}{A Dirichlet process mixture model}{figure.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Generalized Polya Urn}{13}{subsection.3.6}}
 \citation{antoniak}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces GPU}}{8}{figure.1}}
-\newlabel{generalPolya}{{1}{8}{GPU}{figure.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Model definition}{8}{section.4}}
-\newlabel{sec:model}{{4}{8}{Model definition}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}General pipeline}{8}{subsection.4.1}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces GPU}}{14}{algorithm.1}}
+\newlabel{GPU}{{1}{14}{Generalized Polya Urn}{algorithm.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces GPU}}{14}{figure.8}}
+\newlabel{generalPolya}{{8}{14}{GPU}{figure.8}{}}
 \citation{pcl}
 \citation{objectpointslam}
 \citation{fpfh}
 \citation{smcddp}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Landmark Layer}}{9}{algorithm.2}}
-\newlabel{euclid}{{2}{9}{General pipeline}{algorithm.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces General landmark update pipeline}}{9}{figure.2}}
-\newlabel{pipeline}{{2}{9}{General landmark update pipeline}{figure.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Point cloud modification pipeline.}}{10}{figure.3}}
-\newlabel{pcl:mod}{{3}{10}{Point cloud modification pipeline}{figure.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}The data distribution}{10}{subsection.4.2}}
-\newlabel{data:dist}{{4.2}{10}{The data distribution}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Model definition}{15}{section.4}}
+\newlabel{sec:model}{{4}{15}{Model definition}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}General pipeline}{15}{subsection.4.1}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Landmark Layer}}{15}{algorithm.2}}
+\newlabel{euclid}{{2}{15}{General pipeline}{algorithm.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces General landmark update pipeline}}{15}{figure.9}}
+\newlabel{pipeline}{{9}{15}{General landmark update pipeline}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Point cloud modification pipeline.}}{16}{figure.10}}
+\newlabel{pcl:mod}{{10}{16}{Point cloud modification pipeline}{figure.10}{}}
 \citation{caron}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}The data distribution}{17}{subsection.4.2}}
+\newlabel{data:dist}{{4.2}{17}{The data distribution}{subsection.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Exponential trend}}{17}{figure.11}}
+\newlabel{pcl:kl}{{11}{17}{Exponential trend}{figure.11}{}}
 \citation{smc:theory}
 \citation{doucet}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Exponential trend}}{11}{figure.4}}
-\newlabel{pcl:kl}{{4}{11}{Exponential trend}{figure.4}{}}
-\newlabel{eq1}{{1}{11}{The data distribution}{equation.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Sequential monte carlo sampler}{12}{subsection.4.3}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces SMC for DDPM}}{12}{algorithm.3}}
-\newlabel{SMC}{{3}{12}{Sequential monte carlo sampler}{algorithm.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Gibbs updates}{12}{subsubsection.4.3.1}}
-\newlabel{Gibbs}{{3}{12}{Gibbs updates}{equation.4.3}{}}
+\newlabel{eq1}{{3}{18}{The data distribution}{equation.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Sequential monte carlo sampler}{18}{subsection.4.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Gibbs updates}{18}{subsubsection.4.3.1}}
+\newlabel{Gibbs}{{5}{18}{Gibbs updates}{equation.4.5}{}}
 \citation{compendium}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces SMC for DDPM}}{19}{algorithm.3}}
+\newlabel{SMC}{{3}{19}{Sequential monte carlo sampler}{algorithm.3}{}}
+\newlabel{Q1}{{6}{19}{Gibbs updates}{equation.4.6}{}}
 \citation{conjugate}
-\newlabel{Q1}{{4}{13}{Gibbs updates}{equation.4.4}{}}
-\newlabel{Q_2}{{5}{13}{Gibbs updates}{equation.4.5}{}}
-\newlabel{udpates}{{6}{13}{Gibbs updates}{equation.4.6}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Weight updates}{13}{subsubsection.4.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Decision Layer}{14}{subsection.4.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Complexity}{14}{subsection.4.5}}
+\newlabel{Q_2}{{7}{20}{Gibbs updates}{equation.4.7}{}}
+\newlabel{udpates}{{8}{20}{Gibbs updates}{equation.4.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Weight updates}{20}{subsubsection.4.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Decision Layer}{20}{subsection.4.4}}
 \citation{RANSAC}
 \citation{fpfh}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Complexity}{21}{subsection.4.5}}
 \citation{smcddp}
-\newlabel{Q_filt}{{9}{15}{Complexity}{equation.4.9}{}}
-\newlabel{complexity}{{10}{15}{Complexity}{equation.4.10}{}}
 \citation{sqlite}
+\newlabel{Q_filt}{{11}{22}{Complexity}{equation.4.11}{}}
+\newlabel{complexity}{{12}{22}{Complexity}{equation.4.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Landmark size}{22}{subsection.4.6}}
 \citation{pcl}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Landmark size}{16}{subsection.4.6}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{16}{section.5}}
-\newlabel{sec:results}{{5}{16}{Results}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Simple datasets}{16}{subsection.5.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Initial data along with the distributions infered}}{17}{figure.5}}
-\newlabel{pcl:clust}{{5}{17}{Initial data along with the distributions infered}{figure.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Expersivensess and decision layer}{18}{subsection.5.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces More complicated color distributions}}{19}{figure.6}}
-\newlabel{pcl:clust2}{{6}{19}{More complicated color distributions}{figure.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The colour and position boudnary is displayed in these pictures}}{20}{figure.7}}
-\newlabel{pip:bounds}{{7}{20}{The colour and position boudnary is displayed in these pictures}{figure.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Limits of the method}{20}{subsection.5.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Clustering layer}{20}{subsubsection.5.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Fail use cases.}}{21}{figure.8}}
-\newlabel{pip:limits}{{8}{21}{Fail use cases}{figure.8}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Decision layer}{21}{subsubsection.5.3.2}}
-\newlabel{pip:expo}{{5.3.2}{22}{Decision layer}{subsubsection.5.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}EKF-SLAM experiments}{22}{subsection.5.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces SLAM session using the pipeline.}}{23}{figure.9}}
-\newlabel{slam}{{9}{23}{SLAM session using the pipeline}{figure.9}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Speed}{23}{subsubsection.5.4.1}}
-\newlabel{bench}{{5.4.1}{24}{Speed}{subsubsection.5.4.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}Memory requirements}{24}{subsubsection.5.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{23}{section.5}}
+\newlabel{sec:results}{{5}{23}{Results}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Simple datasets}{23}{subsection.5.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Initial data along with the distributions infered}}{24}{figure.12}}
+\newlabel{pcl:clust}{{12}{24}{Initial data along with the distributions infered}{figure.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Expersivensess and decision layer}{25}{subsection.5.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Limits of the method}{25}{subsection.5.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Clustering layer}{25}{subsubsection.5.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces More complicated color distributions}}{26}{figure.13}}
+\newlabel{pcl:clust2}{{13}{26}{More complicated color distributions}{figure.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces The colour and position boudnary is displayed in these pictures}}{27}{figure.14}}
+\newlabel{pip:bounds}{{14}{27}{The colour and position boudnary is displayed in these pictures}{figure.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Fail use cases.}}{28}{figure.15}}
+\newlabel{pip:limits}{{15}{28}{Fail use cases}{figure.15}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Decision layer}{28}{subsubsection.5.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}EKF-SLAM experiments}{28}{subsection.5.4}}
+\newlabel{pip:expo}{{5.3.2}{29}{Decision layer}{subsubsection.5.3.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Speed}{29}{subsubsection.5.4.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces SLAM session using the pipeline.}}{30}{figure.16}}
+\newlabel{slam}{{16}{30}{SLAM session using the pipeline}{figure.16}{}}
+\newlabel{bench}{{5.4.1}{31}{Speed}{subsubsection.5.4.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}Memory requirements}{31}{subsubsection.5.4.2}}
 \bibcite{probRobs}{1}
 \bibcite{ekf}{2}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Memory Requirements as a function of strength parameter $\alpha $.}}{25}{figure.10}}
-\newlabel{memReq}{{10}{25}{Memory Requirements as a function of strength parameter $\alpha $}{figure.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion and future work}{25}{section.6}}
-\newlabel{sec:discussion}{{6}{25}{Conclusion and future work}{section.6}{}}
 \bibcite{graph}{3}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Memory Requirements as a function of strength parameter $\alpha $.}}{32}{figure.17}}
+\newlabel{memReq}{{17}{32}{Memory Requirements as a function of strength parameter $\alpha $}{figure.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion and future work}{32}{section.6}}
+\newlabel{sec:discussion}{{6}{32}{Conclusion and future work}{section.6}{}}
 \bibcite{Figueredo:2009dg}{4}
 \bibcite{liflonglearning}{5}
 \bibcite{lifelongmaps}{6}

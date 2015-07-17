@@ -28,10 +28,11 @@
 \fancyhead[C]{Master thesis $\bullet$ Panagiotis Chatzichristodoulou $\bullet$ 2015} % Custom header text
 \fancyfoot[RO,LE]{\thepage} % Custom footer text
 
-
+ 
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \graphicspath{ {pics/} }
+\usepackage{paralist}
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
@@ -151,10 +152,206 @@ In its general definition, the correspondence problem refers to the problem of a
 \section{Theory background}
 \label{sec:theory}
 
+A background on the Dirichlet distribution and the related theories will be given in this section.
 
-Generalized Polya Urn is an extension on basic Urn\cite{polya} models for Dirichlet processes and serves as the base of the sampler presented in the theory section. 
 
-\subsection{Generalized Polya's Urn}
+\subsection{Dirichlet Distribution}
+
+An example of a \textit{probability mass function}(pmf) is an ordinary six-sided dice. To sample from the pmf, one rolls the die and a result from 1 to 6 is realized. One important property of pmfs given from real dice is that they are not uniformly weighted, due to the manufacturing process not being perfect. A bag of dice can then be considered as an example of a random pmf. To sample from this random pmf, you have to put your hand in the bag and draw a die, and the result of this drawing process is itself a probability distribution. A Dirichlet distribution is an object that can be used to model the randomness of such objects whose domain is itself is a probability distribution i.e it is a distribution of distributions.
+
+Formally, a probability mass function with \textit{k} components lies on the \textit{(k-1)} dimensional probability simplex, which is a surface in $ \mathbb{R}^k $ denoted by $ \Delta_k $ and defined to be the set of vectors whose $ k $  components are non-negative and sum up to 1, that is \\ $ \Delta_k = \{ q \in  \mathbb{R}^k | \sum_{i=1}^k q_i=1, q_i \geq 0\ for\ i=1,2,...k \} $ . $ \Delta_k $  is itself a $ ( k-1 ) $ dimensional object lying in the $k$ dimensional space. This property of the $\Delta_k$ will become more obvious during the definitions of the sampling methods over such distribution.
+
+
+\textbf{Dirichlet distribution:} Let $ Q = [Q_1,Q_2,...,Q_k  ] $ be a random pmf, that is, $ Q_i \geq 0 $ for $ i=1,2,..k $ and $ \sum_{i=1}^k Q_k=1 $. In addition, suppose that $ \alpha = [\alpha_1, \alpha_2, ..., \alpha_k ] $, with $ \alpha_i  \ge  0 $ for each i, and let $ \alpha_0 = \sum_{i=1}^k \alpha_i $. Then $ Q $ is said to have a Dirichlet distribution with parameter $\alpha$, which we denote by $ Q \sim  Dir(\alpha)$, if it has $f(q;a) = 0$ if q is not a pmf, and if q is a pmf then:
+
+$$ f(q; \alpha) = \frac{ \Gamma( \alpha_0)  }{ \prod_{i=1}^{k} \Gamma ( \alpha_i) } \prod_{i=1}^{k} q_i^{a_i -1}$$
+
+The first two cumulants of the distribution are the following:
+
+$$ E[ \alpha_i]\ =\ \frac{ \alpha_i }{ \alpha_0 } $$
+
+\[
+ Cov(Q_i,Q_i) =
+\left\{
+	\begin{array}{ll}
+		\frac{ - \alpha_i \alpha_j }{ \alpha_0^2 ( \alpha_0+1) }                   & \mbox{if } i \neq j  \\
+		\frac{ - \alpha_i ( \alpha_0 - \alpha_i) }{ \alpha_0^2 ( \alpha_0+1)} & \mbox{if } i=j
+	\end{array}
+\right.
+\]
+
+The first two cumulants of the distribution help understand how the changing the $ \alpha $ vector affects the behaviour of the distribution as to where the density is located as well as the variance in the pmfs sampled. The following graphs display the difference of behaviour on samples from Dirichlet distributions with different initial alpha values.
+
+
+\begin{wrapfigure}{l}{.40\textwidth}
+    \begin{tabular}{cc}
+   	          \includegraphics[width=0.15\textwidth]{uniformDist} & \includegraphics[width=0.15\textwidth]{1-3-1Ddist} \\
+		(a) $ \alpha = [1,1,1] $ & (b) $ \alpha = [1,3,1] $  \\[6pt]
+		 \includegraphics[width=0.15\textwidth]{2-5-20Dist} &    \includegraphics[width=0.15\textwidth]{01-01-01Dist} \\
+		(c) $ \alpha = [2,5,20] $  & (d) $ \alpha = [0.1,0.1,0.1] $  \\[6pt]
+	\end{tabular}
+	\caption{Different behaviour the distribution for different initial parameters of the $\alpha$ vector}
+	\label{firstplot}
+\end{wrapfigure}
+
+Random samples from a Dirichlet distribution are presented in Figure[\ref{firstplot}]. It must be noted that every point within the simplex can be considered itself a pmf since its components add up to one. It is then apparent how samples from a Dirichlet distribution are themselves probability distributions. Furthermore, for an $ \alpha = [c,c,c]\ ,c \ge 0 $ , the density is symetric to the uniform pmf. The special case of $ \alpha = [1,1,1] $ where c=1 is displayed at Figure[\ref{firstplot}](a) where the initial choice of the $\alpha$ vector results is a uniform distribution of points over the probability simplex. As c increases the distribuiton is concentrated more towards the center of the simplex. When the $  \alpha $ vector is not symetric, the density of the distribution is shifted towards the higher parameter, as is shown in Figure[\ref{firstplot}](b) and Figure[\ref{firstplot}](c). Furthermore, when the values of the vector are smaller than 1, the density of the distribution is shifted towards the vertices of the simplex as is shown in subplot Figure[\ref{firstplot}](d).
+
+One important property of the Dirichlet distribution is that it serves as a conjugate prior for the probability parameter $q$ of the multinomial distribution. 
+
+That is,  if $ (X|q) \sim\ Multinomial_k(n,q) $ and $ Q \sim Dir( \alpha ) $ then $( Q| X=x) \sim Dir( \alpha + x) $
+
+\subsection{Dirichlet Distribution sampling methods}
+One of the most natural questions to ask for every distribution is how to generate samples from it. Two basic sampling methods from the Dirichlet Distribution will be presented: Stick breaking process, and Polya's urn.
+\subsubsection{Stick Breaking Process}
+
+The stick breaking process can be though of as follows: Imagine breaking a unit length stick into $k$ such that the $k$ pieces follow a $Dir( \alpha)$  distribution. Such samples can be created by the following procedure:
+
+\begin{compactitem}
+
+	\item  \textbf{Step 1:} Simulate $ u_1 \sim Beta(a_1, \sum_{i=1}^k a_i ) $, and set $q_1 = u_1$. That's the first piece of the stick, with the remaining piece having length of $ 1-u_1$
+
+
+	\item \textbf{Step 2:} For $ 2 \leq j \leq k-1$, if j-1 pieces, with lengths  $u_1,u_2,...,u_{j-1},..$ have been broken off, the length of the remaining stick is $\prod_{i-1}^{j-1} (1 - u_i) $. We simulate $ u_j \sim Beta( a_j, \sum_{i=j+1}^k a_i) $ and set  $q_j=u_j \prod_{i=1}^{j-1}(1-u_i)$. The length of the remaining part of the stick is  $\prod_{i=1}^{j}(1-u_i)$
+
+	\item  \textbf{Step 3:} The length of the remaining piece is $q_k$.
+
+Since the last part of the stick will always be created so that we end up with a valid pmf, it is made explicit how the density of the Dirichlet is  a ${k-1}$ dimensional object lying in the $k$ dimensional space. Figure[\ref{stickR3}] shows realizations of of the stick breaking process in $R^3$ and the similarities between the stick breaking sampling method and the probability simplex presented in the previous section are shown. As expected, an initial $\alpha$ vector of [1,1,1] results in a uniform distribution of weights and. Furthermore, as the weights in increase we have a more balanced distribution of weights as shown for the case of Figure[\ref{stickR3}]([10,10,10]) and this this balance is shifted towards the higher weight when the initial vector is not symmetric as shown in Figure[\ref{stickR3}]([2,5,15]). Finally, an initial vector of weights $<1$ results in single values dominating the simplex.
+\end{compactitem}
+
+\begin{figure}[ht!]
+    \centerline{\includegraphics[width=.35\textwidth]{stickBreaking}}
+\caption{Stick breaking construction}
+\label{stickR3}
+\end{figure}
+
+\subsubsection{Polya's Urn}
+
+The second method of sampling from a Dirichlet distribution is by using an urn model. In probability theory and statistics, an urn problem is an idealized mental exercise in which some objects of real interest are represented as colored balls in an urn or other container. More specifically, Polya's urn model depicts a random process whose realizations are realizations of a Dirichlet distribution.
+\begin{wrapfigure}{l}{.45\textwidth}
+    \includegraphics[width=0.40\textwidth]{urn}
+	\caption{Poly's urn for $\alpha$=[2 1 1] }
+	\label{polysurn}
+\end{wrapfigure}
+Supose that you want to generate $Q \sim Dir( \alpha ) $.To start, we put $\alpha_i$ balls of colour i for $i=1,2,...,k$ in an urn, as shown in Figure[\ref{polysurn}]. It must be noted that $\alpha$ can be fractional and even irrational(!). At each iteration we randomly draw a ball from the urn and put it back in the urn with an extra ball of the same colour as well. As we iterate this procedure an infinite amount of times, the proportions of the balls of each colour will converge to a pmf that is a realization of from the distribution $Dir(\alpha)$.
+
+The procedure can be then described as follows:
+\begin{compactitem}
+
+	\item \textbf{Step 1:} Set a counter n=1. Draw $ X \sim \alpha / \alpha_0 $. 
+	\item \textbf{Step 2:} Update counter to n+1. Draw $ X_{n+1} | X_1, X_2, ..., X_n \sim \alpha / \alpha_{n0}$, where $\alpha_n = \alpha + \sum_{i=1}^n \delta_{X_i} $ and $ \alpha_{n0}$ is the sum of the entries of $\alpha_n$. Repeat step 2 an infinite number of times.
+\end{compactitem}
+i
+
+
+
+
+\subsection{Dirichlet Process}
+
+The Dirichlet process was formally introduced by Thomas Ferguson in 1973 and serves as an extention to the Dirichlet distribution in modelling infinite sets of events. More specifically, in the introductory example, a six sided dice was described. If instead of a six sided dice a dice with an infinite amount of sides was used, the Dirichlet Distribution could not handle the infinite sample space. A Dirichlet process is a random process whose realizations are distributions over an arbitrary and possibly infinite sample space. To make the infinity assumption manageable, the Dirichlet process restricts the class of distributions it can handle to a specific set: Discrete distributions over the infinite sample space that can be written as an infinite sum of indicator functions which can be formally presented as:
+
+$$ P( B ) = \sum_{k=1}^\infty p_k \delta_{y_k}  $$
+
+Where $p_k$ is the mixture weight and $\delta_{y_\kappa}$ is an indicator function such that $\delta_{y_\kappa} (B)=1\ if\ y_{\kappa}\ \in B$ and  $\delta_{y_\kappa}(B)=0$ otherwise. This formulation makes explicit the fact that realizations of a Dirichlet process are discrete distributions.
+
+Formaly, the DP is defined as follows: Let $\mathcal{X}$ be a set and let $\mathcal{B}$ be an $\sigma$-algebra on $\mathcal{X}$ .  Let ($\mathcal{X} $, $\mathcal{B}$ )  denote the collection of probability distributions on set as $\mathcal{P} $. $\mathcal{P}$ is a Dirichlet Process as with a strength parameter $\alpha$ and a base distribution $H$ on ($\mathcal{X} $, $\mathcal{B} $ ) if for any finite measurable partition $ \{B_i\}_{i=1}^k$ of $\mathcal{X} $, the random vector (($ P(B_1), ..., P(B_k)$) has a Dirichlet distribution with parameters (($ \alpha H(B_1), ..., \alpha H(B_k)$) . The mean and the covariance of a Dirichlet process are defined as:
+\begin{itemize}
+
+	\item{ $ \mathcal{E}[G(A)] = \alpha H(A) $. The base distribution can be though of as the mean of the Dirichlet process}
+
+	\item{$ \mathcal{V}[G(A)] = \frac{H(A)(1-H(A))}{\alpha + 1} $. The strength parameter $\alpha$ can be though of as the inverse covariance of the Dirichlet process. }
+\end{itemize}
+
+In the case of the Dirichlet process, the $\alpha$ value is a number whereas in the Dirichlet distribution, the $\alpha$ value is a scalar. This can be confusing and for the rest of the paper, unless otherwise noted, the $\alpha$ value will represent the strength parameter of the Dirichlet Process.
+
+When $\mathcal{P}$ is a Dirichlet Process every finite partition of measurable space of $\mathcal{X}$ follows a Dirichlet distribution. How do we know that such an object exists? The existence of such an object is based on two very important theorems: Komolgorov's\cite{komolgorov} continuity theorem and De Finetti's\cite{definetti} exchangeability theorem. Addressing those theorems is outside the scope of this report and for the rest of the paper,unless otherwise noted, the data will be considered to be exchangeable.
+
+\subsection{Sampling methods}
+
+Two methods for sampling from a Dirichlet process will be presented: the Chinese Restaurant Process, the Stick Breaking Process.
+
+
+\subsubsection{Chinese restaurant process}
+\label{sec:crp}
+Polya's Urn and the stick breaking process are two names of the same process. The chinese restaurant process scheme is similar to the Polya's urn and it is defined as follows:
+Imagine a restaurant with an infinite number of tables, each with infinite capacity. At time t=1, the first customer enters the restaurant and sits at table 1 with probability 1. For every next step, the customer can either
+
+\begin{compactitem}
+	\item Choose an unoccupied table with probability $ \propto \frac{\alpha}{n-1+ \alpha }$
+	\item Choose occupied table k with probability $ \propto  \frac{c}{n-1+ \alpha }$ where c is the number of people currently sitting at that table
+\end{compactitem}
+
+It can be seen that there is a positive reinforcement effect in this process, that is the more people already sitting at a table, the bigger the probability that more people will be sitting into that table in the future. It can also be proved that the number of tables grows $ \propto \alpha log(n)$ where n is the number of customers in the restaurant. Figure[\ref{CRP}] visualizes the progression of the proccess as more people enter the restaurant, Figure[\ref{numoftabcrp}] displays the plot of the number of tables occupied as the number of people in the restaurant increase as well as the logarithmic trend it follows.
+\begin{wrapfigure}{l}{.52\textwidth}
+          \centerline{\includegraphics[width=.40\textwidth]{crp}}
+	\caption{The CRP process }
+	\label{CRP}
+\end{wrapfigure}
+
+
+One important property of this procedure is that the nth customer has the same probability to sit on the same table as any other customer of the table. That is the number of people seating on table 1 is on average the same as the number of people seating on table $k$! This very interesting and counter intuitive(at first) property of the exchangeable data and understanding this is crucial on building intuition regarding the behaviour of exchangeable random variables.
+
+
+\subsubsection{Stick Breaking}
+
+Measures drawn from a Dirichlet distribution are discrete with probability 1(Ferguson 1973). This property is made explicit by the stick breaking construction(Sethuraman 1994). The construction is based on the independent sequences of i.i.d. random variables $(\pi'_k)_{k=1}^\infty$ and $ ( \phi_k)_{k=1}^\infty$  defined as follows:
+
+\centerline{ $\pi'_k  | \alpha_0, G_0 \sim Beta(1, \alpha_0)$\ \ \ \ \ \ \ \ \ \ $  \phi_k | \alpha_0, G_0 \sim G_0 $} 
+
+This can be defined as follows: Draw $\pi'_k$ as a Beta random variable. Draw $\phi_k$ from $G_0$ Now define a random measure G as:
+
+\ \
+
+\ \
+\centerline{ $\pi_k  | \pi'_k \prod_{l=1}^{k-1}(1- \pi'_l   )$\ \ \ \ \ \ \ \ \ \   $  G = \sum_{k=1}^\infty \pi_k \delta_{\phi_k} $}
+\ \
+
+The first part of the stick will have length $\pi'_k$ and the conditional length given all the previous draws is given by $\pi_k$. Finally, the distribution created is given as an infinite sum of indicator functions given by $G$. Figure~\ref{crpGausBase} displays a Dirichlet Process's realization from a stick breaking process with a Gaussian base distribution. Different parameter values for strength parameter $\alpha$ are shown to display how it affects the Distribution created. As the alpha parameter is increased, the realization of the distribution will be closer to the base distribution. Furthermore, this picture also shows that the distribution created from the infinite sum of indicator function is a discrete distribution. Finally, when G is generated using a stick breaking process with a strength parameter $\alpha$, it can be written in shorthand as: $ G \sim GEM(\alpha) $
+
+\begin{figure}[h!]
+          \centerline{\includegraphics[width=0.81\textwidth]{stickBreakGaus}}
+	\caption{The SB process for Gaussian base distribution and different values of alpha}
+	\label{crpGausBase}
+\end{figure}
+
+\subsection{Dirichlet process mixture models}
+
+The Dirichlet process and sampling methods have been introduced. One of the most important properties of those objects is that thay can serve as a nonparametric prior to mixture models. A typical 1D mixture model that represents data comming from a mixture of two one-dimensional Gaussian distributions is shown in Figure[\ref{1dGMM}].
+\begin{wrapfigure}{l}{.4\textwidth}
+          \includegraphics[width=.3\textwidth]{1DGMM}
+	\caption{A 1D gaussian mixture model}
+	\label{1dGMM}
+\end{wrapfigure}
+
+Mixture models can be considered as the Bayesian approach to clustering, and one of the most important applications of the Dirichlet process is to serve as the non parametric prior on the parameters of such models. In particular, suppose that observations $x_i$ arise from the following model:
+	\begin{equation}
+			\theta_i | G \sim G ,
+			x_i | \theta_i \sim F(\theta_i )
+	\end{equation}
+
+
+Where $F(\theta_i )$ denotes the distribution of the observation $x_i$ given $\theta_i $. The factors $ \theta_i $ are conditionally independent given G, and the observation $x_i$ is conditionally independent of the other observations given the factor $\theta_i$. When G is distributed according to a Dirichlet process, this model is refered as a Dirichlet process mixture model and its representation is shown in Figure[\ref{mm}]. The number of distributions that underlie the data can be mapped to the number of tables within a chinese restaurant process, and the mixing proportions are proportional to the number of people sitting in every table.
+
+Since G can be represented using a stick-breaking construction, the factors $ \theta_i $ take on values $\phi_k$ with probability $\pi_k$. We can denote this using $z_i$ as an indicator variable which takes on positive values and is distributed according to \textbf{$\pi$}. Hence, an equivalent representation of a Dirichlet process mixture model  is given by the following conditional distributions:
+
+	\begin{equation}
+		\begin{aligned}
+			\centerline{ \textbf{$\pi$} $|$  $ \alpha_0  \sim GEM(\alpha_0 )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   z_i$ $|$ \textbf{$ \pi \sim \pi  $} } \\
+			\centerline{$ \phi_k | G_0 \sim G_0 $\ \ \ \ \ \ \ \ \ \ \ \ $x_i | z_i, (\phi )_{k=1}^\infty \sim F(\phi_{z_i}) $  } \\
+		\end{aligned}
+	\end{equation}
+
+The infinite limit of finite mixture models is taken when we let the number of components into a model to reach infinity. An infinite mixture model assumes that the data come from an infinite number of distributions.
+\begin{wrapfigure}{l}{.3\textwidth}
+          \centerline{\includegraphics[width=.20\textwidth]{dpmm3}}
+	\caption{A Dirichlet process mixture model.}
+	\label{mm}
+\end{wrapfigure}
+
+
+
+This means that in such models the number of components and concequently distributions from which the data are generated can be infinite. Given the fact that in such models the finite number of distributions restriction is removed, it is important to notice in a dataset of size $n$ , the data come from at most n clusters where $n$ is the total number of elements. This is an important property of infinite mixture models and is exploited when performing posterior inference.
+
+\subsection{Generalized Polya Urn}
 
 Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data\cite{antoniak}. Dependent dirichlet processes extend those tools by allowing the clusters in the data to vary with some variance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies on the data which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern\cite{theory:ddp} and have been widely used since. The main motivation behind using such tools is the inherent extension they provide to dynamic environments.
 
@@ -180,15 +377,15 @@ A DDP also known as Generalized Polya Urn\cite{caron} and has the property of ra
 
 
 Where Cat is a categorical distribution, Bin is the binomial distribution, $\alpha$ is the DP concentration parameter and $\rho$ is the deletion parameter of the GPU. This Generative Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$)
-
-This process can be though of in the terms of a general chinese restaurant process\cite{antoniak} as shown in Fig.~\ref{generalPolya}. Imagine a restaurant with an infinite number of tables and an infinite number of customers patiently waiting in line to enter the restaurant. At time $t=0$ customer 1 enters the restaurant and sits at table $c=1$ with probability 1. For every timepoint after the first suppose there is a number of customers $n$ seating at several tables in the restaurant. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated (b). Each table occupied is moved according to the number of customers still seating in that table (c). A new customer then enters the table and either chooses to sit on one of the existing tables (e) or choose a new with probability proportional to the strength parameter $\alpha$ of the model(f).
-
-
 \begin{wrapfigure}{l}{.73\textwidth}
     \includegraphics[width=.61\textwidth]{generalPolya2}
     \caption{GPU}
     \label{generalPolya}
 \end{wrapfigure}
+This process can be though of in the terms of a general chinese restaurant process\cite{antoniak} as shown in Fig.~\ref{generalPolya}. Imagine a restaurant with an infinite number of tables and an infinite number of customers patiently waiting in line to enter the restaurant. At time $t=0$ customer 1 enters the restaurant and sits at table $c=1$ with probability 1. For every timepoint after the first suppose there is a number of customers $n$ seating at several tables in the restaurant. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated (b). Each table occupied is moved according to the number of customers still seating in that table (c). A new customer then enters the table and either chooses to sit on one of the existing tables (e) or choose a new with probability proportional to the strength parameter $\alpha$ of the model(f).
+
+
+
 
 \section{Model definition}
 \label{sec:model}
@@ -196,7 +393,6 @@ This process can be though of in the terms of a general chinese restaurant proce
 \subsection{General pipeline}
 
 The general flow of operations that defines the basic communication between the pipeline and the EKF module is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The algorithmic procedure shown in Algorithm~\ref{euclid} analytically.
-
 
 \begin{wrapfigure}{l}{0.7\textwidth}
 \begin{tabular}{cc}
