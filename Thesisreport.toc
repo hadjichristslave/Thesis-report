@@ -6,7 +6,7 @@
 \contentsline {subsection}{\numberline {2.4}Correspondence}{6}{subsection.2.4}
 \contentsline {section}{\numberline {3}Theory background}{7}{section.3}
 \contentsline {subsection}{\numberline {3.1}Dirichlet Distribution}{7}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Dirichlet Distribution sampling methods}{8}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.2}Sampling methods}{8}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}Stick Breaking Process}{8}{subsubsection.3.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2}Polya's Urn}{9}{subsubsection.3.2.2}
 \contentsline {subsection}{\numberline {3.3}Dirichlet Process}{10}{subsection.3.3}
@@ -14,10 +14,11 @@
 \contentsline {subsubsection}{\numberline {3.4.1}Chinese restaurant process}{11}{subsubsection.3.4.1}
 \contentsline {subsubsection}{\numberline {3.4.2}Stick Breaking}{11}{subsubsection.3.4.2}
 \contentsline {subsection}{\numberline {3.5}Dirichlet process mixture models}{12}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}Generalized Polya Urn}{13}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.6}Inference}{13}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Generalized Polya Urn}{13}{subsection.3.7}
 \contentsline {section}{\numberline {4}Model definition}{15}{section.4}
 \contentsline {subsection}{\numberline {4.1}General pipeline}{15}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}The data distribution}{17}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.2}The data distribution}{16}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}Sequential monte carlo sampler}{18}{subsection.4.3}
 \contentsline {subsubsection}{\numberline {4.3.1}Gibbs updates}{18}{subsubsection.4.3.1}
 \contentsline {subsubsection}{\numberline {4.3.2}Weight updates}{20}{subsubsection.4.3.2}

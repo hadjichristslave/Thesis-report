@@ -6,7 +6,7 @@
 \BOOKMARK [2][-]{subsection.2.4}{Correspondence}{section.2}% 6
 \BOOKMARK [1][-]{section.3}{Theory background}{}% 7
 \BOOKMARK [2][-]{subsection.3.1}{Dirichlet Distribution}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.2}{Dirichlet Distribution sampling methods}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Sampling methods}{section.3}% 9
 \BOOKMARK [3][-]{subsubsection.3.2.1}{Stick Breaking Process}{subsection.3.2}% 10
 \BOOKMARK [3][-]{subsubsection.3.2.2}{Polya's Urn}{subsection.3.2}% 11
 \BOOKMARK [2][-]{subsection.3.3}{Dirichlet Process}{section.3}% 12
@@ -14,23 +14,24 @@
 \BOOKMARK [3][-]{subsubsection.3.4.1}{Chinese restaurant process}{subsection.3.4}% 14
 \BOOKMARK [3][-]{subsubsection.3.4.2}{Stick Breaking}{subsection.3.4}% 15
 \BOOKMARK [2][-]{subsection.3.5}{Dirichlet process mixture models}{section.3}% 16
-\BOOKMARK [2][-]{subsection.3.6}{Generalized Polya Urn}{section.3}% 17
-\BOOKMARK [1][-]{section.4}{Model definition}{}% 18
-\BOOKMARK [2][-]{subsection.4.1}{General pipeline}{section.4}% 19
-\BOOKMARK [2][-]{subsection.4.2}{The data distribution}{section.4}% 20
-\BOOKMARK [2][-]{subsection.4.3}{Sequential monte carlo sampler}{section.4}% 21
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Gibbs updates}{subsection.4.3}% 22
-\BOOKMARK [3][-]{subsubsection.4.3.2}{Weight updates}{subsection.4.3}% 23
-\BOOKMARK [2][-]{subsection.4.4}{Decision Layer}{section.4}% 24
-\BOOKMARK [2][-]{subsection.4.5}{Complexity}{section.4}% 25
-\BOOKMARK [2][-]{subsection.4.6}{Landmark size}{section.4}% 26
-\BOOKMARK [1][-]{section.5}{Results}{}% 27
-\BOOKMARK [2][-]{subsection.5.1}{Simple datasets}{section.5}% 28
-\BOOKMARK [2][-]{subsection.5.2}{Expersivensess and decision layer}{section.5}% 29
-\BOOKMARK [2][-]{subsection.5.3}{Limits of the method}{section.5}% 30
-\BOOKMARK [3][-]{subsubsection.5.3.1}{Clustering layer}{subsection.5.3}% 31
-\BOOKMARK [3][-]{subsubsection.5.3.2}{Decision layer}{subsection.5.3}% 32
-\BOOKMARK [2][-]{subsection.5.4}{EKF-SLAM experiments}{section.5}% 33
-\BOOKMARK [3][-]{subsubsection.5.4.1}{Speed}{subsection.5.4}% 34
-\BOOKMARK [3][-]{subsubsection.5.4.2}{Memory requirements}{subsection.5.4}% 35
-\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 36
+\BOOKMARK [2][-]{subsection.3.6}{Inference}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.7}{Generalized Polya Urn}{section.3}% 18
+\BOOKMARK [1][-]{section.4}{Model definition}{}% 19
+\BOOKMARK [2][-]{subsection.4.1}{General pipeline}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.2}{The data distribution}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.3}{Sequential monte carlo sampler}{section.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Gibbs updates}{subsection.4.3}% 23
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Weight updates}{subsection.4.3}% 24
+\BOOKMARK [2][-]{subsection.4.4}{Decision Layer}{section.4}% 25
+\BOOKMARK [2][-]{subsection.4.5}{Complexity}{section.4}% 26
+\BOOKMARK [2][-]{subsection.4.6}{Landmark size}{section.4}% 27
+\BOOKMARK [1][-]{section.5}{Results}{}% 28
+\BOOKMARK [2][-]{subsection.5.1}{Simple datasets}{section.5}% 29
+\BOOKMARK [2][-]{subsection.5.2}{Expersivensess and decision layer}{section.5}% 30
+\BOOKMARK [2][-]{subsection.5.3}{Limits of the method}{section.5}% 31
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Clustering layer}{subsection.5.3}% 32
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Decision layer}{subsection.5.3}% 33
+\BOOKMARK [2][-]{subsection.5.4}{EKF-SLAM experiments}{section.5}% 34
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Speed}{subsection.5.4}% 35
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Memory requirements}{subsection.5.4}% 36
+\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 37

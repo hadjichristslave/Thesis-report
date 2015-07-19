@@ -200,19 +200,16 @@ One important property of the Dirichlet distribution is that it serves as a conj
 
 That is,  if $ (X|q) \sim\ Multinomial_k(n,q) $ and $ Q \sim Dir( \alpha ) $ then $( Q| X=x) \sim Dir( \alpha + x) $
 
-\subsection{Dirichlet Distribution sampling methods}
-One of the most natural questions to ask for every distribution is how to generate samples from it. Two basic sampling methods from the Dirichlet Distribution will be presented: Stick breaking process, and Polya's urn.
+\subsection{Sampling methods}
+
+Two basic sampling methods from the Dirichlet Distribution will be presented: Stick breaking process, and Polya's urn.
+
 \subsubsection{Stick Breaking Process}
 
 The stick breaking process can be though of as follows: Imagine breaking a unit length stick into $k$ such that the $k$ pieces follow a $Dir( \alpha)$  distribution. Such samples can be created by the following procedure:
-
 \begin{compactitem}
-
 	\item  \textbf{Step 1:} Simulate $ u_1 \sim Beta(a_1, \sum_{i=1}^k a_i ) $, and set $q_1 = u_1$. That's the first piece of the stick, with the remaining piece having length of $ 1-u_1$
-
-
 	\item \textbf{Step 2:} For $ 2 \leq j \leq k-1$, if j-1 pieces, with lengths  $u_1,u_2,...,u_{j-1},..$ have been broken off, the length of the remaining stick is $\prod_{i-1}^{j-1} (1 - u_i) $. We simulate $ u_j \sim Beta( a_j, \sum_{i=j+1}^k a_i) $ and set  $q_j=u_j \prod_{i=1}^{j-1}(1-u_i)$. The length of the remaining part of the stick is  $\prod_{i=1}^{j}(1-u_i)$
-
 	\item  \textbf{Step 3:} The length of the remaining piece is $q_k$.
 
 Since the last part of the stick will always be created so that we end up with a valid pmf, it is made explicit how the density of the Dirichlet is  a ${k-1}$ dimensional object lying in the $k$ dimensional space. Figure[\ref{stickR3}] shows realizations of of the stick breaking process in $R^3$ and the similarities between the stick breaking sampling method and the probability simplex presented in the previous section are shown. As expected, an initial $\alpha$ vector of [1,1,1] results in a uniform distribution of weights and. Furthermore, as the weights in increase we have a more balanced distribution of weights as shown for the case of Figure[\ref{stickR3}]([10,10,10]) and this this balance is shifted towards the higher weight when the initial vector is not symmetric as shown in Figure[\ref{stickR3}]([2,5,15]). Finally, an initial vector of weights $<1$ results in single values dominating the simplex.
@@ -240,9 +237,6 @@ The procedure can be then described as follows:
 	\item \textbf{Step 1:} Set a counter n=1. Draw $ X \sim \alpha / \alpha_0 $. 
 	\item \textbf{Step 2:} Update counter to n+1. Draw $ X_{n+1} | X_1, X_2, ..., X_n \sim \alpha / \alpha_{n0}$, where $\alpha_n = \alpha + \sum_{i=1}^n \delta_{X_i} $ and $ \alpha_{n0}$ is the sum of the entries of $\alpha_n$. Repeat step 2 an infinite number of times.
 \end{compactitem}
-i
-
-
 
 
 \subsection{Dirichlet Process}
@@ -283,7 +277,7 @@ Imagine a restaurant with an infinite number of tables, each with infinite capac
 It can be seen that there is a positive reinforcement effect in this process, that is the more people already sitting at a table, the bigger the probability that more people will be sitting into that table in the future. It can also be proved that the number of tables grows $ \propto \alpha log(n)$ where n is the number of customers in the restaurant. Figure[\ref{CRP}] visualizes the progression of the proccess as more people enter the restaurant, Figure[\ref{numoftabcrp}] displays the plot of the number of tables occupied as the number of people in the restaurant increase as well as the logarithmic trend it follows.
 \begin{wrapfigure}{l}{.52\textwidth}
           \centerline{\includegraphics[width=.40\textwidth]{crp}}
-	\caption{The CRP process }
+	\caption{The CRP process}
 	\label{CRP}
 \end{wrapfigure}
 
@@ -328,7 +322,6 @@ Mixture models can be considered as the Bayesian approach to clustering, and one
 			x_i | \theta_i \sim F(\theta_i )
 	\end{equation}
 
-
 Where $F(\theta_i )$ denotes the distribution of the observation $x_i$ given $\theta_i $. The factors $ \theta_i $ are conditionally independent given G, and the observation $x_i$ is conditionally independent of the other observations given the factor $\theta_i$. When G is distributed according to a Dirichlet process, this model is refered as a Dirichlet process mixture model and its representation is shown in Figure[\ref{mm}]. The number of distributions that underlie the data can be mapped to the number of tables within a chinese restaurant process, and the mixing proportions are proportional to the number of people sitting in every table.
 
 Since G can be represented using a stick-breaking construction, the factors $ \theta_i $ take on values $\phi_k$ with probability $\pi_k$. We can denote this using $z_i$ as an indicator variable which takes on positive values and is distributed according to \textbf{$\pi$}. Hence, an equivalent representation of a Dirichlet process mixture model  is given by the following conditional distributions:
@@ -351,9 +344,13 @@ The infinite limit of finite mixture models is taken when we let the number of c
 
 This means that in such models the number of components and concequently distributions from which the data are generated can be infinite. Given the fact that in such models the finite number of distributions restriction is removed, it is important to notice in a dataset of size $n$ , the data come from at most n clusters where $n$ is the total number of elements. This is an important property of infinite mixture models and is exploited when performing posterior inference.
 
+\subsection{Inference}
+
+Statistical inference is the process of deducing properties of an underlying distribution by analysis of data\cite{statinf}. Inference can be considered as the inverse procedure presented in the plate in Figure[\ref{mm}]; the same graphical process with the arrows facing the opposite direction. Statistical inference techniques can be categorized into 3 families: MCMC, Variational inference and SMC methods. The literature on such methods is extensive and covering it is beyond the scope of this project; for the purpose of this project an SMC sampler will be defined in detail in the model definition section. In that direction the Generalized Polya Urn model will be defined in the theory and an application of the model will be presented in the Model definition section
+
 \subsection{Generalized Polya Urn}
 
-Dirichlet process priors have been widely used in the literature as non parametric Bayesian tools to estimate the number of clusters in the data\cite{antoniak}. Dependent dirichlet processes extend those tools by allowing the clusters in the data to vary with some variance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies on the data which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern\cite{theory:ddp} and have been widely used since. The main motivation behind using such tools is the inherent extension they provide to dynamic environments.
+Dependent dirichlet processes extend Dirichlet processes by allowing the clusters in the data to vary with some variance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies on the data which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern\cite{theory:ddp} and have been widely used since. The main motivation behind using such tools is the inherent extension they provide to dynamic environments.
 
 A DDP also known as Generalized Polya Urn\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. The current notation defines the $n_{th}$ datapoint at time $t$,$x_{t,n}$ having an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
 
@@ -377,8 +374,8 @@ A DDP also known as Generalized Polya Urn\cite{caron} and has the property of ra
 
 
 Where Cat is a categorical distribution, Bin is the binomial distribution, $\alpha$ is the DP concentration parameter and $\rho$ is the deletion parameter of the GPU. This Generative Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$)
-\begin{wrapfigure}{l}{.73\textwidth}
-    \includegraphics[width=.61\textwidth]{generalPolya2}
+\begin{wrapfigure}{l}{.40\textwidth}
+    \includegraphics[width=.35\textwidth]{generalPolya2}
     \caption{GPU}
     \label{generalPolya}
 \end{wrapfigure}
@@ -389,6 +386,8 @@ This process can be though of in the terms of a general chinese restaurant proce
 
 \section{Model definition}
 \label{sec:model}
+
+The model definition is structured as follows: An introduction to the general pipeline that will serve as the compressed sensor model of the EKF slam module is resented first. Every component of the pipeline is then analysed in detail in its functions and usage. 
 
 \subsection{General pipeline}
 
@@ -791,7 +790,7 @@ The restrictions introduced by the decision layer are relatively simple due to i
 
 \subsection{EKF-SLAM experiments}
 
-Finally, the pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. As it was shown when calculating the complexity of the method, speed is dependent to the downsampling process. If the downsampling threshold operations are strict and the cloud is being stripped of many of its points, accuracy will decline and speed will increase. As shown in the landmark size section, the unit cost of a Landmark has an upper limit. Therefore, the memory requirements of the method are directly depending on how many landmarks the algorithm allows. A strict landmark matching decision layer that requires a high degree of correlation to match landmarks will converge to a higher amount of landmarks compared to a less strict one. In Fig.\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown. The yellow spheres represent the landmarks extracted during the slam session and it can be seen that the fussball table is decomposed to several parts; furthermore the column next to the table is also being given a landmark of its own. It must also be noted that the environment is quite noisy, especially in readings that are near the maximum range of the kinect sensor or close to the window and that leads to more landmarks.
+Finally, the pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. In Fig.\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown. The yellow spheres represent the landmarks extracted during the slam session and it can be seen that the fussball table is decomposed to several parts; furthermore the column next to the table is also being given a landmark of its own. It must also be noted that the environment is quite noisy, especially in readings that are near the maximum range of the kinect sensor or close to the window and that leads to more landmarks.
 
 The compression that method introduces is not directly observable. As the environment is being reduced from a cloud to a landmarks, the memory needs change from using point clouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial. The expresiveness of the distributions greatly affects the objects as well as object shapes that could be represented. Finally it is always possible to extend the method presented by adding new features and new priors to those features.
 
@@ -806,6 +805,7 @@ The compression that method introduces is not directly observable. As the enviro
 
 
 \subsubsection{Speed}
+
 
 As was shown in the Complexity session, the speed is mainly dependent to the initial downsampling of the pipeline. If strong downsampling is performed on the cloud, the information loss will lead to a cloud that does not represent the structure effectively, and, therefore, sub optimal results. Conversely if the downsampling is very loose, the speed of the method will decrease making the pipeline unable to handle online data streams. The speed of the method was tested on a mid level as well as on a high level machine to display the differences in time needed to perform the operations. The results of a machine running on a pentium i5-3210M and on a pentium i7 are shown in table \ref{bench} and the influence that leaf size has to computational time is apparent. Furthermore, as will also be shown in the restrictions section, speed also depends on the hyperparameters of the sampler. Having a large alpha value results in a large amount of clusters which also affects directly the speed of the sampler. Given those restrictions, the optimal settings for the sampler where found by a large amount of trial and error. 
 
