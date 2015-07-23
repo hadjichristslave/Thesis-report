@@ -81,7 +81,7 @@
 \newpage
 \begin{abstract}
 
-\noindent Long term mapping is the natural conceptual extension to existing mapping methods that are focused on mapping static environments. Mapping an area for a large amount of time is a problem that if tackled efficiently will be a large step towards highly autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to tackle the clustering subproblem of lifelong mapping methods. A novel method of point cloud representation is presented and its results are applied to an EKF SLAM algorithm; its strengths and weaknesses are analyzed as well as the directions in which the method could be extended to be a complete solution to both the dynamic as well as the compression problem of long term slam.
+\noindent Long term mapping is the natural conceptual extension to existing mapping methods that are focused on mapping static environments. Mapping an area for a large amount of time is a problem that if tackled efficiently will be a large step towards truly autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to tackle the clustering subproblem of lifelong mapping methods. A novel method of point cloud representation is presented and its results are applied to an EKF SLAM algorithm; its strengths and weaknesses are analyzed as well as the directions in which the method could be extended to be a complete solution to both the dynamic as well as the compression problem of long term slam.
 
 
 \end{abstract}
@@ -91,7 +91,6 @@
 %----------------------------------------------------------------------------------------
  
 \tableofcontents
-
 \listoffigures
  
  
@@ -128,7 +127,7 @@ Since the method will use distributions to represent objects within the cloud, m
 
 \subsection{Object based SLAM}
 
-Salas-Moreno et al.\cite{slam++} define a method of performing object based slam for specific classes objects. The objects are identified by camera that is on top of the robot. By having a model of pre-trained objects, SLAM can be performed on environments the robot knows what objects to expect. The disadvantage of that method is that object models have be to be well defined and there is a small number of such objects. 
+Salas-Moreno et al.\cite{slam++} define a method of performing object based slam for specific classes objects. The objects are identified by camera that is on top of the robot. By having a model of pre-trained objects, SLAM can be performed on environments the robot knows what objects to expect. The disadvantage of that method is that there exists a small number of well defined objects. 
 Castle et al. use object recognition to perform object based SLAM with the use of a hand-held cameras. Selvatici et al.\cite{objslam} use a similar approach while exploiting structural information such as object height and position within the room. That way a couch that is a large object situated in floor level is easier to be recognized.
 Choudhary et al.\cite{objectpointslam} use point clouds and an object database to match objects currently seen with known objects within their database. They use omnimaper\cite{omnimaper} as their mapping method and as a representation a combination of the downsampled  voxel grids with additional normal and curvature information.  Finally, all their operations are done in the non-planar components of the point cloud.
 Jensfelt et al\cite{objslam} present an object based approach to SLAM where the robot can manipulate the objects of the map. They use camera pictures as input and receptive Field Histogram as the method to abstract the camera input and extract features for their object matching algorithm. Their approach is proposed as a solution to a service robot scenario.
@@ -137,7 +136,7 @@ Seongyong Koo et al.\cite{objectDisc} introduce a method of unsupervised object 
 
 \subsection{Point Cloud Object segmentation}
 
-Trevor et al.\cite{pointSeg} take positional information, Euclidean distances and the normal of points to as input to their function and output segments that are part of the same object. PCL library\cite{pcl} introduces methods like Euclidean clustering and conditional Euclidean clustering that use a number of heuristics that take normal as well as curvature information to extract segments in the point cloud that represent objects. Furthermore, a there is a lot of research on segmentation of point clouds in scenes, the emphasis is usually on extracting geometric primitives\cite{planarSeg},\cite{planarSeg2} using cues like normals and curvature. Rabbani et al.\cite{segOverview} introduce a new method of object segmentation using KNN as their base algorithm. They also present a very informative literature review along with the strengths and weaknesses of existing methods. Finally Triebel et al.\cite{smartSeg} introduce a general clustering framework that does not rely on plane segmentation. Instead of segmenting the plane by using classical approaches like RANSAC or MLASAC they introduce a framework where they make no assumptions regarding plane data. 
+Trevor et al.\cite{pointSeg} take positional information, Euclidean distances and the normal of points to as input to their function and output segments that are part of the same object. PCL library\cite{pcl} introduces methods like Euclidean clustering and conditional Euclidean clustering that use a number of heuristics that take normal as well as curvature information to extract segments in the point cloud that represent objects. Furthermore, there is a lot of research on segmentation of point clouds in scenes, with the emphasis usually put on extracting geometric primitives\cite{planarSeg},\cite{planarSeg2} using cues like normals and curvature. Rabbani et al.\cite{segOverview} introduce a new method of object segmentation using KNN as their base algorithm. They also present a very informative literature review along with the strengths and weaknesses of existing methods. Finally Triebel et al.\cite{smartSeg} introduce a general clustering framework that does not rely on plane segmentation. Instead of segmenting the plane by using classical approaches like RANSAC or MLASAC they introduce a framework where they make no assumptions regarding plane data. 
 
 \subsection{Non Parametric Bayesian methods}
 
@@ -152,8 +151,8 @@ In its general definition, the correspondence problem refers to the problem of a
 \section{Theory background}
 \label{sec:theory}
 
-A background on the Dirichlet distribution and the related theories will be given in this section.
 
+An introduction to the Dirichlet Distribution and Dirichlet process mixture models will be given. Finally, the Generaly Polya urn model will be presented as it serves as the base to the sampler presented in the model section.
 
 \subsection{Dirichlet Distribution}
 
@@ -180,7 +179,7 @@ $$ E[ \alpha_i]\ =\ \frac{ \alpha_i }{ \alpha_0 } $$
 \right.
 \]
 
-The first two cumulants of the distribution help understand how the changing the $ \alpha $ vector affects the behaviour of the distribution as to where the density is located as well as the variance in the pmfs sampled. The following graphs display the difference of behaviour on samples from Dirichlet distributions with different initial alpha values.
+The mean and variance formulas help understand how the changing the $ \alpha $ vector affects the behaviour of the distribution as to where the density is located as well as the variance in the pmfs sampled. The following graphs display the difference of behaviour on samples from Dirichlet distributions with different initial alpha values.
 
 
 \begin{wrapfigure}{l}{.40\textwidth}
@@ -194,7 +193,7 @@ The first two cumulants of the distribution help understand how the changing the
 	\label{firstplot}
 \end{wrapfigure}
 
-Random samples from a Dirichlet distribution are presented in Figure[\ref{firstplot}]. It must be noted that every point within the simplex can be considered itself a pmf since its components add up to one. It is then apparent how samples from a Dirichlet distribution are themselves probability distributions. Furthermore, for an $ \alpha = [c,c,c]\ ,c \ge 0 $ , the density is symetric to the uniform pmf. The special case of $ \alpha = [1,1,1] $ where c=1 is displayed at Figure[\ref{firstplot}](a) where the initial choice of the $\alpha$ vector results is a uniform distribution of points over the probability simplex. As c increases the distribuiton is concentrated more towards the center of the simplex. When the $  \alpha $ vector is not symetric, the density of the distribution is shifted towards the higher parameter, as is shown in Figure[\ref{firstplot}](b) and Figure[\ref{firstplot}](c). Furthermore, when the values of the vector are smaller than 1, the density of the distribution is shifted towards the vertices of the simplex as is shown in subplot Figure[\ref{firstplot}](d).
+Random samples from a Dirichlet distribution are presented in Fig.\ref{firstplot}. It must be noted that every point within the simplex can be considered itself a pmf since its components add up to one.  Furthermore, for an $ \alpha = [c,c,c]\ ,c \ge 0 $ , the density is symetric to the uniform pmf. The special case of $ \alpha = [1,1,1] $ where c=1 is displayed at Fig.\ref{firstplot}(a) where the initial choice of the $\alpha$ vector results is a uniform distribution of points over the probability simplex. As c increases the distribuiton is concentrated towards the center of the simplex. When the $  \alpha $ vector is not symetric, the density of the distribution is shifted towards the higher parameter, as is shown in Fig.\ref{firstplot}(b) and Fig.\ref{firstplot}(c). Furthermore, when the values of the vector are smaller than 1, the density of the distribution is shifted towards the vertices of the simplex as is shown in subplot Fig.\ref{firstplot}(d).
 
 One important property of the Dirichlet distribution is that it serves as a conjugate prior for the probability parameter $q$ of the multinomial distribution. 
 
@@ -212,15 +211,18 @@ The stick breaking process can be though of as follows: Imagine breaking a unit 
 	\item \textbf{Step 2:} For $ 2 \leq j \leq k-1$, if j-1 pieces, with lengths  $u_1,u_2,...,u_{j-1},..$ have been broken off, the length of the remaining stick is $\prod_{i-1}^{j-1} (1 - u_i) $. We simulate $ u_j \sim Beta( a_j, \sum_{i=j+1}^k a_i) $ and set  $q_j=u_j \prod_{i=1}^{j-1}(1-u_i)$. The length of the remaining part of the stick is  $\prod_{i=1}^{j}(1-u_i)$
 	\item  \textbf{Step 3:} The length of the remaining piece is $q_k$.
 
-Since the last part of the stick will always be created so that we end up with a valid pmf, it is made explicit how the density of the Dirichlet is  a ${k-1}$ dimensional object lying in the $k$ dimensional space. Figure[\ref{stickR3}] shows realizations of of the stick breaking process in $R^3$ and the similarities between the stick breaking sampling method and the probability simplex presented in the previous section are shown. As expected, an initial $\alpha$ vector of [1,1,1] results in a uniform distribution of weights and. Furthermore, as the weights in increase we have a more balanced distribution of weights as shown for the case of Figure[\ref{stickR3}]([10,10,10]) and this this balance is shifted towards the higher weight when the initial vector is not symmetric as shown in Figure[\ref{stickR3}]([2,5,15]). Finally, an initial vector of weights $<1$ results in single values dominating the simplex.
-\end{compactitem}
 
-\begin{figure}[ht!]
-    \centerline{\includegraphics[width=.35\textwidth]{stickBreaking}}
+\end{compactitem}
+Since the last part of the stick will always be created so that we end up with a valid pmf, it is made explicit how the density of the Dirichlet is  a ${k-1}$ dimensional object lying in the $k$ dimensional space. Fig.\ref{stickR3} shows realizations of of the stick breaking process in $R^3$ and the similarities between the stick breaking sampling method and the probability simplex presented in the previous section are shown.
+
+\begin{wrapfigure}{l}{.6\textwidth}
+    \centerline{\includegraphics[width=.55\textwidth]{stickBreaking}}
 \caption{Stick breaking construction}
 \label{stickR3}
-\end{figure}
+\end{wrapfigure}
 
+
+As expected, an initial $\alpha$ vector of [1,1,1] results in a uniform distribution of weights and. Furthermore, as the weights in increase we have a more balanced distribution of weights as shown for the case of Fig.\ref{stickR3}([10,10,10]) and this this balance is shifted towards the higher weight when the initial vector is not symmetric as shown in Fig.\ref{stickR3}([2,5,15]). Finally, an initial vector of weights $<1$ results in single values dominating the simplex.
 \subsubsection{Polya's Urn}
 
 The second method of sampling from a Dirichlet distribution is by using an urn model. In probability theory and statistics, an urn problem is an idealized mental exercise in which some objects of real interest are represented as colored balls in an urn or other container. More specifically, Polya's urn model depicts a random process whose realizations are realizations of a Dirichlet distribution.
@@ -241,7 +243,7 @@ The procedure can be then described as follows:
 
 \subsection{Dirichlet Process}
 
-The Dirichlet process was formally introduced by Thomas Ferguson in 1973 and serves as an extention to the Dirichlet distribution in modelling infinite sets of events. More specifically, in the introductory example, a six sided dice was described. If instead of a six sided dice a dice with an infinite amount of sides was used, the Dirichlet Distribution could not handle the infinite sample space. A Dirichlet process is a random process whose realizations are distributions over an arbitrary and possibly infinite sample space. To make the infinity assumption manageable, the Dirichlet process restricts the class of distributions it can handle to a specific set: Discrete distributions over the infinite sample space that can be written as an infinite sum of indicator functions which can be formally presented as:
+The Dirichlet process was formally introduced by Thomas Ferguson in 1973 and serves as an extension to the Dirichlet distribution in modelling infinite sets of events. More specifically, in the introductory example, a six sided dice was described. If instead of a six sided dice a dice with an infinite amount of sides was used, the Dirichlet Distribution could not handle the infinite sample space. A Dirichlet process is a random process whose realizations are distributions over an arbitrary and possibly infinite sample space. To make the infinity assumption manageable, the Dirichlet process restricts the class of distributions it can handle to a specific set: Discrete distributions over the infinite sample space that can be written as an infinite sum of indicator functions which can be formally presented as:
 
 $$ P( B ) = \sum_{k=1}^\infty p_k \delta_{y_k}  $$
 
@@ -254,10 +256,6 @@ Formaly, the DP is defined as follows: Let $\mathcal{X}$ be a set and let $\math
 
 	\item{$ \mathcal{V}[G(A)] = \frac{H(A)(1-H(A))}{\alpha + 1} $. The strength parameter $\alpha$ can be though of as the inverse covariance of the Dirichlet process. }
 \end{itemize}
-
-In the case of the Dirichlet process, the $\alpha$ value is a number whereas in the Dirichlet distribution, the $\alpha$ value is a scalar. This can be confusing and for the rest of the paper, unless otherwise noted, the $\alpha$ value will represent the strength parameter of the Dirichlet Process.
-
-When $\mathcal{P}$ is a Dirichlet Process every finite partition of measurable space of $\mathcal{X}$ follows a Dirichlet distribution. How do we know that such an object exists? The existence of such an object is based on two very important theorems: Komolgorov's\cite{komolgorov} continuity theorem and De Finetti's\cite{definetti} exchangeability theorem. Addressing those theorems is outside the scope of this report and for the rest of the paper,unless otherwise noted, the data will be considered to be exchangeable.
 
 \subsection{Sampling methods}
 
@@ -274,7 +272,8 @@ Imagine a restaurant with an infinite number of tables, each with infinite capac
 	\item Choose occupied table k with probability $ \propto  \frac{c}{n-1+ \alpha }$ where c is the number of people currently sitting at that table
 \end{compactitem}
 
-It can be seen that there is a positive reinforcement effect in this process, that is the more people already sitting at a table, the bigger the probability that more people will be sitting into that table in the future. It can also be proved that the number of tables grows $ \propto \alpha log(n)$ where n is the number of customers in the restaurant. Figure[\ref{CRP}] visualizes the progression of the proccess as more people enter the restaurant, Figure[\ref{numoftabcrp}] displays the plot of the number of tables occupied as the number of people in the restaurant increase as well as the logarithmic trend it follows.
+It can be seen that there is a positive reinforcement effect in this process, that is the more people already sitting at a table, the bigger the probability that more people will be sitting into that table in the future. It can also be proved that the number of tables grows $ \propto \alpha log(n)$ where n is the number of customers in the restaurant. Figure[\ref{CRP}] visualizes the progression of the proccess as more people enter the restaurant. 
+
 \begin{wrapfigure}{l}{.52\textwidth}
           \centerline{\includegraphics[width=.40\textwidth]{crp}}
 	\caption{The CRP process}
@@ -287,9 +286,13 @@ One important property of this procedure is that the nth customer has the same p
 
 \subsubsection{Stick Breaking}
 
-Measures drawn from a Dirichlet distribution are discrete with probability 1(Ferguson 1973). This property is made explicit by the stick breaking construction(Sethuraman 1994). The construction is based on the independent sequences of i.i.d. random variables $(\pi'_k)_{k=1}^\infty$ and $ ( \phi_k)_{k=1}^\infty$  defined as follows:
+Measures drawn from a Dirichlet distribution are discrete with probability 1. This property is made explicit by the stick breaking construction. The construction is based on the independent sequences of i.i.d. random variables $(\pi'_k)_{k=1}^\infty$ and $ ( \phi_k)_{k=1}^\infty$  defined as follows:
+
+\ \ 
 
 \centerline{ $\pi'_k  | \alpha_0, G_0 \sim Beta(1, \alpha_0)$\ \ \ \ \ \ \ \ \ \ $  \phi_k | \alpha_0, G_0 \sim G_0 $} 
+
+\ \ 
 
 This can be defined as follows: Draw $\pi'_k$ as a Beta random variable. Draw $\phi_k$ from $G_0$ Now define a random measure G as:
 
@@ -309,12 +312,14 @@ The first part of the stick will have length $\pi'_k$ and the conditional length
 
 \subsection{Dirichlet process mixture models}
 
-The Dirichlet process and sampling methods have been introduced. One of the most important properties of those objects is that thay can serve as a nonparametric prior to mixture models. A typical 1D mixture model that represents data comming from a mixture of two one-dimensional Gaussian distributions is shown in Figure[\ref{1dGMM}].
-\begin{wrapfigure}{l}{.4\textwidth}
-          \includegraphics[width=.3\textwidth]{1DGMM}
-	\caption{A 1D gaussian mixture model}
+\begin{wrapfigure}{l}{.30\textwidth}
+          \includegraphics[width=.25\textwidth]{1DGMM}
+	\caption{Mixture model}
 	\label{1dGMM}
 \end{wrapfigure}
+
+One of the most important properties of those objects is that thay can serve as a nonparametric prior to mixture models. A typical 1D mixture model that represents data comming from a mixture of two one-dimensional Gaussian distributions is shown in Figure[\ref{1dGMM}].
+
 
 Mixture models can be considered as the Bayesian approach to clustering, and one of the most important applications of the Dirichlet process is to serve as the non parametric prior on the parameters of such models. In particular, suppose that observations $x_i$ arise from the following model:
 	\begin{equation}
@@ -334,25 +339,29 @@ Since G can be represented using a stick-breaking construction, the factors $ \t
 	\end{equation}
 
 The infinite limit of finite mixture models is taken when we let the number of components into a model to reach infinity. An infinite mixture model assumes that the data come from an infinite number of distributions.
+
+This means that in such models the number of components from which the data are generated can be infinite. In models where the finite number of distributions restriction is removed, it is important to notice in a dataset of size $n$ , the data come from at most n clusters where $n$ is the total number of elements. This is an important property of infinite mixture models and is exploited when performing posterior inference.
+
+\subsection{Inference}
 \begin{wrapfigure}{l}{.3\textwidth}
-          \centerline{\includegraphics[width=.20\textwidth]{dpmm3}}
+          \centerline{\includegraphics[width=.17\textwidth]{dpmm3}}
 	\caption{A Dirichlet process mixture model.}
 	\label{mm}
 \end{wrapfigure}
 
 
-
-This means that in such models the number of components and concequently distributions from which the data are generated can be infinite. Given the fact that in such models the finite number of distributions restriction is removed, it is important to notice in a dataset of size $n$ , the data come from at most n clusters where $n$ is the total number of elements. This is an important property of infinite mixture models and is exploited when performing posterior inference.
-
-\subsection{Inference}
-
-Statistical inference is the process of deducing properties of an underlying distribution by analysis of data\cite{statinf}. Inference can be considered as the inverse procedure presented in the plate in Figure[\ref{mm}]; the same graphical process with the arrows facing the opposite direction. Statistical inference techniques can be categorized into 3 families: MCMC, Variational inference and SMC methods. The literature on such methods is extensive and covering it is beyond the scope of this project; for the purpose of this project an SMC sampler will be defined in detail in the model definition section. In that direction the Generalized Polya Urn model will be defined in the theory and an application of the model will be presented in the Model definition section
+Statistical inference is the process of deducing properties of an underlying distribution by analysis of data. Inference can be considered as the inverse procedure presented in the plate in Figure[\ref{mm}]; the same graphical process with the arrows facing the opposite direction. Statistical inference techniques can be categorized into 3 families: MCMC, Variational inference and SMC methods. The literature on such methods is extensive and covering it is beyond the scope of this project; for the purpose of this project an SMC sampler will be defined in detail in the model definition section. 
 
 \subsection{Generalized Polya Urn}
 
 Dependent dirichlet processes extend Dirichlet processes by allowing the clusters in the data to vary with some variance over time. Dependent Dirichlet processes(DDP) remove the restriction of exchangeable data and introduce dependencies on the data which can be temporal, positional etc. The DDPs are a natural extension of the DP's in domains where data cannot be considered exchangeable. They where introduced by MacEachern\cite{theory:ddp} and have been widely used since. The main motivation behind using such tools is the inherent extension they provide to dynamic environments.
+\begin{wrapfigure}{l}{.38\textwidth}
+    \includegraphics[width=.33\textwidth]{generalPolya2}
+    \caption{GPU}
+    \label{generalPolya}
+\end{wrapfigure}
 
-A DDP also known as Generalized Polya Urn\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. The current notation defines the $n_{th}$ datapoint at time $t$,$x_{t,n}$ having an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
+A DDP also known as Generalized Polya Urn\cite{caron} and has the property of randomly deleting partitions of clusters on every iteration. That way, it can cope with the variance of the data. The current notation as used in algorithm \ref{gpu:algo} defines the $n_{th}$ datapoint at time $t$,$x_{t,n}$ having an assignment $c_{t,n}$ at cluster $k \in \{1,2,..., K\} $. The size of cluster $k$ at time $t$ is defined as $s_t^k$. The GPU of this model at time $t$ can now be defined as:
 
 \begin{algorithm}
   \caption{GPU}\label{GPU}
@@ -370,37 +379,32 @@ A DDP also known as Generalized Polya Urn\cite{caron} and has the property of ra
       \EndFor
     \EndProcedure
   \end{algorithmic}
+  \label{gpu:algo}
 \end{algorithm}
 
 
 Where Cat is a categorical distribution, Bin is the binomial distribution, $\alpha$ is the DP concentration parameter and $\rho$ is the deletion parameter of the GPU. This Generative Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$)
-\begin{wrapfigure}{l}{.40\textwidth}
-    \includegraphics[width=.35\textwidth]{generalPolya2}
-    \caption{GPU}
-    \label{generalPolya}
-\end{wrapfigure}
-This process can be though of in the terms of a general chinese restaurant process\cite{antoniak} as shown in Fig.~\ref{generalPolya}. Imagine a restaurant with an infinite number of tables and an infinite number of customers patiently waiting in line to enter the restaurant. At time $t=0$ customer 1 enters the restaurant and sits at table $c=1$ with probability 1. For every timepoint after the first suppose there is a number of customers $n$ seating at several tables in the restaurant. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated (b). Each table occupied is moved according to the number of customers still seating in that table (c). A new customer then enters the table and either chooses to sit on one of the existing tables (e) or choose a new with probability proportional to the strength parameter $\alpha$ of the model(f).
-
-
+his process can be though of in the terms of a general chinese restaurant process\cite{antoniak} as shown in Fig.~\ref{generalPolya}. Imagine a restaurant with an infinite number of tables and an infinite number of customers patiently waiting in line to enter the restaurant. At time $t=0$ customer 1 enters the restaurant and sits at table $c=1$ with probability 1. For every timepoint after the first suppose there is a number of customers $n$ seating at several tables in the restaurant. Each customer has to decide if he/she will remain at table with probability $p$ or leave the restaurant with probability $1-p$. Once all the customers make their decisions they leave the restaurant or remain seated (b). Each table occupied is moved according to the number of customers still seating in that table (c). A new customer then enters the table and either chooses to sit on one of the existing tables (e) or choose a new with probability proportional to the strength parameter $\alpha$ of the model(f).
 
 
 \section{Model definition}
 \label{sec:model}
 
-The model definition is structured as follows: An introduction to the general pipeline that will serve as the compressed sensor model of the EKF slam module is resented first. Every component of the pipeline is then analysed in detail in its functions and usage. 
+The model definition is structured as follows: An introduction to the general pipeline that will serve as the compressed sensor model of the EKF slam module is resented first. Every component of the pipeline is then analysed in detail in relation to the operations it serves.
 
 \subsection{General pipeline}
 
-The general flow of operations that defines the basic communication between the pipeline and the EKF module is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The algorithmic procedure shown in Algorithm~\ref{euclid} analytically.
-
 \begin{wrapfigure}{l}{0.7\textwidth}
 \begin{tabular}{cc}
-  \includegraphics[width=.3\textwidth]{workflowGen} &    \includegraphics[width=.3\textwidth]{workflowSpec} \\
+  \includegraphics[width=.33\textwidth]{workflowGen} &    \includegraphics[width=.33\textwidth]{workflowSpec} \\
 (a) General pipeline & (b) Landmark pipeline \\[6pt]
 \end{tabular}
 \caption{General landmark update pipeline}
 \label{pipeline}
-\   \end{wrapfigure}
+\end{wrapfigure}
+
+
+The general flow of operations that defines the basic communication between the pipeline and the EKF module is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The algorithmic procedure shown in Algorithm~\ref{euclid} analytically.
 
 
 \begin{algorithm}
@@ -453,7 +457,6 @@ Each point $x$ in the cloud is represented as a tuple $x =(x^s, x^a, x^c ) $ whe
 The object model is a mixture of distributions over the data with each object being modeled as D($\theta_t^k$) where $\theta$ represents the parameters of object $k$ at time $t$. More specifically, each set \textbf{x} with $n$ datapoints at time $t$ is distributed as:
 $$ x_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
 
-Where $Normal$ is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; $Mult$ is a Categorical multinomial distribution with parameter vector $\delta$ representing the color distribution and $Exp$ is an exponential with shape parameter $\lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in.~\ref{pcl:kl}. Since there is a clear exponential trend, the exponential distribution was chosen to model the angle signature of the data.
 
 
 \begin{wrapfigure}{l}{0.35\textwidth}
@@ -463,7 +466,10 @@ Where $Normal$ is a three dimensional Gaussian distribution with mean $\mu$ and 
     \label{pcl:kl}
 \end{wrapfigure}
 
-Now that the distribution of the objects is defined, the progression of the sufficient statistics at time $t$ given $t-1$ given by:
+Where $Normal$ is a three dimensional Gaussian distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; $Mult$ is a Categorical multinomial distribution with parameter vector $\delta$ representing the color distribution and $Exp$ is an exponential with shape parameter $\lambda$ representing the angle distribution of the data within the cluster. The exponential distribution was chosen to model angular information after empiric evaluation showed that it would be a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in Fig.~\ref{pcl:kl}. Since there is a clear exponential trend, the exponential distribution was chosen to model the angle signature of the data.
+
+
+Now that the object distribution is defined, the progression of the sufficient statistics at time $t$ given $t-1$ given by:
 
 $\theta_t^k | \theta_{t-1}^k \sim
 \begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
@@ -513,7 +519,7 @@ where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior parameters given th
 
 \subsection{Sequential monte carlo sampler}
 
-Sequential monte carlo samplers for Dirichlet process mixture models where introduced by Doucet et al~\cite{doucet} and serve as fast alternative to MCMC and VI methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation is hard to occur at a small time horizon of that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
+Sequential monte carlo samplers for Dirichlet process mixture models where introduced by Doucet et al.~\cite{doucet} and serve as fast alternative to MCMC and VI methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation is hard to occur at a small time horizon of that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
 
 \begin{algorithm}[ht!]
   \caption{SMC for DDPM}\label{SMC}
@@ -587,7 +593,7 @@ q_N = q_0 +  \sum_n x_i^c,
 \end{equation}
 
 
-Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations. The formulas for the updates can be found at the literature of cojugate priors like\cite{conjugate}.
+Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations. The formulas for the updates can be found in statistics literature about cojugate priors\cite{conjugate}.
 
 \subsubsection{Weight updates}
 
@@ -721,7 +727,10 @@ More specifically, the reduced point cloud is shown in the top left part. It is 
 	 \end{tabular}    
 \end{center}
 
-After the structure is clustered, distances between the elements can be calculated. The table shows the distances between every cluster shown in Fig[\ref{pcl:clust}]. It can be seen that the first two landmarks have small distances in their Gaussian counterparts since they represent nearby areas and objects in the cloud that are very far apart. The angular distances between them are also not very large. The distinct colors of the milk boxes make the color signatures of the clusters distinct. An example with more complex color signatures is shown in Fig.[\ref{pcl:clust2}]. The clouds are now given a mixture of colors and this is passed to the color signature inferred on every cluster in Fig.[\ref{pcl:clust2}](b). In this case the sampler outputs 2 clusters and the color signatures the clusters carry map that relation. There is some overlap as both clusters share blue but the the difference in their signatures is obvious.
+After the structure is clustered, distances between the elements can be calculated. The table shows the distances between every cluster shown in Fig.\ref{pcl:clust}. It can be seen that the first two landmarks have small distances in their Gaussian counterparts since they represent nearby areas and objects in the cloud that are very far apart. The angular distances between them are also not very large. The distinct colors of the milk boxes make the color signatures of the clusters distinct. The calculated distances are then given to the decision layer to caclulate if the clusters currently calculated are part of landmarks previously encountered.
+An example with more complex color signatures is shown in Fig.\ref{pcl:clust2}. The clouds are now given a mixture of colors and this is passed to the color signature inferred on every cluster in Fig.\ref{pcl:clust2}(b). In this case the sampler outputs 2 clusters and the color signatures capture the more complex color signatures as well as the expected overlap correctly. 
+
+
 
 \begin{figure}
 \begin{tabular}{c}
@@ -754,45 +763,11 @@ In Fig.\ref{pip:bounds}(a) the yellow folder allong with some of its environment
 
 The exponential part of the distribution is responsible for the angle signature elements within a cluster have. Practically, having a large amount of different angle distributions in a single cluster leads to objects that have texture and their surface is not smooth. Having a very strict limit in the angle distribution can lead to very small clusters and subsequently to a high amount of landmarks within the data. Using the data from the kinect camera, angle distributions are highly prone to high amounts of noise that is found in parts of the cloud that are near the end of Kinect sensor's range. Practical evaluation has shown that using an angle limit that is close to the average distance between angle signatures produces stable results and reasonably sized landmarks in the cloud.
 
-
-\subsection{Limits of the method}
-
-	Restrictions imposed by the method can be categorized to two major classes. Restrictions to the clustering layer and restrictions to the decision layer of the sampler.
-
-
-\subsubsection{Clustering layer}
-
-
-An important limit of the pipeline exists with respect to the Dirichlet hyper-parameter $\alpha$. During the clustering, choosing a correct value for the hyper-parameter $\alpha$ is very important in order to have optimal results. Having sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no environment specific information are incorporated to the cloud. Fig.[\ref{pip:limits}](a) shows the behaviour of the sampler for $\alpha$ values lower than 1. The clusters are color coded in the downsampled cloud, and it can be seen that only one cluster is output by the sampler. On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler every time. That in combination with the strict decision layer can lead to a non-converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters with each containing a small number of points. Furthermore, having a high value in the hyperparameter leads to a slower sampling procedure since the complexity of the sampler is $O(TKLSN)$ where $K$ is the number of clusters. Fig.[\ref{pcl:kl}](b) displays the behavior of the sampler for very large values $\alpha$. The landmarks extracted from a single cloud are shown as spheres; it can be seen that the cloud is not visible and the majority of the points is considered a landmark of its own.
-
-
-\begin{figure}
-\begin{tabular}{cc}
-    \includegraphics[width=.5\textwidth]{singlecluster} &  \includegraphics[width=.5\textwidth]{onlyclusters2} \\
-  (a) Low $\alpha$ translates to a single cluster  & (b) High $\alpha$ translates to a non converging cloud \\[6pt]
-\end{tabular}
-\caption{Fail use cases.}
-  \label{pip:limits}
-\end{figure}
-
-\subsubsection{Decision layer}
-
-The restrictions introduced by the decision layer are relatively simple due to its constant nature. Taking very small distances in the distance threshold operation can lead to pipeline that continuously adds new landmarks to the database. An example is shown in Fig.~\ref{pip:expo} where limiting the landmark matching operation to very small exponential distances, leads to a cloud where objects are decomposed to many entities that also differ on every iteration. Spheres represent landmarks and it can be seen that the chair is being assigned to many landmarks using the pipeline with this setup. That means that very strict limits lead to a non converging pipeline with respect to the landmarks it outputs. It must be noted that the object decomposition is even more intense when camera movement is involved due to the different angles. Furthermore, since the number of landmarks is also a function of noise, areas of the cloud that are near the maximum range of the sensor can lead to different landmarks added frequently. These issues can be tackled by having a less strict limit in the operation that defines what is considered a landmark the sampler has encountered before or not.
-
-    \begin{figure}
-        \centering
-	    \includegraphics[width=.5\textwidth]{monsterchair} \\
-	  (a) Very strict decision limits lead to multiple \\
-	   entities on single objects \\[6pt]
-	  \label{pip:expo}
-    \end{figure}
-
-
 \subsection{EKF-SLAM experiments}
 
-Finally, the pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. In Fig.\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown. The yellow spheres represent the landmarks extracted during the slam session and it can be seen that the fussball table is decomposed to several parts; furthermore the column next to the table is also being given a landmark of its own. It must also be noted that the environment is quite noisy, especially in readings that are near the maximum range of the kinect sensor or close to the window and that leads to more landmarks.
+Finally, the pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. In Fig.\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown. The yellow spheres represent the landmarks extracted during the slam session with every sphere representing the environment signature at the specific part of the map; furthermore the column next to the table is also being given a landmark of its own. It must also be noted that the environment is quite noisy, especially in readings that are near the maximum range of the kinect sensor or close to the window and that leads to more landmarks.
 
-The compression that method introduces is not directly observable. As the environment is being reduced from a cloud to a landmarks, the memory needs change from using point clouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial. The expresiveness of the distributions greatly affects the objects as well as object shapes that could be represented. Finally it is always possible to extend the method presented by adding new features and new priors to those features.
+The compression that the method introduces is not directly observable. As the environment is being reduced from a cloud to a landmarks, the memory needs change from using point clouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial. The expresiveness of the distributions greatly affects the objects as well as object shapes that could be represented. Finally it is always possible to extend the method presented by adding new features and new priors to those features.
 
 
 
@@ -868,11 +843,45 @@ The memory requirements of the method is a function that is directly affected to
 As it can be seen, the number of landmarks follows the logarithmic trend of the distribution in relation to $\alpha$. Increasing the alpha value more will not make the algorithm follow the logarithmic trend indefinitely. That is due to the fact that as the alpha increases, the constant decision layer has an upper bound to the number of landmarks it can have. This means that the algorithm will keep adding landmarks until the environment saturates and no new landmarks can be added. It must also be noted that as the alpha parameter is set to higher numbers, the sampler outputs more clusters making it more accurate of the environment descriptor it outputs, but also takes more time, making it non feasible to use this in real time mapping scenarios. Values of alpha between 0 and 10 provide a robust but also fast enough sampler that can be used in online mapping scenarios.
 
 
+\subsection{Limits of the method}
+
+	Restrictions imposed by the method can be categorized to two major classes. Restrictions to the clustering layer and restrictions to the decision layer of the sampler.
+
+
+\subsubsection{Clustering layer}
+
+
+An important limit of the pipeline exists with respect to the Dirichlet hyper-parameter $\alpha$. During the clustering, choosing a correct value for the hyper-parameter $\alpha$ is very important in order to have optimal results. Having sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no environment specific information are incorporated to the cloud. Fig.[\ref{pip:limits}](a) shows the behaviour of the sampler for $\alpha$ values lower than 1. The clusters are color coded in the downsampled cloud, and it can be seen that only one cluster is output by the sampler. On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler every time. That in combination with the strict decision layer can lead to a non-converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters with each containing a small number of points. Furthermore, having a high value in the hyperparameter leads to a slower sampling procedure since the complexity of the sampler is $O(TKLSN)$ where $K$ is the number of clusters. Fig.[\ref{pcl:kl}](b) displays the behavior of the sampler for very large values $\alpha$. The landmarks extracted from a single cloud are shown as spheres; it can be seen that the cloud is not visible and the majority of the points is considered a landmark of its own.
+
+
+\begin{figure}
+\begin{tabular}{cc}
+    \includegraphics[width=.5\textwidth]{singlecluster} &  \includegraphics[width=.5\textwidth]{onlyclusters2} \\
+  (a) Low $\alpha$ translates to a single cluster  & (b) High $\alpha$ translates to a non converging cloud \\[6pt]
+\end{tabular}
+\caption{Fail use cases.}
+  \label{pip:limits}
+\end{figure}
+
+\subsubsection{Decision layer}
+
+The restrictions introduced by the decision layer are relatively simple due to its constant nature. Taking very small distances in the distance threshold operation can lead to pipeline that continuously adds new landmarks to the database. An example is shown in Fig.~\ref{pip:expo} where limiting the landmark matching operation to very small exponential distances, leads to a cloud where objects are decomposed to many entities that also differ on every iteration. Spheres represent landmarks and it can be seen that the chair is being assigned to many landmarks using the pipeline with this setup. That means that very strict limits lead to a non converging pipeline with respect to the landmarks it outputs. It must be noted that the object decomposition is even more intense when camera movement is involved due to the different angles. Furthermore, since the number of landmarks is also a function of noise, areas of the cloud that are near the maximum range of the sensor can lead to different landmarks added frequently. These issues can be tackled by having a less strict limit in the operation that defines what is considered a landmark the sampler has encountered before or not.
+
+    \begin{figure}
+        \centering
+	    \includegraphics[width=.5\textwidth]{monsterchair} \\
+	  (a) Very strict decision limits lead to multiple \\
+	   entities on single objects \\[6pt]
+	  \label{pip:expo}
+    \end{figure}
+
+
+
 
 \section{Conclusion and future work}
 \label{sec:discussion}
 
- In this paper a novel method for cloud representation using non-parametric Bayesian tools was introduced. Its strengths and weaknesses where presented and an application on how this method could be used to tackle the compression problem of long term SLAM were given. There is a number of directions in which such methods could be improved. Choosing more complex environment representations could increase the expresional stregth of the sampler making it easier to represent with better precision more complex objects. Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that long term slam problems introduce. Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. Finally, all those additions could help lift the dynamic environment restrictions that were defined in Walcotts PhD thesis and make the pipeline handle in a fully Bayesian way the long term mapping implications of SLAM.
+ In this paper a novel method for cloud representation using non-parametric Bayesian tools was introduced. Its strengths and weaknesses where presented and an application on how this method could be used to tackle the compression problem of long term SLAM were given. There is a number of directions in which such methods could be improved. Choosing more complex environment signatures could increase the expresional stregth of the sampler making it easier to represent with higher precision more complex structures. Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that long term slam problems introduce. Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. Finally, all those additions could help lift the dynamic environment restrictions that were defined in Walcotts PhD thesis and make the pipeline handle in a fully Bayesian way the long term mapping implications of SLAM.
  
 %------------------------------------------------
 
