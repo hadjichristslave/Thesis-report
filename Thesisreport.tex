@@ -517,15 +517,15 @@ The transition kernel of the model can now be sampled by using the following for
 $\theta_t^k \sim T(\theta_{t-1}^k) = T_2(z_t^k) \circ T_1(\theta_{t-1}^k)$ where:
 \begin{equation} \label{eq1}
 \begin{split}
-z_t^k  & \sim T_1(\theta_{t-1}^k)\\
+    z_{t,1:M}^k  & \sim T_1(\theta_{t-1}^k)\\
  & = Normal(\mu_{t-1}, \Sigma_{t-1}) Mult( \delta_{t-1}) Exp( \lambda_{t-1})
 \end{split}
 \end{equation}
 
 \begin{equation}
 \begin{split}
-\mu_t, \Sigma_t, \delta_t,  \lambda_t & \sim T_2(z_t^k)\\
- & = NiW( \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(q_0) Gam(\alpha_0, \beta_0) 
+    \mu_t, \Sigma_t, \delta_t,  \lambda_t & \sim T_2(z_{t,1:M}^k)\\
+ & = NiW( \kappa_M, \mu_M, \nu_M, \Lambda_M ) Dir(q_M) Gam(\alpha_M, \beta_M) 
 \end{split}
 \end{equation}
 
