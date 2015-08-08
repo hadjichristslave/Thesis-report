@@ -702,7 +702,9 @@ In this section the algorithm will be tested against a simple dataset. That will
 \end{figure}
 
 
-The cloud was first given as input to the downsampling and feature extraction pipeline. The reduced cloud(top left Fig.\ref{pcl:clust}) was then passed as input to the sampler and the clustering results are shown in Fig.\ref{pcl:clust}. The downsampling results in a is significantly smaller in size cloud and this cloud along with feature-information needed to perform the clustering are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
+The cloud was first given as input to the downsampling and feature extraction pipeline. The reduced cloud(top left Fig.\ref{pcl:clust}) was then passed as input to the sampler and the clustering results are shown in Fig.\ref{pcl:clust}. The downsampling results in a significantly smaller cloud and this cloud along with feature-information needed to perform the clustering are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
+
+
 \begin{center} 
     \begin{tabular}{|C|C|C|C|C|C|}
     \hline
@@ -771,7 +773,7 @@ The exponential part of the distribution is responsible for the angle signature 
 
 \subsection{EKF-SLAM experiments}
 
-Finally, the pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. In Fig.\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown. The yellow spheres represent the landmarks extracted during the slam session with every sphere representing the environment signature at the specific part of the map; the noisy cloud readings were taken from the kinect sensor mounted on the robot.
+Finally, the pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. In Fig.\ref{slam} an end result of a slam session using the pipeline as a sensor model is shown. The yellow spheres represent the landmarks extracted during the slam session with every sphere representing the environment signature at the specific part of the map; noisy cloud readings were taken from a kinect sensor mounted on the robot.
 
 
 \begin{wrapfigure}{l}{.5\textwidth}
