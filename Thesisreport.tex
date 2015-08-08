@@ -533,7 +533,7 @@ where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior parameters given th
 
 \subsection{Sequential monte carlo sampler}
 \label{smcsampler}
-Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where introduced by Doucet et al.~\cite{doucet} and serve as fast alternative to Markov Chain Monte Carlo and Variational Inference methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage which is the particle degradation is hard to occur at a small time horizon of that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
+Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where introduced by Doucet et al.~\cite{doucet} and serve as fast alternative to Markov Chain Monte Carlo and Variational Inference methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage, the particle degradation is hard to occur at the minimal time horizon that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
 
 \begin{algorithm}[ht!]
   \caption{SMC for DDPM}\label{SMC}
@@ -546,17 +546,20 @@ Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where 
 								\State Sample $(c_t)^{(l)} \sim Q_1$  
 								\State Sample $(\theta^k ) \sim Q_2$
 						    \EndFor		
-		    \EndFor
 		    \For{$ k = 1,...K$} 
 			   \State Sample $\Delta s_{t-1}^k \sim Binom( (s_{t-1,N_{t-1}}^k)^{(l)}, \rho) $ 
 		       \State Set $s_{t,0}^{k} = s_{t-1,N_{t-1}}^{k} -\Delta s_{t-1}^k$
    		       \State Sample $( (z_{t+1}^k)^{(l)} ) \sim T_1((\theta_t^k))^{(l)} $
 		    \EndFor
 		 	\State compute particle weights $w_t^l$
-    \EndFor
+		    \EndFor
     \State Normalize and resample weights
+    \EndFor
   \end{algorithmic}
 \end{algorithm}
+
+The process is straightforward and can be described as follows:
+For every time step $T$ for every particle $L$ and for every sample$S$, sample cluster indexes $c_t^{(l)}$ from the proposal distribution $Q_1$ and sufficient statistics from proposal distribution $Q_2$. After clusters assignments and sufficient statistics are sampled for all the samples and particles, perform the deletion step of the DDP and sample auxiliary variables with from the transition kernel of the elements that stayed in the clusters after the deletion steps. Compute the weights and perform the resampling. 
 
 \subsubsection{Gibbs updates}
 The proposal distribution $Q_1$ is the probability of an assignment $c_{t,n}$ given cluster sizes, parameters and concentration $\alpha$. Formally $Q_1$ can be written as:
@@ -566,7 +569,7 @@ The proposal distribution $Q_1$ is the probability of an assignment $c_{t,n}$ gi
  	F(x_{t,n} | \theta_t^{c_t} )  &\mbox{if } k \leq K_{t-1} \\
  	\int P(x_{t,n} | \theta_t )G_0(\theta) d\theta & \mbox{if } k > K_{t-1}. \end{cases}
 \end{equation}
-Where $c_{t,n}$ represents cluster $c$ of point $n$ at time $t$, $s$ represents cluster sizes. The integral represents the posterior predictive distribution of the cluster times the base distribution with the parameters integrated out. A review of the literature helps understand how the posterior predictive formula is derived. More specifically, the analytic expression of the integral is:
+Where $c_{t,n}$ represents cluster $c$ of point $n$ at time $t$, $s$ represents cluster sizes. The integral represents the posterior predictive distribution of the cluster times the base distribution with the parameters integrated out. More specifically, the analytic expression of the integral is:
 
 
 \begin{equation} \label{Q1}
@@ -607,7 +610,7 @@ q_N = q_0 +  \sum_n x_i^c,
 \end{equation}
 
 
-Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations. The formulas for the updates can be found in statistics literature\cite{conjugate}.
+Where $\overline{x}$ defines the sample mean for the elements assigned at cluster $c$, $s_{x}$ the sample variance and $N$ denotes the number of observations\cite{conjugate}.
 
 \subsubsection{Weight updates}
 
@@ -631,7 +634,7 @@ Once the points of the current iteration are clustered, the clusters are passed 
 
 Every cluster consists of a three part distribution as it was defined in section \ref{data:dist}. To define a distance measure between cluster, individual distances between all the distribution parts will be defined. More specifically let $l$ be the distribution of the cluster and $o$ the distribution of a currently observed cluster. $l$ and $o$ can be decomposed into 3 parts: $l_G$,$l_C$,$l_E$ where G,C and E stand for Gaussian, Categorical and Exponential respectively. With that notation the distances between those distributions can be defined. For each individual landmark distribution $l$ and observation distribution $o$ the distances computed where the following: A Wesserstein($l_G,o_G$), a Kullback-Leibler($l_G,o_G$), a SquaredHellinger($l_E,o_E$),a Kullback-Leibler($l_E,o_E$) and  Kullback-Leibler($l_C,o_C$).
 
-With that in mind the distance between every distribution can be transposed of a vector of length 5. That way, deciding if a cluster is part of a landmark that has been encountered before is now a problem of finding the optimal decision boundary given the distances at hand. For the purposes of this thesis, the decision boundary of an observation being a landmark or not was chosen by empiric evaluation of the landmarks. It is of course possible to learn the optimal decision boundary but due to time restrictions a simpler decision making approach was chosen instead.
+With that in mind the distance between every distribution can be transposed of a vector where each element represents a specific distance between the two distribution. That way, deciding if a cluster is part of a landmark that has been encountered before is now a problem of finding the optimal decision boundary given the distances at hand. For the purposes of this thesis, the decision boundary of an observation being a landmark or not was chosen by empiric evaluation of the landmarks. It is of course possible to learn the optimal decision boundary but due to time restrictions a simpler decision making approach was chosen instead.
 
 \subsection{Complexity}
 
@@ -686,8 +689,7 @@ The basic block of this algorithm is a cluster containing an environment signatu
 
 \subsection{Simple datasets}
 
-In this section the algorithm will be tested against a simple dataset. That will make easier the conceptual extension to more complex clouds that will be used when mapping the environment. In order to test the sampling as well as the decision layer of the algorithm, a simple dataset provided by the pcl\cite{pcl} library was used. More specifically, a cloud consisting of two milk cartridges with different colors and poses where used. The initial cloud is shown in Fig.\ref{pcl:clust}. The cloud was given as input to the downsampling pipeline. The reduced cloud was then passed as input to the sampler and the clustering results are shown in Fig.\ref{pcl:clust}.
-
+In this section the algorithm will be tested against a simple dataset. That will make easier the conceptual extension to more complex clouds that will be used when mapping the environment. In order to test the sampling as well as the decision layer of the algorithm, a simple dataset provided by the pcl\cite{pcl} library was used. More specifically, a cloud consisting of two milk cartridges with different colors and poses was used. The initial cloud is shown in Fig.\ref{pcl:clust}. 
 \begin{figure}
 \begin{tabular}{c}
   \includegraphics[width=1\textwidth]{clusterings/initialData} \\
@@ -699,10 +701,9 @@ In this section the algorithm will be tested against a simple dataset. That will
   \label{pcl:clust}
 \end{figure}
 
-More specifically, the reduced pointcloud is shown in the top left part. It is significantly smaller in size and this cloud along with all the meta-information needed to perform the clustering are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
 
-\begin{center}
-
+The cloud was first given as input to the downsampling and feature extraction pipeline. The reduced cloud(top left Fig.\ref{pcl:clust}) was then passed as input to the sampler and the clustering results are shown in Fig.\ref{pcl:clust}. The downsampling results in a is significantly smaller in size cloud and this cloud along with feature-information needed to perform the clustering are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
+\begin{center} 
     \begin{tabular}{|C|C|C|C|C|C|}
     \hline
     \multicolumn{6}{|l|}{\centerline{UUID 1}} \\
