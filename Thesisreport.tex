@@ -57,7 +57,7 @@
 \normalsize \textbf{Thesis Commitee:} \\ 
 \normalsize University of Maastricht \\ % Your institution
 \normalsize \textit{Rico Mockel, Kurt Driessens} \\
-\normalsize Dobots B.V.\\
+\normalsize Distributed Organisms B.V.(DoBots)\\
 \normalsize \textit{Anne Van Rossum} \\
 \vspace{0mm} \\
 \normalsize Maastricht University \\
@@ -81,7 +81,7 @@
 \newpage
 \begin{abstract}
 
-\noindent Long term mapping is the natural conceptual extension to existing mapping methods that are focused on mapping static environments. Mapping an area for a large amount of time is a problem that if tackled efficiently will be a large step towards truly autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. The thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to tackle the clustering subproblem of lifelong mapping methods. A novel method of point cloud representation is presented and its results are applied to an EKF SLAM algorithm; its strengths and weaknesses are analyzed as well as the directions in which the method could be extended to be a complete solution to both the dynamic as well as the compression problem of lifelong mapping.
+\noindent Long term mapping is the natural conceptual extension to existing mapping methods that are focused on mapping static environments. Mapping an area for a large amount of time is a problem that if tackled efficiently will be a large step towards fully autonomous robots. As discussed in the literature lifelong mapping consists of two major subproblems. A compression, and a dynamic environment problem. This thesis discuses the application of non parametric Bayesian methods and how such tools can be directed to tackle the clustering subproblem of lifelong mapping methods. A novel method of pointcloud representation is presented and its results are applied to an EKF SLAM algorithm; its strengths and weaknesses are analyzed as well as the directions in which the method could be extended to be a complete solution to both the dynamic as well as the compression problem of lifelong mapping.
 
 
 \end{abstract}
@@ -100,14 +100,14 @@
 \label{sec:Intro}
 
 
-Simultaneous localization and mapping is one of the fundamental problems of autonomous systems\cite{probRobs}. In order for robots to be considered truly autonomous they have to be able to enter an environment and map its structure. In that direction we can now efficiently map such environments with solutions like EKF-slam\cite{ekf} and FastSlam\cite{slam}. The logical extension of methods that can map static environments is methods that remove this restriction. The idea of lifelong learning in robots is not new\cite{liflonglearning}, and in recent years research with a specific focus on lifelong learning in mapping\cite{lifelongmaps} was introduced.  Lifelong mapping introduces the concept of robots that are able to continuously map their environment and this leads to two basic extensions over existing methods: Mapping methods must able to handle the memory needs of an environment that constantly increases and mapping methods must be robust enough to be able to handle dynamic environments and the changes they introduce to the map over time.
+Simultaneous Localization And Mapping(slam) is one of the fundamental problems of autonomous systems\cite{probRobs}. In order for robots to be considered truly autonomous they have to be able to enter an environment and map its structure. In that direction we can now efficiently map such environments with solutions like EKF-slam\cite{ekf} and FastSlam\cite{slam}. The logical extension of methods that can map static environments is methods that remove this restriction. The idea of lifelong learning in robots is not new\cite{liflonglearning}, and in recent years research with a specific focus on lifelong learning in mapping\cite{lifelongmaps} was introduced.  Lifelong mapping introduces the concept of robots that are able to continuously map their environment and this leads to two basic extensions over existing methods: Mapping methods must able to handle the memory needs of an environment that constantly increases and mapping methods must be robust enough to be able to handle dynamic environments and the changes they introduce to the map over time.
 
-As a result, lifelong mapping consists of two basic problems: a compression problem as the map increases over time and a dynamic environment problem as the environment changes over time\cite{aishalong}. In this project the focus will be directed on the compression problem of lifelong mapping. More specifically, how can Bayesian non-parametric methods be used to create compressed environment representations that still retain enough information to be used as a reference point when performing slam. The following research questions have then to be addressed: Are such representations rich enough to be used as references points when performing slam? Are the clustering methods fast enough to be used in online methods? Is the compression created by the methods significant? Since different sensors require different approaches and in order to narrow down the problem the focus was directed on RGBD sensors like Microsoft Kinect. 
+As a result, lifelong mapping consists of two basic subproblems: a compression problem as the map increases over time and a dynamic environment problem as the environment changes over time\cite{aishalong}. In this project the focus will be directed on the compression problem of lifelong mapping. More specifically, how can Bayesian non-parametric methods be used to create compressed environment representations that still retain enough information to be used as reference points when performing slam. The following research questions have then to be addressed: Are such representations rich enough to be used as references points when performing slam? Are the clustering methods fast enough to be used in online methods? Is the compression created by the methods significant? Since different sensors require different approaches the focus will be directed on methods that use RGBD sensors like Microsoft Kinect to perform the mapping. 
 
-Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized rgbd devices with its low price range and high quality sensors. It came as no surprise that research in point clouds, the cloud representation system of Kinect, has increased since then. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap}. The goal of this thesis is to introduce a novel approach to tackle the compression problem of lifelong mapping methods that use the Kinect devices while using Bayesian non parametric methods as the base of its solution.
+Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized rgbd devices with its low price range and high quality sensors. It came as no surprise that research in pointclouds, the cloud representation system of Kinect, has increased since then. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap}. The goal of this thesis is to introduce a novel approach to tackle the compression problem of lifelong mapping methods that use the Kinect devices while using Bayesian non parametric methods as the base of its solution.
 
 Dirichlet processes and Dirichlet process mixture models \cite{nonParam} are the cornerstone of Bayesian non-parametric statistics. The strength of those models lies in the fact that they allow the model's mixture components to grow as much as needed so as to best fit the data. The dynamic number of components in combination with different prior choices leads to very flexible models that can be used in a very large area of applications from topic modeling\cite{LDA} to speaker diarization\cite{speakerDiar}. 
-The main motivation of this project is to use such methods as a means of creating compressed representations of the environment that also retain enough expressiveness to be used as reference points when performing slam. In this paper a novel compressed representation of a cloud is introduced and its results are analyzed both towards their robustness and expressive ability by being used as a sensor module in a EKF slam. The strengths and weaknesses of the method are analyzed and directions on how the method could be extended to tackle all the rest subproblems of Walcott's thesis is given in the discussion section.
+The main motivation of this project is to use such methods as a means of creating compressed representations of the environment that also retain enough expressiveness to be used as reference points when performing slam. In this paper a novel compressed representation of a cloud is introduced and its results are analyzed both towards their robustness and expressive ability. The strengths and weaknesses of the method are analyzed and directions on how the method could be extended to tackle all the rest subproblems of Walcott's thesis is given in the discussion section.
 
 The rest of the paper is structured as follows. Section \ref{sec:literature} will present relevant literature review, Section~\ref{sec:theory} will introduce the theories behind the model, Section~\ref{sec:model} will define the model, Section \ref{sec:results} will show experimental results of the method. Finally, Section ~\ref{sec:discussion} will end up with a conclusion and future directions in which the method could be improved.
 
@@ -115,37 +115,38 @@ The rest of the paper is structured as follows. Section \ref{sec:literature} wil
 \section{Literature review}
 \label{sec:literature}
 
-Literature review will be focused on 4 related sub fields: Object based SLAM or semantic slam, point cloud object segmentation, non-parametric bayesian methods and the correspondence problem in SLAM.
+Literature review will be focused on 4 related sub fields: Object based SLAM, pointcloud object segmentation, non-parametric bayesian methods and the correspondence problem in SLAM.
 
-Since the method will use distributions to represent objects within the cloud, methods that use objects to perform SLAM are relevant. The second part of the literature research is focused on point cloud representations and is specifically directed towards the specific features that need to be taken into account so that the reduced point cloud retains enough information of the initial cloud after the downsampling procedures. Having a rich representation while having a cloud that is as small as possible is important as it greatly affects speed of the method and makes the pipeline capable of handling online problems. The third part of the research is focused on non-parametric Bayesian methods and the clustering tools they provide. Such tools are important as they are the base in which the representation will be based on. Finally, research is focused on the correspondence problem in SLAM. As one of the fundamental problems that need to be solved in order to have robust SLAM algorithms, it is imperative the correspondence problem be solved efficiently. 
+Given that the idea begind the project is to create representations of objects within the cloud, methods that use objects to perform SLAM are relevant. The second part of the literature research is focused on point cloud segmentation and the features needed to be extracted from a cloud to optimally segment it to its components. The third part of the research is focused on non-parametric Bayesian methods and the clustering tools they provide. Finally, literature review is focused on the correspondence problem in SLAM. As one of the fundamental problems that need to be solved in order to have robust SLAM algorithms, it is imperative the correspondence problem be solved efficiently. 
 
 \subsection{Object based SLAM}
 
 
 Object based slam introduces a specific category of slam problems where objects are used as reference points while navigating through the environment.
-Salas-Moreno et al.\cite{slam++} define a method of performing object based slam for specific classes objects. The objects are identified by a camera that is on top of the robot. By having a model of pre-trained objects, SLAM can be performed on environments the robot knows what objects to expect. The disadvantage of that method is that there exists a small number of well defined objects. 
+Salas-Moreno et al.\cite{slam++} define a method of performing object based slam for specific classes objects. The objects are identified by a camera that is on top of the robot. By having a model of pre-trained objects, SLAM can be performed on environments the robot knows what objects to expect.
 Castle et al. use object recognition to perform object based SLAM with the use of a hand-held cameras. Selvatici et al.\cite{objslam} use a similar approach while exploiting structural information such as object height and position within the room. That way a couch that is a large object situated in floor level is easier to be recognized.
-Choudhary et al.\cite{objectpointslam} use point clouds and an object database to match objects currently seen with known objects within their database. They use omnimaper\cite{omnimaper} as their mapping method and as a representation a combination of the downsampled  voxel grids with additional normal and curvature information.  Finally, all their operations are done in the non-planar components of the point cloud.
+Choudhary et al.\cite{objectpointslam} use pointclouds and an object database to match objects currently seen with known objects within their database. They use omnimaper\cite{omnimaper} as their mapping method and as a representation a combination of the downsampled  voxel grids with additional normal and curvature information.  Finally, all their operations are done in the non-planar components of the pointcloud.
 Jensfelt et al\cite{objslam} present an object based approach to SLAM where the robot can manipulate the objects of the map. They use camera pictures as input and receptive Field Histogram as the method to abstract the camera input and extract features for their object matching algorithm. Their approach is proposed as a solution to a service robot scenario.
 MonoSLAM\cite{monoslam} introduces a method of performing slam using a monocular camera. 
-Seongyong Koo et al.\cite{objectDisc} introduce a method of unsupervised object individuation from RGB-D image sequences. They cluster their initial cloud into candidate objects using Eucledian clustering and proceed to extract features like the Euclidian distance(L2) and the Kullback-Leibler distance between point cloud objects. They use IMFT to solve their tracking problem.
-The common base of all those methods is that they treat the problem of object based slam as a classification task. More specifically, the robot cannot navigate in environments where it cannot find such objects.
+Seongyong Koo et al.\cite{objectDisc} introduce a method of unsupervised object individuation from RGB-D image sequences. They cluster their initial cloud into candidate objects using Eucledian clustering and proceed to extract features like the Euclidian distance(L2) and the Kullback-Leibler distance between pointcloud objects. They use IMFT to solve their tracking problem.
+
+The common base of all the methods in object based slam is that they treat the problem of object based slam as a classification task. More specifically, the robot cannot navigate in environments where it cannot find such objects.
 The approach presented in this paper introduces a general and unsupervised method of using environment signatures as reference points to perform slam.
 
 \subsection{Point Cloud Object clustering}
 
 
-Point cloud clustering tools enable the user to cluster the points of a cloud. The features used as well as the functions and the robustness of the clustering vary with respect to the method used.
-Trevor et al.\cite{pointSeg} take positional information, Euclidean distances and the normal of points to as input to their function and output segments that are part of the same object. PCL library\cite{pcl} introduces methods like Euclidean clustering and conditional Euclidean clustering that use a number of heuristics that take normal as well as curvature information to extract segments in the point cloud that represent objects. Furthermore, there is a lot of research on segmentation of point clouds in scenes, with the emphasis usually put on extracting geometric primitives\cite{planarSeg},\cite{planarSeg2} using cues like normals and curvature. Rabbani et al.\cite{segOverview} introduce a new method of object segmentation using KNN as their base algorithm. They also present a very informative literature review along with the strengths and weaknesses of existing methods. Finally Triebel et al.\cite{smartSeg} introduce a general clustering framework that does not rely on plane segmentation. Instead of segmenting the plane by using classical approaches like RANSAC or MLASAC they introduce a framework where they make no assumptions regarding plane data. 
+Point cloud clustering tools enable the user to cluster the points of a cloud. The robustness of the clustering varies with respect to the method used the features it requires as well as the application domain.
+Trevor et al.\cite{pointSeg} take positional information, Euclidean distances and the normal of points to as input to their function and output segments that are part of the same object. PCL library\cite{pcl} introduces methods like Euclidean clustering and conditional Euclidean clustering that use a number of heuristics that take normal as well as curvature information to extract segments in the pointcloud that represent objects. Furthermore, there is a lot of research on segmentation of pointclouds in scenes, with the emphasis usually put on extracting geometric primitives\cite{planarSeg},\cite{planarSeg2} using cues like normals and curvature. Rabbani et al.\cite{segOverview} introduce a new method of object segmentation using KNN as their base algorithm. They also present a very informative literature review along with the strengths and weaknesses of existing methods. Finally Triebel et al.\cite{smartSeg} introduce a general clustering framework that does not rely on plane segmentation. Instead of segmenting the plane by using classical approaches like RANSAC or MLASAC they introduce a framework where they make no assumptions regarding plane data. 
  In this paper an alternative novel clustering approach will be introduced that will use Bayesian non-parametric methods as its basis.
 
 \subsection{Non Parametric Bayesian methods}
 
-Dirichlet processes and Dirichlet process mixture models are the cornerstone of Bayesian statistics. In this project the focus is directed towards the clustering methods that are being introduced by those tools. Radford M. Neal\cite{bayes:neal} with his paper regarding MCMC methods for Dirichlet process mixture models made the definitive step towards Dirichlet process mixture models(DPMM's) receiving a lot of attention. Since then, a variety of approaches for inference on such models has been introduced with MCMC methods, and variational inference(VI) methods being two prominent such approaches. Variational inference for DPMM's, introduced by Jordan et al.\cite{bayes:jordan} introduces deterministic tools to perform inference and approximate the posterior distribution and marginals of a dataset. Both methods have strengths and weaknesses and many tools have been established by using the two approaches as their base. Blei et al.~\cite{LDA} introduced LDA as a method to perform topic modelling. Teh et al.\cite{bayes:hier} introduce a hierarchy on the inference process by introducing the Hierarchical Dirichlet process. Particle filter approaches have also been established. Doucet et al.\cite{bayes:smc} introduce Sequential Monte Carlo as a fast way to approximate inference. Dirichlet process mixture models are a very active research field and covering it is beyond the scope of this report. In this project SMC samplers where used due to their robustness as well as their inherent extensiveness. A detailed description on the mechanisms of sequential samplers will be given in the theory section.
+Dirichlet processes and Dirichlet process mixture models are the cornerstone of Bayesian statistics. In this project the focus is directed towards the clustering methods that are being introduced by those tools. Radford M. Neal\cite{bayes:neal} with his paper regarding MCMC methods for Dirichlet process mixture models made the definitive step towards Dirichlet process mixture models(DPMM's) receiving a lot of attention. Since then, a variety of approaches for inference on such models has been introduced with MCMC methods, and variational inference(VI) methods being two prominent such approaches. Variational inference for DPMM's, introduced by Jordan et al.\cite{bayes:jordan} introduces deterministic tools to perform inference and approximate the posterior distribution and marginals of a dataset. Both methods have strengths and weaknesses and many tools have been established by using the two approaches as their base. Blei et al.~\cite{LDA} introduced LDA as a method to perform topic modelling. Teh et al.\cite{bayes:hier} introduce a hierarchy on the inference process by introducing the Hierarchical Dirichlet process. Particle filter approaches have also been established. Doucet et al.\cite{bayes:smc} introduce Sequential Monte Carlo as a fast way to approximate inference. Dirichlet process mixture models are a very active research field and covering it is beyond the scope of this thesis. In this project SMC samplers where used due to their robustness as well as their inherent extensiveness. A detailed description on the mechanisms of sequential samplers will be given in the theory section.
 
 \subsection{Correspondence}
 
-In its general definition, the correspondence problem refers to the problem of ascertaining which parts of one image correspond to which parts of another image, where differences are due to movement of the camera, the elapse of time, and/or movement of objects in the photos. Under the semantic SLAM context, it refers to the problem of identifying objects as ones that have been encountered before during the mapping process. In that direction, Cree et al.\cite{corresp:first} create a histogram of line segments of each landmark and compute their root mean square error. They then proceed to calculate their RGB signature to calculate the distance between different landmarks. Low et al.\cite{corres:sec} match Scale Invariant Feature Transform (SIFT) features, an approach which transforms image data into scale-invariant coordinates relative to local features. Lamon et al.\cite{corres:three} store a database of fingerprints which indicate the location in the robot's environment. The features are ordered and stored at a database at as they appear in the robot's immediate surroundings. A new fingerprint is computed for each new view and matched against existing ones. Finally, in Seghal et al.\cite{corres:four} an extension of SIFT descriptors to 3D data and point clouds is given. In this paper the correspondence problem is solved using a simple decision layer.
+In its general definition, the correspondence problem refers to the problem of ascertaining which parts of one image correspond to which parts of another image, where differences are due to movement of the camera, the elapse of time, and/or movement of objects in the photos. Under the object based SLAM context, it refers to the problem of identifying objects as ones that have been encountered before during the mapping process. In that direction, Cree et al.\cite{corresp:first} create a histogram of line segments of each landmark and compute their root mean square error. They then proceed to calculate their RGB signature to calculate the distance between different landmarks. Low et al.\cite{corres:sec} match Scale Invariant Feature Transform (SIFT) features, an approach which transforms image data into scale-invariant coordinates relative to local features. Lamon et al.\cite{corres:three} store a database of fingerprints which indicate the location in the robot's environment. The features are ordered and stored at a database at as they appear in the robot's immediate surroundings. A new fingerprint is computed for each new view and matched against existing ones. Finally, in Seghal et al.\cite{corres:four} an extension of SIFT descriptors to 3D data and pointclouds is given. In this paper the correspondence problem is solved using a simple decision layer that compares current environment representations to past ones.
 
 %------------------------------------------------
 
@@ -157,10 +158,9 @@ An introduction to the Dirichlet Distribution and Dirichlet process mixture mode
 
 \subsection{Dirichlet Distribution}
 
-An example of a \textit{probability mass function}(pmf) is an ordinary six-sided dice. To sample from the pmf, you throw the die and get a number from 1 to 6. One important property of pmfs given from real dice is that they are not uniformly weighted, due to the manufacturing process not being perfect. A bag of dice can then be considered as an example of a random pmf. To sample from this random pmf, you have to put your hand in the bag and draw a die, and the result of this drawing process is itself a probability distribution. A Dirichlet distribution is an object that can be used to model the randomness of such objects whose domain is itself is a probability distribution i.e it is a distribution of distributions.
+An example of a \textit{probability mass function}(pmf) is an ordinary six-sided dice. To sample from the pmf, you cast the dice and get a number from 1 to 6. One important property of pmfs given from real dice is that they are not uniformly weighted due to the manufacturing process not being perfect. A bag of dice can then be considered as an example of a random pmf. To sample from this random pmf, you have to put your hand in the bag and draw a die, and the result of this drawing process is itself a probability distribution. A Dirichlet distribution is an object that can be used to model the randomness of such objects whose domain is itself is a probability distribution i.e it is a distribution of distributions.
 
-Formally, a probability mass function with \textit{k} components lies on the \textit{(k-1)} dimensional probability simplex, which is a surface in $ \mathbb{R}^k $ denoted by $ \Delta_k $ and defined to be the set of vectors whose $ k $  components are non-negative and sum up to 1, that is \\ $ \Delta_k = \{ q \in  \mathbb{R}^k | \sum_{i=1}^k q_i=1, q_i \geq 0\ for\ i=1,2,...k \} $ . $ \Delta_k $  is itself a $ ( k-1 ) $ dimensional object lying in the $k$ dimensional space. This property of the $\Delta_k$ will become more obvious during the definitions of the sampling methods over such distribution.
-
+Formally, a probability mass function with \textit{k} components lies on the \textit{(k-1)} dimensional probability simplex, which is a surface in $ \mathbb{R}^k $ denoted by $ \Delta_k $ and defined to be the set of vectors whose $ k $  components are non-negative and sum up to 1, that is:  $ \Delta_k = \{ q \in  \mathbb{R}^k | \sum_{i=1}^k q_i=1, q_i \geq 0\ for\ i=1,2,...k \} $ . $ \Delta_k $  is itself a $ ( k-1 ) $ dimensional object lying in the $k$ dimensional space. 
 
 \textbf{Dirichlet distribution:} Let $ Q = [Q_1,Q_2,...,Q_k  ] $ be a random pmf, that is, $ Q_i \geq 0 $ for $ i=1,2,..k $ and $ \sum_{i=1}^k Q_k=1 $. In addition, suppose that $ \alpha = [\alpha_1, \alpha_2, ..., \alpha_k ] $, with $ \alpha_i  \ge  0 $ for each i, and let $ \alpha_0 = \sum_{i=1}^k \alpha_i $. Then $ Q $ is said to have a Dirichlet distribution with parameter $\alpha$, which we denote by $ Q \sim  Dir(\alpha)$, if it has $f(q;a) = 0$ if q is not a pmf, and if q is a pmf then:
 
@@ -241,6 +241,9 @@ The procedure can be then described as follows:
 	\item \textbf{Step 2:} Update counter to n+1. Draw $ X_{n+1} | X_1, X_2, ..., X_n \sim \alpha / \alpha_{n0}$, where $\alpha_n = \alpha + \sum_{i=1}^n \delta_{X_i} $ and $ \alpha_{n0}$ is the sum of the entries of $\alpha_n$. Repeat step 2 an infinite number of times.
 \end{compactitem}
 
+As the number of iterations of Step 2 approaches infinity, the proportions of ball colors in the simplex will be a realization from the distribution $Dir(\alpha)$with an initial vector $\alpha$.
+
+
 
 \subsection{Dirichlet Process}
 
@@ -265,13 +268,16 @@ Two methods for sampling from a Dirichlet process will be presented: the Chinese
 
 \subsubsection{Chinese restaurant process}
 \label{sec:crp}
-Polya's Urn and the stick breaking process are two names of the same process. The chinese restaurant process scheme is similar to the Polya's urn and it is defined as follows:
+Polya's Urn and the stick breaking process are two names of the same process. The chinese restaurant process paradigm is similar to the Polya's urn and it is defined as follows:
 Imagine a restaurant with an infinite number of tables, each with infinite capacity. At time t=1, the first customer enters the restaurant and sits at table 1 with probability 1. For every next step, the customer can either
 
 \begin{compactitem}
 	\item Choose an unoccupied table with probability $ \propto \frac{\alpha}{n-1+ \alpha }$
 	\item Choose occupied table k with probability $ \propto  \frac{c}{n-1+ \alpha }$ where c is the number of people currently sitting at that table
 \end{compactitem}
+
+
+If you let an infinite number of customers enter the restaurant, the proportions of people sitting on each table will be a realization from a Dirichlet process with strength parameter $\alpha$.
 
 It can be seen that there is a positive reinforcement effect in this process, that is the more people already sitting at a table, the bigger the probability that more people will be sitting into that table in the future. It can also be proved that the number of tables grows $ \propto \alpha log(n)$ where n is the number of customers in the restaurant. Fig.\ref{CRP} visualizes the progression of the proccess as more people enter the restaurant. 
 
@@ -303,11 +309,11 @@ This can be defined as follows: Draw $\pi'_k$ as a Beta random variable. Draw $\
 \centerline{ $\pi_k  | \pi'_k \prod_{l=1}^{k-1}(1- \pi'_l   )$\ \ \ \ \ \ \ \ \ \   $  G = \sum_{k=1}^\infty \pi_k \delta_{\phi_k} $}
 \ \
 
-The first part of the stick will have length $\pi'_k$ and the conditional length given all the previous draws is given by $\pi_k$. Finally, the distribution created is given as an infinite sum of indicator functions given by $G$. Fig.\ref{crpGausBase} displays a Dirichlet Process's realization from a stick breaking process with a Gaussian base distribution. Different parameter values for strength parameter $\alpha$ are shown to display how it affects the Distribution created. As the alpha parameter is increased, the realization of the distribution will be closer to the base distribution. Furthermore, this picture also shows that the distribution created from the infinite sum of indicator function is a discrete distribution. Finally, when G is generated using a stick breaking process with a strength parameter $\alpha$, it can be written in shorthand as: $ G \sim GEM(\alpha) $
+The first part of the stick will have length $\pi'_k$ and the conditional length given all the previous draws is given by $\pi_k$. Finally, the distribution created is given as an infinite sum of indicator functions given by $G$. Fig.\ref{crpGausBase} displays a Dirichlet Process's realization from a stick breaking process with a Gaussian base distribution. Different parameter values for strength parameter $\alpha$ directly affect the distributions output. As the alpha parameter is increased, the realization of the distribution will be closer to the base distribution. Furthermore, this picture also shows that the distribution created from the infinite sum of indicator function is a discrete distribution. Finally, when G is generated using a stick breaking process with a strength parameter $\alpha$, it can be written in shorthand as: $ G \sim GEM(\alpha) $
 
 \begin{figure}[h!]
           \centerline{\includegraphics[width=0.81\textwidth]{stickBreakGaus}}
-	\caption{The SB process for Gaussian base distribution and different values of alpha}
+	\caption{The stick breaking process for Gaussian base distribution and different values of alpha}
 	\label{crpGausBase}
 \end{figure}
 
@@ -320,7 +326,6 @@ The first part of the stick will have length $\pi'_k$ and the conditional length
 \end{wrapfigure}
 
 One of the most important properties of those objects is that they can serve as a non-parametric prior to mixture models. A typical 1D mixture model that represents data comming from a mixture of two one-dimensional Gaussian distributions is shown in Fig.\ref{1dGMM}.
-
 
 Mixture models can be considered as the Bayesian approach to clustering, and one of the most important applications of the Dirichlet process is to serve as the non-parametric prior on the parameters of such models. In particular, suppose that observations $x_i$ arise from the following model:
 	\begin{equation}
@@ -341,7 +346,7 @@ Since G can be represented using a stick-breaking construction, the factors $ \t
 
 The infinite limit of finite mixture models is taken when we let the number of components into a model to reach infinity. An infinite mixture model assumes that the data come from an infinite number of distributions.
 
-This means that in such models the number of components from which the data are generated can be infinite. In models where the finite number of distributions restriction is removed, it is important to notice in a dataset of size $n$ , the data come from at most n clusters where $n$ is the total number of elements. This is an important property of infinite mixture models and is exploited when performing posterior inference.
+This means that in such models the number of components from which the data are generated can be infinite. In such models it is important to notice in a dataset of size $n$ , the data come from at most n components. This is an important property of infinite mixture models and is exploited when performing posterior inference.
 
 \subsection{Inference}
 \begin{wrapfigure}{l}{.3\textwidth}
@@ -361,7 +366,10 @@ Dirichlet process priors have been widely used in the literature as non-parametr
 A DDP is also known as Generalized Polya Urn\cite{caron}. The most important property of this model is that it randomly deletes partitions of clusters on every iteration. 
 
 
-This Generalized Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$) and can be described as follows: At time point $t$ given the clusters at $t-1$ and the data at that time defined as $N_{t-1}$ perform the following: for every cluster and every point within that cluster the point will stay in the cluster or be deleted from it; the probability of a point being deleted from the cluster is proportional to either the size of the cluster or a constant value $\rho <1$\cite{caron}. After the deletion takes place, each point at time $t$ is being assigned to a new cluster $c_{t,n}$  with probability proportional to the size of the cluster at time $t-1$ or assigned to a new cluster with probability proportional to strength parameter $\alpha$ of the prior Dirichlet Process. Cluster sizes are then updated accordingly.
+This Generalized Polya Urn distribution also has the shorthand notation GPU($\alpha,\rho$) and can be described as follows: At time point $t$ given the clusters at $t-1$ and the data $N_{t-1}$ perform the following: for every cluster and every point within that cluster the point will stay in the cluster or be deleted from it; the probability of a point being deleted from the cluster is proportional to either the size of the cluster or a constant value $\rho <1$\cite{caron}. After the deletion takes place, each point at time $t$ is being assigned to a new cluster $c_{t,n}$  with probability proportional to the size of the cluster at time $t-1$ or assigned to a new cluster with probability proportional to strength parameter $\alpha$ of the prior Dirichlet Process. Cluster sizes are then updated accordingly.
+
+
+The GPU can be described using the Chinese restaurant process paradigm as follows: At time $t$, customers are seating at several tables in the restaurant. Each customer decides if he/she will remain at table with probability $p$ or definitely leave the table with probability $1-p$. Each customer makes his/her decision and leaves or remains seated. Each table occupied is moved according to the number of customers still occupying the table or is deleted if is currently empty. A new customer then enters the restaurant and either chooses to sit on one of the existing tables with probability proportional to the numer of customers sitting at that specific table or choose table a new with probability to the strength parameter $\alpha$ of the prior Dirichlet process.
 
 
 \begin{wrapfigure}{l}{.38\textwidth}
@@ -371,10 +379,7 @@ This Generalized Polya Urn distribution also has the shorthand notation GPU($\al
 \end{wrapfigure}
 
 
-The GPU can be described using the Chinese restaurant process paradigm as follows: At time $t$, customers are seating at several tables in the restaurant. Each customer decides if he/she will remain at table with probability $p$ or definitely leave the table with probability $1-p$. Each customer makes his/her decision and leaves or remains seated. Each table occupied is moved according to the number of customers still occupying the table or is deleted if is currently empty. A new customer then enters the restaurant and either chooses to sit on one of the existing tables with probability to the numer of customers sitting at that specific table,  or choose table a new with probability to the strength parameter $\alpha$ of the prior Dirichlet process.
-
-
-Algorithm \ref{gpu:algo} describes the following process: At time point $t$ given the clusters at $t-1$ and the data at that time defined as $N_{t-1}$ perform the following: for every cluster and every point within that cluster the point will stay in the cluster or be deleted from it; the probability of a point being deleted from the cluster is proportional to either the size of the cluster or a constant value $\rho <1$\cite{caron}. After the deletion takes place, each point at time $t$ is being assigned to a new cluster $c_{t,n}$  with probability proportional to the size of the cluster at time $t-1$ or assigned to a new cluster with probability proportional to strength parameter $\alpha$ of the prior Dirichlet Process. Cluster sizes are then updated accordingly.
+Algorithm \ref{gpu:algo} describes the following process: At time step $t$ given cluster assignments at time $t-1$ and data $N_{t-1}$ perform the following: for every cluster and every point within that cluster the point will either stay in the cluster or be deleted from it; the probability of a point being deleted from the cluster is proportional to either the size of the cluster or a constant value $\rho <1$\cite{caron}. Cluster sizes are then modified with respect to the number of points that were deleted from each cluster. After the deletion takes place, each point at time $t$ is being assigned to a new cluster $c_{t,n}$  with probability proportional to the size of the cluster at time $t-1$ after the deletion step or be assigned to a new cluster with probability proportional to strength parameter $\alpha$ of the prior dependent Dirichlet process. Cluster sizes are then updated accordingly.
 
 \begin{algorithm}
   \caption{GPU}\label{GPU}
@@ -399,7 +404,7 @@ Algorithm \ref{gpu:algo} describes the following process: At time point $t$ give
 \section{Model definition}
 \label{sec:model}
 
-The model definition is structured as follows: An introduction to the general pipeline that will serve as the compressed sensor model of the EKF slam module is represented first. Every component of the pipeline is then analysed in detail in relation to the operations it serves.
+The model definition section is structured as follows: An introduction to the general pipeline that will serve as the compressed sensor model of the EKF slam module is presented first. Every non-trivial component of the pipeline is then analysed in detail with respect to the operations it serves.
 
 \subsection{General pipeline}
 
@@ -413,23 +418,23 @@ The model definition is structured as follows: An introduction to the general pi
 \end{wrapfigure}
 
 
-The general flow of operations that defines the basic communication between the pipeline and the EKF module is presented in Fig.~\ref{pipeline}(a). During step 1, the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes that cloud, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline}(b) shows a more detailed view of the computations of the pipeline. The algorithmic procedure shown in Algorithm~\ref{euclid} analytically.
+The general flow of operations that defines the basic communication between the pipeline and the EKF module is presented in Fig.~\ref{pipeline}. During step 1 the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes the cloud readings, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline} shows a more detailed view of the computations of the pipeline. The algorithmic procedure shown in Algorithm~\ref{euclid} analytically.
 
 
 \begin{algorithm}
   \caption{Landmark Layer}\label{euclid}
   \begin{algorithmic}[1]
-    \Procedure{getLandmarkIds}{$pointCloud, timepoint, existingLandmarks$}
-      \State $pointCloudReduced \gets extractMetaFeatures(pointCloud)$ 
-      \State $features \gets extractMetaFeatures(pointCloudReduced)$
+    \Procedure{getLandmarkIds}{$pointCloud, existingLandmarks$}
+      \State $cloudReduced \gets downsample(pointCloud)$ 
+      \State $features \gets extractFeatures(cloudReduced)$
       \State $landmarks \gets cluster(features)$  
       \For{\texttt{$landmarks$ as $landmark$}}
 	      \State $ (similarity, landId) \gets calcBestSim(landmark, existingLandmarks) $
 			\If{$similarity >threshold$}
 			   \State $ addLandmarks(landMarkIds, landId)$
 			\Else 
-			   \State $ newLandID \gets addLandmarkDB(landmarkDB, landmark)$
-			   \State $addLandmarks(newLandID)$
+               \State $ newID \gets addLandmark(landmark)$
+			   \State $addLandmarks(newID)$
 			\EndIf
       \EndFor
       \State \textbf{return} $ landMarkIds$\Comment{Return landmarks}
@@ -438,9 +443,9 @@ The general flow of operations that defines the basic communication between the 
 \end{algorithm}
 
 
-\textbf{Method input:} The method takes as input a point cloud as it is currently being read by the kinect sensor.
+\textbf{Method input:} The method takes as input a pointcloud as it is currently being read by the kinect sensor.
 
-\textbf{Lines 3-4:} The downsampling and feature extraction are done through the pcl\cite{pcl} library. A voxel grid is used to reduce the dataset size. A leaf size of approximately 3cm produces a good trade-off between precision and speed. The object representation used approach is similar to\cite{objectpointslam}. Instead of using the CSHOT descriptor, fpfh\cite{fpfh} histogram is used instead. A fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. After the fpfh estimation a 23 dimensional angular signature of information between a point and its neighbors is acquired. The distance that is passed at the sampler is the average distance between the histograms of a point and its neighbors. The distance metrics used are EMD,Hellinger,and KL divergence. The color signature of the cloud is being encoded with an approach similar to ~\cite{smcddp}. The color spectrum is discretized and what is extracted is the count of different color signatures between a point and its k nearest neighbors. Finally the position of every point is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. The pipeline outputs a vector of $ \textbf{x} = (x_s, x_c, x_a) $  where $s$ represents a vector of space information, $c$ a vector of colour information and $a$ angular information. It must be noted that pcl offers a multi threading operation on the point feature histogram extraction. 
+\textbf{Lines 3-4:} The downsampling and feature extraction are done through the pcl\cite{pcl} library. A voxel grid is used to reduce the dataset size. A leaf size of approximately 3cm produces a good trade-off between precision and speed. The object representation used approach is similar to\cite{objectpointslam}. Instead of using the CSHOT descriptor, fpfh\cite{fpfh} histogram is used instead. A fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. After the fpfh estimation an angular signature of information between a point and its neighbors is acquired. The color signature of the cloud is being encoded with an approach similar to ~\cite{smcddp}. The color spectrum is discretized and what is extracted is the count of different color signatures between a point and its k nearest neighbors. Finally the position of every point is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. The pipeline outputs a vector of $ \textbf{x} = (x_s, x_c, x_a) $  where $s$ represents a vector of space information, $c$ a vector of colour information and $a$ angular information. 
 
 \begin{figure}[ht!]
   \centering
@@ -451,19 +456,12 @@ The general flow of operations that defines the basic communication between the 
 
 \textbf{Lines 5:} The input of the method is the feature vector for every data point which is calculated in the previous steps. The clustering is done using the SMC sampler presented in section \ref{smcsampler}. 
 
-\textbf{Lines 6-12:} The correspondence of previously seen landmarks to current observations is computed in lines 6-12. Since the landmarks are distributions, statistical distances can be taken to perform the matching. For every observation, its distances with all the stored landmarks are calculated. The calcBestSim function returns the cluster with the highest similarity that exists in the database. If the similarity is high enough, correspondence is performed and the landmark is added to the landmark list to be send for update in the EKF, otherwise a new landmark is added and its ID is then added to the list.
+\textbf{Lines 6-12:} The correspondence of previously seen landmarks to current observations is computed here. Since the landmarks are distributions, statistical distances can be taken to perform the matching. For every observation, its distances with all the stored landmarks are calculated. calcBestSim returns the cluster with the highest similarity that exists in the database. If the similarity is high enough, correspondence is performed and the landmark is added to the landmark list to be send for update in the EKF, otherwise a new landmark is added and its ID is then added to the list.
 
-\textbf{Lines 15:} The algorithm returns the list of the landmarks the robot encounters in this current timeframe.
+\textbf{Lines 15:} The algorithm returns the list of the landmarks the robot currently encounters.
 
 \subsection{The data distribution}
 \label{data:dist}
-
-Each point $x$ in the cloud is represented as a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ color information. The method those features are extracted is explained in lines 3 and 4 of the general pipeline.
-
-The object model is a mixture of distributions over the data with each object being modeled as F($\theta_t^k$) where $\theta$ represents the parameters of object $k$ at time $t$. More specifically, each set \textbf{X} with $n$ datapoints at time $t$ is distributed as:
-$$ \textbf{X}_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
-
-
 
 \begin{wrapfigure}{l}{0.35\textwidth}
     \centering
@@ -472,19 +470,30 @@ $$ \textbf{X}_{t,n} \sim D(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult
     \label{pcl:kl}
 \end{wrapfigure}
 
-Where $Normal$ is a three dimensional normal distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; $Mult$ is a Categorical multinomial distribution with parameter vector $\delta$ representing the color distribution and $Exp$ is an exponential with shape parameter $\lambda$ representing the angle distribution of the data within the cluster. This is a novel environment abstraction and the purpose of choosing such signature was to have both simple but also informative environment signatures captured by the model. The exponential distribution specifically  was chosen to model angular information after empiric evaluation showed that it would provide a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in Fig.~\ref{pcl:kl} and the exponential trend of data distances is trivial to distinguish.
+Each point $x$ in the cloud is represented as a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ color information. The method those features are extracted is explained in lines 3 and 4 of the general pipeline.
+
+The object model is a mixture of distributions over the data with each object being modeled as F($\theta_t^k$) where $\theta$ represents the parameters of object $k$ at time $t$. More specifically, each set \textbf{X} with $n$ datapoints at time $t$ is distributed as:
+$$ \textbf{X}_{t,n} \sim F(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
+
+
+
+
+Where $Normal$ is a three dimensional normal distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; $Mult$ is a Categorical multinomial distribution with parameter vector $\delta$ representing the color distribution and $Exp$ is an exponential with rate $\lambda$ representing the angle distribution of the data within the cluster. This signature introduces a novel environment abstraction and the purpose of choosing such signature was to have both simple but also informative environment signatures captured by the model. The exponential distribution specifically  was chosen to model angular information after empiric evaluation showed that it would provide a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in Fig.~\ref{pcl:kl} and the exponential trend of data distances is trivial to distinguish.
 
 Now that the object distribution is defined, the progression of the sufficient statistics at time $t$ given $t-1$ given by:
 
-$\theta_t^k | \theta_{t-1}^k \sim
+
+\begin{center}
+ $\theta_t^k | \theta_{t-1}^k \sim
 \begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
 G_0 & \mbox{if } k > K_{t-1}. \end{cases}$
+\end{center}
 
 Where $T$ represents the transition kernel of the data given the previous state in the model. The case $ k > K_{t-1} $ represents the creation of a new cluster and $G_0$ is the base distribution of the DDP. In our case, the conjugate priors of the distributions of the data were chosen to model the base distribution. Therefore, $G_0$ is defined as:
 
 $$ G_0(\theta_t^k)  = NiW( \mu_t^k, \Sigma_t^k | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t^k | q_0) Gam( \lambda_t^k | \alpha_0, \beta_0) $$
 
-Where NiW is a Normal inverse Wishart distribution, Dir denotes a Dirichlet distribution, and Gam the Gamma distribution. $ \kappa_0, \mu_0, \nu_0, \Lambda_0, q_0,\alpha_0$ and $\beta_0$ are predefined parameters of the model. The generative process for the Dependent Dirichlet mixture model can be written for each timestep $t$ as:
+Where NiW is a Normal inverse Wishart distribution, Dir denotes a Dirichlet distribution, and Gam the Gamma distribution. $ \kappa_0, \mu_0, \nu_0, \Lambda_0, q_0,\alpha_0$ and $\beta_0$ are parameters of the model. The generative process for the Dependent Dirichlet mixture model can be written for each timestep $t$ as:
 
 \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
 \begin{enumerate}
@@ -690,7 +699,7 @@ In this section the algorithm will be tested against a simple dataset. That will
   \label{pcl:clust}
 \end{figure}
 
-More specifically, the reduced point cloud is shown in the top left part. It is significantly smaller in size and this cloud along with all the meta-information needed to perform the clustering are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
+More specifically, the reduced pointcloud is shown in the top left part. It is significantly smaller in size and this cloud along with all the meta-information needed to perform the clustering are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
 
 \begin{center}
 
@@ -771,7 +780,7 @@ Finally, the pipeline was used in real life scenarios as a sensor model in a Lan
   \label{slam}
 \end{wrapfigure}
 
-The compression that the method introduces is not directly observable. As the environment is being reduced from a cloud to a landmarks, the memory needs change from using point clouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial. The expressiveness of the distributions greatly affects the objects as well as object shapes that could be represented. Finally it is always possible to extend the method presented by adding new features and new priors to those features.
+The compression that the method introduces is not directly observable. As the environment is being reduced from a cloud to a landmarks, the memory needs change from using pointclouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial. The expressiveness of the distributions greatly affects the objects as well as object shapes that could be represented. Finally it is always possible to extend the method presented by adding new features and new priors to those features.
 
 
 
@@ -889,15 +898,14 @@ The restrictions introduced by the decision layer are relatively simple due to t
 	  \label{pip:expo}
     \end{figure}
 
-
-
-
 \section{Conclusion and future work}
 \label{sec:discussion}
 
  In this paper a novel method for cloud representation using non-parametric Bayesian tools was introduced. Its compression strength and speed were presented as well as how it could help tackle the compression problem of lifelong mapping. The discussion section showed ways that the pipeline can output sub-optimal results and also its clustering behaviour due to its unsupervised nature. There is a number of directions in which the method could be improved. Choosing more complex environment signatures could increase the expresional stregth of the sampler making it easier to represent with higher precision more complex structures. Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that lifelong mapping problems introduce. Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. Finally, all those additions could help tackle lifelong mapping problem as a whole in a fully Bayesian manner.
 
+
 %------------------------------------------------
+
 
 \begin{thebibliography}{9}
 
@@ -975,7 +983,7 @@ Figueredo, A.J. and Wolf, P. S.A. (2009).
 \newblock{Fast point feature histogram.Rusu, R. B., Blodow, N., \& Beetz, M. (2009, May). Fast point feature histograms (FPFH) for 3D registration. In Robotics and Automation, 2009. ICRA'09. IEEE International Conference on (pp. 3212-3217). IEEE.}
 
 \bibitem{segOverview}
-\newblock {Rabbani, T., van den Heuvel, F., \& Vosselmann, G. (2006). Segmentation of point clouds using smoothness constraint. International Archives of Photogrammetry, Remote Sensing and Spatial Information Sciences, 36(5), 248-253.}
+\newblock {Rabbani, T., van den Heuvel, F., \& Vosselmann, G. (2006). Segmentation of pointclouds using smoothness constraint. International Archives of Photogrammetry, Remote Sensing and Spatial Information Sciences, 36(5), 248-253.}
 
 \bibitem{gpu}
 \newblock{Caron, F., Davy, M., \& Doucet, A. (2012) Generalized Polya urn for time-varying Dirichlet process mixtures. arXiv preprint arXiv:1206.5254.}
@@ -994,13 +1002,13 @@ Figueredo, A.J. and Wolf, P. S.A. (2009).
 \newblock Koo, S., Lee, D., \& Kwon, D. S. (2013, November). Multiple object tracking using an rgb-d camera by hierarchical spatiotemporal data association. In Intelligent Robots and Systems (IROS), 2013 IEEE/RSJ International Conference on (pp. 1113-1118). IEEE.
 
 \bibitem{pointSeg}
-\newblock Trevor, A. J., Gedikli, S., Rusu, R. B., \& Christensen, H. I. (2013). Efficient organized point cloud segmentation with connected components. Semantic Perception Mapping and Exploration (SPME).
+\newblock Trevor, A. J., Gedikli, S., Rusu, R. B., \& Christensen, H. I. (2013). Efficient organized pointcloud segmentation with connected components. Semantic Perception Mapping and Exploration (SPME).
 
 \bibitem{planarSeg}
 \newblock Unnikrishnan, R., \& Hebert, M. (2003, October). Robust extraction of multiple structures from non-uniformly sampled data. In Intelligent Robots and Systems, 2003.(IROS 2003). Proceedings. 2003 IEEE/RSJ International Conference on (Vol. 2, pp. 1322-1329). IEEE. 
 
 \bibitem{planarSeg2}
-\newblock Rabbani, T., van den Heuvel, F., \& Vosselmann, G. (2006). Segmentation of point clouds using smoothness constraint. International Archives of Photogrammetry, Remote Sensing and Spatial Information Sciences, 36(5), 248-253.
+\newblock Rabbani, T., van den Heuvel, F., \& Vosselmann, G. (2006). Segmentation of pointclouds using smoothness constraint. International Archives of Photogrammetry, Remote Sensing and Spatial Information Sciences, 36(5), 248-253.
 
 \bibitem{smartSeg}
 \newblock Triebel, R., Shin, J., \& Siegwart, R. (2010, June). Segmentation and unsupervised part-based discovery of repetitive objects. In Robotics: Science and Systems (Vol. 2).
@@ -1019,7 +1027,7 @@ Figueredo, A.J. and Wolf, P. S.A. (2009).
 
 
 \bibitem{corres:four}
-\newblock Sehgal, A., Cernea, D., \& Makaveeva, M. (2010). Real-time scale invariant 3D range point cloud registration. In Image Analysis and Recognition (pp. 220-229). Springer Berlin Heidelberg.
+\newblock Sehgal, A., Cernea, D., \& Makaveeva, M. (2010). Real-time scale invariant 3D range pointcloud registration. In Image Analysis and Recognition (pp. 220-229). Springer Berlin Heidelberg.
 
 \bibitem{bayes:neal}
 \newblock Neal, R. M. (2000). Markov chain sampling methods for Dirichlet process mixture models. Journal of computational and graphical statistics, 9(2), 249-265.
