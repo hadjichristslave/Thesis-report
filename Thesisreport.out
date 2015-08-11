@@ -31,8 +31,8 @@
 \BOOKMARK [2][-]{subsection.5.3}{EKF-SLAM experiments}{section.5}% 31
 \BOOKMARK [3][-]{subsubsection.5.3.1}{Speed}{subsection.5.3}% 32
 \BOOKMARK [3][-]{subsubsection.5.3.2}{Memory requirements}{subsection.5.3}% 33
-\BOOKMARK [2][-]{subsection.5.4}{Discussion}{section.5}% 34
-\BOOKMARK [3][-]{subsubsection.5.4.1}{Unsupervised learning}{subsection.5.4}% 35
-\BOOKMARK [3][-]{subsubsection.5.4.2}{Clustering layer}{subsection.5.4}% 36
-\BOOKMARK [3][-]{subsubsection.5.4.3}{Decision layer}{subsection.5.4}% 37
-\BOOKMARK [1][-]{section.6}{Conclusion and future work}{}% 38
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 34
+\BOOKMARK [2][-]{subsection.6.1}{Unsupervised learning}{section.6}% 35
+\BOOKMARK [2][-]{subsection.6.2}{Clustering layer}{section.6}% 36
+\BOOKMARK [2][-]{subsection.6.3}{Decision layer}{section.6}% 37
+\BOOKMARK [1][-]{section.7}{Conclusion and future work}{}% 38
