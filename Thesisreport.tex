@@ -111,7 +111,7 @@ Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized 
 Dirichlet processes and Dirichlet process mixture models \cite{nonParam} are the cornerstone of Bayesian non-parametric statistics. The strength of those models lies in the fact that they allow the model's mixture components to grow as much as needed so as to best fit the data. The dynamic number of components in combination with different prior choices leads to very flexible models that can be used in a very large area of applications from topic modeling\cite{LDA} to speaker diarization\cite{speakerDiar}.
 The main motivation of this project is to use such methods as a means of creating compressed representations of the environment that also retain enough expressiveness to be used as reference points when performing slam. In this paper a novel compressed representation of a cloud is introduced and its results are analyzed both towards their robustness and expressive ability. The strengths and weaknesses of the method are analyzed and directions on how the method could be extended to tackle the rest subproblems of lifelong mapping are given in the discussion section.
 
-The rest of the paper is structured as follows. Section \ref{sec:literature} will present relevant literature review, Section~\ref{sec:theory} will introduce the theories behind the model, Section~\ref{sec:model} will define the model, Section \ref{sec:results} will show experimental results of the method. Finally, Section ~\ref{sec:discussion} will end up with a conclusion and future directions in which the method could be improved.
+The rest of the paper is structured as follows. Section \ref{sec:literature} will present relevant literature review, section \ref{sec:theory} will introduce the theories behind the model, section \ref{sec:model} will define the model, section \ref{sec:results} will show experimental results of the method. Section \ref{sec:discussion} will analyze the strengths and weaknesses of the methods and, finally, section \ref{sec:conclusion} will conclude with a short summary and future directions in which the method could be improved.
 
 %------------------------------------------------
 
@@ -866,7 +866,7 @@ As can be seen, the number of landmarks follows the logarithmic trend of the dis
 
 \newpage
 \section{Discussion}
-\label{discussion}
+\label{sec:discussion}
 
     Some important properties of the method with respect to its architecture and behaviour will be discussed in the discussion section.
     
@@ -877,7 +877,7 @@ As can be seen, the number of landmarks follows the logarithmic trend of the dis
     \includegraphics[width=.5\textwidth]{8boxesData} &  \includegraphics[width=.5\textwidth]{8boxes} \\
   (a) Initial data  & (b) Clusters infered \\[6pt]
 \end{tabular}
-\caption{Fail use cases.}
+\caption{Unsupervised entity extraction.}
   \label{pip:beh}
 \end{figure}
 
@@ -915,7 +915,7 @@ The restrictions introduced by the decision layer are relatively simple due to t
 
 \newpage
 \section{Conclusion and future work}
-\label{sec:discussion}
+\label{sec:conclusion}
 
  In this paper a novel method for cloud representation using non-parametric Bayesian tools was introduced. Its compression strength and speed were presented as well as how it could help tackle the compression problem of lifelong mapping. The discussion section showed ways that the pipeline can output sub-optimal results and also its clustering behaviour due to its unsupervised nature. There is a number of directions in which the method could be improved. Choosing more complex environment signatures could increase the expresional stregth of the sampler making it easier to represent with higher precision more complex structures. Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that lifelong mapping problems introduce. Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. Finally, all those additions could help tackle lifelong mapping problem as a whole in a fully Bayesian manner.
 
