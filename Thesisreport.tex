@@ -718,15 +718,16 @@ The results of the method will be presented and analysed in this section. A simp
 
 \subsection{Simple datasets}
 
-In this section the algorithm will be tested against a simple dataset. That will make easier the conceptual extension to more complex clouds that will be used when mapping the environment. In order to test the sampling as well as the decision layer of the algorithm, a simple dataset provided by the pcl\cite{pcl} library was used. More specifically, a cloud consisting of two milk cartridges with different colors and poses was used. The initial cloud is shown in Fig.\ref{pcl:clust}. 
+In this section the algorithm will be tested against a simple dataset. That will make easier the conceptual extension to more complex clouds that will be used when mapping the environment. In order to test the sampling as well as the decision layer of the algorithm, a simple dataset provided by the pcl\cite{pcl} library was used. More specifically, a cloud consisting of two milk cartridges(Fig. \ref{pcl:clust}(a)) with different colors and poses was used. 
+
 \begin{figure}
 \begin{tabular}{c}
   \includegraphics[width=1\textwidth]{clusterings/initialData} \\
   (a) Initial cloud. This cloud is given as input to the downsampling pipeline.  \\
    \includegraphics[width=1\textwidth]{clusterings/colorcodedDistributions} \\
  (b) Downsampling and clustering results. Top left picture shows the cloud that is given as input\\
- to the sampler. Top right and bottom ones show the distributions infered for the data. \\[6pt]
-\end{tabular}
+ to the sampler. Top right and bottom ones show the distributions infered for the data. \\
+ The colors in the distribution signatures display the different clusters infered.\end{tabular}
 \caption{Initial data along with the distributions infered }
   \label{pcl:clust}
 \end{figure}
@@ -739,12 +740,13 @@ In this section the algorithm will be tested against a simple dataset. That will
    Notice the more complicated colors the milk catridges have. \\
    \includegraphics[width=1\textwidth]{clusterings/coloursCorrect} \\
  (b) Downsampling and clustering results. Top left picture shows the cloud that is given as input\\
- to the sampler. Top right and bottom ones show the distributions infered for the data. \\[6pt]\end{tabular}
+ to the sampler. Top right and bottom ones show the distributions infered for the data. \\
+ The colors in the distribution signatures display the different clusters infered.\end{tabular}
 \caption{More complicated color distributions}
   \label{pcl:clust2}
 \end{figure}
 
-The cloud was first given as input to the downsampling and feature extraction pipeline. The reduced cloud(top left Fig.\ref{pcl:clust}) was then passed as input to the sampler and the clustering results are shown in Fig.\ref{pcl:clust}. The downsampling results in a significantly smaller cloud and this cloud along with feature-information needed to perform the clustering are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The height of the objects leads to distribution with high variance in the z axis. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
+The cloud was contained in a cloud file(.pcd) and was given as input to the downsampling and feature extraction pipeline. The reduced cloud(top left Fig.\ref{pcl:clust}(b)) was then passed as input to the sampler and the clustering results are shown in Fig.\ref{pcl:clust}(b). The downsampling reduces a cloud of 27408 points in 4493 producing a significantly smaller cloud and this cloud along with all feature information calculated are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
 
 
 \begin{center} 
@@ -752,9 +754,7 @@ The cloud was first given as input to the downsampling and feature extraction pi
     \hline
     \multicolumn{6}{|l|}{\centerline{LandmarkId 1}} \\
     \hline
-     LandmarkId & GausKL & GausWes & ExpHel & ExpHel & CatKL \\
-     \hline
-	 1&0&1.18111e-07&0&0.164045&0 \\
+     LandmarkId & GausKL & GausWes & ExpKL & ExpSqHell & CatKL \\
 	 \hline
  	 2&0.0115821&53.5171&1.20726&0.319589&0 \\
  	 \hline
@@ -763,8 +763,6 @@ The cloud was first given as input to the downsampling and feature extraction pi
     \multicolumn{6}{|l|}{\centerline{LandmakId 2}} \\
     \hline
 	 1&0.0115821&20.1454&1.7215&0.319589&0 \\
-	 \hline
-	2&5.42101e-20&4.88951e-08&0&0.411668&0 \\
 	\hline
 	3&12.8379&21458.6&0.474719&0.449769&13.8155 \\
 	 \hline
@@ -773,14 +771,12 @@ The cloud was first given as input to the downsampling and feature extraction pi
 	 1&13.5579&31191.5&2.55205&0.376699&13.8155\\
 	 \hline
      2&12.8379&65013.8&0.53855&0.449769&13.8155\\
-     \hline
-	3&0&2.43346e-07&0&0.481313&0\\
 	 \hline
 	 \end{tabular}    
      \label{distancesofclusters}
 \end{center}
 
-After the structure is clustered, distances between the elements can be calculated. Table \ref{distancesofclusters} shows the distances between every cluster shown in Fig.\ref{pcl:clust}. It can be seen that the first two landmarks have small distances in their Gaussian counterparts since they represent nearby areas and objects in the cloud that are very far apart. The angular distances between them are also not very large. The distinct colors of the milk boxes make the color signatures of the clusters distinct. The calculated distances are then given to the decision layer to caclulate if the clusters currently calculated are part of landmarks previously encountered.
+After the structure is clustered, distances between the elements can be calculated. Table \ref{distancesofclusters} shows the distances between every cluster shown in Fig.\ref{pcl:clust}. It can be seen that the first two landmarks have small distances in their Gaussian counterparts since they represent nearby areas and objects in the cloud that are very far apart. The angular distances are represented by the ExpKL and ExpSqHell rows. The distinct colors of the milk boxes make the color signatures of the clusters distinct. The calculated distances are then given to the decision layer to caclulate if the clusters currently calculated are part of landmarks previously encountered.
 An example with more complex color signatures is shown in Fig.\ref{pcl:clust2}. The clouds are now given a mixture of colors and this is passed to the color signature inferred on every cluster in Fig.\ref{pcl:clust2}. In this case the sampler outputs 2 clusters and the color signatures capture the more complex color signatures as well as the expected overlap correctly. 
 
 \subsection{Expressivensess and decision layer}
@@ -797,11 +793,11 @@ The decision boundary of the pipeline can be decomposed into three basic parts; 
 	\includegraphics[width=.55\textwidth]{posBound} &   \includegraphics[width=.55\textwidth]{posBound2} \\
 (c) Folder initial  & (d) Folder moved \\[6pt]
 \end{tabular}
-\caption{The colour and position boudnary is displayed in these pictures}
+\caption{The colour and position boundary is displayed in these pictures}
   \label{pip:bounds}
 \end{figure}
 
-In the first picture of Fig.\ref{pip:bounds} the yellow folder along with some of its environment to the left are being assigned to landmark with id 7386. The folder is then removed and a blue trashcan is put in its place. The folder and the trashcan are similar in size and due to that their Gaussian counterparts will not have large distances. Their main difference lies in the color signature they carry. Since the distance in their color is substantial, a new landmark with id 7412 is created to capture the change in the signature of the environment at that place of the map. The different landmark assigned to the cluster can be seen the second picture in Fig.\ref{pip:bounds}. The positional decision boundary is displayed in the third and fourth picture of Fig.\ref{pip:bounds}. In the initial position the yellow folder is assigned to the green landmark of the cloud. As the object is moved a different position in the cloud, it is being assigned to a different cluster. The reason the cluster is assigned to multiple landmarks is due to the fact that the folder is decomposed to several clusters and each one of them is being assigned to a different part of the cloud with respect to their position. This can be seen in the fourth picture of Fig.\ref{pip:bounds} where the bottom left of the folder is being assigned to the red cluster.
+In the first picture of Fig.\ref{pip:bounds} the yellow folder along with some of its environment to the left are being assigned to landmark with id 7386(color coded black). The folder is then removed and a blue trashcan is put in its place. The folder and the trashcan are similar in size and due to that their Gaussian counterparts will not have large distances. Their main difference lies in the color signature they carry. Since the distance in their color is substantial, a new landmark with id 7412(color coded purple) is created to capture the change in the signature of the environment at that place of the map. The different landmark assigned to the cluster can be seen the second picture in Fig.\ref{pip:bounds}. The positional decision boundary is displayed in the third and fourth picture of Fig.\ref{pip:bounds}. In the initial position the yellow folder is assigned to the green landmark of the cloud. As the object is moved a different position in the cloud, it is being assigned to a different cluster. The reason the cluster is assigned to multiple landmarks is due to the fact that the folder is decomposed to several clusters and each one of them is being assigned to a different part of the cloud with respect to their position. This can be seen in the fourth picture of Fig.\ref{pip:bounds} where the bottom left of the folder is being assigned to the red cluster.
 
 The exponential part of the distribution is responsible for the angle signature elements within a cluster have. Having a very strict limit in the angle distribution can lead to very small clusters and subsequently to a high amount of landmarks within the data. Practical evaluation has shown that using an angle limit that is close to the average distance between angle signatures produces stable results and reasonably sized landmarks in the cloud.
 
@@ -811,7 +807,7 @@ The exponential part of the distribution is responsible for the angle signature 
 \begin{figure}
   \centering
     \includegraphics[width=.5\textwidth]{SLAM110landmarks2}
-    \caption{SLAM session using the pipeline.}
+    \caption{SLAM session using the pipeline. The pipeline is used as the sensor model of an EKF-SLAM module. The readings of a kinect mounted on a turtlebot are downsampled and clustered. Current readings are either being matched to past readings giving old landmarks or being used to create new landmarks if no similar past environment sigantures exist. Landmarks are represented with yellow spheres. }
   \label{SLAM}
 \end{figure}
 
@@ -819,15 +815,17 @@ The exponential part of the distribution is responsible for the angle signature 
 The pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. Fig.\ref{SLAM} shows an end result of a SLAM session using the pipeline as a sensor model. The yellow spheres represent the landmarks extracted during the SLAM session with every sphere representing the environment signature at the specific part of the map; noisy cloud readings were taken from a kinect sensor mounted on the robot.
 
 
-The compression that the method introduces is not directly observable. As the environment is being reduced from a cloud to a landmarks, the memory needs change from using pointclouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial.
+The compression that the method introduces is not directly observable. As the environment is being reduced from a cloud to a landmarks, the memory needs change from using pointclouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial. The memory requirements as a function of hyperparameter alpha are analyzed in section \ref{reqs}. 
 
-\subsubsection{Speed}
+\subsection{Speed}
 
 Are the methods fast enough to be used in online SLAM problems? 
 As was shown in the complexity session, the speed is dependent on the initial downsampling of the pipeline. If the initial downsampling performed on the cloud is intense, there will be significant information loss but the speed of the method will increase. Conversely if the downsampling is not intense the speed of the method will decrease making the pipeline unable to handle online data streams. The speed of the method was tested on a mid level as well as on a high level machine to display the differences in time needed to perform the operations. The benchmark results of a machine running on a pentium i5-3210M and on a pentium i7-3610QM are shown in table \ref{bench}.
 
 
 \newcolumntype{C}{>{\centering\arraybackslash}p{7.5em}}
+\begin{table}
+    
 \begin{center}
     \begin{tabular}{|C|C|C|C|C|}
     \hline
@@ -863,19 +861,20 @@ As was shown in the complexity session, the speed is dependent on the initial do
       \hline
       1cm &1.11554	&18487&	2.69855	&0.0021291  \\
       \hline
-	 \end{tabular}    
+	 \end{tabular} 
+     \caption{Benchmark of the pipeline using different downsampling settings on two different machines.}
 	 \label{bench}
 \end{center}
-
+\end{table}
 
 The leaf size directly affects the time the cloud takes to be processed in the pipeline as well as the time the sampling takes aftewards. As shown in the table, a leaf size between 1-5cm provides a good balance between speed and precision. Matching benchmarks the time it takes for the method to match all the landmarks to landmarks in the database, or create new ones. It must be noted that adding new landmarks can be a time consuming operation compared to just matching to existing ones. In fact matching everything to existing takes a very small amount of time and can be therefore disregarded.
 
-\subsubsection{Memory requirements}
-
+\subsection{Memory requirements}
+\label{reqs}
 ``Is the compression created by the methods significant?''
-The memory requirements are shown in Fig.\ref{memReq} as a function of strength parameter alpha. The compression that the method introduces is significant since even for a very high value of alpha, since the memory needs of the landmarks are smaller than 30KB of memory total. Mapping the same environment using the RTAB mapping method, results in maps that average 84MB of memory which leads to a significant compression ratio of 1/2800.
+The memory requirements are shown in Fig.\ref{memReq} as a function of strength parameter alpha. The compression that the method introduces is significant since even for a very high value of alpha, since the memory needs of the landmarks are smaller than 30KB of memory total. Mapping the same environment using the RTAB mapping method, results in maps  as one shown in Fig.\ref{rtabmap} that average 84MB of memory which leads to a significant compression ratio of 1/2800.
 
-The memory requirements of the method are a function that is directly affected to the $\alpha$ strength parameter of the sampler. As the $\alpha$ parameter increases, the sampler will output more clusters on every iteration. The higher amount the of cluster will result a higher amount of landmarks and, consequently, in larger memory requirements in the method. 
+The memory requirements of the method are a function that is directly affected to the $\alpha$ strength parameter of the sampler. As the $\alpha$ parameter increases, the sampler will output more clusters on every iteration. The higher amount the of cluster will result a higher amount of landmarks and, consequently, in larger memory requirements in the method.
 
 \begin{figure}[ht!]
   \centering
@@ -884,7 +883,18 @@ The memory requirements of the method are a function that is directly affected t
   \label{memReq}
 \end{figure}
 
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[width=.8\textwidth]{rtabmap}
+    \caption{Result of a session using RTAB-map module. The resulting map captures the structure of the room and the maps for the room shown in the picture average 84MB in size.}
+  \label{rtabmap}
+\end{figure}
+
+
+
 As can be seen, the number of landmarks follows the logarithmic trend of the distribution in relation to $\alpha$. Increasing the alpha value more will not make the algorithm follow the logarithmic trend indefinitely. That is due to the fact that as the alpha increases, the constant decision layer has an upper bound to the number of landmarks it can have. This means that the algorithm will keep adding landmarks until the environment saturates and no new landmarks can be added. It must also be noted that as the alpha parameter is set to higher numbers, the sampler outputs more clusters making it more accurate of the environment descriptor it outputs, but also takes more time, making it non feasible to use this in real time mapping scenarios. Values of alpha between 1 and 10 provide a robust but also fast enough sampler that can be used in online mapping scenarios.
+
+
 
 \newpage
 \section{Discussion}
@@ -894,7 +904,11 @@ As can be seen, the number of landmarks follows the logarithmic trend of the dis
     \subsection{Unsupervised learning}
 
 
-It is important to note the implications of having a pipeline that is based on a Dependent Dirichlet Process i.e. an unsupervised learning algorithm. Due to the unsupervised nature of the method, the elements of the cloud will be clustered as the algorithm sees (statistically)fit. This means that there will be clusters in the cloud that will be small in size and will contain just parts of objects and, conversely, clusters are large contain more than objects. The environment is clustered in chunks that need not be semantically sound. One such example is shown in Fig.\ref{pip:beh} where multiple milk cartridges are either clustered as single entities or part of larger clusters. 
+It is important to note the implications of having a pipeline that is based on a Dependent Dirichlet Process i.e. an unsupervised learning algorithm. Due to the unsupervised nature of the method, the elements of the cloud will be clustered as the algorithm sees (statistically)fit. This means that there will be clusters in the cloud that will be small in size and will contain just parts of an object and, conversely, clusters that are large contain more than one object. The environment is clustered in chunks that need not be semantically sound. One such example is shown in Fig.\ref{pip:beh} where multiple milk cartridges are either clustered as single entities or part of larger clusters.
+
+This is an expected behaviour given the unsupervised nature of the method and it does not hinder in any way the power of the pipeline. In projects that there is the need to identify parts of the environment with higher degree of precision, and still approach the problem as an unsupervised problem problem, more complex object signatures could be used to force the sampler to be more selective in the parts of the environment it groups. If classification of objects in classes is important a decision layer could be added on top of the clustering since parts of the environment are already given expressive signatures that could help tell objects appart on a distribution level. Unsupervised approaches make the method general and able to handle a high amount of different environments. If domain specific solutions are needed, decision layers could be built on top of the existing pipeline.
+
+
 \begin{figure}
 \begin{tabular}{cc}
     \includegraphics[width=.5\textwidth]{8boxesData} &  \includegraphics[width=.5\textwidth]{8boxes} \\
@@ -911,6 +925,9 @@ It is important to note the implications of having a pipeline that is based on a
 An important limit of the pipeline exists with respect to the Dirichlet hyper-parameter $\alpha$. During the clustering, choosing a correct value for the hyper-parameter $\alpha$ is important. Having the sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no region specific information is propagated to the clusters output. Fig.[\ref{pip:limits}] shows the behaviour of the sampler for $\alpha$ values lower than 1. The clusters are color coded in the downsampled cloud, and it can be seen that only one cluster is output by the sampler.
 
 On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler every time. That can lead to a non converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters with each containing a small number of points. Furthermore, having a high value in the hyperparameter leads to a slower sampling process since the complexity of the sampler is $O(TKLSN)$ where $K$ is the number of clusters. Fig.[\ref{pcl:kl}] displays the behavior of the sampler for very large values $\alpha$. The landmarks extracted from a single cloud are shown as spheres; it can be seen that the cloud is not visible and the majority of the points is considered a landmark of its own.
+
+Both behaviours of the sampler are expected and can be explained from the theory on Dirichlet processes. In this application the range of hyper parameter alpha will affect the precision of the sampler. If the domain in which the sampler is run requires a high amount of precision, the sampler can be run with a high hyper-parameter alpha. That way every point will become a cluster minimizing information loss. Having a small hyper-parameter alpha forces the sampler to group every point in the dataset together. That leads to a high amount of information and is not usefull in such scenarios. If the domain in which the sampler is run requires fast decision making, the sampler could be run with a smaller value of alpha. That way it would ouput a smaller amount of clusters and would consequently be faster. Since the information loss larger compared to high-alpha runs, tweaking the value of alpha is a task usually left on the end-user and what the problem at hand is. Given that the problem of this project was online SLAM, small initial values of $\alpha$ in the range of 1-10 where used. 
+
 
 
 \begin{figure}
@@ -938,7 +955,7 @@ The restrictions introduced by the decision layer are straightforward due to the
 \section{Conclusion and future work}
 \label{sec:conclusion}
 
- In this thesis a novel cloud representation by using Bayesian methodologies was introduced. Its compression strength, expressiveness and speed were presented as well as how it could help tackle the compression problem of lifelong mapping. The discussion section showed ways that wrong initial parameters can lead the pipeline produce sub-optimal results as well as described its clustering behaviour given its unsupervised nature. There is a number of directions in which the method could be improved. Choosing more complex environment signatures could increase the expresional stregth of the sampler making it easier to represent with higher precision more complex structures. Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that lifelong mapping problems introduce. Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. Finally, all those additions could help tackle lifelong mapping problem as a whole in a fully Bayesian manner.
+ In this thesis a novel cloud representation by using Bayesian methodologies was introduced. Its compression strength, expressiveness and speed were presented as well as how it could help tackle the compression problem of lifelong mapping. The discussion section showed ways that wrong initial parameters can lead the pipeline produce sub-optimal results as well as described its clustering behaviour given its unsupervised nature. There are a number of directions in which the method could be improved. Choosing more complex environment signatures could increase the expresional strength of the sampler making it easier to represent with higher precision more complex structures. Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that lifelong mapping problems introduce. Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. Finally, all those additions could help tackle lifelong mapping problem as a whole in a fully Bayesian manner.
 
 
 %------------------------------------------------

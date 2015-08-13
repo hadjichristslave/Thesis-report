@@ -32,8 +32,8 @@
 \BOOKMARK [2][-]{subsection.5.1}{Simple datasets}{section.5}% 32
 \BOOKMARK [2][-]{subsection.5.2}{Expressivensess and decision layer}{section.5}% 33
 \BOOKMARK [2][-]{subsection.5.3}{EKF-SLAM experiments}{section.5}% 34
-\BOOKMARK [3][-]{subsubsection.5.3.1}{Speed}{subsection.5.3}% 35
-\BOOKMARK [3][-]{subsubsection.5.3.2}{Memory requirements}{subsection.5.3}% 36
+\BOOKMARK [2][-]{subsection.5.4}{Speed}{section.5}% 35
+\BOOKMARK [2][-]{subsection.5.5}{Memory requirements}{section.5}% 36
 \BOOKMARK [1][-]{section.6}{Discussion}{}% 37
 \BOOKMARK [2][-]{subsection.6.1}{Unsupervised learning}{section.6}% 38
 \BOOKMARK [2][-]{subsection.6.2}{Clustering layer}{section.6}% 39
