@@ -722,11 +722,12 @@ In this section the algorithm will be tested against a simple dataset. That will
 \begin{figure}
 \begin{tabular}{c}
   \includegraphics[width=1\textwidth]{clusterings/initialData} \\
-  (a) Raw cloud  \\
+  (a) Initial cloud. This cloud is given as input to the downsampling pipeline.  \\
    \includegraphics[width=1\textwidth]{clusterings/colorcodedDistributions} \\
- (b) Post clustering \\[6pt]
+ (b) Downsampling and clustering results. Top left picture shows the cloud that is given as input\\
+ to the sampler. Top right and bottom ones show the distributions infered for the data. \\[6pt]
 \end{tabular}
-\caption{Initial }
+\caption{Initial data along with the distributions infered }
   \label{pcl:clust}
 \end{figure}
 
@@ -734,10 +735,11 @@ In this section the algorithm will be tested against a simple dataset. That will
 \begin{figure}
 \begin{tabular}{c}
   \includegraphics[width=1\textwidth]{clusterings/coloursSource} \\
-  (a) Raw cloud  \\
+  (a) Initial cloud. This cloud is given as input to the downsampling pipeline.    \\
+   Notice the more complicated colors the milk catridges have. \\
    \includegraphics[width=1\textwidth]{clusterings/coloursCorrect} \\
- (b) Post clustering \\[6pt]
-\end{tabular}
+ (b) Downsampling and clustering results. Top left picture shows the cloud that is given as input\\
+ to the sampler. Top right and bottom ones show the distributions infered for the data. \\[6pt]\end{tabular}
 \caption{More complicated color distributions}
   \label{pcl:clust2}
 \end{figure}
@@ -748,9 +750,9 @@ The cloud was first given as input to the downsampling and feature extraction pi
 \begin{center} 
     \begin{tabular}{|C|C|C|C|C|C|}
     \hline
-    \multicolumn{6}{|l|}{\centerline{UUID 1}} \\
+    \multicolumn{6}{|l|}{\centerline{LandmarkId 1}} \\
     \hline
-     LandUUID & GausKL & GausWes & ExpHel & ExpHel & CatKL \\
+     LandmarkId & GausKL & GausWes & ExpHel & ExpHel & CatKL \\
      \hline
 	 1&0&1.18111e-07&0&0.164045&0 \\
 	 \hline
@@ -758,7 +760,7 @@ The cloud was first given as input to the downsampling and feature extraction pi
  	 \hline
 	 3&13.5579&22449.9&1.56956&0.376699&13.8155 \\
 	 \hline
-    \multicolumn{6}{|l|}{\centerline{UUID 2}} \\
+    \multicolumn{6}{|l|}{\centerline{LandmakId 2}} \\
     \hline
 	 1&0.0115821&20.1454&1.7215&0.319589&0 \\
 	 \hline
@@ -766,7 +768,7 @@ The cloud was first given as input to the downsampling and feature extraction pi
 	\hline
 	3&12.8379&21458.6&0.474719&0.449769&13.8155 \\
 	 \hline
-    \multicolumn{6}{|l|}{\centerline{UUID 3}} \\
+    \multicolumn{6}{|l|}{\centerline{LandmarkId 3}} \\
     \hline
 	 1&13.5579&31191.5&2.55205&0.376699&13.8155\\
 	 \hline
