@@ -1,8 +1,8 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces Different behaviour the distribution for different initial parameters of the $\alpha $ vector}}{10}{figure.1}
 \contentsline {figure}{\numberline {2}{\ignorespaces Stick breaking construction}}{11}{figure.2}
-\contentsline {figure}{\numberline {3}{\ignorespaces Poly's urn for $\alpha $=[2 1 1] }}{12}{figure.3}
+\contentsline {figure}{\numberline {3}{\ignorespaces Polya's urn for $\alpha $=[2 1 1] }}{12}{figure.3}
 \contentsline {figure}{\numberline {4}{\ignorespaces The CRP process}}{13}{figure.4}
-\contentsline {figure}{\numberline {5}{\ignorespaces The stick breaking process for Gaussian base distribution and different values of alpha}}{14}{figure.5}
+\contentsline {figure}{\numberline {5}{\ignorespaces The stick breaking process.}}{14}{figure.5}
 \contentsline {figure}{\numberline {6}{\ignorespaces Mixture model}}{15}{figure.6}
 \contentsline {figure}{\numberline {7}{\ignorespaces A Dirichlet process mixture model.}}{16}{figure.7}
 \contentsline {figure}{\numberline {8}{\ignorespaces GPU as a function of CRP}}{17}{figure.8}
@@ -14,5 +14,5 @@
 \contentsline {figure}{\numberline {14}{\ignorespaces The colour and position boudnary is displayed in these pictures}}{29}{figure.14}
 \contentsline {figure}{\numberline {15}{\ignorespaces SLAM session using the pipeline.}}{30}{figure.15}
 \contentsline {figure}{\numberline {16}{\ignorespaces Memory Requirements as a function of strength parameter $\alpha $.}}{32}{figure.16}
-\contentsline {figure}{\numberline {17}{\ignorespaces Unsupervised entity extraction.}}{34}{figure.17}
-\contentsline {figure}{\numberline {18}{\ignorespaces Fail use cases.}}{35}{figure.18}
+\contentsline {figure}{\numberline {17}{\ignorespaces Unsupervised entity extraction.}}{33}{figure.17}
+\contentsline {figure}{\numberline {18}{\ignorespaces Extreme use cases.}}{34}{figure.18}
