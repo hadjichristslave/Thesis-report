@@ -713,6 +713,9 @@ The basic block of this algorithm is a cluster containing an environment signatu
 \section{Results}
 \label{sec:results}
 
+The results of the method will be presented and analysed in this section. A simple dataset will first be presented to introduce the reader to the environment signature the sampler outputs. The decision layer subsection introduces the behaviour of the decision boundary of the sampler with respect to the color and position of the clusters infered. The pipeline is then used as a sensor model in the EKF-SLAM experiments section and the results of the mapping are presented and analysed. Finally, to answer all the research questions that were formulated in the introduction the method was in its speed and memory requirements in the respective subsections.
+
+
 \subsection{Simple datasets}
 
 In this section the algorithm will be tested against a simple dataset. That will make easier the conceptual extension to more complex clouds that will be used when mapping the environment. In order to test the sampling as well as the decision layer of the algorithm, a simple dataset provided by the pcl\cite{pcl} library was used. More specifically, a cloud consisting of two milk cartridges with different colors and poses was used. The initial cloud is shown in Fig.\ref{pcl:clust}. 
@@ -723,7 +726,7 @@ In this section the algorithm will be tested against a simple dataset. That will
    \includegraphics[width=1\textwidth]{clusterings/colorcodedDistributions} \\
  (b) Post clustering \\[6pt]
 \end{tabular}
-\caption{Initial data along with the distributions infered}
+\caption{Initial }
   \label{pcl:clust}
 \end{figure}
 
