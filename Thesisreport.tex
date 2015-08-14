@@ -960,7 +960,11 @@ Furthermore, since the number of landmarks is also a function of noise, areas of
 
 \subsection{Downsampling and Filtering}
 
-The downsampling and filtering operations are important as they directly affect the speed of the sampler. Having the downsampling operations run with a low threshold will lead to a large cloud and a small clustering process. On the other hand, having downsampling operations run with a very high threshold can lead to a very small cloud that has a very small amount of information the inital cloud carried. Fig.\ref{pip:downsample} shows the results of having the pipeline run with a high and a low threshold on the milk cartridge dataset as was shown in Fig.\ref{pcl:clust}(a). The first figure displays the cloud has a high amount of points and minimizes the information loss propagated to the sampler; the second one only keeps a small part of the points the initial cloud carried. The information loss on clean datasets such as this is not significant but plays a significant role in noise-rich data such as data taken from kinect readings while mapping.
+The downsampling and filtering operations are important as they affect the speed of the sampler. 
+During those operations the cloud is transformed from raw data to the downsampled cloud whose features the sampler expects.
+Downsampling is used to reduce the size of the cloud making the calculations manageable in real-time. Filtering operations calculate the features for every point of the downsampled cloud.
+
+Having the downsampling operations run on a low threshold will lead to a large cloud and a small clustering process. On the other hand, having downsampling operations run with a very high threshold can lead to a very small cloud that has a very small amount of information the inital cloud carried. Fig.\ref{pip:downsample} shows the results of having the pipeline run with a high and a low threshold on the milk cartridge dataset as was shown in Fig.\ref{pcl:clust}(a). The first figure displays the cloud has a high amount of points and minimizes the information loss propagated to the sampler; the second one only keeps a small part of the points the initial cloud carried. The information loss on clean datasets such as this is not significant but plays a significant role in noise-rich data such as data taken from kinect readings while mapping.
 
 
 \begin{figure}[!ht]
@@ -976,8 +980,12 @@ The downsampling and filtering operations are important as they directly affect 
 
 \subsection{Data distribution}
 
-One of the fundamental properties of the sampler is the data distribution it infers. The data distribution was introduced in \ref{data:dist}  and serves as an extension to the distribution proposed in \cite{dependentDiri} with the addition of angle information added in the signature. The object distribution was chosen as the minimal signature that is able to handle the information the environment encapsulates. With respect to the problem domain different features can be calculated and more complex environment distributions can be created. That way the information the environment contains will be captured with a higher amount of precision. The memory requirements for every extra component will then increase with respect to the number of parameters the conjugate distribution of the component requires. 
-
+One of the fundamental properties of the model is the data distribution it infers. 
+The data distribution was introduced in \ref{data:dist} and was analyzed in the results section and is an extension to the distribution proposed in \cite{dependentDiri}.
+The object distribution was chosen to be a simple but also expressive enough to be able to handle the information the environment contains efficiently.
+If the problem definition was formulated differently, alternative features could be used and, consequently, a different environment distribution could be used instead.
+More complex environment distributions can lead to objects that capture the information of the environment contains with a higher amount of precision. 
+The memory requirements for every extra component will then increase with respect to the number of parameters the conjugate distribution of the component requires. 
 
 \subsection{Scalability}
 
