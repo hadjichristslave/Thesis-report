@@ -228,7 +228,7 @@ That is,  if $ (X|q) \sim\ Multinomial_k(n,q) $ and $ Q \sim Dir( \alpha ) $ the
 
 Two basic sampling methods from the Dirichlet Distribution will be presented: Stick breaking process, and Polya's urn.
 
-\subsubsection{Stick Breaking Process}
+\subsubsection{Stick breaking process}
 
 The stick breaking process can be though of as follows: Imagine breaking a unit length stick into $k$ such that the $k$ pieces follow a $Dir( \alpha)$  distribution. Such samples can be created by the following procedure:
 \begin{compactitem}
@@ -287,7 +287,7 @@ Formaly, the DP is defined as follows: Let $\mathcal{X}$ be a set and let $\math
 
 \subsection{Sampling methods}
 
-Two methods for sampling from a Dirichlet process will be presented: the Chinese Restaurant Process, the Stick Breaking Process.
+Two methods for sampling from a Dirichlet process will be presented: the Chinese Restaurant Process, the Stick breaking process.
 
 
 \subsubsection{Chinese restaurant process}
@@ -315,9 +315,9 @@ It can be seen that there is a positive reinforcement effect in this process, th
 One important property of this procedure is that the nth customer has the same probability to sit on the same table as any other customer of the table. That is the number of people seating on table 1 is on average the same as the number of people seating on table $k$! This very interesting and counter intuitive(at first) property of the exchangeable data and understanding this is crucial on building intuition regarding the behaviour of exchangeable random variables.
 
 
-\subsubsection{Stick Breaking}
+\subsubsection{Stick breaking}
 
-Measures drawn from a Dirichlet distribution are discrete with probability 1. This property is made explicit by the stick breaking construction. The construction is based on the independent sequences of i.i.d. random variables $(\pi'_k)_{k=1}^\infty$ and $ ( \phi_k)_{k=1}^\infty$  defined as follows:
+Measures drawn from a Dirichlet distribution are discrete with probability 1. This property is made explicit by the stick breaking process. The construction is based on the independent sequences of i.i.d. random variables $(\pi'_k)_{k=1}^\infty$ and $ ( \phi_k)_{k=1}^\infty$  defined as follows:
 
 \ \ 
 
@@ -906,7 +906,7 @@ As can be seen, the number of landmarks follows the logarithmic trend of the dis
 
 It is important to note the implications of having a pipeline that is based on a Dependent Dirichlet Process i.e. an unsupervised learning algorithm. Due to the unsupervised nature of the method, the elements of the cloud will be clustered as the algorithm sees (statistically)fit. This means that there will be clusters in the cloud that will be small in size and will contain just parts of an object and, conversely, clusters that are large contain more than one object. The environment is clustered in chunks that need not be semantically sound. One such example is shown in Fig.\ref{pip:beh} where multiple milk cartridges are either clustered as single entities or part of larger clusters.
 
-This is an expected behaviour given the unsupervised nature of the method and it does not hinder in any way the power of the pipeline. In projects that there is the need to identify parts of the environment with higher degree of precision, and still approach the problem as an unsupervised problem problem, more complex object signatures could be used to force the sampler to be more selective in the parts of the environment it groups. If classification of objects in classes is important a decision layer could be added on top of the clustering since parts of the environment are already given expressive signatures that could help tell objects appart on a distribution level. Unsupervised approaches make the method general and able to handle a high amount of different environments. If domain specific solutions are needed, decision layers could be built on top of the existing pipeline.
+This is an expected behaviour given the unsupervised nature of the method and it does not hinder in any way the  pipeline. In projects that there is the need to identify parts of the environment with higher degree of precision, and still approach the problem as an unsupervised problem problem, more complex object signatures could be used to force the sampler to be more selective in the parts of the environment it groups. If classification of objects in classes is important a decision layer could be added on top of the clustering since parts of the environment are already given expressive signatures that could help tell objects appart on a distribution level. Unsupervised approaches make the method general and able to handle a high amount of different environments. If domain specific solutions are needed, decision layers could be built on top of the existing pipeline.
 
 
 \begin{figure}
@@ -922,11 +922,11 @@ This is an expected behaviour given the unsupervised nature of the method and it
 \subsection{Clustering layer}
 
 
-An important limit of the pipeline exists with respect to the Dirichlet hyper-parameter $\alpha$. During the clustering, choosing a correct value for the hyper-parameter $\alpha$ is important. Having the sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no region specific information is propagated to the clusters output. Fig.[\ref{pip:limits}] shows the behaviour of the sampler for $\alpha$ values lower than 1. The clusters are color coded in the downsampled cloud, and it can be seen that only one cluster is output by the sampler.
+An important oproperty regarding the behaviour of the pipeline exists with respect to the Dirichlet hyper-parameter $\alpha$. During the clustering, choosing a correct value for the hyper-parameter $\alpha$ is important. Having the sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no region specific information is propagated to the clusters output. Fig.[\ref{pip:limits}] shows the behaviour of the sampler for $\alpha$ values lower than 1. The clusters are color coded in the downsampled cloud, and it can be seen that only one cluster is output by the sampler.
 
-On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler every time. That can lead to a non converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters with each containing a small number of points. Furthermore, having a high value in the hyperparameter leads to a slower sampling process since the complexity of the sampler is $O(TKLSN)$ where $K$ is the number of clusters. Fig.[\ref{pcl:kl}] displays the behavior of the sampler for very large values $\alpha$. The landmarks extracted from a single cloud are shown as spheres; it can be seen that the cloud is not visible and the majority of the points is considered a landmark of its own.
+On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler on every iteration of the method. That can lead to a non converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters with each one containing a small number of points. Furthermore, having a high value in the hyperparameter leads to a slower sampling process since the complexity of the sampler is $O(TKLSN)$ where $K$ is the number of clusters. Fig.[\ref{pcl:kl}] displays the behavior of the sampler for very large values $\alpha$. The landmarks extracted from a single cloud are shown as spheres; it can be seen that the cloud is not visible and the majority of the points is considered a landmark of its own.
 
-Both behaviours of the sampler are expected and can be explained from the theory on Dirichlet processes. In this application the range of hyper parameter alpha will affect the precision of the sampler. If the domain in which the sampler is run requires a high amount of precision, the sampler can be run with a high hyper-parameter alpha. That way every point will become a cluster minimizing information loss. Having a small hyper-parameter alpha forces the sampler to group every point in the dataset together. That leads to a high amount of information and is not usefull in such scenarios. If the domain in which the sampler is run requires fast decision making, the sampler could be run with a smaller value of alpha. That way it would ouput a smaller amount of clusters and would consequently be faster. Since the information loss larger compared to high-alpha runs, tweaking the value of alpha is a task usually left on the end-user and what the problem at hand is. Given that the problem of this project was online SLAM, small initial values of $\alpha$ in the range of 1-10 where used. 
+Both behaviours of the sampler are expected and can be explained from the theory on Dirichlet processes. In this application the range of hyper parameter alpha will affect the precision of the sampler. If the domain of the problem requires a high amount of precision, the sampler can be run with a high hyper-parameter alpha. That way every point will become a cluster minimizing information loss with respect to the cloud. Having a small hyper-parameter alpha forces the sampler to group every point in the dataset together. That leads to a high amount of information and is not usefull in such scenarios. If the domain in which the sampler is run requires fast decision making, the sampler could be run with a smaller value of alpha. That way it would ouput a smaller amount of clusters and would consequently be faster. Since the information loss is larger compared to high-alpha runs, tweaking the value of alpha is a task usually left on the user and is related to  what the problem at hand is. Given that the problem of this project was online SLAM and speed was a requirement, small initial values of $\alpha$ in the range of 1-10 where used. 
 
 
 
@@ -941,7 +941,15 @@ Both behaviours of the sampler are expected and can be explained from the theory
 
 \subsection{Decision layer}
 
-The restrictions introduced by the decision layer are straightforward due to the simple approach of the decision layer. Taking very small distances in the distance threshold operation can lead to pipeline that continuously adds new landmarks to the database. An example is shown in Fig.~\ref{pip:expo} where limiting the landmark matching operation to very small exponential distances, leads to a cloud where objects are decomposed to many entities that also differ on every iteration. Spheres represent landmarks and it can be seen that the chair is being assigned to many landmarks using the pipeline with this setup. That means that very strict limits lead to a non converging pipeline with respect to the landmarks it outputs. Furthermore, since the number of landmarks is also a function of noise, areas of the cloud that are near the maximum range of the sensor can lead to different landmarks added frequently. These issues can be tackled by having a less strict limit in the operation that defines what is considered a landmark the sampler has encountered before or not.
+The restrictions introduced by the decision layer are straightforward due to the approach of the decision layer. Taking very small distances in the distance threshold operation can lead to pipeline that continuously adds new landmarks to the database. 
+
+Such restrictions can be introduced to every part of the distances between distributions calculated in table \ref{distancesofclusters}. Taking a strict limit regarding the 
+Gaussian counterparts will lead to a decision layer that only matches neighbor clusters. The same way, taking a strict limit with respect to the categorical counterparts will lead to a decision making process that only matches elements with similar color signatures. Finally, taking a strict exponential limit will lead to a decision layer that only accepts clusters with very similar angle signatures. Of all those restrictions, the exponential part is the most susceptible to noise with an example of a very strict shown in Fig.\ref{pip:expo}.
+
+It can be seen that limiting the landmark matching operation to very small exponential distances, can lead to a cloud where a single object can be decomposed to many entities. Spheres represent landmarks and it can be seen that the chair is being assigned to many landmarks using the pipeline with this setup. That means that very strict limits lead to a non converging pipeline with respect to the landmarks it outputs. The same also holds for the rest of the distances with the Gaussian and categorical parts being less susceptible to noise. 
+
+Furthermore, since the number of landmarks is also a function of noise, areas of the cloud that are near the maximum range of the sensor can lead to different landmarks added frequently. These issues can be tackled by having a less strict limit in the operation that defines what is considered a landmark the sampler has encountered before or not.
+
 
     \begin{figure}
         \centering
@@ -955,7 +963,12 @@ The restrictions introduced by the decision layer are straightforward due to the
 \section{Conclusion and future work}
 \label{sec:conclusion}
 
- In this thesis a novel cloud representation by using Bayesian methodologies was introduced. Its compression strength, expressiveness and speed were presented as well as how it could help tackle the compression problem of lifelong mapping. The discussion section showed ways that wrong initial parameters can lead the pipeline produce sub-optimal results as well as described its clustering behaviour given its unsupervised nature. There are a number of directions in which the method could be improved. Choosing more complex environment signatures could increase the expresional strength of the sampler making it easier to represent with higher precision more complex structures. Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that lifelong mapping problems introduce. Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. Finally, all those additions could help tackle lifelong mapping problem as a whole in a fully Bayesian manner.
+ In this thesis a novel cloud representation by using Bayesian methodologies was introduced. Representation signatures were presented first on simple datasets and were analyzed towards their results. The decision layer section displayed the expressive capabilities of the signature and how it distinguishes between different parts of the environment. In order to show the extend of the expressiveness of the method, the pipeline was then used as the sensor model of a landmark based EKF-SLAM algorithm. The pipeline was then tested towards its speed and compression.
+
+ The discussion section investigated the implications of using a pipeline that is build on top of an unsupervised learning method. Furthermore the importance of hyper parameter $\alpha$ was analyzed as well as how should the $\alpha$ value be chosen with respect to the problem at hand. Having a correct $\alpha$ value is important since it can lead the pipeline to produce sub-optimal results.
+ 
+ There are a number of directions in which the pipeline can be improved. Choosing more complex environment signatures could increase the expresional strength of the sampler making it easier to represent with higher precision more complex structures. Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that lifelong mapping problems introduce. Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. 
+Finally, all those additions could help tackle lifelong mapping problem as a whole in a fully Bayesian manner.
 
 
 %------------------------------------------------

@@ -10,12 +10,12 @@
 \BOOKMARK [1][-]{section.3}{Theory background}{}% 10
 \BOOKMARK [2][-]{subsection.3.1}{Dirichlet Distribution}{section.3}% 11
 \BOOKMARK [2][-]{subsection.3.2}{Sampling methods}{section.3}% 12
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Stick Breaking Process}{subsection.3.2}% 13
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Stick breaking process}{subsection.3.2}% 13
 \BOOKMARK [3][-]{subsubsection.3.2.2}{Polya's Urn}{subsection.3.2}% 14
 \BOOKMARK [2][-]{subsection.3.3}{Dirichlet Process}{section.3}% 15
 \BOOKMARK [2][-]{subsection.3.4}{Sampling methods}{section.3}% 16
 \BOOKMARK [3][-]{subsubsection.3.4.1}{Chinese restaurant process}{subsection.3.4}% 17
-\BOOKMARK [3][-]{subsubsection.3.4.2}{Stick Breaking}{subsection.3.4}% 18
+\BOOKMARK [3][-]{subsubsection.3.4.2}{Stick breaking}{subsection.3.4}% 18
 \BOOKMARK [2][-]{subsection.3.5}{Dirichlet process mixture models}{section.3}% 19
 \BOOKMARK [2][-]{subsection.3.6}{Inference}{section.3}% 20
 \BOOKMARK [2][-]{subsection.3.7}{Generalized Polya Urn}{section.3}% 21
