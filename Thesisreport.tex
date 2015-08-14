@@ -447,16 +447,15 @@ The general flow of operations that defines the basic communication between the 
 \begin{algorithm}
   \caption{Landmark Layer}\label{euclid}
   \begin{algorithmic}[1]
-    \Procedure{getLandmarkIds}{$pointCloud, existingLandmarks$}
-      \State $cloudReduced \gets downsample(pointCloud)$ 
-      \State $features \gets extractFeatures(cloudReduced)$
-      \State $landmarks \gets cluster(features)$  
-      \For{\texttt{$landmarks$ as $landmark$}}
-	      \State $ (similarity, landId) \gets calcBestSim(landmark, existingLandmarks) $
-			\If{$similarity >threshold$}
-			   \State $ addLandmarks(landMarkIds, landId)$
+    \Procedure{getLandmarkIds}{$pC, Landmarks$}
+      \State $pCD \gets downsample(pC)$ 
+      \State $pCDF \gets extractFeatures(pCD)$
+      \State $cls \gets cluster(pCDF)$  
+      \For{\texttt{$cls$ as $cl$}}
+	      \State $ (sim, landId) \gets calcBestSim(cl, Landmarks) $
+			\If{$sim >threshold$}
+			   \State $ addLandmarks(landId)$
 			\Else 
-               \State $ newID \gets addLandmark(landmark)$
 			   \State $addLandmarks(newID)$
 			\EndIf
       \EndFor
@@ -481,7 +480,7 @@ The general flow of operations that defines the basic communication between the 
 
 \textbf{Lines 6-12:} The correspondence of previously seen landmarks to current observations is computed here. Since the landmarks are distributions, statistical distances can be taken to perform the matching. For every observation, its distances with all the stored landmarks are calculated. calcBestSim returns the cluster with the highest similarity that exists in the database. If the similarity is high enough, correspondence is performed and the landmark is added to the landmark list to be send for update in the EKF, otherwise a new landmark is added and its ID is then added to the list.
 
-\textbf{Lines 15:} The algorithm returns the list of the landmarks the robot currently encounters.
+\textbf{Lines 13:} The algorithm returns the list of the landmarks the robot currently encounters.
 
 \subsection{The data distribution}
 \label{data:dist}
@@ -561,8 +560,8 @@ Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where 
 \begin{algorithm}[ht!]
   \caption{SMC for DDPM}\label{SMC}
   \begin{algorithmic}[1]
-	\State \textbf{Input:} Points \{$x_{1,1:N_t}, ..., x_{T,1:N_t}$\}with extracted features
-	\State \textbf{Output:} Clusters representing of the data
+	\State \textbf{Input:} Points \{$x_{1,1:N_t}, ..., x_{T,1:N_t}$\}
+	\State \textbf{Output:} Clusters that best fit input data
 	\For{$t = 1,...T$} 
 			\For{$ l = 1,...L$} 
 							\For{$ i = 1,...S$} 
@@ -576,7 +575,7 @@ Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where 
 		    \EndFor
 		 	\State compute particle weights $w_t^l$
 		    \EndFor
-    \State Normalize and resample weights
+    \State Normalize weights and resample
     \EndFor
   \end{algorithmic}
 \end{algorithm}
