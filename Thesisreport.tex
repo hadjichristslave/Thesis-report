@@ -328,7 +328,7 @@ This can be defined as follows: Draw $\pi'_k$ as a Beta random variable. Draw $\
 \ \
 
 \ \
-\centerline{ $\pi_k  | \pi'_k \prod_{l=1}^{k-1}(1- \pi'_l   )$\ \ \ \ \ \ \ \ \ \   $  G = \sum_{k=1}^\infty \pi_k \delta_{\phi_k} $}
+\centerline{ $\pi_k  | \pi'_k \sim \prod_{l=1}^{k-1}(1- \pi'_l   )$\ \ \ \ \ \ \ \ \ \   $  G = \sum_{k=1}^\infty \pi_k \delta_{\phi_k} $}
 \ \
 
 The first part of the stick will have length $\pi'_k$ and the conditional length given all the previous draws is given by $\pi_k$. Finally, the distribution created is given as an infinite sum of indicator functions given by $G$. Fig.\ref{crpGausBase} displays a Dirichlet Process's realization from a stick breaking process with a Gaussian base distribution. Different parameter values for strength parameter $\alpha$ directly affect the distributions output. As the alpha parameter is increased, the realization of the distribution will be closer to the base distribution. Furthermore, this picture also shows that the distribution created from the infinite sum of indicator function is a discrete distribution. Finally, when G is generated using a stick breaking process with a strength parameter $\alpha$, it can be written in shorthand as: $ G \sim GEM(\alpha) $
@@ -561,11 +561,11 @@ Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where 
 \begin{algorithm}[ht!]
   \caption{SMC for DDPM}\label{SMC}
   \begin{algorithmic}[1]
-	\State \textbf{Input:} Points \{$x_{1,1:N_t}, ..x_{T,1:N_t}$\}with extracted features
+	\State \textbf{Input:} Points \{$x_{1,1:N_t}, ..., x_{T,1:N_t}$\}with extracted features
 	\State \textbf{Output:} Clusters representing of the data
 	\For{$t = 1,...T$} 
 			\For{$ l = 1,...L$} 
-							\For{$ iter = 1,...S$} 
+							\For{$ i = 1,...S$} 
 								\State Sample $(c_t)^{(l)} \sim Q_1$  
 								\State Sample $(\theta^k ) \sim Q_2$
 						    \EndFor		
@@ -601,7 +601,7 @@ Where $c_{t,n}$ represents cluster $c$ of point $n$ at time $t$, $s$ represents 
 		 	\int Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) \times  \\ NiW( \mu_t, \Sigma_t | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t | q_0) Gam( \lambda_t | \alpha_0, \beta_0)  d\theta  \\
 			= \int Normal(x_{t,n}^s| \mu_t, \Sigma_t) \times NiW( \mu_t, \Sigma_t | \kappa_0, \mu_0, \nu_0, \Lambda_0 )\\
 			 Mult(x_{t,n}^c | \delta_t) \times Dir(\delta_t | q_0) \\
-			 Exp(x_{t,n}^a | \lambda_t) \times  \times Gam( \lambda_t | \alpha_0, \beta_0)  d\theta  \\
+			 Exp(x_{t,n}^a | \lambda_t) \times Gam( \lambda_t | \alpha_0, \beta_0)  d\theta  \\
 		 	= t_{\nu_0-1}( x_{t,n}^s | \mu_0, \frac{\Lambda_0(\kappa_0+1)}{\kappa_0(\nu_0-1)}) \times \prod_{j=1}^V \frac{\Gamma(x_{t,n}^c)}{\Gamma(q_0)} \times \\ \frac{\Gamma(\sum_{j=1}^V q_0)}{\Gamma(\sum_{j=1}^V x_{t,n}^c)} \times Lomax(\alpha_0 + s_{t,n}^c, \beta_0 \sum_{j=1}^V x_{t,n}^c)
  	\end{split}
 \end{equation}
