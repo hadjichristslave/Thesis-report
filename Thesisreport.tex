@@ -901,7 +901,7 @@ As can be seen, the number of landmarks follows the logarithmic trend of the dis
 \label{sec:discussion}
 
     
-    \subsection{Unsupervised learning}
+\subsection{Unsupervised learning}
 
 
 It is important to note the implications of having a pipeline that is based on a Dependent Dirichlet Process i.e. an unsupervised learning algorithm. Due to the unsupervised nature of the method, the elements of the cloud will be clustered as the algorithm sees (statistically)fit. This means that there will be clusters in the cloud that will be small in size and will contain just parts of an object and, conversely, clusters that are large contain more than one object. The environment is clustered in chunks that need not be semantically sound. One such example is shown in Fig.\ref{pip:beh} where multiple milk cartridges are either clustered as single entities or part of larger clusters.
@@ -920,7 +920,6 @@ This is an expected behaviour given the unsupervised nature of the method and it
 
 
 \subsection{Clustering layer}
-
 
 An important oproperty regarding the behaviour of the pipeline exists with respect to the Dirichlet hyper-parameter $\alpha$. During the clustering, choosing a correct value for the hyper-parameter $\alpha$ is important. Having the sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no region specific information is propagated to the clusters output. Fig.[\ref{pip:limits}] shows the behaviour of the sampler for $\alpha$ values lower than 1. The clusters are color coded in the downsampled cloud, and it can be seen that only one cluster is output by the sampler.
 
@@ -958,6 +957,21 @@ Furthermore, since the number of landmarks is also a function of noise, areas of
 	   entities on a single \\[6pt]
 	  \label{pip:expo}
     \end{figure}
+
+\subsection{Downsampling and Filtering}
+
+The Downsampling and Filtering operations are important as they directly affect the speed of the sampler. Having the downsampling operations run with a low threshold will lead to a large cloud and a small clustering process. On the other hand, having downsampling operations run with a very high threshold can lead to a very small cloud that has a very small amount of information the inital cloud carried. Fig.\ref{downsamplehighandlow} shows the results of having the pipeline run with a high and a low threshold on the milk cartridge dataset. First figure leaves the cloud almost intact whereas the second one only keeps a small part of the points the initial cloud carried. The information loss on clean datasets such as this is not significant but plays a significant role in noise-rich data such as data taken from kinect readings while mapping.
+
+
+\subsection{Data distribution}
+
+One of the fundamental properties of the sampler is the data distribution it infers. The data distribution was introduced in \ref{data:dist}  and serves as an extension to the distribution proposed in \ref{dependentDiri} with the addition of angle information added in the signature. The object distribution was chosen as the minimal signature that is able to handle the information the environment encapsulates. With respect to the problem domain different features can be calculated and more complex environment distributions can be created. That way the information the environment contains will be captured with a higher amount of precision. The memory requirements for every extra component will then increase with respect to the number of parameters the conjugate distribution of the component requires. 
+
+
+\subsection{Scalability}
+
+The repesentation introduced is scalable with respect to its memory needs and matching operations. Given the small amount of memory a single landmark singature requires, there can be a large amount of landmarks that can be handled. Furthermore, even when having a large amount of landmarks introduced in the system, there are techniques that can be used to reduced the time required for the landmark matching operations. For example, since landmarks are stored in a database, only landmarks occupying a specific part of the map can be retrieved; that way the landmark matching operations will be constant with respect to the number of landmarks the decision layer allows in a specific part of the map. 
+
 
 \newpage
 \section{Conclusion and future work}
