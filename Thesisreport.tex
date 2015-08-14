@@ -181,11 +181,11 @@ An introduction to the Dirichlet Distribution and Dirichlet process mixture mode
 
 \subsection{Dirichlet Distribution}
 
-An example of a \textit{probability mass function}(pmf) is an ordinary six-sided dice. To sample from the pmf, you cast the dice and get a number from 1 to 6. One important property of pmfs given from real dice is that they are not uniformly weighted due to the manufacturing process not being perfect. A bag of dice can then be considered as an example of a random pmf. To sample from this random pmf, you have to put your hand in the bag and draw a die, and the result of this drawing process is itself a probability distribution. A Dirichlet distribution is an object that can be used to model the randomness of such objects whose domain is itself is a probability distribution i.e it is a distribution of distributions.
+An example of a \textit{probability mass function}(pmf) can be described as an ordinary six-sided dice. To sample from this function , you cast the dice and get a number from 1 to 6. One important property of probability mass functions taken from real dice is that they are not uniformly weighted due to the manufacturing process not being perfect. A bag of dice can then be considered as an example of a random pmf. To sample from this random pmf, you have to put your hand in the bag and draw a die, and the result of this drawing process is itself a probability distribution. A Dirichlet distribution is an object that can be used to model the randomness of such objects whose domain is itself is a probability distribution i.e it is a distribution of distributions.
 
-Formally, a probability mass function with \textit{k} components lies on the \textit{(k-1)} dimensional probability simplex, which is a surface in $ \mathbb{R}^k $ denoted by $ \Delta_k $ and defined to be the set of vectors whose $ k $  components are non-negative and sum up to 1, that is:  $ \Delta_k = \{ q \in  \mathbb{R}^k | \sum_{i=1}^k q_i=1, q_i \geq 0\ for\ i=1,2,...k \} $ . $ \Delta_k $  is itself a $ ( k-1 ) $ dimensional object lying in the $k$ dimensional space. 
+Formally, a probability density function with \textit{k} components lies on the \textit{(k-1)} dimensional probability simplex, which is a surface in $ \mathbb{R}^k $ denoted by $ \Delta_k $ and defined to be the set of vectors whose $ k $  components are non-negative and sum up to 1, that is:  $ \Delta_k = \{ q \in  \mathbb{R}^k | \sum_{i=1}^k q_i=1, q_i \geq 0\ for\ i=1,2,...k \} $ . $ \Delta_k $  is itself a $ ( k-1 ) $ dimensional object lying in the $k$ dimensional space. 
 
-\textbf{Dirichlet distribution:} Let $ Q = [Q_1,Q_2,...,Q_k  ] $ be a random pmf, that is, $ Q_i \geq 0 $ for $ i=1,2,..k $ and $ \sum_{i=1}^k Q_k=1 $. In addition, suppose that $ \alpha = [\alpha_1, \alpha_2, ..., \alpha_k ] $, with $ \alpha_i  \ge  0 $ for each i, and let $ \alpha_0 = \sum_{i=1}^k \alpha_i $. Then $ Q $ is said to have a Dirichlet distribution with parameter $\alpha$, which we denote by $ Q \sim  Dir(\alpha)$, if it has $f(q;a) = 0$ if q is not a pmf, and if q is a pmf then:
+\textbf{Dirichlet distribution:} Let $ Q = [Q_1,Q_2,...,Q_k  ] $ be a random pmf, that is, $ Q_i \geq 0 $ for $ i=1,2,..k $ and $ \sum_{i=1}^k Q_k=1 $. In addition, suppose that $ \alpha = [\alpha_1, \alpha_2, ..., \alpha_k ] $, with $ \alpha_i  \ge  0 $ for each i, and let $ \alpha_0 = \sum_{i=1}^k \alpha_i $. Then $ Q $ is said to have a Dirichlet distribution with parameter $\alpha$, which we denote by $ Q \sim  Dir(\alpha)$, if it has $f(q;a) = 0$ if q is not a pmf, and if q is a pmf then f has a probability density function of:
 
 $$ f(q; \alpha) = \frac{ \Gamma( \alpha_0)  }{ \prod_{i=1}^{k} \Gamma ( \alpha_i) } \prod_{i=1}^{k} q_i^{a_i -1}$$
 
@@ -203,9 +203,7 @@ $$ E[ \alpha_i]\ =\ \frac{ \alpha_i }{ \alpha_0 } $$
 \right.
 \]
 
-The mean and variance formulas help understand how the changing the $ \alpha $ vector affects the behaviour of the distribution as to where the density is located as well as the variance in the pmfs sampled. The following graphs display the difference of behaviour on samples from Dirichlet distributions with different initial alpha values.
-
-
+Mean and variance formulas help understand how the changing the $ \alpha $ vector affects the behaviour of the distribution as to where the density is located as well as the variance in the pmfs sampled. The following graphs display the difference of behaviour on samples from Dirichlet distributions with different initial alpha values.
 
 
 Random samples from a Dirichlet distribution are presented in Fig.\ref{firstplot}. It must be noted that every point within the simplex can be considered itself a pmf since its components add up to one.  Furthermore, for an $ \alpha = [c,c,c]\ ,c \ge 0 $ , the density is symetric towards the center of the simplex; for the special case of $ \alpha = [1,1,1] $ where c=1 is displayed at Fig.\ref{firstplot}(a) where the initial choice of the $\alpha$ vector results is a uniform distribution of points over the probability simplex. As c increases the distribuiton is concentrated towards the center of the simplex. The behaviour of the density changes when the $\alpha$ vector is not symetric, when there is a shift in density towards the higher parameter, as is shown in Fig.\ref{firstplot}(b) and Fig.\ref{firstplot}(c). Finally, when the values of the vector are smaller than 1, the density of the distribution is shifted towards the vertices of the simplex as is shown in subplot Fig.\ref{firstplot}(d).
@@ -222,7 +220,7 @@ Random samples from a Dirichlet distribution are presented in Fig.\ref{firstplot
 
 One important property of the Dirichlet distribution is that it serves as a conjugate prior for the probability parameter $q$ of the multinomial distribution. 
 
-That is,  if $ (X|q) \sim\ Multinomial_k(n,q) $ and $ Q \sim Dir( \alpha ) $ then $( Q| X=x) \sim Dir( \alpha + x) $
+That is,  if $ X|q \sim\ Multinomial_k(n,q) $ and $ Q \sim Dir( \alpha ) $ then $ Q| X=x \sim Dir( \alpha + x) $
 
 \subsection{Sampling methods}
 
@@ -909,7 +907,7 @@ It is important to note the implications of having a pipeline that is based on a
 This is an expected behaviour given the unsupervised nature of the method and it does not hinder in any way the  pipeline. In projects that there is the need to identify parts of the environment with higher degree of precision, and still approach the problem as an unsupervised problem problem, more complex object signatures could be used to force the sampler to be more selective in the parts of the environment it groups. If classification of objects in classes is important a decision layer could be added on top of the clustering since parts of the environment are already given expressive signatures that could help tell objects appart on a distribution level. Unsupervised approaches make the method general and able to handle a high amount of different environments. If domain specific solutions are needed, decision layers could be built on top of the existing pipeline.
 
 
-\begin{figure}
+\begin{figure}[!ht]
 \begin{tabular}{cc}
     \includegraphics[width=.5\textwidth]{8boxesData} &  \includegraphics[width=.5\textwidth]{8boxes} \\
   (a) Initial data  & (b) Clusters infered \\[6pt]
@@ -950,7 +948,7 @@ It can be seen that limiting the landmark matching operation to very small expon
 Furthermore, since the number of landmarks is also a function of noise, areas of the cloud that are near the maximum range of the sensor can lead to different landmarks added frequently. These issues can be tackled by having a less strict limit in the operation that defines what is considered a landmark the sampler has encountered before or not.
 
 
-    \begin{figure}
+\begin{figure}[!ht]
         \centering
 	    \includegraphics[width=.5\textwidth]{monsterchair} \\
 	  (a) Very strict decision limits lead to multiple \\
