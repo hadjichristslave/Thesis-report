@@ -41,4 +41,4 @@
 \contentsline {subsection}{\numberline {6.4}Downsampling and Filtering}{38}{subsection.6.4}
 \contentsline {subsection}{\numberline {6.5}Data distribution}{38}{subsection.6.5}
 \contentsline {subsection}{\numberline {6.6}Scalability}{38}{subsection.6.6}
-\contentsline {section}{\numberline {7}Conclusion and future work}{39}{section.7}
+\contentsline {section}{\numberline {7}Conclusion and future work}{40}{section.7}

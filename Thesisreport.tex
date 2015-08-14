@@ -963,9 +963,19 @@ Furthermore, since the number of landmarks is also a function of noise, areas of
 The Downsampling and Filtering operations are important as they directly affect the speed of the sampler. Having the downsampling operations run with a low threshold will lead to a large cloud and a small clustering process. On the other hand, having downsampling operations run with a very high threshold can lead to a very small cloud that has a very small amount of information the inital cloud carried. Fig.\ref{downsamplehighandlow} shows the results of having the pipeline run with a high and a low threshold on the milk cartridge dataset. First figure leaves the cloud almost intact whereas the second one only keeps a small part of the points the initial cloud carried. The information loss on clean datasets such as this is not significant but plays a significant role in noise-rich data such as data taken from kinect readings while mapping.
 
 
+\begin{figure}
+\begin{tabular}{cc}
+    \includegraphics[width=.5\textwidth]{smalldownsamplinglimit} &  \includegraphics[width=.5\textwidth]{largedownsamplinglimit} \\
+    (a) Small threshold in the downsampling leads to & (b) A high threshold in the downsampling leads to  \\
+    a high amoung of points propagated to the sampler& a small amount of poits propagated to the sampler \\[6pt]
+\end{tabular}
+\caption{The behaviour of the dowsampling with respect to the threshold of the operations.}
+  \label{pip:downsample}
+\end{figure}
+
 \subsection{Data distribution}
 
-One of the fundamental properties of the sampler is the data distribution it infers. The data distribution was introduced in \ref{data:dist}  and serves as an extension to the distribution proposed in \ref{dependentDiri} with the addition of angle information added in the signature. The object distribution was chosen as the minimal signature that is able to handle the information the environment encapsulates. With respect to the problem domain different features can be calculated and more complex environment distributions can be created. That way the information the environment contains will be captured with a higher amount of precision. The memory requirements for every extra component will then increase with respect to the number of parameters the conjugate distribution of the component requires. 
+One of the fundamental properties of the sampler is the data distribution it infers. The data distribution was introduced in \ref{data:dist}  and serves as an extension to the distribution proposed in \cite{dependentDiri} with the addition of angle information added in the signature. The object distribution was chosen as the minimal signature that is able to handle the information the environment encapsulates. With respect to the problem domain different features can be calculated and more complex environment distributions can be created. That way the information the environment contains will be captured with a higher amount of precision. The memory requirements for every extra component will then increase with respect to the number of parameters the conjugate distribution of the component requires. 
 
 
 \subsection{Scalability}
