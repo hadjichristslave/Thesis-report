@@ -17,4 +17,4 @@
 \contentsline {figure}{\numberline {17}{\ignorespaces Result of a session using RTAB-map module. The resulting map captures the structure of the room and the maps for the room shown in the picture average 84MB in size.}}{34}{figure.17}
 \contentsline {figure}{\numberline {18}{\ignorespaces Unsupervised entity extraction.}}{35}{figure.18}
 \contentsline {figure}{\numberline {19}{\ignorespaces Extreme use cases.}}{36}{figure.19}
-\contentsline {figure}{\numberline {20}{\ignorespaces The behaviour of the dowsampling with respect to the threshold of the operations.}}{38}{figure.20}
+\contentsline {figure}{\numberline {20}{\ignorespaces The behaviour of the dowsampling module with respect to the threshold of the operations.}}{38}{figure.20}
