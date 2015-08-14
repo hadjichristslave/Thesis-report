@@ -965,10 +965,10 @@ During those operations the cloud is transformed from raw kinect readings to the
 Downsampling is used to reduce the size of the cloud and increase the speed of the method since the complexity of the pipeline is directly related to cloud size as it was shown in section \ref{subsec:complexity}. Filtering operations calculate the features for every point of the downsampled cloud.
 Having the downsampling operations run on a low threshold will lead to a large cloud after the downsampling takes place. 
 Passing a large cloud in the sampler will result in a more precise environment representation, but also a slower clustering process.
-On the other hand, having downsampling operations run with a very high threshold will lead to a very small cloud that has a very small amount of information the inital cloud carried. This will lead to very simplistic results after the clustering that do not contain significant information regarding the cloud.
+On the other hand, having downsampling operations run with a very high threshold will lead to a very small cloud that has a very small amount of information the inital cloud carried. This will lead to very simplistic clustering results that do not contain significant information regarding the cloud.
 
-Fig.\ref{pip:downsample} shows the results of having the pipeline run with a high and a low threshold on the milk cartridge dataset as was shown in Fig.\ref{pcl:clust}(a).
-The first figure displays a cloud that has a minimal amount of points removed during the downsampling operations. The sampler will then receive a cloud with a lot of the initial information still contained in its structure.
+Fig.\ref{pip:downsample} displays the results of having the pipeline run with a high(a) and a low(b) threshold on the milk cartridge dataset that was introduced in Fig.\ref{pcl:clust}(a).
+The first figure displays a cloud that has a smaller amount of points removed during the downsampling operations. The sampler will then receive a cloud with a lot of the initial information still contained in its structure.
 The second figure displays a cloud that has keept a very small portion of the points the initial cloud carried. The information loss on clean datasets such as this is not significant but plays a significant role in noise-rich data such as data taken from kinect readings while mapping.
 
 
@@ -986,7 +986,7 @@ The second figure displays a cloud that has keept a very small portion of the po
 \subsection{Data distribution}
 
 One of the fundamental properties of the model is the data distribution it infers. 
-The data distribution was introduced in \ref{data:dist} and was analyzed in the results section and is an extension to the distribution proposed in \cite{dependentDiri}.
+The data distribution that was introduced in \ref{data:dist} and analyzed in the results section is an extension to the distribution proposed in \cite{dependentDiri} for 2D video data.
 The object distribution was chosen to be a simple but also expressive enough to be able to handle the information the environment contains efficiently.
 If the problem definition was formulated differently, alternative features could be used and, consequently, a different environment distribution could be used instead.
 More complex environment distributions can lead to objects that capture the information of the environment contains with a higher amount of precision. 
@@ -994,7 +994,21 @@ The memory requirements for every extra component will then increase with respec
 
 \subsection{Scalability}
 
-The repesentation introduced is scalable with respect to its memory needs and matching operations. Given the small amount of memory a single landmark singature requires, there can be a large amount of landmarks that can be handled. Furthermore, even when having a large amount of landmarks introduced in the system, there are techniques that can be used to reduced the time required for the landmark matching operations. For example, since landmarks are stored in a database, only landmarks occupying a specific part of the map can be retrieved; that way the landmark matching operations will be constant with respect to the number of landmarks the decision layer allows in a specific part of the map. 
+The repesentation introduced is very scalable with respect to its memory needs and the matching operations.
+The small amount of memory a single landmark singature requires(260Bytes) leads to a large amount. Fig.\ref{pip:reqs} displays the memory requirements in relation to the number of landmarks the environment has. It can be seen that even for a very large amount of landmarks the memory requirements are low. 
+
+Furthermore, when having a large amount of landmarks introduced in the system, there are techniques that can be used to reduced the time required for the landmark matching operations.
+For example, since landmarks are stored in a database, only landmarks occupying a specific part of the map can be retrieved;
+that way the landmark matching operations will be constant with respect to the number of landmarks the decision layer allows in a specific part of the map. 
+
+
+
+\begin{figure}[!ht]
+        \centering
+	    \includegraphics[width=.5\textwidth]{MemoryRequirements} \\
+	  Memory requirements with respect to the number of landmarks in the environment. \\[6pt]
+	  \label{pip:reqs}
+    \end{figure}
 
 
 \newpage
