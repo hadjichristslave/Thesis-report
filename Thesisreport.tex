@@ -949,7 +949,7 @@ Both behaviours of the sampler are expected and can be explained from the theory
     \includegraphics[width=.5\textwidth]{singlecluster} &  \includegraphics[width=.5\textwidth]{onlyclusters2} \\
   (a) Low $\alpha$ translates to a single cluster  & (b) High $\alpha$ translates to a non converging cloud \\[6pt]
 \end{tabular}
-\caption{Extreme use cases.}
+\caption{Cases where using very low/high values on the hyper parameter $\alpha$ lead to a pipeline that either groups the whole cloud being to a single landmark or to a pipeline that constantly creates new landmarks.}
   \label{pip:limits}
 \end{figure}
 
@@ -1010,7 +1010,7 @@ The memory requirements for every extra component will then increase with respec
 
 
 
-The repesentation introduced is very scalable with respect to its memory needs and the matching operations.
+The repesentation introduced is scalable with respect to its memory needs and the landmark matching operations as the number of landmarks in the environment increases.
 The small amount of memory a single landmark singature requires(260Bytes) leads to a large amount. Fig.\ref{pip:reqs} displays the memory requirements in relation to the number of landmarks the environment has. It can be seen that even for a very large amount of landmarks the memory requirements are low. 
 
 Furthermore, when having a large amount of landmarks introduced in the system, there are techniques that can be used to reduced the time required for the landmark matching operations.
