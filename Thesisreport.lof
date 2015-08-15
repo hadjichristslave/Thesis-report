@@ -15,7 +15,7 @@
 \contentsline {figure}{\numberline {15}{\ignorespaces SLAM session using the pipeline. The pipeline is used as the sensor model of an EKF-SLAM module. The readings of a kinect mounted on a turtlebot are downsampled and clustered. Current readings are either being matched to past readings giving old landmarks or being used to create new landmarks if no similar past environment sigantures exist. Landmarks are represented with yellow spheres. }}{32}{figure.15}
 \contentsline {figure}{\numberline {16}{\ignorespaces Memory Requirements as a function of strength parameter $\alpha $.}}{33}{figure.16}
 \contentsline {figure}{\numberline {17}{\ignorespaces Result of a session using RTAB-map module. The resulting map captures the structure of the room and the maps for the room shown in the picture average 84MB in size.}}{34}{figure.17}
-\contentsline {figure}{\numberline {18}{\ignorespaces Unsupervised entity extraction.}}{35}{figure.18}
-\contentsline {figure}{\numberline {19}{\ignorespaces Cases where using very low/high values on the hyper parameter $\alpha $ lead to a pipeline that either groups the whole cloud being to a single landmark or to a pipeline that constantly creates new landmarks.}}{36}{figure.19}
-\contentsline {figure}{\numberline {20}{\ignorespaces The behaviour of the dowsampling module with respect to the threshold of the operations.}}{38}{figure.20}
-\contentsline {figure}{\numberline {21}{\ignorespaces Memory requirements with respect to the number of landmarks in the environment.}}{39}{figure.21}
+\contentsline {figure}{\numberline {18}{\ignorespaces The behaviour of the dowsampling module with respect to the threshold of the operations.}}{36}{figure.18}
+\contentsline {figure}{\numberline {19}{\ignorespaces Unsupervised entity extraction.}}{36}{figure.19}
+\contentsline {figure}{\numberline {20}{\ignorespaces Cases where using very low/high values on the hyper parameter $\alpha $ lead to a pipeline that either groups the whole cloud being to a single landmark or to a pipeline that constantly creates new landmarks.}}{38}{figure.20}
+\contentsline {figure}{\numberline {21}{\ignorespaces Memory requirements with respect to the number of landmarks in the environment. 10000 landmarks have memory needs of 2.6MB making the method very memory efficient.}}{39}{figure.21}
