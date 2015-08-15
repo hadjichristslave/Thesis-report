@@ -104,9 +104,9 @@
 \subsection{Motivation}
 
 
-Simultaneous Localization And Mapping(SLAM) is one of the fundamental challenges of autonomous systems\cite{probRobs}. In order for robots to be considered truly autonomous they have to be able to enter an unknown environment and map the structure while navigating in the environment. With solutions like EKF-SLAM\cite{ekf} and FastSlam\cite{SLAM} robots are currently capable of efficiently mapping unknown environments. The logical extension of methods that can map \textit{static} environments for a \textit{finite amount of time} are methods that remove those restrictions. Lifelong learning in robots is not a new concept\cite{liflonglearning}, and in recent years research with a specific focus on lifelong learning in mapping\cite{lifelongmaps} was introduced.  Lifelong mapping introduces the concept of robots that are able to continuously map their environment and this leads to two basic extensions over existing methods: Mapping methods that are capable of handling the memory needs of a constantly increasing environment and robust enough to handle changes that occur in the environment over time. 
+Simultaneous Localization And Mapping(SLAM) is one of the fundamental challenges of autonomous systems\cite{probRobs}. In order for robots to be considered truly autonomous they have to be able to enter an unknown environment and map the structure while navigating in the same environment. With solutions like EKF-SLAM\cite{ekf} and FastSlam\cite{SLAM} robots are currently capable of efficiently mapping unknown environments. The logical extension of methods that can map \textit{static} environments for a \textit{finite amount of time} are methods that remove those restrictions. Lifelong learning in robots is not a new concept\cite{liflonglearning}, and in recent years research with a specific focus on lifelong learning in mapping\cite{lifelongmaps} was introduced.  Lifelong mapping introduces the concept of robots that are able to continuously map their environment and this leads to two basic extensions over existing methods: Mapping methods that are capable of handling the memory needs of a constantly increasing environment and robust enough to handle changes that occur in the environment over time. 
 
-The increasing need of memory resources brings in the spotlight one of the fundamental restrictions of autonomous systems, i.e. memory bottlenecks. In order to be able to map an unknown environment for an indefinite amount of time, an indefinite amount of memory is required. Since there cannot be an indefinite amount of memory, the need for methods that store environment information in a less costly manner rises. The problem then transposes to a compression problem with two basic questions: How can the environment information be compressed? How do we minimize information loss due to the compression?
+The increasing need of memory resources brings in the spotlight one of the fundamental restrictions of autonomous systems, i.e. memory bottlenecks. In order to be able to map an unknown environment for an arbitrary amount of time, an arbitrary amount of memory is required. Since memory resources can only be finite, the need for methods that store environment information in a less costly manner rises. The problem then transposes to a compression problem with two basic questions: How can the environment information be compressed? How do we minimize information loss due to the compression?
 
 As a result, lifelong mapping consists of two basic subproblems: a compression problem as the map increases over time and a dynamic environment problem as the environment changes over time\cite{aishalong}. In this project the focus will be directed on the compression problem of lifelong mapping. More specifically, how can Bayesian non-parametric methods be used to create compressed environment representations that still retain enough environment information to be used as reference points when performing SLAM. Since different sensors require different mapping approaches the focus will be directed towards algorithms that use RGBD sensors like Microsoft Kinect to perform the mapping. 
 
@@ -114,15 +114,15 @@ As a result, lifelong mapping consists of two basic subproblems: a compression p
 Dirichlet processes and Dirichlet process mixture models \cite{nonParam} are the cornerstone of Bayesian non-parametric statistics. The strength of those models lies in the fact that they allow their components to grow as much as needed so as to best fit the data. This means that in such models the number of topics in a document, the number of objects in a picture or items in a point cloud must not be predefined. This implied information that resides in the data can be infered by the models themselves. The dynamic number of components in combination with different prior choices leads to very flexible solutions that can be used in a very large area of applications from topic modeling\cite{LDA} to speaker diarization\cite{speakerDiar}.
 The main motivation of this project is to use such methods as a means of creating compressed representations of the environment that also retain enough expressiveness to be used as reference points when performing SLAM. 
 
-Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized RGBD devices with its low price range and high quality sensors. It came as no surprise that research in pointclouds, the cloud representation system of Kinect, has increased since then. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap},\cite{rgbdmapping}. The goal of this thesis is to introduce a novel compressed representation of pointclouds in order to tackle the first part of lifelong mapping problems while using Bayesian methodologies. 
+Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized RGBD devices with its low price range and high quality sensors. It came as no surprise that research in pointclouds, the cloud representation system of Kinect, has increased since then. Many libraries that enable the user to perform tasks from feature extraction to plane segmentation\cite{pcl} in pointclouds are currently available. In the field of robotics, many teams are using the Kinect sensors to perform simultaneous localization and mapping\cite{rtabmap},\cite{rgbdmapping}. The goal of this thesis is to introduce a compressed representation of pointclouds in order to tackle the first part of lifelong mapping problems while using Bayesian methodologies. 
 
 
 \subsection{Research questions}
 
 
-The following research questions have then to be addressed: Are such representations rich enough to be used as reference points when performing SLAM? Are the methods fast enough to be used in online SLAM scenarios? Is the compression ratio with respect to normal repesentations significant? 
+The following research questions have then to be addressed: Are such representations rich enough to be used as sensor models in SLAM?  Will the methods be fast enough to be used in online SLAM scenarios? Will the compression ratio with respect to normal repesentations be significant? 
 
-In this thesis a method of creating compressed representation of a pointclouds is introduced; the representation's compression strength, expressive ability as well as the ability to handle online streams of data are presented in the results section. The discussion section investigates some details regarding the mechanisms of the method. Cases where the method does not perform as needed as well as the implications of having a method that has an unsupervised learning mechanism at its core are presented. Finally, the motivation behind the object signature and the scalability of the method are discussed.
+In this thesis a method of creating compressed representation of a pointclouds is introduced; the representation's compression strength, expressive ability as well as the ability to handle online streams of data are presented in the results section. The discussion section analyzes some details of the mechanisms of the method, cases where the method does not perform as needed as well as implications of having a method that has an unsupervised learning mechanism at its core.
 
 The rest of the paper is structured as follows. Section \ref{sec:literature} will present relevant literature review, section \ref{sec:theory} will introduce the theories behind the model, section \ref{sec:model} will define the model, section \ref{sec:results} will show experimental results of the method. Section \ref{sec:discussion} will discuss specific behaviours of the method and, finally, section \ref{sec:conclusion} will conclude with a short summary and future directions in which the method could be improved.
 
@@ -741,8 +741,9 @@ In this section the algorithm will be tested against a simple dataset. That will
   (a) Initial cloud. This cloud is given as input to the downsampling pipeline.  \\
    \includegraphics[width=1\textwidth]{clusterings/colorcodedDistributions} \\
  (b) Downsampling and clustering results. Top left picture shows the cloud that is given as input\\
- to the sampler. Top right and bottom ones show the distributions infered for the data. \\
- The colors in the distribution signatures display the different clusters infered.\end{tabular}
+ to the sampler. Top right(Gaussian) and bottom(Exponential, Categorical) subfigures show the \\
+ distributions infered from the data.  The colors in the distribution signatures display \\
+ the different clusters infered.\end{tabular}
 \caption{Initial data along with the distributions infered }
   \label{pcl:clust}
 \end{figure}
@@ -755,13 +756,14 @@ In this section the algorithm will be tested against a simple dataset. That will
    Notice the more complicated colors the milk catridges have. \\
    \includegraphics[width=1\textwidth]{clusterings/coloursCorrect} \\
  (b) Downsampling and clustering results. Top left picture shows the cloud that is given as input\\
- to the sampler. Top right and bottom ones show the distributions infered for the data. \\
- The colors in the distribution signatures display the different clusters infered.\end{tabular}
+ to the sampler. Top right(Gaussian) and bottom(Exponential, Categorical) subfigures show the \\
+ distributions infered from the data. The colors in the distribution signatures display \\
+ the different clusters infered.\end{tabular}
 \caption{More complicated color distributions}
   \label{pcl:clust2}
 \end{figure}
 
-The cloud was contained in a cloud file(.pcd) and was given as input to the downsampling and feature extraction pipeline. The reduced cloud(top left Fig.\ref{pcl:clust}(b)) was then passed as input to the sampler and the clustering results are shown in Fig.\ref{pcl:clust}(b). The downsampling reduces a cloud of 27408 points in 4493 producing a significantly smaller cloud and this cloud along with all feature information calculated are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
+The cloud was parsed from a cloud file(.pcd) and was given as input to the downsampling and feature extraction pipeline. The reduced cloud(top left Fig.\ref{pcl:clust}(b)) was then passed as input to the sampler and the clustering results are shown in Fig.\ref{pcl:clust}(b). The downsampling reduces a cloud of 27408 points in 4493 producing a significantly smaller cloud and this cloud along with all feature information calculated are given as input to the sampler. The sampler outputs a mixture of distributions that fits the input data. The clustering output is shown in Fig.\ref{pcl:clust} with the top right being the Gaussian distributions inferred, bottom left the exponential and bottom right the categorical representing the color information of the cloud. The sampler outputs 3 clusters for the data and it can be seen that the change in angular information of the box leads the sampler to assign two distributions in the left milk box cloud. The color information is captured correctly in the structures and that was expected since the data had distinct colour signatures.
 
 
 \begin{center} 
@@ -803,9 +805,9 @@ The decision boundary of the pipeline can be decomposed into three basic parts; 
 \begin{figure}
 
 \begin{tabular}{cc}
-  \includegraphics[width=.55\textwidth]{colorBound} &   \includegraphics[width=.55\textwidth]{colorBound2} \\
+  \includegraphics[width=.45\textwidth]{colorBound5} &   \includegraphics[width=.45\textwidth]{colorBound6} \\
 (a) Yellow Folder assignment  & (b) Blue trashcan assignment \\[6pt]
-	\includegraphics[width=.55\textwidth]{posBound} &   \includegraphics[width=.55\textwidth]{posBound2} \\
+	\includegraphics[width=.45\textwidth]{posBound5} &   \includegraphics[width=.45\textwidth]{posBound6} \\
 (c) Folder initial  & (d) Folder moved \\[6pt]
 \end{tabular}
 \caption{The colour and position boundary is displayed in these pictures}
@@ -830,7 +832,7 @@ The exponential part of the distribution is responsible for the angle signature 
 The pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. Fig.\ref{SLAM} shows an end result of a SLAM session using the pipeline as a sensor model. The yellow spheres represent the landmarks extracted during the SLAM session with every sphere representing the environment signature at the specific part of the map; noisy cloud readings were taken from a kinect sensor mounted on the robot.
 
 
-The compression that the method introduces is not directly observable. As the environment is being reduced from a cloud to a landmarks, the memory needs change from using pointclouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial. The memory requirements as a function of hyperparameter alpha are analyzed in section \ref{reqs}. 
+As the environment is being reduced from a cloud to a landmarks, the memory needs change from using pointclouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial. The memory requirements as a function of hyperparameter alpha are analyzed in section \ref{reqs}. 
 
 \subsection{Speed}
 
@@ -877,7 +879,7 @@ As was shown in the complexity session, the speed is dependent on the initial do
       1cm &1.11554	&18487&	2.69855	&0.0021291  \\
       \hline
 	 \end{tabular} 
-     \caption{Benchmark of the pipeline using different downsampling settings on two different machines.}
+     \caption{Benchmark of the pipeline using different downsampling settings on two different machines. The effect the downsampling has on the speed of the process is noticeable.}
 	 \label{bench}
 \end{center}
 \end{table}
@@ -914,6 +916,8 @@ As can be seen, the number of landmarks follows the logarithmic trend of the dis
 \newpage
 \section{Discussion}
 \label{sec:discussion}
+
+The discussion section investigates modelling choices like the data distribution, details regarding specific parts of the pipeline, as well as implications that are part of the theoritical background the pipeline is build on. Finally some limits of the pipeline in relation to the parameter values it uses are investigated.
 
  
 \subsection{Data distribution}
