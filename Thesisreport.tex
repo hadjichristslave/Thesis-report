@@ -185,15 +185,17 @@ An example of a \textit{probability mass function}(pmf) can be described as an o
 
 Formally, a probability density function with \textit{k} components lies on the \textit{(k-1)} dimensional probability simplex, which is a surface in $ \mathbb{R}^k $ denoted by $ \Delta_k $ and defined to be the set of vectors whose $ k $  components are non-negative and sum up to 1, that is:  $ \Delta_k = \{ q \in  \mathbb{R}^k | \sum_{i=1}^k q_i=1, q_i \geq 0\ for\ i=1,2,...k \} $ . $ \Delta_k $  is itself a $ ( k-1 ) $ dimensional object lying in the $k$ dimensional space. 
 
-\textbf{Dirichlet distribution:} Let $ Q = [Q_1,Q_2,...,Q_k  ] $ be a random pmf, that is, $ Q_i \geq 0 $ for $ i=1,2,..k $ and $ \sum_{i=1}^k Q_k=1 $. In addition, suppose that $ \alpha = [\alpha_1, \alpha_2, ..., \alpha_k ] $, with $ \alpha_i  \ge  0 $ for each i, and let $ \alpha_0 = \sum_{i=1}^k \alpha_i $. Then $ Q $ is said to have a Dirichlet distribution with parameter $\alpha$, which we denote by $ Q \sim  Dir(\alpha)$, if it has $f(q;a) = 0$ if q is not a pmf, and if q is a pmf then f has a probability density function of:
-
-$$ f(q; \alpha) = \frac{ \Gamma( \alpha_0)  }{ \prod_{i=1}^{k} \Gamma ( \alpha_i) } \prod_{i=1}^{k} q_i^{a_i -1}$$
-
+\textbf{Dirichlet distribution:} Let $ Q = [Q_1,Q_2,...,Q_k  ] $ be a random pmf, that is, $ Q_i \geq 0 $ for $ i=1,2,..k $ and $ \sum_{i=1}^k Q_k=1 $. In addition, suppose that $ \alpha = [\alpha_1, \alpha_2, ..., \alpha_k ] $, with $ \alpha_i  \ge  0 $ for each i, and $ \alpha_0 = \sum_{i=1}^k \alpha_i $. Then $ Q $ is said to have a Dirichlet distribution with parameter $\alpha$, which we denote by $ Q \sim  Dir(\alpha)$, if it has $f(q;a) = 0$ if q is not a pmf, and if q is a pmf then f has a probability density function of:
+\begin{equation}
+ f(q; \alpha) = \frac{ \Gamma( \alpha_0)  }{ \prod_{i=1}^{k} \Gamma ( \alpha_i) } \prod_{i=1}^{k} q_i^{a_i -1}
+\end{equation}
 The first two cumulants of the distribution are the following:
 
-$$ E[ \alpha_i]\ =\ \frac{ \alpha_i }{ \alpha_0 } $$
+\begin{equation}
+ E[ \alpha_i]\ =\ \frac{ \alpha_i }{ \alpha_0 } 
+\end{equation}
 
-\[
+\begin{equation}
  Cov(Q_i,Q_i) =
 \left\{
 	\begin{array}{ll}
@@ -201,8 +203,7 @@ $$ E[ \alpha_i]\ =\ \frac{ \alpha_i }{ \alpha_0 } $$
 		\frac{ - \alpha_i ( \alpha_0 - \alpha_i) }{ \alpha_0^2 ( \alpha_0+1)} & \mbox{if } i=j
 	\end{array}
 \right.
-\]
-
+\end{equation}
 Mean and variance formulas help understand how the changing the $ \alpha $ vector affects the behaviour of the distribution as to where the density is located as well as the variance in the pmfs sampled. The following graphs display the difference of behaviour on samples from Dirichlet distributions with different initial alpha values.
 
 
@@ -271,7 +272,9 @@ As the number of iterations of Step 2 approaches infinity, the proportions of ba
 
 The Dirichlet process was formally introduced by Thomas Ferguson in 1973 and serves as an extension to the Dirichlet distribution in modelling infinite sets of events. More specifically, in the introductory example, a six sided dice was described. If instead of a six sided dice a dice with an infinite amount of sides was used, the Dirichlet Distribution could not handle the infinite sample space. A Dirichlet process is a random process whose realizations are distributions over an arbitrary and possibly infinite sample space. To make the infinity assumption manageable, the Dirichlet process restricts the class of distributions it can handle to a specific set: Discrete distributions over the infinite sample space that can be written as an infinite sum of indicator functions which can be formally presented as:
 
-$$ P( B ) = \sum_{k=1}^\infty p_k \delta_{y_k}  $$
+\begin{equation}
+ P( B ) = \sum_{k=1}^\infty p_k \delta_{y_k} 
+ \end{equation}
 
 Where $p_k$ is the mixture weight and $\delta_{y_\kappa}$ is an indicator function such that $\delta_{y_\kappa} (B)=1\ if\ y_{\kappa}\ \in B$ and  $\delta_{y_\kappa}(B)=0$ otherwise. This formulation makes explicit the fact that realizations of a Dirichlet process are discrete distributions.
 
@@ -317,18 +320,20 @@ One important property of this procedure is that the nth customer has the same p
 
 Measures drawn from a Dirichlet distribution are discrete with probability 1. This property is made explicit by the stick breaking process. The construction is based on the independent sequences of i.i.d. random variables $(\pi'_k)_{k=1}^\infty$ and $ ( \phi_k)_{k=1}^\infty$  defined as follows:
 
-\ \ 
 
-\centerline{ $\pi'_k  | \alpha_0, G_0 \sim Beta(1, \alpha_0)$\ \ \ \ \ \ \ \ \ \ $  \phi_k | \alpha_0, G_0 \sim G_0 $} 
+  \begin{equation}
+\pi'_k  | \alpha_0, G_0 \sim Beta(1, \alpha_0)\ \ \ \ \ \ \ \ \ \   \phi_k | \alpha_0, G_0 \sim G_0
+\end{equation}
 
-\ \ 
+
 
 This can be defined as follows: Draw $\pi'_k$ as a Beta random variable. Draw $\phi_k$ from $G_0$ Now define a random measure G as:
 
-\ \
 
 \ \
-\centerline{ $\pi_k  | \pi'_k \sim \prod_{l=1}^{k-1}(1- \pi'_l   )$\ \ \ \ \ \ \ \ \ \   $  G = \sum_{k=1}^\infty \pi_k \delta_{\phi_k} $}
+\begin{equation}
+\pi_k  | \pi'_k \sim \prod_{l=1}^{k-1}(1- \pi'_l) \ \ \ \ \ \ \ \ \ \     G = \sum_{k=1}^\infty \pi_k \delta_{\phi_k} 
+\end{equation}
 \ \
 
 The first part of the stick will have length $\pi'_k$ and the conditional length given all the previous draws is given by $\pi_k$. Finally, the distribution created is given as an infinite sum of indicator functions given by $G$. Fig.\ref{crpGausBase} displays a Dirichlet Process's realization from a stick breaking process with a Gaussian base distribution. Different parameter values for strength parameter $\alpha$ directly affect the distributions output. As the alpha parameter is increased, the realization of the distribution will be closer to the base distribution. Furthermore, this picture also shows that the distribution created from the infinite sum of indicator function is a discrete distribution. Finally, when G is generated using a stick breaking process with a strength parameter $\alpha$, it can be written in shorthand as: $ G \sim GEM(\alpha) $
@@ -495,7 +500,10 @@ The general flow of operations that defines the basic communication between the 
 Each point $x$ in the cloud is represented as a tuple $x =(x^s, x^a, x^c ) $ where superscript $s$ represents spatial information, $a$ angle information, and $c$ color information. The method those features are extracted is explained in lines 3 and 4 of the general pipeline.
 
 The object model is a mixture of distributions over the data with each object being modeled as F($\theta_t^k$) where $\theta$ represents the parameters of object $k$ at time $t$. More specifically, each set \textbf{X} with $n$ datapoints at time $t$ is distributed as:
-$$ \textbf{X}_{t,n} \sim F(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) $$
+
+\begin{equation}
+    \textbf{X}_{t,n} \sim F(\theta_t^k) = Normal(x_{t,n}^s| \mu_t, \Sigma_t) Mult(x_{t,n}^c | \delta_t) Exp(x_{t,n}^a | \lambda_t) 
+\end{equation}
 
 
 
@@ -504,16 +512,18 @@ Where $Normal$ is a three dimensional normal distribution with mean $\mu$ and co
 
 Now that the object distribution is defined, the progression of the sufficient statistics at time $t$ given $t-1$ given by:
 
-
-\begin{center}
- $\theta_t^k | \theta_{t-1}^k \sim
-\begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
-G_0 & \mbox{if } k > K_{t-1}. \end{cases}$
-\end{center}
-
+   \begin{center}
+\begin{equation}
+    \theta_t^k | \theta_{t-1}^k \sim
+   \begin{cases} T (\theta_{t-1}^k) &\mbox{if } k \leq K_{t-1} \\
+   G_0 & \mbox{if } k > K_{t-1}. \end{cases}
+\end{equation}
+   \end{center}
 Where $T$ represents the transition kernel of the data given the previous state in the model. The case $ k > K_{t-1} $ represents the creation of a new cluster and $G_0$ is the base distribution of the DDP. In our case, the conjugate priors of the distributions of the data were chosen to model the base distribution. Therefore, $G_0$ is defined as:
 
-$$ G_0(\theta_t^k)  = NiW( \mu_t^k, \Sigma_t^k | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t^k | q_0) Gam( \lambda_t^k | \alpha_0, \beta_0) $$
+\begin{equation}
+ G_0(\theta_t^k)  = NiW( \mu_t^k, \Sigma_t^k | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t^k | q_0) Gam( \lambda_t^k | \alpha_0, \beta_0)
+ \end{equation}
 
 Where NiW is a Normal inverse Wishart distribution, Dir denotes a Dirichlet distribution, and Gam the Gamma distribution. $ \kappa_0, \mu_0, \nu_0, \Lambda_0, q_0,\alpha_0$ and $\beta_0$ are parameters of the model. The generative process for the Dependent Dirichlet mixture model can be written for each timestep $t$ as:
 
@@ -528,11 +538,15 @@ Where NiW is a Normal inverse Wishart distribution, Dir denotes a Dirichlet dist
 \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
 The transition kernel must satisfy\cite{caron}:
 
-$$ \int G_0(\theta_k) T(\theta_t^k | \theta_{t-1}^k) d\theta_{t-1}^k =  G_0(\theta_k) $$
+\begin{equation}
+\int G_0(\theta_k) T(\theta_t^k | \theta_{t-1}^k) d\theta_{t-1}^k =  G_0(\theta_k)
+\end{equation}
 
 The equation means that the invariant distribution must equal its base distribution. A typical way of meeting this restriction and forcing the sampler to converge to the original target density\cite{smc:theory} is to introduce a set of M auxiliary variables \textbf{z} such that:
 
-$$ P(\theta_t^k | \theta_{t-1}^k) =  \int P(\theta_t^k | z_{t}^k)   P(z_t^k| \theta_{t-1}^k) dz_t^k $$
+\begin{equation}
+    P(\theta_t^k | \theta_{t-1}^k) =  \int P(\theta_t^k | z_{t}^k)   P(z_t^k| \theta_{t-1}^k) dz_t^k
+\end{equation}
 
 The transition kernel of the model can now be sampled by using the following formula:
 
@@ -581,9 +595,10 @@ Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where 
 \end{algorithm}
 
 The process can be described as follows:
-For every time step $T$ for every particle $L$ and for every sample $S$, sample cluster indexes $c_t^{(l)}$ from the proposal distribution $Q_1$ and sufficient statistics from proposal distribution $Q_2$. After clusters assignments and sufficient statistics are sampled for all the samples and particles, perform the deletion step of the DDP and sample auxiliary variables with from the transition kernel of the elements that stayed in the clusters after the deletion steps. Compute the weights and perform the resampling. 
+For every time step $T$ for every particle $L$ and for every sample $S$, sample cluster indexes $c_t^{(l)}$ from the proposal distribution $Q_1$ and sufficient statistics from proposal distribution $Q_2$ as they are defined in section \ref{gibbsUpd}. After clusters assignments and sufficient statistics are sampled for all the samples and particles, perform the deletion step of the DDP and sample auxiliary variables with from the transition kernel of the elements that stayed in the clusters after the deletion steps. Compute the weights and perform the resampling. 
 
 \subsubsection{Gibbs updates}
+\label{gibbsUpd}
 The proposal distribution $Q_1$ is the probability of an assignment $c_{t,n}$ given cluster sizes, parameters and concentration $\alpha$. Formally $Q_1$ can be written as:
 \begin{equation} \label{Gibbs}
  Q_1(c_{t,n} | s_{t,n}^k, \theta_t^k, \alpha) \propto Cat( s_{t,n}^1,...s_{t,n}^K, \alpha ) \times
@@ -921,11 +936,11 @@ This is an expected behaviour given the unsupervised nature of the method and it
 
 \subsection{Clustering layer}
 
-An important oproperty regarding the behaviour of the pipeline exists with respect to the Dirichlet hyper-parameter $\alpha$. During the clustering, choosing a correct value for the hyper-parameter $\alpha$ is important. Having the sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no region specific information is propagated to the clusters output. Fig.[\ref{pip:limits}] shows the behaviour of the sampler for $\alpha$ values lower than 1. The clusters are color coded in the downsampled cloud, and it can be seen that only one cluster is output by the sampler.
+An important oproperty regarding the behaviour of the pipeline exists with respect to the Dirichlet hyper parameter $\alpha$. During the clustering, choosing a correct value for the hyper parameter $\alpha$ is important. Having the sampler run with a very low $\alpha$ can lead to the whole cloud being assigned a single cluster. Having every point in the cloud being part of the same cluster leads to a a significant amount of information loss as no region specific information is propagated to the clusters output. Fig.[\ref{pip:limits}] shows the behaviour of the sampler for $\alpha$ values lower than 1. The clusters are color coded in the downsampled cloud, and it can be seen that only one cluster is output by the sampler.
 
 On the other hand, having a very large $\alpha$ can lead to a very large amount of clusters being output by the sampler on every iteration of the method. That can lead to a non converging pipeline since every time a new landmark that does not fit the landmark database is output. This leads to many small clusters with each one containing a small number of points. Furthermore, having a high value in the hyperparameter leads to a slower sampling process since the complexity of the sampler is $O(TKLSN)$ where $K$ is the number of clusters. Fig.[\ref{pcl:kl}] displays the behavior of the sampler for very large values $\alpha$. The landmarks extracted from a single cloud are shown as spheres; it can be seen that the cloud is not visible and the majority of the points is considered a landmark of its own.
 
-Both behaviours of the sampler are expected and can be explained from the theory on Dirichlet processes. In this application the range of hyper parameter alpha will affect the precision of the sampler. If the domain of the problem requires a high amount of precision, the sampler can be run with a high hyper-parameter alpha. That way every point will become a cluster minimizing information loss with respect to the cloud. Having a small hyper-parameter alpha forces the sampler to group every point in the dataset together. That leads to a high amount of information and is not usefull in such scenarios. If the domain in which the sampler is run requires fast decision making, the sampler could be run with a smaller value of alpha. That way it would ouput a smaller amount of clusters and would consequently be faster. Since the information loss is larger compared to high-alpha runs, tweaking the value of alpha is a task usually left on the user and is related to  what the problem at hand is. Given that the problem of this project was online SLAM and speed was a requirement, small initial values of $\alpha$ in the range of 1-10 where used. 
+Both behaviours of the sampler are expected and can be explained from the theory on Dirichlet processes. In this application the range of hyper parameter alpha will affect the precision of the sampler. If the domain of the problem requires a high amount of precision, the sampler can be run with a high hyper parameter alpha. That way every point will become a cluster minimizing information loss with respect to the cloud. Having a small hyper parameter alpha forces the sampler to group every point in the dataset together. That leads to a high amount of information and is not usefull in such scenarios. If the domain in which the sampler is run requires fast decision making, the sampler could be run with a smaller value of alpha. That way it would ouput a smaller amount of clusters and would consequently be faster. Since the information loss is larger compared to high-alpha runs, tweaking the value of alpha is a task usually left on the user and is related to  what the problem at hand is. Given that the problem of this project was online SLAM and speed was a requirement, small initial values of $\alpha$ in the range of 1-10 where used. 
 
 
 
@@ -942,8 +957,7 @@ Both behaviours of the sampler are expected and can be explained from the theory
 
 The restrictions introduced by the decision layer are straightforward due to the approach of the decision layer. Taking very small distances in the distance threshold operation can lead to pipeline that continuously adds new landmarks to the database. 
 
-Such restrictions can be introduced to every part of the distances between distributions calculated in table \ref{distancesofclusters}. Taking a strict limit regarding the 
-Gaussian counterparts will lead to a decision layer that only matches neighbor clusters. The same way, taking a strict limit with respect to the categorical counterparts will lead to a decision making process that only matches elements with similar color signatures. Finally, taking a strict exponential limit will lead to a decision layer that only accepts clusters with very similar angle signatures. Of all those restrictions, the exponential part is the most susceptible to noise with an example of a very strict shown in Fig.\ref{pip:expo}.
+Such restrictions can be introduced to every part of the distances between distributions calculated in table \ref{distancesofclusters}. Taking a strict limit regarding the Gaussian counterparts will lead to a decision layer that only matches neighbor clusters. In the same way, taking a strict limit with respect to the categorical counterparts will lead to a decision making process that only matches elements with similar color signatures. Finally, taking a strict exponential limit will lead to a decision layer that only accepts clusters with very similar angle signatures. Of all the aforementioned restrictions, the exponential part is the most susceptible to noise with an example of a very strict shown in Fig.\ref{pip:expo}.
 
 It can be seen that limiting the landmark matching operation to very small exponential distances, can lead to a cloud where a single object can be decomposed to many entities. Spheres represent landmarks and it can be seen that the chair is being assigned to many landmarks using the pipeline with this setup. That means that very strict limits lead to a non converging pipeline with respect to the landmarks it outputs. The same also holds for the rest of the distances with the Gaussian and categorical parts being less susceptible to noise. 
 
@@ -969,7 +983,7 @@ On the other hand, having downsampling operations run with a very high threshold
 
 Fig.\ref{pip:downsample} displays the results of having the pipeline run with a high(a) and a low(b) threshold on the milk cartridge dataset that was introduced in Fig.\ref{pcl:clust}(a).
 The first figure displays a cloud that has a smaller amount of points removed during the downsampling operations. The sampler will then receive a cloud with a lot of the initial information still contained in its structure.
-The second figure displays a cloud that has keept a very small portion of the points the initial cloud carried. The information loss on clean datasets such as this is not significant but plays a significant role in noise-rich data such as data taken from kinect readings while mapping.
+The second figure displays a cloud that has keept a very small portion of the points the initial cloud carried.
 
 
 \begin{figure}[!ht]
@@ -994,6 +1008,8 @@ The memory requirements for every extra component will then increase with respec
 
 \subsection{Scalability}
 
+
+
 The repesentation introduced is very scalable with respect to its memory needs and the matching operations.
 The small amount of memory a single landmark singature requires(260Bytes) leads to a large amount. Fig.\ref{pip:reqs} displays the memory requirements in relation to the number of landmarks the environment has. It can be seen that even for a very large amount of landmarks the memory requirements are low. 
 
@@ -1004,22 +1020,37 @@ that way the landmark matching operations will be constant with respect to the n
 
 
 \begin{figure}[!ht]
-        \centering
-	    \includegraphics[width=.5\textwidth]{MemoryRequirements} \\
-	  Memory requirements with respect to the number of landmarks in the environment. \\[6pt]
-	  \label{pip:reqs}
-    \end{figure}
+  \centering
+  \includegraphics[width=.8\textwidth]{MemoryRequirements} \\
+  \caption{Memory requirements with respect to the number of landmarks in the environment.}
+  \label{pip:reqs}
+\end{figure}
 
 
 \newpage
 \section{Conclusion and future work}
 \label{sec:conclusion}
 
- In this thesis a novel cloud representation by using Bayesian methodologies was introduced. Representation signatures were presented first on simple datasets and were analyzed towards their results. The decision layer section displayed the expressive capabilities of the signature and how it distinguishes between different parts of the environment. In order to show the extend of the expressiveness of the method, the pipeline was then used as the sensor model of a landmark based EKF-SLAM algorithm. The pipeline was then tested towards its speed and compression.
+ In this thesis a novel cloud representation by using Bayesian methodologies was introduced.
+The pipeline that uses this representation was defined in the model definition section
 
- The discussion section investigated the implications of using a pipeline that is build on top of an unsupervised learning method. Furthermore the importance of hyper parameter $\alpha$ was analyzed as well as how should the $\alpha$ value be chosen with respect to the problem at hand. Having a correct $\alpha$ value is important since it can lead the pipeline to produce sub-optimal results.
- 
- There are a number of directions in which the pipeline can be improved. Choosing more complex environment signatures could increase the expresional strength of the sampler making it easier to represent with higher precision more complex structures. Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would change the result of the clustering. Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that lifelong mapping problems introduce. Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. 
+Representation signatures were presented first on simple datasets and were analyzed towards their results. 
+The decision layer section displayed the expressive capabilities of the signature and how it distinguishes between different parts of the environment.
+In order to show the extend of the expressiveness of the method, the pipeline was then used as the sensor model of a landmark based EKF-SLAM algorithm.
+The pipeline was then tested towards its speed on two different machines.
+Finally, the memory needs of a method mapping using this machine were used and it was shown that the number of landmarks follows the logarithmic trend of the underlying Dirichlet distribution until the environment saturates on landmarks.
+
+ The discussion section investigated the implications of using a pipeline that is build on top of an unsupervised learning method. 
+ The motivation behind using the data signature was investigated and how more demanding problems can lead to more complex environment signatures that better represent environment signatures.
+ Furthermore the importance of hyper parameter $\alpha$ was analyzed as well as how should the $\alpha$ value be chosen with respect to the problem at hand. Having a correct $\alpha$ value is important since it can lead the pipeline to produce sub-optimal results. 
+ With respect to the downsampling process, the discussion section analyzed how the tweaking of the downsampling parameters helps the user choose between speed and precision in the pipeline.
+ Finally, the scalability of the pipeline was presented along with examples of how the landmark matching operations could handle an increasing number of landmarks in an environment.
+
+There are a number of directions in which the pipeline can be improved.
+Choosing more complex environment signatures could increase the expresional strength of the sampler making it easier to represent with higher precision more complex structures.
+Furthermore, since the sampler clusters parts of environment, it would be interesting to see how a hierarchical approach would affect the result of the clustering.
+Hierarchical dependent Dirichlet processes would be interesting extensions since such tools would both have the ability to capture structures in a hierarchal way not just as chunks of the environment as well as be able to handle the dynamic component that lifelong mapping problems introduce. 
+Furthermore, having a more complex decision layer would also increase the robustness of the method making it able to handle more complex environment structures. 
 Finally, all those additions could help tackle lifelong mapping problem as a whole in a fully Bayesian manner.
 
 
