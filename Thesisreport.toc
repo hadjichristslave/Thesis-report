@@ -34,11 +34,11 @@
 \contentsline {subsection}{\numberline {5.3}EKF-SLAM experiments}{30}{subsection.5.3}
 \contentsline {subsection}{\numberline {5.4}Speed}{32}{subsection.5.4}
 \contentsline {subsection}{\numberline {5.5}Memory requirements}{33}{subsection.5.5}
-\contentsline {section}{\numberline {6}Discussion}{36}{section.6}
-\contentsline {subsection}{\numberline {6.1}Data distribution}{36}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Downsampling and Filtering}{36}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Unsupervised learning}{36}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}Clustering layer}{38}{subsection.6.4}
-\contentsline {subsection}{\numberline {6.5}Decision layer}{38}{subsection.6.5}
-\contentsline {subsection}{\numberline {6.6}Scalability}{39}{subsection.6.6}
-\contentsline {section}{\numberline {7}Conclusion and future work}{40}{section.7}
+\contentsline {section}{\numberline {6}Discussion}{35}{section.6}
+\contentsline {subsection}{\numberline {6.1}Data distribution}{35}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Downsampling and Filtering}{35}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Unsupervised learning}{35}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Clustering layer}{37}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}Decision layer}{37}{subsection.6.5}
+\contentsline {subsection}{\numberline {6.6}Scalability}{38}{subsection.6.6}
+\contentsline {section}{\numberline {7}Conclusion and future work}{39}{section.7}
