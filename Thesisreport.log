@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 10:02
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 10:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -789,7 +789,7 @@ Package pdftex.def Info: pics/rtabmap.png used on input line 915.
 File: pics/smalldownsamplinglimit.png Graphic file (type png)
 
 <use pics/smalldownsamplinglimit.png>
-Package pdftex.def Info: pics/smalldownsamplinglimit.png used on input line 959
+Package pdftex.def Info: pics/smalldownsamplinglimit.png used on input line 962
 .
 (pdftex.def)             Requested size: 171.99922pt x 96.73874pt.
 
@@ -797,7 +797,7 @@ Package pdftex.def Info: pics/smalldownsamplinglimit.png used on input line 959
 File: pics/largedownsamplinglimit.png Graphic file (type png)
 
 <use pics/largedownsamplinglimit.png>
-Package pdftex.def Info: pics/largedownsamplinglimit.png used on input line 959
+Package pdftex.def Info: pics/largedownsamplinglimit.png used on input line 962
 .
 (pdftex.def)             Requested size: 171.99922pt x 96.73874pt.
  [36]
@@ -805,16 +805,16 @@ Package pdftex.def Info: pics/largedownsamplinglimit.png used on input line 959
 File: pics/8boxesData.png Graphic file (type png)
 
 <use pics/8boxesData.png>
-Package pdftex.def Info: pics/8boxesData.png used on input line 978.
+Package pdftex.def Info: pics/8boxesData.png used on input line 981.
 (pdftex.def)             Requested size: 215.0023pt x 146.91254pt.
 
 <pics/8boxes.png, id=672, 1370.11874pt x 729.72626pt>
 File: pics/8boxes.png Graphic file (type png)
  <use pics/8boxes.png>
-Package pdftex.def Info: pics/8boxes.png used on input line 978.
+Package pdftex.def Info: pics/8boxes.png used on input line 981.
 (pdftex.def)             Requested size: 215.0023pt x 114.50937pt.
 
-Overfull \hbox (23.99998pt too wide) in paragraph at lines 977--981
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 980--984
 [][] 
  []
 
@@ -823,17 +823,17 @@ Overfull \hbox (23.99998pt too wide) in paragraph at lines 977--981
 File: pics/singlecluster.png Graphic file (type png)
 
 <use pics/singlecluster.png>
-Package pdftex.def Info: pics/singlecluster.png used on input line 998.
+Package pdftex.def Info: pics/singlecluster.png used on input line 1001.
 (pdftex.def)             Requested size: 215.0023pt x 152.2429pt.
 
 <pics/onlyclusters2.png, id=681, 1045.9075pt x 743.77875pt>
 File: pics/onlyclusters2.png Graphic file (type png)
 
 <use pics/onlyclusters2.png>
-Package pdftex.def Info: pics/onlyclusters2.png used on input line 998.
+Package pdftex.def Info: pics/onlyclusters2.png used on input line 1001.
 (pdftex.def)             Requested size: 215.0023pt x 152.89554pt.
 
-Overfull \hbox (23.99998pt too wide) in paragraph at lines 997--1001
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 1000--1004
 [][] 
  []
 
@@ -842,23 +842,23 @@ Overfull \hbox (23.99998pt too wide) in paragraph at lines 997--1001
 File: pics/monsterchair.png Graphic file (type png)
 
 <use pics/monsterchair.png>
-Package pdftex.def Info: pics/monsterchair.png used on input line 1017.
+Package pdftex.def Info: pics/monsterchair.png used on input line 1020.
 (pdftex.def)             Requested size: 215.0023pt x 185.51186pt.
  [39 <./pics/singlecluster.png> <./pics/onlyclusters2.png>] <pics/MemoryRequire
 ments.png, id=696, 1469.49pt x 782.925pt>
 File: pics/MemoryRequirements.png Graphic file (type png)
 
 <use pics/MemoryRequirements.png>
-Package pdftex.def Info: pics/MemoryRequirements.png used on input line 1034.
+Package pdftex.def Info: pics/MemoryRequirements.png used on input line 1037.
 (pdftex.def)             Requested size: 344.005pt x 183.28256pt.
  [40 <./pics/monsterchair.png (PNG copy)> <./pics/MemoryRequirements.png>] [41]
  [42] [43] [44]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1258.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1261.
  [45]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1258.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1261.
  (./Thesisreport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1258.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1258.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1261.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1261.
 
 Package rerunfilecheck Info: File `Thesisreport.out' has not changed.
 (rerunfilecheck)             Checksum: 9C4F7364B270AE26AC3FA3C4AE7BD97B;2929.
@@ -866,7 +866,10 @@ Package rerunfilecheck Info: File `Thesisreport.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1258.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1261.
  ) 
 Here is how much of TeX's memory you used:
  9950 strings out of 495032
@@ -875,7 +878,7 @@ Here is how much of TeX's memory you used:
  12446 multiletter control sequences out of 15000+600000
  78685 words of font info for 319 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,16n,43p,1423b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,16n,43p,1420b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/panos/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk>{/usr/sha
 re/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/font
@@ -888,7 +891,7 @@ sr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/palatino/uplri8a.pfb>
-Output written on Thesisreport.pdf (45 pages, 5134581 bytes).
+Output written on Thesisreport.pdf (45 pages, 5135009 bytes).
 PDF statistics:
  820 PDF objects out of 1000 (max. 8388607)
  198 named destinations out of 1000 (max. 500000)
