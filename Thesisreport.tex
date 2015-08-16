@@ -243,7 +243,7 @@ The stick breaking process can be thought of as follows: Imagine breaking a unit
 
 
 \end{compactitem}
-Since the last part of the stick will always be created so that we end up with a valid pmf, it is made explicit how the density of the Dirichlet is  a ${k-1}$ dimensional object lying in the $k$ dimensional space. Fig.\ref{stickR3} shows realizations of of the stick breaking process in $R^3$ and the similarities between the stick breaking sampling method and the probability simplex presented in the previous section are shown.
+Since the last part of the stick will always be created so that we end up with a valid pmf, it is made explicit how the density of the Dirichlet is  a ${k-1}$ dimensional object lying in the $k$ dimensional space. Fig.\ref{stickR3} shows realizations of the stick breaking process in $R^3$ and the similarities between the stick breaking sampling method and the probability simplex presented in Fig.\ref{firstplot} .
 
 \begin{figure}[!h]
     \centerline{\includegraphics[width=.55\textwidth]{stickBreaking}}
@@ -252,16 +252,17 @@ Since the last part of the stick will always be created so that we end up with a
 \end{figure}
 
 
-As expected, an initial $\alpha$ vector of [1,1,1] results in a uniform distribution of weights. Furthermore, as the weights in the $\alpha$ vector increase we have a more balanced distribution of weights as shown for the case of Fig.\ref{stickR3}([10,10,10]) and this this balance is shifted towards the higher weight when the initial vector is not symmetric as shown in Fig.\ref{stickR3}([2,5,15]). Finally, an initial vector of weights $<1$ results in single values dominating the simplex.
+As expected, an initial $\alpha$ vector of [1,1,1] results in a uniform distribution of weights. Furthermore, as the weights in the $\alpha$ vector increase we have a more balanced distribution of weights as shown in subfigure \ref{stickR3}([10,10,10]) and this balance is shifted towards the higher weight when the initial vector is not symmetric as shown in subfigure \ref{stickR3}([2,5,15]). Finally, an initial vector of weights $<1$ results in single values dominating the simplex.
 \subsubsection{Polya's Urn}
 
 The second method of sampling from a Dirichlet distribution is by using an urn model. In probability theory and statistics, an urn problem is an idealized mental exercise in which some objects of real interest are represented as colored balls in an urn or other container. More specifically, Polya's urn model depicts a random process whose realizations are realizations of a Dirichlet distribution.
+
 \begin{figure}[!h]
     \centerline{\includegraphics[width=0.5\textwidth]{urn}}
 	\caption{Polya's urn for $\alpha$=[2 1 1] }
 	\label{polysurn}
 \end{figure}
-Supose that you want to generate $Q \sim Dir( \alpha ) $.To start, we put $\alpha_i$ balls of colour i for $i=1,2,...,k$ in an urn, as shown in Fig.\ref{polysurn}. It must be noted that $\alpha$ can be fractional and even irrational(!). At each iteration we randomly draw a ball from the urn and put it back in the urn with an extra ball of the same colour as well. As we iterate this procedure an infinite amount of times, the proportions of the balls of each colour will converge to a pmf that is a realization of from the distribution $Dir(\alpha)$.
+Supose that you want to generate $Q \sim Dir( \alpha ) $.To start, we put $\alpha_i$ balls of colour i for $i=1,2,...,k$ in an urn, as shown in Fig.\ref{polysurn}. It must be noted that $\alpha$ can be fractional and even irrational(!). At each iteration we randomly draw a ball from the urn and put it back in the urn with an extra ball of the same colour as well. As we iterate this procedure an infinite amount of times, the proportions of the balls of each colour will converge to a pmf that is a realization from the distribution $Dir(\alpha)$.
 
 The procedure can be then described as follows:
 \begin{compactitem}
@@ -270,13 +271,9 @@ The procedure can be then described as follows:
 	\item \textbf{Step 2:} Update counter to n+1. Draw $ X_{n+1} | X_1, X_2, ..., X_n \sim \alpha / \alpha_{n0}$, where $\alpha_n = \alpha + \sum_{i=1}^n \delta_{X_i} $ and $ \alpha_{n0}$ is the sum of the entries of $\alpha_n$. Repeat step 2 an infinite number of times.
 \end{compactitem}
 
-As the number of iterations of Step 2 approaches infinity, the proportions of ball colors in the simplex will be a realization from the distribution $Dir(\alpha)$with an initial vector $\alpha$.
-
-
-
 \subsection{Dirichlet Process}
 
-The Dirichlet process was formally introduced by Thomas Ferguson in 1973 and serves as an extension to the Dirichlet distribution in modelling infinite sets of events. More specifically, in the introductory example, a six sided dice was described. If instead of a six sided dice a dice with an infinite amount of sides was used, the Dirichlet Distribution could not handle the infinity of the sample space. A Dirichlet process is a random process whose realizations are distributions over an arbitrary and possibly infinite sample space. To make the infinity assumption manageable, the Dirichlet process restricts the class of distributions it can handle to a specific set: Discrete distributions over the infinite sample space that can be written as an infinite sum of indicator functions which can be formally presented as:
+The Dirichlet process was formally introduced by Thomas Ferguson in 1973 and serves as an extension to the Dirichlet distribution in modelling infinite sets of events. More specifically, in the introductory example, a six sided dice was described. If instead of a six sided dice, one with an infinite amount of sides was used, the Dirichlet Distribution could not handle the infinity of the sample space. A Dirichlet process is a random process whose realizations are distributions over an arbitrary and possibly infinite sample space. To make the infinity assumption manageable, the Dirichlet process restricts the class of distributions it can handle to a specific set: Discrete distributions over the infinite sample space that can be written as an infinite sum of indicator functions which can be formally presented as:
 
 \begin{equation}
  P( B ) = \sum_{k=1}^\infty p_k \delta_{y_k} 
@@ -294,13 +291,13 @@ Formaly, the DP is defined as follows: Let $\mathcal{X}$ be a set and let $\math
 
 \subsection{Sampling methods}
 
-Two methods for sampling from a Dirichlet process will be presented: the Chinese Restaurant Process, the Stick breaking process.
+Two methods for sampling from a Dirichlet process will be presented: the Chinese Restaurant Process and the Stick breaking process.
 
 
 \subsubsection{Chinese restaurant process}
 \label{sec:crp}
 Polya's Urn and the stick breaking process are two names of the same process. The chinese restaurant process paradigm is similar to the Polya's urn and it is defined as follows:
-Imagine a restaurant with an infinite number of tables, each with infinite capacity. At time t=1, the first customer enters the restaurant and sits at table 1 with probability 1. For every next step, the customer can either
+Imagine a restaurant with an infinite number of tables, each with infinite capacity. At time t=1, the first customer enters the restaurant and sits at table 1 with probability 1. For every next step, the new customer entering the restaurant can either: 
 
 \begin{compactitem}
 	\item Choose an unoccupied table with probability $ \propto \frac{\alpha}{n-1+ \alpha }$
@@ -310,7 +307,7 @@ Imagine a restaurant with an infinite number of tables, each with infinite capac
 
 If you let an infinite number of customers enter the restaurant, the proportions of people sitting on each table will be a realization from a Dirichlet process with strength parameter $\alpha$.
 
-It can be seen that there is a positive reinforcement effect in this process, that is the more people already sitting at a table, the bigger the probability that more people will be sitting into that table in the future. It can also be proved that the number of tables grows $ \propto \alpha log(n)$ where n is the number of customers in the restaurant. Fig.\ref{CRP} visualizes the progression of the proccess as more people enter the restaurant. 
+It can be seen that there is a positive reinforcement effect in this process; that being that being the more people sitting at a table, the higher the chance that more people will be sitting into that table in the future. It can also be proved that the number of tables grows $ \propto \alpha log(n)$ where n is the number of customers in the restaurant. Fig.\ref{CRP} visualizes the progression of the proccess as more people enter the restaurant. 
 
 \begin{figure}[!h]
           \centerline{\includegraphics[width=.70\textwidth]{crp}}
@@ -346,7 +343,7 @@ The first part of the stick will have length $\pi'_k$ and the conditional length
 
 \begin{figure}[h!]
           \centerline{\includegraphics[width=0.91\textwidth]{stickBreakGaus}}
-	\caption{The stick breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha$ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are discrete distributions.}
+	\caption{The stick breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha$ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are in fact discrete distributions.}
 	\label{crpGausBase}
 \end{figure}
 
