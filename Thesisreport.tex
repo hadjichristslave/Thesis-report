@@ -82,7 +82,7 @@
 \begin{abstract}
 
 \noindent Long term mapping is the natural conceptual extension to existing mapping methods that are focused on mapping static environments.
-Existing methods do not address problems such as memory restrictions and changes that occur in map over time. Therefore, if tackled efficiently, the solution of lifelong mapping will be one important step towards fully autonomous robots
+Existing methods do not address problems such as memory restrictions and changes that occur in map over time. Therefore, if tackled efficiently, the solution of lifelong mapping will be one important step towards fully autonomous robots.
 As discussed in the literature, lifelong mapping consists of two major subproblems. A compression problem as the size of the map increases over time, and a dynamic environment problem as the environment changes over time. This thesis investigates the application of non-parametric Bayesian methods and how such tools can be used to tackle the compression subproblem of lifelong mapping methods. A novel method of pointcloud representation is introduced and its results are applied to an extended Kalman filter algorithm; both its compression strength and expressive power are analyzed, as are directions in which the method could be improved and extended to formulate a general solution to both the compression as well as the dynamic environment problem of lifelong mapping.
 
 
@@ -109,7 +109,7 @@ As discussed in the literature, lifelong mapping consists of two major subproble
 Simultaneous Localization And Mapping(SLAM) is one of the fundamental challenges of autonomous systems\cite{probRobs}. 
 In order for robots to be considered truly autonomous they have to be able to navigate through an unknown environment whilst mapping its structure.
 With solutions like EKF-SLAM\cite{ekf} and FastSlam\cite{SLAM} robots are currently capable of efficiently mapping unknown environments. 
-Methods that remove the restrictions of mapping \textit{static} for a \textit{finite} amount of time are the logical extension to existing methods.
+Methods that remove the restrictions of mapping \textit{static} environments for a \textit{finite} amount of time are the logical extension to existing methods.
 Lifelong learning in robots is not a new concept\cite{liflonglearning}; in recent years research with a specific focus on lifelong learning in mapping\cite{lifelongmaps} was introduced.  Lifelong mapping introduces the concept of robots that are capable of continuously mapping their environment with this leading to two basic extensions over existing methods: Mapping methods that are capable of handling the memory needs of a constantly increasing environment and robust enough to handle changes that occur in the environment over time. 
 
 The increasing need of memory resources brings in the spotlight one of the fundamental restrictions of autonomous systems, i.e. memory bottlenecks. In order to be able to map an unknown environment for an arbitrary amount of time, an arbitrary amount of memory is required. Since memory resources can only be finite, the need for methods that store environment information in a less costly manner rises. The problem then transposes to a compression problem with two basic questions: How can environment information be compressed? How do we minimize information loss due to the compression?
