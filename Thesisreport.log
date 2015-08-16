@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 09:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 09:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -727,138 +727,138 @@ Overfull \hbox (12.8pt too wide) in paragraph at lines 776--800
 
 [27] [28 <./pics/clusterings/initialData.png> <./pics/clusterings/colorcodedDis
 tributions.png>] [29 <./pics/clusterings/coloursSource.png> <./pics/clusterings
-/coloursCorrect.png>] <pics/colorBound5.png, id=611, 638.385pt x 771.88374pt>
+/coloursCorrect.png>] <pics/colorBound5.png, id=613, 638.385pt x 771.88374pt>
 File: pics/colorBound5.png Graphic file (type png)
 
 <use pics/colorBound5.png>
-Package pdftex.def Info: pics/colorBound5.png used on input line 814.
+Package pdftex.def Info: pics/colorBound5.png used on input line 817.
 (pdftex.def)             Requested size: 193.50076pt x 233.95784pt.
 
-<pics/colorBound6.png, id=612, 638.385pt x 771.88374pt>
+<pics/colorBound6.png, id=614, 638.385pt x 771.88374pt>
 File: pics/colorBound6.png Graphic file (type png)
 
 <use pics/colorBound6.png>
-Package pdftex.def Info: pics/colorBound6.png used on input line 814.
+Package pdftex.def Info: pics/colorBound6.png used on input line 817.
 (pdftex.def)             Requested size: 193.50076pt x 233.95784pt.
 
-<pics/posBound5.png, id=613, 877.2775pt x 894.34125pt>
+<pics/posBound5.png, id=615, 877.2775pt x 894.34125pt>
 File: pics/posBound5.png Graphic file (type png)
 
 <use pics/posBound5.png>
-Package pdftex.def Info: pics/posBound5.png used on input line 816.
+Package pdftex.def Info: pics/posBound5.png used on input line 819.
 (pdftex.def)             Requested size: 193.50076pt x 197.2606pt.
- <pics/posBound6.png, id=614, 875.27pt x 891.33pt>
+ <pics/posBound6.png, id=616, 875.27pt x 891.33pt>
 File: pics/posBound6.png Graphic file (type png)
 
 <use pics/posBound6.png>
-Package pdftex.def Info: pics/posBound6.png used on input line 816.
+Package pdftex.def Info: pics/posBound6.png used on input line 819.
 (pdftex.def)             Requested size: 193.50076pt x 197.04524pt.
 
-<pics/SLAM110landmarks2.png, id=619, 1051.93pt x 911.405pt>
+<pics/SLAM110landmarks2.png, id=621, 1051.93pt x 911.405pt>
 File: pics/SLAM110landmarks2.png Graphic file (type png)
 
 <use pics/SLAM110landmarks2.png>
-Package pdftex.def Info: pics/SLAM110landmarks2.png used on input line 832.
+Package pdftex.def Info: pics/SLAM110landmarks2.png used on input line 835.
 (pdftex.def)             Requested size: 215.0023pt x 186.26904pt.
  [30] [31 <./pics/colorBound5.png (PNG copy)> <./pics/colorBound6.png> <./pics/
 posBound5.png> <./pics/posBound6.png (PNG copy)>]
 
-Package array Warning: Column C is already defined on input line 849.
+Package array Warning: Column C is already defined on input line 852.
 
 
-Overfull \hbox (12.8pt too wide) in paragraph at lines 853--888
+Overfull \hbox (12.8pt too wide) in paragraph at lines 856--891
  [] 
  []
 
 [32 <./pics/SLAM110landmarks2.png>]
-<pics/memoryRequirements2.png, id=641, 1348.03625pt x 735.74875pt>
+<pics/memoryRequirements2.png, id=642, 1348.03625pt x 735.74875pt>
 File: pics/memoryRequirements2.png Graphic file (type png)
 
 <use pics/memoryRequirements2.png>
-Package pdftex.def Info: pics/memoryRequirements2.png used on input line 904.
+Package pdftex.def Info: pics/memoryRequirements2.png used on input line 907.
 (pdftex.def)             Requested size: 344.005pt x 187.75377pt.
 
-<pics/rtabmap.png, id=642, 1572.87625pt x 878.28125pt>
+<pics/rtabmap.png, id=643, 1572.87625pt x 878.28125pt>
 File: pics/rtabmap.png Graphic file (type png)
  <use pics/rtabmap.png>
-Package pdftex.def Info: pics/rtabmap.png used on input line 911.
+Package pdftex.def Info: pics/rtabmap.png used on input line 914.
 (pdftex.def)             Requested size: 344.005pt x 192.08334pt.
 
-[33] [34 <./pics/memoryRequirements2.png> <./pics/rtabmap.png>]
-<pics/smalldownsamplinglimit.png, id=657, 1606.0pt x 903.375pt>
+[33] [34 <./pics/memoryRequirements2.png> <./pics/rtabmap.png>] [35]
+<pics/smalldownsamplinglimit.png, id=663, 1606.0pt x 903.375pt>
 File: pics/smalldownsamplinglimit.png Graphic file (type png)
 
 <use pics/smalldownsamplinglimit.png>
-Package pdftex.def Info: pics/smalldownsamplinglimit.png used on input line 955
+Package pdftex.def Info: pics/smalldownsamplinglimit.png used on input line 958
 .
 (pdftex.def)             Requested size: 171.99922pt x 96.73874pt.
 
-<pics/largedownsamplinglimit.png, id=658, 1606.0pt x 903.375pt>
+<pics/largedownsamplinglimit.png, id=664, 1606.0pt x 903.375pt>
 File: pics/largedownsamplinglimit.png Graphic file (type png)
 
 <use pics/largedownsamplinglimit.png>
-Package pdftex.def Info: pics/largedownsamplinglimit.png used on input line 955
+Package pdftex.def Info: pics/largedownsamplinglimit.png used on input line 958
 .
 (pdftex.def)             Requested size: 171.99922pt x 96.73874pt.
- [35]
-<pics/8boxesData.png, id=665, 1023.825pt x 699.61375pt>
+ [36]
+<pics/8boxesData.png, id=671, 1023.825pt x 699.61375pt>
 File: pics/8boxesData.png Graphic file (type png)
 
 <use pics/8boxesData.png>
-Package pdftex.def Info: pics/8boxesData.png used on input line 974.
+Package pdftex.def Info: pics/8boxesData.png used on input line 977.
 (pdftex.def)             Requested size: 215.0023pt x 146.91254pt.
 
-<pics/8boxes.png, id=666, 1370.11874pt x 729.72626pt>
+<pics/8boxes.png, id=672, 1370.11874pt x 729.72626pt>
 File: pics/8boxes.png Graphic file (type png)
  <use pics/8boxes.png>
-Package pdftex.def Info: pics/8boxes.png used on input line 974.
+Package pdftex.def Info: pics/8boxes.png used on input line 977.
 (pdftex.def)             Requested size: 215.0023pt x 114.50937pt.
 
-Overfull \hbox (23.99998pt too wide) in paragraph at lines 973--977
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 976--980
 [][] 
  []
 
-[36 <./pics/smalldownsamplinglimit.png> <./pics/largedownsamplinglimit.png>]
-<pics/singlecluster.png, id=673, 1041.8925pt x 737.75626pt>
+[37 <./pics/smalldownsamplinglimit.png> <./pics/largedownsamplinglimit.png>]
+<pics/singlecluster.png, id=680, 1041.8925pt x 737.75626pt>
 File: pics/singlecluster.png Graphic file (type png)
 
 <use pics/singlecluster.png>
-Package pdftex.def Info: pics/singlecluster.png used on input line 994.
+Package pdftex.def Info: pics/singlecluster.png used on input line 997.
 (pdftex.def)             Requested size: 215.0023pt x 152.2429pt.
 
-<pics/onlyclusters2.png, id=674, 1045.9075pt x 743.77875pt>
+<pics/onlyclusters2.png, id=681, 1045.9075pt x 743.77875pt>
 File: pics/onlyclusters2.png Graphic file (type png)
 
 <use pics/onlyclusters2.png>
-Package pdftex.def Info: pics/onlyclusters2.png used on input line 994.
+Package pdftex.def Info: pics/onlyclusters2.png used on input line 997.
 (pdftex.def)             Requested size: 215.0023pt x 152.89554pt.
 
-Overfull \hbox (23.99998pt too wide) in paragraph at lines 993--997
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 996--1000
 [][] 
  []
 
-[37 <./pics/8boxesData.png> <./pics/8boxes.png>]
-<pics/monsterchair.png, id=682, 1053.9375pt x 909.3975pt>
+[38 <./pics/8boxesData.png> <./pics/8boxes.png>]
+<pics/monsterchair.png, id=688, 1053.9375pt x 909.3975pt>
 File: pics/monsterchair.png Graphic file (type png)
 
 <use pics/monsterchair.png>
-Package pdftex.def Info: pics/monsterchair.png used on input line 1013.
+Package pdftex.def Info: pics/monsterchair.png used on input line 1016.
 (pdftex.def)             Requested size: 215.0023pt x 185.51186pt.
- [38 <./pics/singlecluster.png> <./pics/onlyclusters2.png>] <pics/MemoryRequire
-ments.png, id=690, 1469.49pt x 782.925pt>
+ [39 <./pics/singlecluster.png> <./pics/onlyclusters2.png>] <pics/MemoryRequire
+ments.png, id=696, 1469.49pt x 782.925pt>
 File: pics/MemoryRequirements.png Graphic file (type png)
 
 <use pics/MemoryRequirements.png>
-Package pdftex.def Info: pics/MemoryRequirements.png used on input line 1030.
+Package pdftex.def Info: pics/MemoryRequirements.png used on input line 1033.
 (pdftex.def)             Requested size: 344.005pt x 183.28256pt.
- [39 <./pics/monsterchair.png (PNG copy)> <./pics/MemoryRequirements.png>] [40]
- [41] [42] [43]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1254.
- [44]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1254.
+ [40 <./pics/monsterchair.png (PNG copy)> <./pics/MemoryRequirements.png>] [41]
+ [42] [43] [44]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1257.
+ [45]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1257.
  (./Thesisreport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1254.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1254.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1257.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1257.
 
 Package rerunfilecheck Info: File `Thesisreport.out' has not changed.
 (rerunfilecheck)             Checksum: 9C4F7364B270AE26AC3FA3C4AE7BD97B;2929.
@@ -866,11 +866,14 @@ Package rerunfilecheck Info: File `Thesisreport.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1254.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1257.
  ) 
 Here is how much of TeX's memory you used:
- 9948 strings out of 495032
- 146426 string characters out of 6181719
+ 9950 strings out of 495032
+ 146440 string characters out of 6181719
  267872 words of memory out of 5000000
  12446 multiletter control sequences out of 15000+600000
  78685 words of font info for 319 fonts, out of 8000000 for 9000
@@ -888,9 +891,9 @@ sr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/palatino/uplri8a.pfb>
-Output written on Thesisreport.pdf (44 pages, 5133548 bytes).
+Output written on Thesisreport.pdf (45 pages, 5134544 bytes).
 PDF statistics:
- 814 PDF objects out of 1000 (max. 8388607)
- 196 named destinations out of 1000 (max. 500000)
+ 820 PDF objects out of 1000 (max. 8388607)
+ 198 named destinations out of 1000 (max. 500000)
  57355 words of extra memory for PDF output out of 61914 (max. 10000000)
 
