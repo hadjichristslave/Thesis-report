@@ -930,24 +930,24 @@ The discussion section investigates modelling choices like the data distribution
 \subsection{Data distribution}
 
 One of the fundamental properties of the model is the data distribution it infers. 
-The data distribution that was introduced and analyzed in \ref{data:dist} and is an extension to the distribution proposed in \cite{dependentDiri} for 2D video data.
+The data distribution that was introduced and analyzed in \ref{data:dist}  is an extension to the distribution proposed in \cite{dependentDiri} for 2D video data.
 The object distribution was chosen to be simple but also expressive enough to be able to handle the information the environment contains efficiently.
-If the problem definition was formulated differently, alternative features could be used and, consequently, a different environment distribution could be used instead.
-More complex environment distributions can lead to objects that capture the information of the environment contains with a higher amount of precision. 
+If the problem definition was formulated differently, alternative features could be used and, consequently, a different environment distribution could have been implemented instead.
+More complex environment distributions can lead to objects that capture the information the environment contains with a higher amount of precision. 
 The memory requirements for every extra component will then increase with respect to the number of parameters the conjugate distribution of the component requires. 
  
 \subsection{Downsampling and Filtering}
 
-The downsampling and filtering operations are important as they affect the speed of sampling and the quality of clusters the inferred on every iteration. 
+The downsampling and filtering operations are important as they affect the speed of sampling and the quality of clusters inferred on every iteration. 
 During those operations the cloud is transformed from raw kinect readings to the data the sampler expects.
 Downsampling is used to reduce the size of the cloud and increase the speed of the method since the complexity of the pipeline is directly related to cloud size as it was shown in section \ref{subsec:complexity}. Filtering operations calculate the features for every point of the downsampled cloud.
 Having the downsampling operations run on a low threshold will lead to a large cloud after the downsampling takes place. 
 Passing a large cloud in the sampler will result in a more precise environment representation, but also a slower clustering process.
-On the other hand, having downsampling operations run with a very high threshold will lead to a very small cloud that has a very small amount of information the inital cloud carried. This will lead to clustering results that do not contain significant information regarding the initial cloud.
+On the other hand, having downsampling operations run with a very high threshold will lead to a very small cloud that has a very small amount of information of the inital cloud. This will lead to clustering results that do not contain significant information regarding the initial cloud.
 
 Fig.\ref{pip:downsample} displays the results of having the pipeline run with a high(a) and a low(b) threshold on the milk cartridge dataset that was introduced in Fig.\ref{pcl:clust}(a).
 The first figure displays a cloud that has a small amount of points removed during the downsampling operations. The sampler will then receive a cloud with a lot of the initial information still contained in its structure.
-The second figure displays a cloud that has keept a very small portion of the points the initial cloud carried.
+The second figure displays a cloud that has kept a very small portion of the information the initial cloud carried.
 
 
 \begin{figure}[!ht]

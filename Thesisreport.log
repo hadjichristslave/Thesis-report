@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 13:26
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 13:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -822,8 +822,7 @@ Overfull \hbox (23.99998pt too wide) in paragraph at lines 973--977
 [][] 
  []
 
-[36 <./pics/smalldownsamplinglimit.png> <./pics/largedownsamplinglimit.png> <./
-pics/8boxesData.png> <./pics/8boxes.png>]
+[36 <./pics/smalldownsamplinglimit.png> <./pics/largedownsamplinglimit.png>]
 <pics/singlecluster.png, id=677, 1041.8925pt x 737.75626pt>
 File: pics/singlecluster.png Graphic file (type png)
 
@@ -842,21 +841,25 @@ Overfull \hbox (23.99998pt too wide) in paragraph at lines 991--995
 [][] 
  []
 
-[37] <pics/monsterchair.png, id=687, 1053.9375pt x 909.3975pt>
+[37 <./pics/8boxesData.png> <./pics/8boxes.png>]
+<pics/monsterchair.png, id=687, 1053.9375pt x 909.3975pt>
 File: pics/monsterchair.png Graphic file (type png)
 
 <use pics/monsterchair.png>
 Package pdftex.def Info: pics/monsterchair.png used on input line 1014.
 (pdftex.def)             Requested size: 215.0023pt x 185.51186pt.
-
-<pics/MemoryRequirements.png, id=689, 1469.49pt x 782.925pt>
+ [38 <./pics/singlecluster.png> <./pics/onlyclusters2.png>] <pics/MemoryRequire
+ments.png, id=695, 1469.49pt x 782.925pt>
 File: pics/MemoryRequirements.png Graphic file (type png)
 
 <use pics/MemoryRequirements.png>
 Package pdftex.def Info: pics/MemoryRequirements.png used on input line 1031.
 (pdftex.def)             Requested size: 344.005pt x 183.28256pt.
- [38 <./pics/singlecluster.png> <./pics/onlyclusters2.png>] [39 <./pics/monster
-chair.png (PNG copy)> <./pics/MemoryRequirements.png>] [40] [41] [42] [43]
+ [39 <./pics/monsterchair.png (PNG copy)> <./pics/MemoryRequirements.png>]
+Underfull \vbox (badness 1038) has occurred while \output is active []
+
+ [40]
+[41] [42] [43]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1255.
  [44]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 1255.
@@ -895,7 +898,7 @@ sr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/palatino/uplri8a.pfb>
-Output written on Thesisreport.pdf (44 pages, 5134539 bytes).
+Output written on Thesisreport.pdf (44 pages, 5134768 bytes).
 PDF statistics:
  818 PDF objects out of 1000 (max. 8388607)
  197 named destinations out of 1000 (max. 500000)
