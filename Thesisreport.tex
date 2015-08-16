@@ -748,8 +748,9 @@ In this section the algorithm will be tested against a simple dataset. That will
    \includegraphics[width=1\textwidth]{clusterings/colorcodedDistributions} \\
  (b) Downsampling and clustering results. Top left picture shows the cloud that is given as input\\
  to the sampler. Top right(Gaussian) and bottom(Exponential, Categorical) subfigures show the \\
- distributions infered from the data.  The colors in the distribution signatures display \\
- the different clusters infered.\end{tabular}
+ distributions infered from the data.  The different clusters signatures  are color coded. \\
+ Blue and red signatures override completely since they carry identical color signatures.\\
+ \end{tabular}
 \caption{Initial data along with the distributions infered }
   \label{pcl:clust}
 \end{figure}
@@ -802,7 +803,7 @@ The cloud was parsed from a cloud file(.pcd) and was given as input to the downs
 \end{table}
 
 
-After the structure is clustered, distances between the elements can be calculated. Table \ref{distancesofclusters} shows the distances between every cluster shown in Fig.\ref{pcl:clust}. It can be seen that the first two landmarks have small distances in their Gaussian counterparts since they represent nearby areas and objects in the cloud that are very far apart. The angular distances are represented by the ExpKL and ExpSqHell rows. The distinct colors of the milk boxes make the color signatures of the clusters distinct. The calculated distances are then given to the decision layer to caclulate if the clusters currently calculated are part of landmarks previously encountered.
+After the structure is clustered, distances between the elements can be calculated. Table \ref{distancesofclusters} shows the distances between every cluster shown in Fig.\ref{pcl:clust}. It can be seen that the first two landmarks have small distances in their Gaussian counterparts since they represent nearby areas and objects in the cloud that are very far apart. The angular distances are represented by the ExpKL and ExpSqHell rows. The distinct colors of the milk boxes are correctly captured in their respective cluster signatures. The calculated distances are then given to the decision layer to caclulate if the clusters currently calculated are part of landmarks previously encountered.
 An example with more complex color signatures is shown in Fig.\ref{pcl:clust2}. The clouds are now given a mixture of colors and this is passed to the color signature inferred on every cluster in Fig.\ref{pcl:clust2}. In this case the sampler outputs 2 clusters and the color signatures capture the more complex color signatures as well as the expected overlap correctly. 
 
 \subsection{Expressivensess and decision layer}
@@ -823,9 +824,9 @@ The decision boundary of the pipeline can be decomposed into three basic parts; 
   \label{pip:bounds}
 \end{figure}
 
-In the first picture of Fig.\ref{pip:bounds} the yellow folder along with some of its environment to the left are being assigned to landmark with id 7386(color coded black). The folder is then removed and a blue trashcan is put in its place. The folder and the trashcan are similar in size and due to that their Gaussian counterparts will not have large distances. Their main difference lies in the color signature they carry. Since the distance in their color is substantial, a new landmark with id 7412(color coded purple) is created to capture the change in the signature of the environment at that place of the map. The different landmark assigned to the cluster can be seen the second picture in Fig.\ref{pip:bounds}. The positional decision boundary is displayed in the third and fourth picture of Fig.\ref{pip:bounds}. In the initial position the yellow folder is assigned to the green landmark of the cloud. As the object is moved a different position in the cloud, it is being assigned to a different cluster. The reason the cluster is assigned to multiple landmarks is due to the fact that the folder is decomposed to several clusters and each one of them is being assigned to a different part of the cloud with respect to their position. This can be seen in the fourth picture of Fig.\ref{pip:bounds} where the bottom left of the folder is being assigned to the red cluster.
+In the first picture of Fig.\ref{pip:bounds} the yellow folder along with some of its environment to the left are being assigned to landmark with id 7386(color coded black). The folder is then removed and a blue trashcan is put in its place. The folder and the trashcan are similar in size; due to that their Gaussian counterparts will not have large distances. Their main difference lies in the color signature they carry. Since the distance in their color is substantial, a new landmark with id 7412(color coded purple) is created to capture the change in the signature of the environment at that place of the map. The different landmark assigned to the cluster can be seen the second picture in Fig.\ref{pip:bounds}. The positional decision boundary is displayed in the third and fourth picture of Fig.\ref{pip:bounds}. In the initial position the yellow folder is assigned to the green landmark of the cloud. As the object is moved a different position in the cloud, it is being assigned to a different cluster. The reason the cluster is assigned to multiple landmarks is due to the fact that the folder is decomposed to several clusters and each one of them is being assigned to a different part of the cloud with respect to their position. This can be seen in the fourth picture of Fig.\ref{pip:bounds} where the bottom left of the folder is being assigned to the red cluster.
 
-The exponential part of the distribution is responsible for the angle signature elements within a cluster have. Having a very strict limit in the angle distribution can lead to very small clusters and subsequently to a high amount of landmarks within the data. Practical evaluation has shown that using an angle limit that is close to the average distance between angle signatures produces stable results and reasonably sized landmarks in the cloud.
+The exponential part of the distribution is responsible for the angle signature elements within a cluster carry. Having a very strict limit in the angle distribution can lead to very small clusters and subsequently to a high amount of landmarks within the data. Practical evaluation has shown that using an angle limit that is close to the average distance between angle signatures produces stable results and reasonably sized landmarks in the cloud.
 
 \subsection{EKF-SLAM experiments}
 
@@ -838,7 +839,7 @@ The exponential part of the distribution is responsible for the angle signature 
 \end{figure}
 
 
-The pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was tested in its speed and memory requirements. Fig.\ref{SLAM} shows an end result of a SLAM session using the pipeline as a sensor model. The yellow spheres represent the landmarks extracted during the SLAM session with every sphere representing the environment signature at the specific part of the map; noisy cloud readings were taken from a kinect sensor mounted on the robot.
+The pipeline was used in real life scenarios as a sensor model in a Landmark based EKF SLAM algorithm and was further tested for its speed and memory requirements. Fig.\ref{SLAM} shows an end result of a SLAM session using the pipeline as a sensor model. The yellow spheres represent the landmarks extracted during the SLAM session with every sphere representing the environment signature at the specific part of the map; cloud readings were taken from a kinect sensor mounted on the robot.
 
 
 As the environment is being reduced from a cloud to a landmarks, the memory needs change from using pointclouds to using the landmarks extracted in those clouds. Since every landmark represents a signature of the environment at this particular point, the compression is done by reducing a high amount of points to that specific signature. The number of parameters needed to define the three distributions in the signature is all the information this method requires and hence the memory gains are substantial. The memory requirements as a function of hyperparameter alpha are analyzed in section \ref{reqs}. 
