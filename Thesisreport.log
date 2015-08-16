@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 10:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 11:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -818,47 +818,47 @@ Overfull \hbox (23.99998pt too wide) in paragraph at lines 979--983
 [][] 
  []
 
-[37 <./pics/smalldownsamplinglimit.png> <./pics/largedownsamplinglimit.png>]
-<pics/singlecluster.png, id=680, 1041.8925pt x 737.75626pt>
+[37 <./pics/smalldownsamplinglimit.png> <./pics/largedownsamplinglimit.png> <./
+pics/8boxesData.png> <./pics/8boxes.png>]
+<pics/singlecluster.png, id=681, 1041.8925pt x 737.75626pt>
 File: pics/singlecluster.png Graphic file (type png)
 
 <use pics/singlecluster.png>
-Package pdftex.def Info: pics/singlecluster.png used on input line 1000.
+Package pdftex.def Info: pics/singlecluster.png used on input line 998.
 (pdftex.def)             Requested size: 215.0023pt x 152.2429pt.
 
-<pics/onlyclusters2.png, id=681, 1045.9075pt x 743.77875pt>
+<pics/onlyclusters2.png, id=682, 1045.9075pt x 743.77875pt>
 File: pics/onlyclusters2.png Graphic file (type png)
 
 <use pics/onlyclusters2.png>
-Package pdftex.def Info: pics/onlyclusters2.png used on input line 1000.
+Package pdftex.def Info: pics/onlyclusters2.png used on input line 998.
 (pdftex.def)             Requested size: 215.0023pt x 152.89554pt.
 
-Overfull \hbox (23.99998pt too wide) in paragraph at lines 999--1003
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 997--1001
 [][] 
  []
 
-[38 <./pics/8boxesData.png> <./pics/8boxes.png>]
-<pics/monsterchair.png, id=688, 1053.9375pt x 909.3975pt>
+[38] <pics/monsterchair.png, id=690, 1053.9375pt x 909.3975pt>
 File: pics/monsterchair.png Graphic file (type png)
 
 <use pics/monsterchair.png>
-Package pdftex.def Info: pics/monsterchair.png used on input line 1019.
+Package pdftex.def Info: pics/monsterchair.png used on input line 1020.
 (pdftex.def)             Requested size: 215.0023pt x 185.51186pt.
- [39 <./pics/singlecluster.png> <./pics/onlyclusters2.png>] <pics/MemoryRequire
-ments.png, id=696, 1469.49pt x 782.925pt>
+
+<pics/MemoryRequirements.png, id=692, 1469.49pt x 782.925pt>
 File: pics/MemoryRequirements.png Graphic file (type png)
 
 <use pics/MemoryRequirements.png>
-Package pdftex.def Info: pics/MemoryRequirements.png used on input line 1036.
+Package pdftex.def Info: pics/MemoryRequirements.png used on input line 1037.
 (pdftex.def)             Requested size: 344.005pt x 183.28256pt.
- [40 <./pics/monsterchair.png (PNG copy)> <./pics/MemoryRequirements.png>] [41]
- [42] [43] [44]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1260.
+ [39 <./pics/singlecluster.png> <./pics/onlyclusters2.png>] [40 <./pics/monster
+chair.png (PNG copy)> <./pics/MemoryRequirements.png>] [41] [42] [43] [44]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1261.
  [45]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1260.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1261.
  (./Thesisreport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1260.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1260.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1261.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1261.
 
 Package rerunfilecheck Info: File `Thesisreport.out' has not changed.
 (rerunfilecheck)             Checksum: 9C4F7364B270AE26AC3FA3C4AE7BD97B;2929.
@@ -869,7 +869,7 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1260.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1261.
  ) 
 Here is how much of TeX's memory you used:
  9950 strings out of 495032
@@ -891,9 +891,9 @@ sr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/palatino/uplri8a.pfb>
-Output written on Thesisreport.pdf (45 pages, 5134961 bytes).
+Output written on Thesisreport.pdf (45 pages, 5135269 bytes).
 PDF statistics:
- 820 PDF objects out of 1000 (max. 8388607)
+ 821 PDF objects out of 1000 (max. 8388607)
  198 named destinations out of 1000 (max. 500000)
  57355 words of extra memory for PDF output out of 61914 (max. 10000000)
 
