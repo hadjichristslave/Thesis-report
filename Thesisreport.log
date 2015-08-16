@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 11:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  16 AUG 2015 12:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -590,7 +590,7 @@ Package pdftex.def Info: pics/crp.png used on input line 313.
 File: pics/stickBreakGaus.jpg Graphic file (type jpg)
 
 <use pics/stickBreakGaus.jpg>
-Package pdftex.def Info: pics/stickBreakGaus.jpg used on input line 345.
+Package pdftex.def Info: pics/stickBreakGaus.jpg used on input line 344.
 (pdftex.def)             Requested size: 391.30577pt x 185.86974pt.
 
 
@@ -599,10 +599,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <pics/1DGMM.png, id=455, 722.7pt x 433.62pt>
 File: pics/1DGMM.png Graphic file (type png)
  <use pics/1DGMM.png>
-Package pdftex.def Info: pics/1DGMM.png used on input line 353.
+Package pdftex.def Info: pics/1DGMM.png used on input line 352.
 (pdftex.def)             Requested size: 193.50076pt x 116.09972pt.
  [15]
-Overfull \hbox (1.66663pt too wide) detected at line 375
+Overfull \hbox (1.66663pt too wide) detected at line 374
 [] []
  []
 
@@ -610,7 +610,7 @@ Overfull \hbox (1.66663pt too wide) detected at line 375
 <pics/dpmm3.png, id=470, 147.55125pt x 380.42125pt>
 File: pics/dpmm3.png Graphic file (type png)
  <use pics/dpmm3.png>
-Package pdftex.def Info: pics/dpmm3.png used on input line 383.
+Package pdftex.def Info: pics/dpmm3.png used on input line 382.
 (pdftex.def)             Requested size: 73.09999pt x 188.46872pt.
 
 [17 <./pics/dpmm3.png>]
@@ -618,14 +618,14 @@ Package pdftex.def Info: pics/dpmm3.png used on input line 383.
 File: pics/generalPolya2.png Graphic file (type png)
 
 <use pics/generalPolya2.png>
-Package pdftex.def Info: pics/generalPolya2.png used on input line 406.
+Package pdftex.def Info: pics/generalPolya2.png used on input line 405.
 (pdftex.def)             Requested size: 227.90192pt x 233.63776pt.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 415.
+put line 414.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/pplx/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 419.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 418.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
@@ -640,22 +640,22 @@ Package microtype Info: Loading generic settings for font family
 File: pics/workflowGen.png Graphic file (type png)
 
 <use pics/workflowGen.png>
-Package pdftex.def Info: pics/workflowGen.png used on input line 444.
+Package pdftex.def Info: pics/workflowGen.png used on input line 443.
 (pdftex.def)             Requested size: 141.9023pt x 77.26357pt.
 
 <pics/workflowSpec.png, id=492, 773.89125pt x 489.83pt>
 File: pics/workflowSpec.png Graphic file (type png)
 
 <use pics/workflowSpec.png>
-Package pdftex.def Info: pics/workflowSpec.png used on input line 444.
+Package pdftex.def Info: pics/workflowSpec.png used on input line 443.
 (pdftex.def)             Requested size: 141.9023pt x 89.81738pt.
 
-Overfull \hbox (6.80267pt too wide) in paragraph at lines 443--447
+Overfull \hbox (6.80267pt too wide) in paragraph at lines 442--446
 [][] 
  []
 
 
-Underfull \hbox (badness 1092) in paragraph at lines 452--453
+Underfull \hbox (badness 1092) in paragraph at lines 451--452
 \T1/pplx/m/n/10 (+20) ba-sic com-mu-ni-ca-tion be-
  []
 
@@ -663,107 +663,241 @@ Underfull \hbox (badness 1092) in paragraph at lines 452--453
 <pics/Basic.png, id=510, 703.62875pt x 76.285pt>
 File: pics/Basic.png Graphic file (type png)
  <use pics/Basic.png>
-Package pdftex.def Info: pics/Basic.png used on input line 482.
+Package pdftex.def Info: pics/Basic.png used on input line 481.
 (pdftex.def)             Requested size: 430.00462pt x 46.61874pt.
 
 <pics/Kullback-Leibler.png, id=512, 808.01875pt x 337.26pt>
 File: pics/Kullback-Leibler.png Graphic file (type png)
 
 <use pics/Kullback-Leibler.png>
-Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 498.
+Package pdftex.def Info: pics/Kullback-Leibler.png used on input line 497.
 (pdftex.def)             Requested size: 150.50424pt x 62.8141pt.
  [20 <./pics/Basic.png> <./pics/Kullback-Leibler.png (PNG copy)>] [21] [22] [23
-] [24] [25] [26]
-<pics/clusterings/initialData.png, id=588, 1606.0pt x 903.375pt>
+]
+
+LaTeX Warning: Reference `distMes' on page 24 undefined on input line 673.
+
+[24] [25] [26]
+<pics/clusterings/initialData.png, id=587, 1606.0pt x 903.375pt>
 File: pics/clusterings/initialData.png Graphic file (type png)
 
 <use pics/clusterings/initialData.png>
 Package pdftex.def Info: pics/clusterings/initialData.png used on input line 74
-3.
+0.
 (pdftex.def)             Requested size: 430.00462pt x 241.87442pt.
 
-<pics/clusterings/colorcodedDistributions.png, id=589, 1606.0pt x 903.375pt>
+<pics/clusterings/colorcodedDistributions.png, id=588, 1606.0pt x 903.375pt>
 File: pics/clusterings/colorcodedDistributions.png Graphic file (type png)
 
 <use pics/clusterings/colorcodedDistributions.png>
 Package pdftex.def Info: pics/clusterings/colorcodedDistributions.png used on i
-nput line 745.
+nput line 742.
 (pdftex.def)             Requested size: 430.00462pt x 241.87442pt.
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 742--751
+Overfull \hbox (12.0pt too wide) in paragraph at lines 739--748
 [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 18.89745pt on input line 753.
+LaTeX Warning: Float too large for page by 18.89745pt on input line 750.
 
-<pics/clusterings/coloursSource.png, id=590, 1606.0pt x 903.375pt>
+<pics/clusterings/coloursSource.png, id=589, 1606.0pt x 903.375pt>
 File: pics/clusterings/coloursSource.png Graphic file (type png)
 
 <use pics/clusterings/coloursSource.png>
 Package pdftex.def Info: pics/clusterings/coloursSource.png used on input line 
-758.
+755.
 (pdftex.def)             Requested size: 430.00462pt x 241.87442pt.
 
-<pics/clusterings/coloursCorrect.png, id=591, 1606.0pt x 903.375pt>
+<pics/clusterings/coloursCorrect.png, id=590, 1606.0pt x 903.375pt>
 File: pics/clusterings/coloursCorrect.png Graphic file (type png)
 
 <use pics/clusterings/coloursCorrect.png>
 Package pdftex.def Info: pics/clusterings/coloursCorrect.png used on input line
- 761.
+ 758.
 (pdftex.def)             Requested size: 430.00462pt x 241.87442pt.
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 757--766
+Overfull \hbox (12.0pt too wide) in paragraph at lines 754--763
 [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 31.49747pt on input line 768.
+LaTeX Warning: Float too large for page by 31.49747pt on input line 765.
 
 
-Overfull \hbox (12.8pt too wide) in paragraph at lines 774--798
+Overfull \hbox (12.8pt too wide) in paragraph at lines 771--795
  [] 
  []
 
 [27] [28 <./pics/clusterings/initialData.png> <./pics/clusterings/colorcodedDis
 tributions.png>] [29 <./pics/clusterings/coloursSource.png> <./pics/clusterings
-/coloursCorrect.png>] <pics/colorBound5.png, id=614, 638.385pt x 771.88374pt>
+/coloursCorrect.png>] <pics/colorBound5.png, id=613, 638.385pt x 771.88374pt>
 File: pics/colorBound5.png Graphic file (type png)
 
 <use pics/colorBound5.png>
-Package pdftex.def Info: pics/colorBound5.png used on input line 815.
+Package pdftex.def Info: pics/colorBound5.png used on input line 812.
 (pdftex.def)             Requested size: 193.50076pt x 233.95784pt.
 
-<pics/colorBound6.png, id=615, 638.385pt x 771.88374pt>
+<pics/colorBound6.png, id=614, 638.385pt x 771.88374pt>
 File: pics/colorBound6.png Graphic file (type png)
 
 <use pics/colorBound6.png>
-Package pdftex.def Info: pics/colorBound6.png used on input line 815.
+Package pdftex.def Info: pics/colorBound6.png used on input line 812.
 (pdftex.def)             Requested size: 193.50076pt x 233.95784pt.
 
-<pics/posBound5.png, id=616, 877.2775pt x 894.34125pt>
+<pics/posBound5.png, id=615, 877.2775pt x 894.34125pt>
 File: pics/posBound5.png Graphic file (type png)
 
 <use pics/posBound5.png>
-Package pdftex.def Info: pics/posBound5.png used on input line 817.
+Package pdftex.def Info: pics/posBound5.png used on input line 814.
 (pdftex.def)             Requested size: 193.50076pt x 197.2606pt.
- <pics/posBound6.png, id=617, 875.27pt x 891.33pt>
+ <pics/posBound6.png, id=616, 875.27pt x 891.33pt>
 File: pics/posBound6.png Graphic file (type png)
 
 <use pics/posBound6.png>
-Package pdftex.def Info: pics/posBound6.png used on input line 817.
+Package pdftex.def Info: pics/posBound6.png used on input line 814.
 (pdftex.def)             Requested size: 193.50076pt x 197.04524pt.
 
-<pics/SLAM110landmarks2.png, id=622, 1051.93pt x 911.405pt>
+<pics/SLAM110landmarks2.png, id=621, 1051.93pt x 911.405pt>
 File: pics/SLAM110landmarks2.png Graphic file (type png)
 
 <use pics/SLAM110landmarks2.png>
-Package pdftex.def Info: pics/SLAM110landmarks2.png used on input line 833.
+Package pdftex.def Info: pics/SLAM110landmarks2.png used on input line 830.
 (pdftex.def)             Requested size: 215.0023pt x 186.26904pt.
  [30] [31 <./pics/colorBound5.png (PNG copy)> <./pics/colorBound6.png> <./pics/
 posBound5.png> <./pics/posBound6.png (PNG copy)>]
 
-Package array Warning: Column C is already defined on input line 850.
+Package array Warning: Column C is already defined on input line 847.
 
 
-Overfu
+Overfull \hbox (12.8pt too wide) in paragraph at lines 851--886
+ [] 
+ []
+
+[32 <./pics/SLAM110landmarks2.png>]
+<pics/memoryRequirements2.png, id=643, 1348.03625pt x 735.74875pt>
+File: pics/memoryRequirements2.png Graphic file (type png)
+
+<use pics/memoryRequirements2.png>
+Package pdftex.def Info: pics/memoryRequirements2.png used on input line 902.
+(pdftex.def)             Requested size: 344.005pt x 187.75377pt.
+
+<pics/rtabmap.png, id=644, 1572.87625pt x 878.28125pt>
+File: pics/rtabmap.png Graphic file (type png)
+ <use pics/rtabmap.png>
+Package pdftex.def Info: pics/rtabmap.png used on input line 909.
+(pdftex.def)             Requested size: 344.005pt x 192.08334pt.
+
+[33] [34 <./pics/memoryRequirements2.png> <./pics/rtabmap.png>] [35]
+<pics/smalldownsamplinglimit.png, id=663, 1606.0pt x 903.375pt>
+File: pics/smalldownsamplinglimit.png Graphic file (type png)
+
+<use pics/smalldownsamplinglimit.png>
+Package pdftex.def Info: pics/smalldownsamplinglimit.png used on input line 955
+.
+(pdftex.def)             Requested size: 171.99922pt x 96.73874pt.
+
+<pics/largedownsamplinglimit.png, id=664, 1606.0pt x 903.375pt>
+File: pics/largedownsamplinglimit.png Graphic file (type png)
+
+<use pics/largedownsamplinglimit.png>
+Package pdftex.def Info: pics/largedownsamplinglimit.png used on input line 955
+.
+(pdftex.def)             Requested size: 171.99922pt x 96.73874pt.
+ [36]
+<pics/8boxesData.png, id=671, 1023.825pt x 699.61375pt>
+File: pics/8boxesData.png Graphic file (type png)
+
+<use pics/8boxesData.png>
+Package pdftex.def Info: pics/8boxesData.png used on input line 974.
+(pdftex.def)             Requested size: 215.0023pt x 146.91254pt.
+
+<pics/8boxes.png, id=672, 1370.11874pt x 729.72626pt>
+File: pics/8boxes.png Graphic file (type png)
+ <use pics/8boxes.png>
+Package pdftex.def Info: pics/8boxes.png used on input line 974.
+(pdftex.def)             Requested size: 215.0023pt x 114.50937pt.
+
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 973--977
+[][] 
+ []
+
+[37 <./pics/smalldownsamplinglimit.png> <./pics/largedownsamplinglimit.png> <./
+pics/8boxesData.png> <./pics/8boxes.png>]
+<pics/singlecluster.png, id=681, 1041.8925pt x 737.75626pt>
+File: pics/singlecluster.png Graphic file (type png)
+
+<use pics/singlecluster.png>
+Package pdftex.def Info: pics/singlecluster.png used on input line 992.
+(pdftex.def)             Requested size: 215.0023pt x 152.2429pt.
+
+<pics/onlyclusters2.png, id=682, 1045.9075pt x 743.77875pt>
+File: pics/onlyclusters2.png Graphic file (type png)
+
+<use pics/onlyclusters2.png>
+Package pdftex.def Info: pics/onlyclusters2.png used on input line 992.
+(pdftex.def)             Requested size: 215.0023pt x 152.89554pt.
+
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 991--995
+[][] 
+ []
+
+[38] <pics/monsterchair.png, id=690, 1053.9375pt x 909.3975pt>
+File: pics/monsterchair.png Graphic file (type png)
+
+<use pics/monsterchair.png>
+Package pdftex.def Info: pics/monsterchair.png used on input line 1014.
+(pdftex.def)             Requested size: 215.0023pt x 185.51186pt.
+
+<pics/MemoryRequirements.png, id=692, 1469.49pt x 782.925pt>
+File: pics/MemoryRequirements.png Graphic file (type png)
+
+<use pics/MemoryRequirements.png>
+Package pdftex.def Info: pics/MemoryRequirements.png used on input line 1031.
+(pdftex.def)             Requested size: 344.005pt x 183.28256pt.
+ [39 <./pics/singlecluster.png> <./pics/onlyclusters2.png>] [40 <./pics/monster
+chair.png (PNG copy)> <./pics/MemoryRequirements.png>] [41] [42] [43] [44]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1255.
+ [45]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1255.
+ (./Thesisreport.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1255.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1255.
+
+Package rerunfilecheck Info: File `Thesisreport.out' has not changed.
+(rerunfilecheck)             Checksum: 9C4F7364B270AE26AC3FA3C4AE7BD97B;2929.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1255.
+ ) 
+Here is how much of TeX's memory you used:
+ 9939 strings out of 495032
+ 146348 string characters out of 6181719
+ 267877 words of memory out of 5000000
+ 12447 multiletter control sequences out of 15000+600000
+ 78075 words of font info for 310 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 36i,16n,43p,1420b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/panos/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk>{/usr/sha
+re/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/math
+pazo/fplmbb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplm
+r.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/urw/palatino/uplri8a.pfb>
+Output written on Thesisreport.pdf (45 pages, 5135326 bytes).
+PDF statistics:
+ 821 PDF objects out of 1000 (max. 8388607)
+ 198 named destinations out of 1000 (max. 500000)
+ 57355 words of extra memory for PDF output out of 61914 (max. 10000000)
+

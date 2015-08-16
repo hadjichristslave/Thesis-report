@@ -307,7 +307,7 @@ Imagine a restaurant with an infinite number of tables, each with infinite capac
 
 If you let an infinite number of customers enter the restaurant, the proportions of people sitting on each table will be a realization from a Dirichlet process with strength parameter $\alpha$.
 
-It can be seen that there is a positive reinforcement effect in this process; that being that being the more people sitting at a table, the higher the chance that more people will be sitting into that table in the future. It can also be proved that the number of tables grows $ \propto \alpha log(n)$ where n is the number of customers in the restaurant. Fig.\ref{CRP} visualizes the progression of the proccess as more people enter the restaurant. 
+It can be seen that there is a positive reinforcement effect in this process; that being that the more people sitting at a table, the higher the chance that more people will be sitting into that table in the future. It can also be proved that the number of tables grows $ \propto \alpha log(n)$ where n is the number of customers in the restaurant. Fig.\ref{CRP} visualizes the progression of the proccess as more people enter the restaurant. 
 
 \begin{figure}[!h]
           \centerline{\includegraphics[width=.70\textwidth]{crp}}
@@ -316,8 +316,7 @@ It can be seen that there is a positive reinforcement effect in this process; th
 \end{figure}
 
 
-One important property of this procedure is that the nth customer has the same probability to sit on the same table as any other customer of the table. That is the number of people seating on table 1 is on average the same as the number of people seating on table $k$! This very interesting and counter intuitive(at first) property of the exchangeable data and understanding this is crucial on building intuition regarding the behaviour of exchangeable random variables.
-
+One important property of this procedure is that the nth customer has the same probability to sit on the same table as any other customer of the table. That meaning that the number of people sitting on table 1 is on average the same as the number of people seating on table $k$! This is a very interesting and counter intuitive(at first) property of the exchangeable data and understanding it is crucial on building intuition regarding the behaviour of exchangeable random variables.
 
 \subsubsection{Stick breaking}
 
@@ -449,7 +448,7 @@ The model definition section is structured as follows: An introduction to the ge
 \end{wrapfigure}
 
 
-The general flow of operations that defines the basic communication between the pipeline and the EKF module is presented in Fig.~\ref{pipeline}. During step 1 the EKF-SLAM module requests new observation readings given the cloud currently read by the sensors and the position of the robot. The pipeline takes the cloud readings, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that where observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline} shows a more detailed view of the computations of the pipeline. The algorithmic procedure shown in Algorithm~\ref{euclid} analytically.
+The general flow of operations that defines the basic communication between the pipeline and the EKF module is presented in Fig.~\ref{pipeline}. During step 1 the EKF-SLAM module requests new observation readings given the current cloud readings and the position of the robot. The pipeline takes those cloud readings, extracts clusters and returns the landmarks currently being observed while taking into account landmarks that were observed in the past. Landmarks and clusters are identical concepts representing a different layer in the pipeline. More specifically, clusters are output from the sampler and are given as an input of landmarks to the EKF module. Fig.~\ref{pipeline} shows a more detailed view of the computations of the pipeline. The algorithmic procedure is shown in Algorithm~\ref{euclid} analytically.
 
 
 \begin{algorithm}
@@ -475,7 +474,7 @@ The general flow of operations that defines the basic communication between the 
 
 \textbf{Method input:} The method takes as input a pointcloud(pC) as it is currently being read by the kinect sensor.
 
-\textbf{Lines 3-4:} The downsampling and feature extraction are done through the pcl\cite{pcl} library. A voxel grid is used to reduce the dataset size. A leaf size of approximately 3cm produces a good trade-off between precision and speed. The object representation used approach is similar to\cite{objectpointSLAM}. Instead of using the CSHOT descriptor, fpfh\cite{fpfh} histogram is used instead. A fast point feature histogram(fpfh) represents an angular signature between a point and its neighbors. After the fpfh estimation an angular signature of information between a point and its neighbors is acquired. The color signature of the cloud is being encoded with an approach similar to ~\cite{smcddp}. The color spectrum is discretized and what is extracted is the count of different color signatures between a point and its k nearest neighbors. Finally the position of every point is also given as input to the algorithm. The pipeline is presented in figure Fig.~\ref{pcl:mod}. The pipeline outputs a vector of $ \textbf{x} = (x_s, x_c, x_a) $  where $s$ represents a vector of space information, $c$ a vector of colour information and $a$ angular information. 
+\textbf{Lines 3-4:} The downsampling and feature extraction are done through the pcl\cite{pcl} library. A voxel grid is used to reduce the dataset size. A leaf size of approximately 3cm produces a good trade-off between precision and speed. The object representation approach used is similar to\cite{objectpointSLAM}. Instead of using the CSHOT descriptor, fast point feature histogram(fpfh)\cite{fpfh} histogram is used instead. A fpfh represents an angular signature between a point and its neighbors. After the fpfh estimation an angular signature of information between a point and its neighbors is acquired. The color signature of the cloud is being encoded with an approach similar to\cite{smcddp}. The color spectrum is discretized and what is extracted is the count of different color signatures between a point and its k nearest neighbors. Finally the position of every point is also given as input to the algorithm. The filtering pipeline is presented in figure Fig.~\ref{pcl:mod}. The pipeline outputs a vector of $ \textbf{x} = (x_s, x_c, x_a) $  where $s$ represents a vector of space information, $c$ a vector of colour information and $a$ angular information. 
 
 \begin{figure}[ht!]
   \centering
@@ -484,9 +483,9 @@ The general flow of operations that defines the basic communication between the 
   \label{pcl:mod}
 \end{figure}
 
-\textbf{Lines 5:} The input of the method is the feature vector for every data point which is calculated in the previous steps. The clustering method is presented in section \ref{smcsampler}. 
+\textbf{Lines 4:} The input of the method is the feature vector for every data point which is calculated in the previous steps. The clustering method is presented in section \ref{smcsampler}. 
 
-\textbf{Lines 6-12:} The correspondence of previously seen landmarks to current observations is computed here. Since the landmarks are distributions, statistical distances can be taken to perform the matching. For every observation, its distances with all the stored landmarks are calculated. calcBestSim returns the cluster with the highest similarity that exists in the database. If the similarity is high enough, correspondence is performed and the landmark is added to the landmark list to be send for update in the EKF, otherwise a new landmark is added and its ID is then added to the list.
+\textbf{Lines 6-12:} The correspondence of previously seen landmarks to current observations is computed here. Since the landmarks are distributions, statistical distances can be taken to perform the matching. For every observation, its distances with all the stored landmarks are calculated. calcBestSim returns the cluster with the highest similarity that exists in the database. If the similarity is high enough, correspondence is performed and the landmark is added to the landmark list to be sent for update in the EKF; otherwise a new landmark is added to the list.
 
 \textbf{Lines 13:} The algorithm returns the list of the landmarks the robot currently encounters.
 
@@ -511,9 +510,9 @@ The object model is a mixture of distributions over the data with each object be
 
 
 
-Where $Normal$ is a three dimensional normal distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; $Mult$ is a Categorical multinomial distribution with parameter vector $\delta$ representing the color distribution and $Exp$ is an exponential with rate $\lambda$ representing the angle distribution of the data within the cluster. This signature introduces a novel environment abstraction and the purpose of choosing such signature was to have both simple but also informative environment signatures captured by the model. The exponential distribution specifically  was chosen to model angular information after empiric evaluation showed that it would provide a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in Fig.~\ref{pcl:kl} and the exponential trend of data distances is trivial to distinguish.
+Where $Normal$ is a three dimensional normal distribution with mean $\mu$ and covariance $\Sigma$ representing the positional distribution of the data; $Mult$ is a categorical multinomial distribution with parameter vector $\delta$ representing the color distribution and $Exp$ is an exponential with rate $\lambda$ representing the angle distribution of the data within the cluster. This signature introduces a novel environment abstraction and the purpose of choosing such signature was to have both simple but also informative environment signatures captured by the model. The exponential distribution was specifically chosen to model angular information after empiric evaluation showed that it would provide a good fit for the angle signature distribution of the data. A typical angle signature distribution is shown in Fig.~\ref{pcl:kl} and the exponential trend of data distances is trivial to distinguish.
 
-Now that the object distribution is defined, the progression of the sufficient statistics at time $t$ given $t-1$ given by:
+Now that the object distribution is defined, the progression of the sufficient statistics at time $t$ given $t-1$ is given by:
 
    \begin{center}
 \begin{equation}
@@ -522,7 +521,7 @@ Now that the object distribution is defined, the progression of the sufficient s
    G_0 & \mbox{if } k > K_{t-1}. \end{cases}
 \end{equation}
    \end{center}
-Where $T$ represents the transition kernel of the data given the previous state in the model. The case $ k > K_{t-1} $ represents the creation of a new cluster and $G_0$ is the base distribution of the DDP. In our case, the conjugate priors of the distributions of the data were chosen to model the base distribution. Therefore, $G_0$ is defined as:
+Where $T$ represents the transition kernel of the data given the previous state in the model. The case $ k > K_{t-1} $ represents the creation of a new cluster and $G_0$ is the base distribution of the Dependent Dirichlet process. In our case, the conjugate priors of the distributions of the data were chosen to model the base distribution. Therefore, $G_0$ is defined as:
 
 \begin{equation}
  G_0(\theta_t^k)  = NiW( \mu_t^k, \Sigma_t^k | \kappa_0, \mu_0, \nu_0, \Lambda_0 ) Dir(\delta_t^k | q_0) Gam( \lambda_t^k | \alpha_0, \beta_0)
@@ -572,7 +571,7 @@ where $\mu_t, \Sigma_t, \delta_t,  \lambda_t$  are posterior parameters given th
 
 \subsection{Sequential monte carlo sampler}
 \label{smcsampler}
-Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where introduced by Doucet et al.~\cite{doucet} and serve as fast alternative to Markov Chain Monte Carlo and Variational Inference methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand, as their main theoretical disadvantage, the particle degradation is hard to occur at the minimal time horizon that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
+Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where introduced by Doucet et al.~\cite{doucet} and serve as fast alternative to Markov Chain Monte Carlo and Variational Inference methods of performing posterior inference. SMC samplers have known strengths and weaknesses and are a good fit for the problem at hand as their main theoretical disadvantage, the particle degradation, is hard to occur at the minimal time horizon that the sampler is being used. We can now define the SMC sampler that will be used to perform inference on our model as follows:
 
 \begin{algorithm}[ht!]
   \caption{SMC for DDPM}\label{SMC}
@@ -597,8 +596,8 @@ Sequential Monte Carlo(SMC) samplers for Dirichlet process mixture models where 
   \end{algorithmic}
 \end{algorithm}
 
-The process  presented in Algorithm \ref{SMC} can be described as follows:
-For every time step $T$ for every particle $L$ and for every sample $S$, sample cluster indexes $c_t^{(l)}$ from the proposal distribution $Q_1$ and sufficient statistics from proposal distribution $Q_2$ as they are defined in section \ref{gibbsUpd}. After clusters assignments and sufficient statistics are sampled for all the samples and particles, perform the deletion step of the DDP and sample auxiliary variables with from the transition kernel of the elements that stayed in the clusters after the deletion steps. Compute the weights and perform the resampling. 
+The process presented in Algorithm \ref{SMC} can be described as:
+For every time step $T$ for every particle $L$ and for every sample $S$, sample cluster indexes $c_t^{(l)}$ from the proposal distribution $Q_1$ and sufficient statistics from proposal distribution $Q_2$ as they are defined in section \ref{gibbsUpd}. After cluster assignments and sufficient statistics are sampled for all the samples and particles, perform the deletion step of the DDP and sample auxiliary variables from the transition kernel of the elements that stayed in the clusters after the deletion steps. Compute the weights and perform the resampling. 
 
 \subsubsection{Gibbs updates}
 \label{gibbsUpd}
@@ -623,13 +622,11 @@ Where $c_{t,n}$ represents cluster $c$ of point $n$ at time $t$, $s$ represents 
  	\end{split}
 \end{equation}
 
-Where $t$ represents student's t-distribution with $\nu$ degrees of freedom, Lo
-max represents Lomax distribution with shape and scale, $\alpha$ and $\beta$ repsectively and the rest represent a Dirichlet-Multinomial(aka DirMul) distribution. The formulas of the posterior predictive distributions can be found in the literature with \cite{compendium} being a good example. 
+Where $t$ represents student's t-distribution with $\nu$ degrees of freedom, Lomax represents Lomax distribution with shape and scale, $\alpha$ and $\beta$ repsectively and the rest represent a Dirichlet-Multinomial(aka DirMul) distribution. The formulas of the posterior predictive distributions can be found in the literature with \cite{compendium} being a good example. 
 
-The integration is easy to calculate due to two basic assumptions on the data. Firstly, the object distribution and the base distribution are build such a way that their respective counterparts consist of conjugate distributions. Since literature on calculating the posterior predictive distribution of two distribution with the parameters of the distribution intergrated out, finding the result is a matter of finding the correct formula\cite{compendium}. Secondly, due to that every pair of prior distribution along with its respective likelihood are independent from every other pair given the parameters $\theta$ it is easy to calculate this integral in closed form.
+The integration is easy to calculate due to two basic assumptions on the data. Firstly, the object distribution and the base distribution are build in such a way that their respective counterparts consist of conjugate distributions. Secondly, due to that every pair of prior distribution along with its respective likelihood being independent from every other pair given the parameters $\theta$, it is easy to calculate the integral in closed form.
 
 The conjugacy of the base and prior distribution also allow for an easy sampling formula for proposal distribution $Q_2$ which is of the form: 
-
 
 \begin{equation} \label{Q_2}
 \begin{split}
@@ -673,9 +670,9 @@ Which can be calculated using equations $Q_2$ and $Q_1$ for the first and second
 
 \subsection{Decision Layer}
 
-Once the points of the current iteration are grouped, the clusters that were infered are passed as input to the decision layer. The decision layer calculates the similarity of the current clusters to past ones; if the similarity is high enough the clusters are considered to be part of the same landmark. To do that, distance measures between the stored clusters and the ones that are inferred at the current iteration of the algorithm must be defined. Distances between distributions are called divergences and a large amount of literature on divergences exists.
+Once the points of the current iteration are grouped, the clusters that were infered are passed as input to the decision layer. The decision layer calculates the similarity of the current clusters to past ones; if the similarity is high enough the clusters are considered to be part of the same landmark. To do that, distance measures between stored clusters and the ones that are inferred during the current iteration of the algorithm must be defined. Distances between distributions are called divergences and extensive literature on them exists\ref{distMes}.
 
-Every cluster consists of a three part distribution as it was defined in section \ref{data:dist}. To define a distance measure between cluster, individual distances between all the distribution parts will be defined. More specifically let $l$ be the distribution of a cluster encountered in the past and $o$ the distribution of a currently observed cluster. $l$ and $o$ can be decomposed into 3 parts: $l_G$,$l_C$,$l_E$ where G,C and E stand for Gaussian, Categorical and Exponential respectively. With that notation the distances between those distributions can be defined. For each individual landmark distribution $l$ and observation distribution $o$ the distances computed where the following: A Wesserstein($l_G,o_G$), a Kullback-Leibler($l_G,o_G$), a SquaredHellinger($l_E,o_E$),a Kullback-Leibler($l_E,o_E$) and  Kullback-Leibler($l_C,o_C$).
+Every cluster consists of a three part distribution as it was defined in section \ref{data:dist}. To define a distance measure between clusters, individual distances between their individual distribution parts will be considered. More specifically let $l$ be the distribution of a cluster encountered in the past and $o$ the distribution of a currently observed cluster. $l$ and $o$ can be decomposed into 3 parts: $l_G$,$l_C$,$l_E$ where G,C and E stand for Gaussian, Categorical and Exponential respectively. With that notation and for each individual landmark distribution $l$ and observation distribution $o$ the distances computed were the following: A Wesserstein($l_G,o_G$), a Kullback-Leibler($l_G,o_G$), a SquaredHellinger($l_E,o_E$),a Kullback-Leibler($l_E,o_E$) and  Kullback-Leibler($l_C,o_C$).
 
 With that in mind the distance between every distribution can be transposed to a vector where each element represents a specific distance between the two distributions. That way, deciding if a cluster is part of a landmark that has been encountered before is now a problem of finding the optimal decision boundary given the distances at hand. For the purposes of this thesis, the decision boundary of an observation being a landmark or not was chosen by empiric evaluation of the landmarks. It is of course possible to learn the optimal decision boundary but due to time restrictions a simpler decision making approach was chosen instead.
 
