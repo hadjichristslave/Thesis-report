@@ -16,6 +16,8 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\newlabel{fig:1}{{}{2}{}{Doc-Start}{}}
+\newlabel{fig:2}{{}{2}{}{Doc-Start}{}}
 \citation{probRobs}
 \citation{ekf}
 \citation{SLAM}
@@ -29,15 +31,15 @@
 \citation{pcl}
 \citation{rtabmap}
 \citation{rgbdmapping}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{5}{section.1}}
-\newlabel{sec:Intro}{{1}{5}{Introduction}{section.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Motivation}{5}{subsection.1.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Tools and methods}{5}{subsection.1.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{8}{section.1}}
+\newlabel{sec:Intro}{{1}{8}{Introduction}{section.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Motivation}{8}{subsection.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Tools and methods}{8}{subsection.1.2}}
 \citation{pcl}
 \citation{objectpointSLAM}
 \citation{smcddp}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Research questions}{6}{subsection.1.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Original contributions}{6}{subsection.1.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Research questions}{9}{subsection.1.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Original contributions}{9}{subsection.1.4}}
 \citation{SLAM++}
 \citation{objSLAM}
 \citation{objectpointSLAM}
@@ -52,9 +54,9 @@
 \citation{planarSeg2}
 \citation{segOverview}
 \citation{smartSeg}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Literature review}{7}{section.2}}
-\newlabel{sec:literature}{{2}{7}{Literature review}{section.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Object based SLAM}{7}{subsection.2.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Literature review}{10}{section.2}}
+\newlabel{sec:literature}{{2}{10}{Literature review}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Object based SLAM}{10}{subsection.2.1}}
 \citation{bayes:neal}
 \citation{bayes:jordan}
 \citation{LDA}
@@ -64,136 +66,136 @@
 \citation{corres:sec}
 \citation{corres:three}
 \citation{corres:four}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Point Cloud segmentation}{8}{subsection.2.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Non Parametric Bayesian methods}{8}{subsection.2.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Correspondence}{8}{subsection.2.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Theory background}{10}{section.3}}
-\newlabel{sec:theory}{{3}{10}{Theory background}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Dirichlet Distribution}{10}{subsection.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Different behaviour the distribution for different initial parameters of the $\alpha $ vector}}{11}{figure.1}}
-\newlabel{firstplot}{{1}{11}{Different behaviour the distribution for different initial parameters of the $\alpha $ vector}{figure.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sampling methods}{11}{subsection.3.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Stick breaking process}{11}{subsubsection.3.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Realizations from a Dirichlet distribution using the stick breaking construction in $R^3$. Each color represents the weight of the respective component. Weights sum up to 1 making every realization a probability mass function. A single line can be mapped to a single dot in Figure \ref  {firstplot} }}{12}{figure.2}}
-\newlabel{stickR3}{{2}{12}{Realizations from a Dirichlet distribution using the stick breaking construction in $R^3$. Each color represents the weight of the respective component. Weights sum up to 1 making every realization a probability mass function. A single line can be mapped to a single dot in Figure \ref {firstplot}}{figure.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Polya's Urn}{12}{subsubsection.3.2.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Polya's urn for $\alpha $= [2 1 1] }}{13}{figure.3}}
-\newlabel{polysurn}{{3}{13}{Polya's urn for $\alpha $= [2 1 1]}{figure.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Dirichlet Process}{13}{subsection.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Sampling methods}{14}{subsection.3.4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Chinese restaurant process}{14}{subsubsection.3.4.1}}
-\newlabel{sec:crp}{{3.4.1}{14}{Chinese restaurant process}{subsubsection.3.4.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The CRP process}}{14}{figure.4}}
-\newlabel{CRP}{{4}{14}{The CRP process}{figure.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Stick breaking}{15}{subsubsection.3.4.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Dirichlet process mixture models}{15}{subsection.3.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The stick breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha $ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are in fact discrete distributions.}}{16}{figure.5}}
-\newlabel{crpGausBase}{{5}{16}{The stick breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha $ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are in fact discrete distributions}{figure.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Mixture model}}{16}{figure.6}}
-\newlabel{1dGMM}{{6}{16}{Mixture model}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Point Cloud segmentation}{11}{subsection.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Non Parametric Bayesian methods}{11}{subsection.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Correspondence}{11}{subsection.2.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Theory background}{13}{section.3}}
+\newlabel{sec:theory}{{3}{13}{Theory background}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Dirichlet Distribution}{13}{subsection.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Different behaviour the distribution for different initial parameters of the $\alpha $ vector}}{14}{figure.1}}
+\newlabel{firstplot}{{1}{14}{Different behaviour the distribution for different initial parameters of the $\alpha $ vector}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sampling methods}{14}{subsection.3.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Stick breaking process}{14}{subsubsection.3.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Realizations from a Dirichlet distribution using the stick breaking construction in $R^3$. Each color represents the weight of the respective component. Weights sum up to 1 making every realization a probability mass function. A single line can be mapped to a single dot in Figure \ref  {firstplot} }}{15}{figure.2}}
+\newlabel{stickR3}{{2}{15}{Realizations from a Dirichlet distribution using the stick breaking construction in $R^3$. Each color represents the weight of the respective component. Weights sum up to 1 making every realization a probability mass function. A single line can be mapped to a single dot in Figure \ref {firstplot}}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Polya's Urn}{15}{subsubsection.3.2.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Polya's urn for $\alpha $= [2 1 1] }}{16}{figure.3}}
+\newlabel{polysurn}{{3}{16}{Polya's urn for $\alpha $= [2 1 1]}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Dirichlet Process}{16}{subsection.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Sampling methods}{17}{subsection.3.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Chinese restaurant process}{17}{subsubsection.3.4.1}}
+\newlabel{sec:crp}{{3.4.1}{17}{Chinese restaurant process}{subsubsection.3.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A visualization of a Chinese Restaurant Process}}{17}{figure.4}}
+\newlabel{CRP}{{4}{17}{A visualization of a Chinese Restaurant Process}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Stick breaking}{18}{subsubsection.3.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Dirichlet process mixture models}{18}{subsection.3.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The stick breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha $ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are in fact discrete distributions.}}{19}{figure.5}}
+\newlabel{crpGausBase}{{5}{19}{The stick breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha $ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are in fact discrete distributions}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces A 1D Gaussian mixture model}}{19}{figure.6}}
+\newlabel{1dGMM}{{6}{19}{A 1D Gaussian mixture model}{figure.6}{}}
 \citation{antoniak}
 \citation{caron}
 \citation{caron}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Inference}{17}{subsection.3.6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces A Dirichlet process mixture model.}}{17}{figure.7}}
-\newlabel{mm}{{7}{17}{A Dirichlet process mixture model}{figure.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Generalized Polya Urn}{17}{subsection.3.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Inference}{20}{subsection.3.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces A Dirichlet process mixture model.}}{20}{figure.7}}
+\newlabel{mm}{{7}{20}{A Dirichlet process mixture model}{figure.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Generalized Polya Urn}{20}{subsection.3.7}}
 \citation{caron}
-\newlabel{generalPolya}{{3.7}{18}{Generalized Polya Urn}{subsection.3.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces GPU as a function of CRP}}{18}{figure.8}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces GPU}}{18}{algorithm.1}}
-\newlabel{GPU}{{1}{18}{Generalized Polya Urn}{algorithm.1}{}}
-\newlabel{gpu:algo}{{1}{18}{Generalized Polya Urn}{algorithm.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Model definition}{19}{section.4}}
-\newlabel{sec:model}{{4}{19}{Model definition}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}General pipeline}{19}{subsection.4.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces General landmark update pipeline}}{19}{figure.9}}
-\newlabel{pipeline}{{9}{19}{General landmark update pipeline}{figure.9}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Landmark Layer}}{19}{algorithm.2}}
-\newlabel{euclid}{{2}{19}{General pipeline}{algorithm.2}{}}
+\newlabel{generalPolya}{{3.7}{21}{Generalized Polya Urn}{subsection.3.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Generaly Polya Urn as can be described through the Chinese Restaurant process paradigm.}}{21}{figure.8}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces GPU}}{21}{algorithm.1}}
+\newlabel{GPU}{{1}{21}{Generalized Polya Urn}{algorithm.1}{}}
+\newlabel{gpu:algo}{{1}{21}{Generalized Polya Urn}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Model definition}{22}{section.4}}
+\newlabel{sec:model}{{4}{22}{Model definition}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}General pipeline}{22}{subsection.4.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces General landmark update pipeline}}{22}{figure.9}}
+\newlabel{pipeline}{{9}{22}{General landmark update pipeline}{figure.9}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Landmark Layer}}{22}{algorithm.2}}
+\newlabel{euclid}{{2}{22}{General pipeline}{algorithm.2}{}}
 \citation{pcl}
 \citation{objectpointSLAM}
 \citation{fpfh}
 \citation{smcddp}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Point cloud modification pipeline.}}{20}{figure.10}}
-\newlabel{pcl:mod}{{10}{20}{Point cloud modification pipeline}{figure.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}The data distribution}{20}{subsection.4.2}}
-\newlabel{data:dist}{{4.2}{20}{The data distribution}{subsection.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Exponential trend}}{20}{figure.11}}
-\newlabel{pcl:kl}{{11}{20}{Exponential trend}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Point cloud modification pipeline.}}{23}{figure.10}}
+\newlabel{pcl:mod}{{10}{23}{Point cloud modification pipeline}{figure.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}The data distribution}{23}{subsection.4.2}}
+\newlabel{data:dist}{{4.2}{23}{The data distribution}{subsection.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces The exponential trend in angle distances between points makes the Exponential distribution a good modeling choice for the data.}}{23}{figure.11}}
+\newlabel{pcl:kl}{{11}{23}{The exponential trend in angle distances between points makes the Exponential distribution a good modeling choice for the data}{figure.11}{}}
 \citation{caron}
 \citation{smc:theory}
 \citation{doucet}
-\newlabel{eq1}{{14}{22}{The data distribution}{equation.4.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Sequential monte carlo sampler}{22}{subsection.4.3}}
-\newlabel{smcsampler}{{4.3}{22}{Sequential monte carlo sampler}{subsection.4.3}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces SMC for DDPM}}{22}{algorithm.3}}
-\newlabel{SMC}{{3}{22}{Sequential monte carlo sampler}{algorithm.3}{}}
+\newlabel{eq1}{{14}{25}{The data distribution}{equation.4.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Sequential monte carlo sampler}{25}{subsection.4.3}}
+\newlabel{smcsampler}{{4.3}{25}{Sequential monte carlo sampler}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Gibbs updates}{25}{subsubsection.4.3.1}}
+\newlabel{gibbsUpd}{{4.3.1}{25}{Gibbs updates}{subsubsection.4.3.1}{}}
+\newlabel{Gibbs}{{16}{25}{Gibbs updates}{equation.4.16}{}}
 \citation{compendium}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Gibbs updates}{23}{subsubsection.4.3.1}}
-\newlabel{gibbsUpd}{{4.3.1}{23}{Gibbs updates}{subsubsection.4.3.1}{}}
-\newlabel{Gibbs}{{16}{23}{Gibbs updates}{equation.4.16}{}}
-\newlabel{Q1}{{17}{23}{Gibbs updates}{equation.4.17}{}}
-\newlabel{Q_2}{{18}{23}{Gibbs updates}{equation.4.18}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces SMC for DDPM}}{26}{algorithm.3}}
+\newlabel{SMC}{{3}{26}{Sequential monte carlo sampler}{algorithm.3}{}}
+\newlabel{Q1}{{17}{26}{Gibbs updates}{equation.4.17}{}}
 \citation{conjugate}
-\newlabel{udpates}{{19}{24}{Gibbs updates}{equation.4.19}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Weight updates}{24}{subsubsection.4.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Decision Layer}{24}{subsection.4.4}}
+\newlabel{Q_2}{{18}{27}{Gibbs updates}{equation.4.18}{}}
+\newlabel{udpates}{{19}{27}{Gibbs updates}{equation.4.19}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Weight updates}{27}{subsubsection.4.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Decision Layer}{27}{subsection.4.4}}
 \citation{RANSAC}
 \citation{fpfh}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Complexity}{28}{subsection.4.5}}
+\newlabel{subsec:complexity}{{4.5}{28}{Complexity}{subsection.4.5}{}}
+\newlabel{Q_filt}{{22}{28}{Complexity}{equation.4.22}{}}
 \citation{smcddp}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Complexity}{25}{subsection.4.5}}
-\newlabel{subsec:complexity}{{4.5}{25}{Complexity}{subsection.4.5}{}}
-\newlabel{Q_filt}{{22}{25}{Complexity}{equation.4.22}{}}
 \citation{sqlite}
-\newlabel{complexity}{{23}{26}{Complexity}{equation.4.23}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Landmark size}{26}{subsection.4.6}}
+\newlabel{complexity}{{23}{29}{Complexity}{equation.4.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Landmark size}{29}{subsection.4.6}}
 \citation{pcl}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{27}{section.5}}
-\newlabel{sec:results}{{5}{27}{Results}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Simple datasets}{27}{subsection.5.1}}
-\newlabel{distancesofclusters}{{5.1}{27}{Simple datasets}{figure.13}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Distances between the distributions inferred in Figure \ref  {pcl:clust}}}{27}{table.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Initial data along with the distributions inferred }}{28}{figure.12}}
-\newlabel{pcl:clust}{{12}{28}{Initial data along with the distributions inferred}{figure.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces More complicated color distributions}}{29}{figure.13}}
-\newlabel{pcl:clust2}{{13}{29}{More complicated color distributions}{figure.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Expressivensess and decision layer}{30}{subsection.5.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}EKF-SLAM experiments}{30}{subsection.5.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces The color and position boundary is displayed in these pictures}}{31}{figure.14}}
-\newlabel{pip:bounds}{{14}{31}{The color and position boundary is displayed in these pictures}{figure.14}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces SLAM session using the pipeline. The pipeline is used as the sensor model of an EKF-SLAM module. The readings of a kinect mounted on a turtlebot are downsampled and clustered. Current readings are either being matched to past readings giving old landmarks or being used to create new landmarks if no similar past environment sigantures exist. Landmarks are represented with yellow spheres. }}{32}{figure.15}}
-\newlabel{SLAM}{{15}{32}{SLAM session using the pipeline. The pipeline is used as the sensor model of an EKF-SLAM module. The readings of a kinect mounted on a turtlebot are downsampled and clustered. Current readings are either being matched to past readings giving old landmarks or being used to create new landmarks if no similar past environment sigantures exist. Landmarks are represented with yellow spheres}{figure.15}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Speed}{32}{subsection.5.4}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Benchmark of the pipeline using different downsampling settings on two different machines. The effect the downsampling has on the speed of the process is noticeable.}}{33}{table.2}}
-\newlabel{bench}{{2}{33}{Benchmark of the pipeline using different downsampling settings on two different machines. The effect the downsampling has on the speed of the process is noticeable}{table.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Memory requirements}{33}{subsection.5.5}}
-\newlabel{reqs}{{5.5}{33}{Memory requirements}{subsection.5.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Memory Requirements as a function of strength parameter $\alpha $.}}{34}{figure.16}}
-\newlabel{memReq}{{16}{34}{Memory Requirements as a function of strength parameter $\alpha $}{figure.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Result of a session using RTAB-map module. The resulting map captures the structure of the room and the maps for the room shown in the picture average 84MB in size.}}{34}{figure.17}}
-\newlabel{rtabmap}{{17}{34}{Result of a session using RTAB-map module. The resulting map captures the structure of the room and the maps for the room shown in the picture average 84MB in size}{figure.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{30}{section.5}}
+\newlabel{sec:results}{{5}{30}{Results}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Simple datasets}{30}{subsection.5.1}}
+\newlabel{distancesofclusters}{{5.1}{30}{Simple datasets}{figure.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Distances between the distributions inferred in Figure \ref  {pcl:clust}}}{30}{table.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Initial data along with the distributions inferred }}{31}{figure.12}}
+\newlabel{pcl:clust}{{12}{31}{Initial data along with the distributions inferred}{figure.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces The results of running the pipeline using a dataset with a more complex color distribution.}}{32}{figure.13}}
+\newlabel{pcl:clust2}{{13}{32}{The results of running the pipeline using a dataset with a more complex color distribution}{figure.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Expressivensess and decision layer}{33}{subsection.5.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}EKF-SLAM experiments}{33}{subsection.5.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces The color and position boundary is displayed in these pictures}}{34}{figure.14}}
+\newlabel{pip:bounds}{{14}{34}{The color and position boundary is displayed in these pictures}{figure.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces SLAM session using the pipeline. The pipeline is used as the sensor model of an EKF-SLAM module. The readings of a kinect mounted on a turtlebot are downsampled and clustered. Current readings are either being matched to past readings giving old landmarks or being used to create new landmarks if no similar past environment sigantures exist. Landmarks are represented with yellow spheres. }}{35}{figure.15}}
+\newlabel{SLAM}{{15}{35}{SLAM session using the pipeline. The pipeline is used as the sensor model of an EKF-SLAM module. The readings of a kinect mounted on a turtlebot are downsampled and clustered. Current readings are either being matched to past readings giving old landmarks or being used to create new landmarks if no similar past environment sigantures exist. Landmarks are represented with yellow spheres}{figure.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Speed}{35}{subsection.5.4}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Benchmark of the pipeline using different downsampling settings on two different machines. The effect the downsampling has on the speed of the process is noticeable.}}{36}{table.2}}
+\newlabel{bench}{{2}{36}{Benchmark of the pipeline using different downsampling settings on two different machines. The effect the downsampling has on the speed of the process is noticeable}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Memory requirements}{36}{subsection.5.5}}
+\newlabel{reqs}{{5.5}{36}{Memory requirements}{subsection.5.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Memory Requirements of the method as a function of strength parameter $\alpha $.}}{37}{figure.16}}
+\newlabel{memReq}{{16}{37}{Memory Requirements of the method as a function of strength parameter $\alpha $}{figure.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Result of a session using RTAB-map module. The resulting map captures the structure of the room and the maps for the room shown in the picture average 84MB in size.}}{37}{figure.17}}
+\newlabel{rtabmap}{{17}{37}{Result of a session using RTAB-map module. The resulting map captures the structure of the room and the maps for the room shown in the picture average 84MB in size}{figure.17}{}}
 \citation{dependentDiri}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{35}{section.6}}
-\newlabel{sec:discussion}{{6}{35}{Discussion}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Data distribution}{35}{subsection.6.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Downsampling and Filtering}{35}{subsection.6.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Unsupervised learning}{35}{subsection.6.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces The behaviour of the dowsampling module with respect to the threshold of the operations.}}{36}{figure.18}}
-\newlabel{pip:downsample}{{18}{36}{The behaviour of the dowsampling module with respect to the threshold of the operations}{figure.18}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Clustering layer}{36}{subsection.6.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{38}{section.6}}
+\newlabel{sec:discussion}{{6}{38}{Discussion}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Data distribution}{38}{subsection.6.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Downsampling and Filtering}{38}{subsection.6.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Unsupervised learning}{38}{subsection.6.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces The behaviour of the dowsampling module with respect to the threshold of the operations.}}{39}{figure.18}}
+\newlabel{pip:downsample}{{18}{39}{The behaviour of the dowsampling module with respect to the threshold of the operations}{figure.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Clustering layer}{39}{subsection.6.4}}
 \citation{dependent}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Unsupervised entity extraction. The number of clusters the method outputs can be different from the number of elements existing in the environment. This is a direct implication of using an unsupervised learning mechanism at the core of the pipeline.}}{37}{figure.19}}
-\newlabel{pip:beh}{{19}{37}{Unsupervised entity extraction. The number of clusters the method outputs can be different from the number of elements existing in the environment. This is a direct implication of using an unsupervised learning mechanism at the core of the pipeline}{figure.19}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Decision layer}{37}{subsection.6.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Cases where using very low/high values on the hyperparameter $\alpha $ lead to a pipeline that either groups the whole cloud being to a single landmark or to a pipeline that constantly creates new landmarks.}}{38}{figure.20}}
-\newlabel{pip:limits}{{20}{38}{Cases where using very low/high values on the hyperparameter $\alpha $ lead to a pipeline that either groups the whole cloud being to a single landmark or to a pipeline that constantly creates new landmarks}{figure.20}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Scalability}{38}{subsection.6.6}}
-\newlabel{pip:expo}{{6.5}{39}{Decision layer}{subsection.6.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Memory requirements with respect to the number of landmarks in the environment. 10000 landmarks have memory needs of 2.6MB making the method very memory efficient.}}{40}{figure.21}}
-\newlabel{pip:reqs}{{21}{40}{Memory requirements with respect to the number of landmarks in the environment. 10000 landmarks have memory needs of 2.6MB making the method very memory efficient}{figure.21}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion and future work}{40}{section.7}}
-\newlabel{sec:conclusion}{{7}{40}{Conclusion and future work}{section.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Unsupervised entity extraction. The number of clusters the method outputs can be different from the number of elements existing in the environment. This is a direct implication of using an unsupervised learning mechanism at the core of the pipeline.}}{40}{figure.19}}
+\newlabel{pip:beh}{{19}{40}{Unsupervised entity extraction. The number of clusters the method outputs can be different from the number of elements existing in the environment. This is a direct implication of using an unsupervised learning mechanism at the core of the pipeline}{figure.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Decision layer}{40}{subsection.6.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Cases where using very low/high values on the hyperparameter $\alpha $ lead to a pipeline that either groups the whole cloud being to a single landmark or to a pipeline that constantly creates new landmarks.}}{41}{figure.20}}
+\newlabel{pip:limits}{{20}{41}{Cases where using very low/high values on the hyperparameter $\alpha $ lead to a pipeline that either groups the whole cloud being to a single landmark or to a pipeline that constantly creates new landmarks}{figure.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Scalability}{41}{subsection.6.6}}
+\newlabel{pip:expo}{{6.5}{42}{Decision layer}{subsection.6.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Memory requirements with respect to the number of landmarks in the environment. 10000 landmarks have memory needs of 2.6MB making the method very memory efficient.}}{43}{figure.21}}
+\newlabel{pip:reqs}{{21}{43}{Memory requirements with respect to the number of landmarks in the environment. 10000 landmarks have memory needs of 2.6MB making the method very memory efficient}{figure.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion and future work}{43}{section.7}}
+\newlabel{sec:conclusion}{{7}{43}{Conclusion and future work}{section.7}{}}
 \bibcite{probRobs}{1}
 \bibcite{ekf}{2}
 \bibcite{graph}{3}

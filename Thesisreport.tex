@@ -33,6 +33,8 @@
 \usepackage{graphicx}
 \graphicspath{ {pics/} }
 \usepackage{paralist}
+
+\usepackage{textcomp}
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
@@ -58,7 +60,7 @@
 \normalsize University of Maastricht \\ % Your institution
 \normalsize \textit{Rico Mockel, Kurt Driessens} \\
 \normalsize Distributed Organisms B.V. (DoBots)\\
-\normalsize \textit{Anne Van Rossum} \\
+\normalsize \textit{Anne van Rossum} \\
 \vspace{0mm} \\
 \normalsize Maastricht University \\
 \normalsize Faculty of Humanities and Sciences \\ 
@@ -79,6 +81,35 @@
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 \newpage
+
+
+\begin{flushleft}
+    
+\begin{figure}[!b]
+\centering
+\includegraphics[width=.2\textwidth]{logo}
+    \label{fig:1}
+
+The work in this thesis was supported by DoBots B.V. Their cooperation is hereby gratefully acknowledged
+\end{figure}
+
+\end{flushleft}
+
+
+\begin{figure}[!b]
+\centering
+\includegraphics[width=.5\textwidth]{logo-um-black}
+    \label{fig:2}
+
+Copyright \textcopyright \ University of Maastricht, Department of Knowledge Engineering. \\
+All rights reserved.
+
+\end{figure}
+
+
+
+
+\newpage
 \begin{abstract}
 
 \noindent Long term mapping is the natural conceptual extension to existing mapping methods that are focused on mapping static environments.
@@ -91,8 +122,12 @@ As discussed in the literature, lifelong mapping consists of two major subproble
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
 %----------------------------------------------------------------------------------------
- 
+\newpage 
 \tableofcontents
+
+
+\newpage
+
 \listoffigures
  
  
@@ -106,7 +141,7 @@ As discussed in the literature, lifelong mapping consists of two major subproble
 \subsection{Motivation}
 
 
-Simultaneous Localization And Mapping ( SLAM ) is one of the fundamental challenges of autonomous systems\cite{probRobs}. 
+Simultaneous Localization And Mapping (SLAM) is one of the fundamental challenges of autonomous systems\cite{probRobs}. 
 In order for robots to be considered truly autonomous they have to be able to navigate through an unknown environment whilst mapping its structure.
 With solutions like EKF-SLAM\cite{ekf} and FastSlam\cite{SLAM} robots are currently capable of efficiently mapping unknown environments. 
 Methods that remove the restrictions of mapping \textit{static} environments for a \textit{finite} amount of time are the logical extension to existing methods.
@@ -145,7 +180,7 @@ The feature selection and cloud analysis are inspired by \cite{objectpointSLAM} 
 Finally, an application of the method is introduced by using it as a sensor model in an extended Kalman Filter module which to the best of my knowledge has not been presented in the literature before.
 
 
-The rest of the paper is structured as follows. Section \ref{sec:literature} will present relevant literature review, section \ref{sec:theory} will introduce the theories behind the model, section \ref{sec:model} will define the model, section \ref{sec:results} will show experimental results of the method. Section \ref{sec:discussion} will discuss specific behaviours of the method and, finally, section \ref{sec:conclusion} will conclude with a short summary and future extensions by which the method could be improved.
+The rest of the paper is structured as follows. In section \ref{sec:literature} relevant literature review will be presented, section \ref{sec:theory} introduces the theories behind the model, section \ref{sec:model} defines the model, section \ref{sec:results} shows experimental results of the method. Specific behaviours of the method will be discussed in Section \ref{sec:discussion} and, finally, a section \ref{sec:conclusion} will conclude with a short summary and future extensions by which the method could be improved.
 
 %------------------------------------------------
 
@@ -326,7 +361,7 @@ It can be seen that there is a positive reinforcement effect in this process; th
 
 \begin{figure} [!h]
           \centerline{\includegraphics [width=.70\textwidth]{crp}}
-	\caption{The CRP process}
+	\caption{A visualization of a Chinese Restaurant Process}
 	\label{CRP}
 \end{figure}
 
@@ -365,7 +400,7 @@ The first part of the stick will have length $\pi'_k$ and the conditional length
 
 \begin{figure} [!ht]
     \centerline{\includegraphics [width=.45\textwidth]{1DGMM}}
-	\caption{Mixture model}
+	\caption{A 1D Gaussian mixture model}
 	\label{1dGMM}
 \end{figure}
 
@@ -379,7 +414,7 @@ Mixture models can be considered as the Bayesian approach to clustering, and one
 
 Where $F (\theta_i )$ denotes the distribution of the observation $x_i$ given $\theta_i $. The factors $ \theta_i $ are conditionally independent given G, and the observation $x_i$ is conditionally independent of the other observations given the factor $\theta_i$. When G is distributed according to a Dirichlet process, this model is refered as a Dirichlet process mixture model and its representation is shown in Figure \ref{mm}. The number of distributions that underlie the data can be mapped to the number of tables within a chinese restaurant process, and the mixing proportions are proportional to the number of people sitting in every table.
 
-Since G can be represented using a stick-breaking construction, the factors $ \theta_i $ take on values $\phi_k$ with probability $\pi_k$. We can denote this using $z_i$ as an indicator variable which takes on positive values and is distributed according to \textbf{$\pi$}. Hence, an equivalent representation of a Dirichlet process mixture model  is given by the following conditional distributions:
+Since G can be represented using a stick-breaking process, the factors $ \theta_i $ take on values $\phi_k$ with probability $\pi_k$. We can denote this using $z_i$ as an indicator variable which takes on positive values and is distributed according to \textbf{$\pi$}. Hence, an equivalent representation of a Dirichlet process mixture model  is given by the following conditional distributions:
 
 	\begin{equation}
 		\begin{aligned}
@@ -419,7 +454,7 @@ The GPU can be described using the Chinese restaurant process paradigm as follow
 \begin{wrapfigure}{l}{.58\textwidth}
     \includegraphics [width=.53\textwidth]{generalPolya2}
     \label{generalPolya}
-    \caption{GPU as a function of CRP}
+    \caption{Generaly Polya Urn as can be described through the Chinese Restaurant process paradigm.}
 \end{wrapfigure}
 
 
@@ -510,7 +545,7 @@ The general flow of operations that defines the basic communication between the 
 \begin{wrapfigure}{l}{0.35\textwidth}
     \centering
     \includegraphics [width=.35\textwidth]{Kullback-Leibler}
-    \caption{Exponential trend}
+    \caption{The exponential trend in angle distances between points makes the Exponential distribution a good modeling choice for the data.}
     \label{pcl:kl}
 \end{wrapfigure}
 
@@ -775,7 +810,7 @@ In this section the algorithm will be tested against a simple dataset. That will
  to the sampler. Top right (Gaussian) and bottom (Exponential, Categorical) subfigures show the \\
  distributions inferred from the data. The colors in the distribution signatures display \\
  the different clusters inferred.\end{tabular}
-\caption{More complicated color distributions}
+\caption{The results of running the pipeline using a dataset with a more complex color distribution.}
   \label{pcl:clust2}
 \end{figure}
 
@@ -915,7 +950,7 @@ The memory requirements of the method are a function that is directly affected t
 \begin{figure} [ht!]
   \centering
     \includegraphics [width=.8\textwidth]{memoryRequirements2}
-    \caption{Memory Requirements as a function of strength parameter $\alpha$.}
+    \caption{Memory Requirements of the method as a function of strength parameter $\alpha$.}
   \label{memReq}
 \end{figure}
 
