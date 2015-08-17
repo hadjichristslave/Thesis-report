@@ -176,7 +176,7 @@ Since higher compression ratio usually results in a higher amount of information
 
 To answer the research questions the following original contributions will be presented:
 By using existing point cloud tools \cite{pcl} a novel compressed environment representation is introduced.
-The feature selection and cloud analysis are inspired by \cite{objectpointSLAM} and the clustering algorithm that is used to infer the representation is an extension of the method introduced in \cite{smcddp}.
+The feature selection process is influenced by \cite{objectpointSLAM} and the clustering algorithm that is used to learn the representation is an extension of the method introduced in \cite{smcddp}.
 Finally, an application of the method is introduced by using it as a sensor model in an extended Kalman Filter module which to the best of my knowledge has not been presented in the literature before.
 
 
@@ -281,11 +281,11 @@ That is,  if $ X|q \sim\ Multinomial_k (n,q) $ and $ Q \sim Dir ( \alpha ) $ the
 
 \subsection{Sampling methods}
 
-Two basic sampling methods from the Dirichlet Distribution will be presented: Stick breaking process, and Polya's urn.
+Two basic sampling methods from the Dirichlet Distribution will be presented: Stick-breaking process, and Polya's urn.
 
-\subsubsection{Stick breaking process}
+\subsubsection{Stick-breaking process}
 
-The stick breaking process can be thought of as follows: Imagine breaking a unit length stick into $k$ such that the $k$ pieces follow a $Dir ( \alpha)$  distribution. Such samples can be created by the following procedure:
+The stick-breaking process can be thought of as follows: Imagine breaking a unit length stick into $k$ such that the $k$ pieces follow a $Dir ( \alpha)$  distribution. Such samples can be created by the following procedure:
 \begin{compactitem}
 	\item  \textbf{Step 1:} Simulate $ u_1 \sim Beta (a_1, \sum_{i=1}^k a_i ) $, and set $q_1 = u_1$. That's the first piece of the stick, with the remaining piece having length of $ 1-u_1$
 	\item \textbf{Step 2:} For $ 2 \leq j \leq k-1$, if j-1 pieces, with lengths  $u_1,u_2,...,u_{j-1},..$ have been broken off, the length of the remaining stick is $\prod_{i-1}^{j-1}  (1 - u_i) $. We simulate $ u_j \sim Beta ( a_j, \sum_{i=j+1}^k a_i) $ and set  $q_j=u_j \prod_{i=1}^{j-1} (1-u_i)$. The length of the remaining part of the stick is  $\prod_{i=1}^{j} (1-u_i)$
@@ -293,11 +293,11 @@ The stick breaking process can be thought of as follows: Imagine breaking a unit
 
 
 \end{compactitem}
-Since the last part of the stick will always be created so that we end up with a valid pmf, it is made explicit how the density of the Dirichlet is  a ${k-1}$ dimensional object lying in the $k$ dimensional space. Figure \ref{stickR3} shows realizations of the stick breaking process in $R^3$ and the similarities between the stick breaking sampling method and the probability simplex presented in Figure \ref{firstplot} .
+Since the last part of the stick will always be created so that we end up with a valid pmf, it is made explicit how the density of the Dirichlet is  a ${k-1}$ dimensional object lying in the $k$ dimensional space. Figure \ref{stickR3} shows realizations of the stick-breaking process in $R^3$ and the similarities between the stick-breaking sampling method and the probability simplex presented in Figure \ref{firstplot} .
 
 \begin{figure} [!h]
     \centerline{\includegraphics [width=.55\textwidth]{stickBreaking}}
-    \caption{Realizations from a Dirichlet distribution using the stick breaking construction in $R^3$. Each color represents the weight of the respective component. Weights sum up to 1 making every realization a probability mass function. A single line can be mapped to a single dot in Figure  \ref{firstplot}  }
+    \caption{Realizations from a Dirichlet distribution using the stick-breaking construction in $R^3$. Each color represents the weight of the respective component. Weights sum up to 1 making every realization a probability mass function. A single line can be mapped to a single dot in Figure  \ref{firstplot}  }
 \label{stickR3}
 \end{figure}
 
@@ -341,12 +341,12 @@ Formaly, the DP is defined as follows: Let $\mathcal{X}$ be a set and let $\math
 
 \subsection{Sampling methods}
 
-Two methods for sampling from a Dirichlet process will be presented: the Chinese Restaurant Process and the Stick breaking process.
+Two methods for sampling from a Dirichlet process will be presented: the Chinese Restaurant Process and the Stick-breaking process.
 
 
 \subsubsection{Chinese restaurant process}
 \label{sec:crp}
-Polya's Urn and the stick breaking process are two names of the same process. The chinese restaurant process paradigm is similar to the Polya's urn and it is defined as follows:
+Polya's Urn and the stick-breaking process are two names of the same process. The chinese restaurant process paradigm is similar to the Polya's urn and it is defined as follows:
 Imagine a restaurant with an infinite number of tables, each with infinite capacity. At time t=1, the first customer enters the restaurant and sits at table 1 with probability 1. For every next step, the new customer entering the restaurant can either: 
 
 \begin{compactitem}
@@ -368,9 +368,9 @@ It can be seen that there is a positive reinforcement effect in this process; th
 
 One important property of this procedure is that the nth customer has the same probability to sit on the same table as any other customer of the table. That meaning that the number of people sitting on table 1 is on average the same as the number of people seating on table $k$! This is a very interesting and counter intuitive (at first) property of the exchangeable data and understanding it is crucial on building intuition regarding the behaviour of exchangeable random variables.
 
-\subsubsection{Stick breaking}
+\subsubsection{Stick-breaking}
 
-Measures drawn from a Dirichlet distribution are discrete with probability 1. This property is made explicit by the stick breaking process. The construction is based on the independent sequences of i.i.d. random variables $ (\pi'_k)_{k=1}^\infty$ and $  ( \phi_k)_{k=1}^\infty$  defined as follows:
+Measures drawn from a Dirichlet distribution are discrete with probability 1. This property is made explicit by the stick-breaking process. The construction is based on the independent sequences of i.i.d. random variables $ (\pi'_k)_{k=1}^\infty$ and $  ( \phi_k)_{k=1}^\infty$  defined as follows:
 
 
   \begin{equation}
@@ -388,11 +388,11 @@ This can be defined as follows: Draw $\pi'_k$ as a Beta random variable. Draw $\
 \end{equation}
 \ \
 
-The first part of the stick will have length $\pi'_k$ and the conditional length given all the previous draws is given by $\pi_k$. Finally, the distribution created is given as an infinite sum of indicator functions given by $G$. Figure \ref{crpGausBase} displays a Dirichlet Process's realization from a stick breaking process with a Gaussian base distribution. Different parameter values for strength parameter $\alpha$ directly affect the distributions output. As the $\alpha$ parameter is increased, the realization of the distribution will be closer to the base distribution. Furthermore, this picture also shows that the distribution created from the infinite sum of indicator function is a discrete distribution. Finally, when G is generated using a stick breaking process with a strength parameter $\alpha$, it can be written in shorthand as: $ G \sim GEM (\alpha) $
+The first part of the stick will have length $\pi'_k$ and the conditional length given all the previous draws is given by $\pi_k$. Finally, the distribution created is given as an infinite sum of indicator functions given by $G$. Figure \ref{crpGausBase} displays a Dirichlet Process's realization from a stick-breaking process with a Gaussian base distribution. Different parameter values for strength parameter $\alpha$ directly affect the distributions output. As the $\alpha$ parameter is increased, the realization of the distribution will be closer to the base distribution. Furthermore, this picture also shows that the distribution created from the infinite sum of indicator function is a discrete distribution. Finally, when G is generated using a stick-breaking process with a strength parameter $\alpha$, it can be written in shorthand as: $ G \sim GEM (\alpha) $
 
 \begin{figure} [h!]
           \centerline{\includegraphics [width=0.91\textwidth]{stickBreakGaus}}
-	\caption{The stick breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha$ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are in fact discrete distributions.}
+	\caption{The stick-breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha$ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are in fact discrete distributions.}
 	\label{crpGausBase}
 \end{figure}
 
@@ -400,7 +400,7 @@ The first part of the stick will have length $\pi'_k$ and the conditional length
 
 \begin{figure} [!ht]
     \centerline{\includegraphics [width=.45\textwidth]{1DGMM}}
-	\caption{A 1D Gaussian mixture model}
+	\caption{A 1 dimensional Gaussian mixture model}
 	\label{1dGMM}
 \end{figure}
 

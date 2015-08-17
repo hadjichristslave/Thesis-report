@@ -1,9 +1,9 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces Different behaviour the distribution for different initial parameters of the $\alpha $ vector}}{14}{figure.1}
-\contentsline {figure}{\numberline {2}{\ignorespaces Realizations from a Dirichlet distribution using the stick breaking construction in $R^3$. Each color represents the weight of the respective component. Weights sum up to 1 making every realization a probability mass function. A single line can be mapped to a single dot in Figure \ref {firstplot} }}{15}{figure.2}
+\contentsline {figure}{\numberline {2}{\ignorespaces Realizations from a Dirichlet distribution using the stick-breaking construction in $R^3$. Each color represents the weight of the respective component. Weights sum up to 1 making every realization a probability mass function. A single line can be mapped to a single dot in Figure \ref {firstplot} }}{15}{figure.2}
 \contentsline {figure}{\numberline {3}{\ignorespaces Polya's urn for $\alpha $= [2 1 1] }}{16}{figure.3}
 \contentsline {figure}{\numberline {4}{\ignorespaces A visualization of a Chinese Restaurant Process}}{17}{figure.4}
-\contentsline {figure}{\numberline {5}{\ignorespaces The stick breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha $ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are in fact discrete distributions.}}{19}{figure.5}
-\contentsline {figure}{\numberline {6}{\ignorespaces A 1D Gaussian mixture model}}{19}{figure.6}
+\contentsline {figure}{\numberline {5}{\ignorespaces The stick-breaking process. Every part of the stick represents the number of customers sitting at that specific table in the CRP process. It can be seen that the higher values of $\alpha $ lead to realizations that are closer to the base distribution. It is clear that realizations of a Dirichlet process are in fact discrete distributions.}}{19}{figure.5}
+\contentsline {figure}{\numberline {6}{\ignorespaces A 1 dimensional Gaussian mixture model}}{19}{figure.6}
 \contentsline {figure}{\numberline {7}{\ignorespaces A Dirichlet process mixture model.}}{20}{figure.7}
 \contentsline {figure}{\numberline {8}{\ignorespaces Generaly Polya Urn as can be described through the Chinese Restaurant process paradigm.}}{21}{figure.8}
 \contentsline {figure}{\numberline {9}{\ignorespaces General landmark update pipeline}}{22}{figure.9}
