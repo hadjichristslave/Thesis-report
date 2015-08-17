@@ -126,9 +126,25 @@ Since its introduction in 2010 Microsoft Kinect\cite{kinect} has revolutionized 
 \subsection{Research questions}
 
 
-The following research questions have then to be addressed: Are such representations rich enough to be used as sensor models in SLAM?  Will the methods be fast enough to be used in online SLAM scenarios? Will the compression ratio with respect to normal repesentations be significant? 
+The following research questions have then to be addressed: 
 
-In this thesis a method of creating compressed representation of a pointcloud is introduced; the representation's compression strength, expressive ability as well as the ability to handle online streams of data are presented in the results section. The discussion section analyzes some details regarding the mechanisms of the method, cases where the method does not perform as expected, as well as implications of having a method that has an unsupervised learning engine at its core.
+\textit{Are such representations rich enough to be used as sensor models in SLAM?}
+A representation that introduces a high amount of compression but keeps a very small portion of information the initial cloud carried is not usefull. The representation should be expressive enough to still provide a usefull environment abstraction after the compression takes place. That way it could be used in scenarios such as being the sensor model of SLAM methods.
+
+\textit{Will the methods be fast enough to be used in online SLAM scenarios? }
+The method's speed is directly affected by the preprocessing operations on the cloud. If a high amount of information is removed from the cloud during the preprocessing, the method will be fast but the information loss might lead to sub-optimal results. Can we find an optimal filtering boundary that makes the method capable of handling online problems?
+
+\textit{Will the compression ratio be significant in respect to normal repesentations?}
+Since higher compression ratio usually results in a higher amount of information loss, how will the information loss be kept to a minimum while maintaining significant memory gains? How scalable will the method be then?
+
+\subsection{Original contributions}
+
+To address the research questions the following original contributions will be presented:
+By using existing point cloud tools \cite{pcl} a novel compressed environment representation is introduced.
+The feature selection and cloud analysis are inspired by \cite{objectpointSLAM} and
+the clustering algorithm that is used to infer the representation is an extension of the method introduced in \cite{smcddp}.
+Finally, an application of the pipeline is introduced by using this method as a sensor model in an extended Kalman Filter module which to the best of my knowledge has not been presented in the literature before.
+
 
 The rest of the paper is structured as follows. Section \ref{sec:literature} will present relevant literature review, section \ref{sec:theory} will introduce the theories behind the model, section \ref{sec:model} will define the model, section \ref{sec:results} will show experimental results of the method. Section \ref{sec:discussion} will discuss specific behaviours of the method and, finally, section \ref{sec:conclusion} will conclude with a short summary and future extensions by which the method could be improved.
 
@@ -187,7 +203,7 @@ An introduction to the Dirichlet Distribution and Dirichlet process mixture mode
 
 \subsection{Dirichlet Distribution}
 
-An example of a \textit{probability mass function}(pmf) can be described through an ordinary six-sided dice. To sample from this function, you cast the dice and get a number from 1 to 6. One important property of probability mass functions taken from real dice is that they are not uniformly weighted due to the manufacturing process not being perfect. A bag of dice can then be considered as an example of a random pmf. To sample from this random pmf, you have to put your hand in the bag and draw a dice, and the result of this drawing process is itself a probability distribution. A Dirichlet distribution is an object that can be used to model the randomness of such objects whose domain is itself is a probability distribution i.e it is a distribution of distributions.
+An example of a \textit{probability mass function}(pmf) can be described through an ordinary six-sided dice. To sample from this function, you cast the dice and get a number from 1 to 6. One important property of probability mass functions taken from real dice is that they are not uniformly weighted due to the manufacturing process not being perfect. A bag of dice can then be considered as an example of a random function whose realizations are vectors of length six with components that sum up to one. To sample from this random pmf, you have to put your hand in the bag and draw a dice, and the result of this drawing process is itself a probability distribution. A Dirichlet distribution is an object that can be used to model the randomness of such objects whose domain is itself is a probability distribution i.e it is a distribution of distributions.
 
 Formally, a probability density function with \textit{k} components lies on the \textit{(k-1)} dimensional probability simplex, which is a surface in $ \mathbb{R}^k $ denoted by $ \Delta_k $ and defined to be the set of vectors whose $ k $  components are non-negative and sum up to 1, that is:  $ \Delta_k = \{ q \in  \mathbb{R}^k | \sum_{i=1}^k q_i=1, q_i \geq 0\ for\ i=1,2,...k \} $ . $ \Delta_k $  is itself a $ ( k-1 ) $ dimensional object lying in the $k$ dimensional space. 
 
