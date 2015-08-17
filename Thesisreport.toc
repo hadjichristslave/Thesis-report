@@ -5,7 +5,7 @@
 \contentsline {subsection}{\numberline {1.4}Original contributions}{6}{subsection.1.4}
 \contentsline {section}{\numberline {2}Literature review}{7}{section.2}
 \contentsline {subsection}{\numberline {2.1}Object based SLAM}{7}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Point Cloud Object clustering}{8}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}Point Cloud segmentation}{8}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Non Parametric Bayesian methods}{8}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Correspondence}{8}{subsection.2.4}
 \contentsline {section}{\numberline {3}Theory background}{10}{section.3}
